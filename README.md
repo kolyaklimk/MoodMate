@@ -1,5 +1,6 @@
 # OOP Coursework
 Student: Klimkovich Nikolay Viktorovich
+
 Group number: 153504
 
 # MoodMate
