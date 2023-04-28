@@ -2,7 +2,7 @@
 
 namespace MoodMate.Components.Entities.Abstractions;
 
-internal abstract class ANote<T> where T : class
+internal abstract class ANote<T>
 {
     protected DataControl<T> NoteControl { get; set; } = new();
     public int Id { get; set; }
