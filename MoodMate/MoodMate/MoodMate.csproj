@@ -52,4 +52,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Components\Entities\Abstractions\" />
+	  <Folder Include="Components\Factory\" />
+	  <Folder Include="Components\Comparer\" />
+	  <Folder Include="Pages\" />
+	  <Folder Include="ViewModel\" />
+	</ItemGroup>
+
 </Project>
