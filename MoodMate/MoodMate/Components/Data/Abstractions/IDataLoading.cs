@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoodMate.Components.Data.Abstractions
+namespace MoodMate.Components.Data.Abstractions;
+
+internal interface IDataLoading<T>
 {
-    internal interface IDataLoading
-    {
-    }
+    List<T> Data { get; set; }
+    Task Load(string path, bool local);
 }
