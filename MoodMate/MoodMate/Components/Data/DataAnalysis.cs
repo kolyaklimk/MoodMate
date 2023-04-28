@@ -11,9 +11,7 @@ public class DataAnalysis<T> : IDataAnalysis<T>
         if (date.Month == Choosedate.Month && date.Year == Choosedate.Year)
         {
             if (AnalysedData.ContainsKey(name))
-            {
                 AnalysedData[name] = (AnalysedData[name].Item1, AnalysedData[name].Item2 + 1, AnalysedData[name].Item3);
-            }
             else
                 AnalysedData.Add(name, (source, 1, -1));
         }
