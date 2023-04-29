@@ -13,7 +13,6 @@ public partial class MoodListViewModel: ObservableObject
     public MoodListViewModel()
     {
         MoodNote = new("Mood");
-        MoodNotes = MoodNote.note.GetData();
         LoadMoodNote();
     }
 
@@ -22,5 +21,10 @@ public partial class MoodListViewModel: ObservableObject
     private async Task Load()
     {
         await MoodNote.note.LoadNote();
+        var moods = MoodNote.note.GetData();
+
+        MoodNotes.Clear();
+        foreach(var mood in moods)
+            MoodNotes.Add(mood);
     }
 }
