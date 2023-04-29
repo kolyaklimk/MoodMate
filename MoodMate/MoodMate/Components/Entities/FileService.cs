@@ -3,7 +3,7 @@ using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Entities;
 
-internal class FileService : IFileService
+public class FileService : IFileService
 {
     private DataLoading<FileService> ServiceLoading = new();
     public string Name { get; set; }

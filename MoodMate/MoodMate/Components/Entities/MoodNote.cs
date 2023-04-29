@@ -3,7 +3,7 @@ using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Entities;
 
-internal class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
+public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 {
     public DataAnalysis<MoodNote> MoodAnalysis { get; set; } = new();
     public FileService Mood { get; set; } = new();

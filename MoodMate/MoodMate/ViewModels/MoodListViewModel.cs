@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
 
-internal partial class MoodListViewModel: ObservableObject
+public partial class MoodListViewModel: ObservableObject
 {
     private readonly Note MoodNote;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
