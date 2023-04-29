@@ -12,7 +12,8 @@
 
         <Button Text="Add" 
                 Grid.Row="0" 
-                HorizontalOptions="End" />
+                HorizontalOptions="End" 
+                Command="{Binding GoToChooseMoodPageCommand}"/>
 
         <Button Text="Analyse" 
                 Grid.Row="0" 
