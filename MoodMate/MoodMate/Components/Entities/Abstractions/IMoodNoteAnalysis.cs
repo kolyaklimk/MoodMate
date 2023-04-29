@@ -2,7 +2,7 @@
 
 namespace MoodMate.Components.Entities.Abstractions;
 
-internal interface INoteAnalysis
+internal interface IMoodNoteAnalysis
 {
     DataAnalysis<MoodNote> MoodAnalysis { get; set; }
     void InitAnalyse(DateTime date);
