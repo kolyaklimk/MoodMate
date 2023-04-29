@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using System.Collections.ObjectModel;
+using MoodMate.Components;
 
 namespace MoodMate.ViewModels;
 
@@ -19,9 +20,8 @@ public partial class ChooseMoodViewModel: ObservableObject
     async void LoadMoodNote() => await Load();
     private async Task Load()
     {
-        await Mood.LoadService();
+        await Mood.LoadService(Constants.PathMoods);
         var moods = Mood.GetServiceData();
-
 
         Moods.Clear();
         foreach(var mood in moods)
