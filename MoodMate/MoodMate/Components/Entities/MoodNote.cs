@@ -1,10 +1,11 @@
-﻿using MoodMate.Components.Entities.Abstractions;
-using static System.Net.Mime.MediaTypeNames;
+﻿using MoodMate.Components.Data;
+using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Entities;
 
-internal class MoodNote : ANote<MoodNote>
+internal class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 {
+    public DataAnalysis<MoodNote> MoodAnalysis { get; set; } = new();
     public FileService Mood { get; set; } = new();
     public MoodNote() { }
     public MoodNote(DateTime date, string name, string sourse, string text)
@@ -56,5 +57,27 @@ internal class MoodNote : ANote<MoodNote>
         {
             item.value.Id = item.index;
         }
+    }
+
+    // Analyse methot's
+    public void InitAnalyse(DateTime date)
+    {
+        MoodAnalysis.AnalysedData.Clear();
+        foreach (var item in NoteControl.Data)
+        {
+            MoodAnalysis.AddItem(item.Mood.Name, item.Mood.Source, item.Date, date);
+        }
+    }
+    public List<KeyValuePair<string, (string, int, int)>> GetAnalysedData()
+    {
+        return MoodAnalysis.AnalysedData.ToList();
+    }
+    public int GetCountMood()
+    {
+        return MoodAnalysis.GetCount();
+    }
+    public void FindPercentsMood()
+    {
+        MoodAnalysis.GetPercents();
     }
 }
