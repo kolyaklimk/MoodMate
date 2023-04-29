@@ -52,6 +52,7 @@
 	  <None Remove="Resources\Images\good.png" />
 	  <None Remove="Resources\Images\okey.png" />
 	  <None Remove="Resources\Images\sad.png" />
+	  <None Remove="Resources\Raw\Moods.json" />
 	</ItemGroup>
 
 	<ItemGroup>
