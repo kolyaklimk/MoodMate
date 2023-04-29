@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
 using MoodMate.Pages.SimpleNote;
+using MoodMate.ViewModels;
 
 namespace MoodMate;
 
@@ -36,5 +37,6 @@ public static class MauiProgram
         services.AddSingleton<MusicListPage>();
         services.AddSingleton<NoteListPage>();
         //ViewModels
+        services.AddSingleton<MoodListViewModel>();
     }
 }
