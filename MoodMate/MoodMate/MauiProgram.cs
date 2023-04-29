@@ -33,10 +33,14 @@ public static class MauiProgram
     private static void SetupServices(IServiceCollection services)
     {
         //Pages
-        services.AddSingleton<MoodListPage>();
         services.AddSingleton<MusicListPage>();
+
         services.AddSingleton<NoteListPage>();
+
+        services.AddSingleton<MoodListPage>();
+        services.AddSingleton<ChooseMoodPage>();
         //ViewModels
         services.AddSingleton<MoodListViewModel>();
+        services.AddSingleton<ChooseMoodViewModel>();
     }
 }
