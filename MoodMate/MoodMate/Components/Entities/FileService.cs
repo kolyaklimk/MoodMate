@@ -11,9 +11,9 @@ public class FileService : IFileService
     public string Description { get; set; }
 
     public FileService() { }
-    public async Task LoadService(string path)
+    public async Task LoadService()
     {
-        await ServiceLoading.Load(path, true);
+        await ServiceLoading.Load(Constants.PathMoods, true);
     }
     public List<FileService> GetServiceData()
     {

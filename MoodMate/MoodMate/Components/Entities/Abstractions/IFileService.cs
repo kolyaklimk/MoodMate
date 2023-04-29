@@ -5,5 +5,5 @@ internal interface IFileService
     string Name { get; set; }
     string Source { get; set; }
     string Description { get; set; }
-    Task LoadService(string path);
+    Task LoadService();
 }
