@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Pages.MoodNote;
 using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
@@ -18,6 +19,14 @@ public partial class MoodListViewModel: ObservableObject
 
     [RelayCommand]
     async void LoadMoodNote() => await Load();
+
+    [RelayCommand]
+    async void GoToChooseMoodPage() => await GoToChooseMood();
+
+    private async Task GoToChooseMood()
+    {
+        await Shell.Current.GoToAsync(nameof(ChooseMoodPage));
+    }
     private async Task Load()
     {
         await MoodNote.note.LoadNote();
