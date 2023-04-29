@@ -1,9 +1,12 @@
+using MoodMate.ViewModels;
+
 namespace MoodMate.Pages.MoodNote;
 
 public partial class ChooseMoodPage : ContentPage
 {
-	public ChooseMoodPage()
+	public ChooseMoodPage(ChooseMoodViewModel model)
 	{
 		InitializeComponent();
+		BindingContext = model;
 	}
 }
