@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MoodMate.Pages.MoodNote;
+using MoodMate.Pages.Music;
+using MoodMate.Pages.SimpleNote;
 
 namespace MoodMate;
 
@@ -19,6 +22,17 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
+		SetupServices(builder.Services);
+
 		return builder.Build();
 	}
+
+    private static void SetupServices(IServiceCollection services)
+    {
+        //Pages
+        services.AddSingleton<MoodListPage>();
+        services.AddSingleton<MusicListPage>();
+        services.AddSingleton<NoteListPage>();
+        //ViewModels
+    }
 }
