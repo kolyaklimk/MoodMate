@@ -1,6 +1,6 @@
 ﻿namespace MoodMate.Components.Factory;
 
-internal class Note
+public class Note
 {
     public dynamic note { get; }
     public Note(string kind)
