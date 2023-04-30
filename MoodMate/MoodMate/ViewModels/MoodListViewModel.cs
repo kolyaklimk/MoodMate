@@ -42,4 +42,9 @@ public partial class MoodListViewModel : ObservableObject
         foreach (var mood in moods)
             MoodNotes.Add(mood);
     }
+
+    [RelayCommand]
+    void Popup(MoodNote note)
+    {
+    }
 }

@@ -41,6 +41,12 @@
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
 
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
+                                {x:Type model:ChooseMoodViewModel}}, Path=PopupCommand}"
+                                                  CommandParameter="{Binding}"/>
+                        </Border.GestureRecognizers>
+
                         <Grid ColumnSpacing="10" 
                               RowSpacing="10"
                               Grid.ColumnDefinitions="50,*"
