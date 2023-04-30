@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:DataType="model:CreateOrEditMoodViewModel"
+             x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
+             BackgroundColor="#384D44"
+             Shell.TabBarIsVisible="false">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="false"/>
+    </Shell.BackButtonBehavior>
+    
+    <Grid RowDefinitions="0.1*,*" 
+          Padding="10">
+        
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="cancel" 
+                         Grid.Column="0"
+                         HorizontalOptions="Start"/>
+            <Button Text="ok"
+                         Grid.Column="1"
+                         HorizontalOptions="End"/>
+        </Grid>
+        
+        <Grid Grid.Row="1" 
+              RowDefinitions="0.2*,0.5*,0.2*,*"
+              RowSpacing="10">
+            
+            <DatePicker Grid.Row="0" 
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="22"
+                        Date="{Binding SelectedMood.Date}"/>
+            
+            <ImageButton Grid.Row="1"
+                         Source="{Binding SelectedMood.Mood.Source}"/>
+            
+            <Entry Grid.Row="2"
+                   MaxLength="40"
+                   FontSize="28"
+                   FontFamily="OpenSansBold"
+                   Placeholder="Enter your mood here"
+                   Text="{Binding SelectedMood.Mood.Name}"/>
+            
+            <Editor Grid.Row="3"
+                    FontSize="18"
+                    Placeholder="Describe your mood here"
+                    Text="{Binding SelectedMood.Text}"/>
+        </Grid>
+    </Grid>
 </ContentPage>
