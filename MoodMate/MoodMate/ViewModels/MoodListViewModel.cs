@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
 
-public partial class MoodListViewModel: ObservableObject
+public partial class MoodListViewModel : ObservableObject
 {
     private readonly Note MoodNote;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
@@ -33,7 +33,7 @@ public partial class MoodListViewModel: ObservableObject
         var moods = MoodNote.note.GetData();
 
         MoodNotes.Clear();
-        foreach(var mood in moods)
+        foreach (var mood in moods)
             MoodNotes.Add(mood);
     }
 }

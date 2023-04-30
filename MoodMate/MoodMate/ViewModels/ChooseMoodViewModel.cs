@@ -7,11 +7,11 @@ using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels;
 
-public partial class ChooseMoodViewModel: ObservableObject
+public partial class ChooseMoodViewModel : ObservableObject
 {
     private readonly FileService Mood;
     public ObservableCollection<FileService> Moods { get; set; } = new();
-    public ChooseMoodViewModel() 
+    public ChooseMoodViewModel()
     {
         Mood = new();
         LoadMoodNote();
@@ -38,7 +38,7 @@ public partial class ChooseMoodViewModel: ObservableObject
         var moods = Mood.GetServiceData();
 
         Moods.Clear();
-        foreach(var mood in moods)
+        foreach (var mood in moods)
             Moods.Add(mood);
     }
 

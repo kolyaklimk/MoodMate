@@ -75,5 +75,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>    
+    </Grid>
 </ContentPage>
