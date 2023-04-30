@@ -24,7 +24,10 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         if (SelectedMood.Mood.Name != "")
         {
             if (Create)
+            {
+                SelectedMood.Date = SelectedMood.Date.Date.Add(SelectedMood.Date.TimeOfDay);
                 MoodNote.note.AddNote(SelectedMood);
+            }
             else
                 MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
 

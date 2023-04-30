@@ -19,6 +19,7 @@ public partial class ChooseMoodViewModel : ObservableObject
     public ObservableCollection<FileService> Moods { get; set; } = new();
 
     [ObservableProperty] FileService selectedMood;
+    [ObservableProperty] DateTime dateTime = DateTime.Now;
 
     [RelayCommand]
     async void LoadMoodNote()
@@ -39,7 +40,7 @@ public partial class ChooseMoodViewModel : ObservableObject
         {
             await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
                 new Dictionary<string, object>() {
-                    { "MoodNote", new MoodNote() { Mood = SelectedMood }},
+                    { "MoodNote", new MoodNote() { Mood = SelectedMood, Date = DateTime }},
                     { "Create", true}});
             SelectedMood = null;
         }

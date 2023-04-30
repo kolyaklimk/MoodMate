@@ -4,6 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"
              x:DataType="model:CreateOrEditMoodViewModel"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
              BackgroundColor="#384D44"
              Shell.TabBarIsVisible="false">
@@ -35,7 +36,9 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         FontSize="22"
-                        Date="{Binding SelectedMood.Date}"/>
+                        Date="{Binding SelectedMood.Date}"
+                        MinimumDate="01/01/2023"
+                        MaximumDate="{x:Static system:DateTime.Today}"/>
             
             <ImageButton Grid.Row="1"
                          Source="{Binding SelectedMood.Mood.Source}"/>

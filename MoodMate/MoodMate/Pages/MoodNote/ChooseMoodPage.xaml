@@ -6,6 +6,7 @@
              x:Class="MoodMate.Pages.MoodNote.ChooseMoodPage"
              x:DataType="model:ChooseMoodViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              BackgroundColor="#DFDFDF"
              Shell.TabBarIsVisible="false">
 
@@ -34,7 +35,9 @@
                     TextColor="#4C4C4C"
                     VerticalOptions="Start" 
                     HorizontalOptions="Center"
-                    MinimumDate="01/01/2023"/>
+                    MinimumDate="01/01/2023"
+                    MaximumDate="{x:Static system:DateTime.Today}"
+                    Date="{Binding DateTime}"/>
 
         <CollectionView Grid.Row="3"
                         SelectionMode="Single"
