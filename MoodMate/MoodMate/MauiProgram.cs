@@ -39,8 +39,10 @@ public static class MauiProgram
 
         services.AddSingleton<MoodListPage>();
         services.AddSingleton<ChooseMoodPage>();
+        services.AddTransient<CreateOrEditMoodPage>();
         //ViewModels
         services.AddSingleton<MoodListViewModel>();
         services.AddSingleton<ChooseMoodViewModel>();
+        services.AddTransient<CreateOrEditMoodViewModel>();
     }
 }
