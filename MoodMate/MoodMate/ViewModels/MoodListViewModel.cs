@@ -9,13 +9,8 @@ namespace MoodMate.ViewModels;
 
 public partial class MoodListViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
+    private readonly Note MoodNote = new ("Mood");
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
-    public MoodListViewModel()
-    {
-        MoodNote = new("Mood");
-        LoadMoodNote();
-    }
 
     [RelayCommand]
     async void LoadMoodNote() => await Load();

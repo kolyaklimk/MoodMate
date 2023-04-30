@@ -9,13 +9,8 @@ namespace MoodMate.ViewModels;
 
 public partial class ChooseMoodViewModel : ObservableObject
 {
-    private readonly FileService Mood;
+    private readonly FileService Mood=new();
     public ObservableCollection<FileService> Moods { get; set; } = new();
-    public ChooseMoodViewModel()
-    {
-        Mood = new();
-        LoadMoodNote();
-    }
 
     [ObservableProperty] FileService selectedMood;
 

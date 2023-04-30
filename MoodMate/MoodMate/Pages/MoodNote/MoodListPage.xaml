@@ -7,7 +7,12 @@
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              BackgroundColor="#DFDFDF">
-
+    
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding LoadMoodNoteCommand}"/>
+    </ContentPage.Behaviors>
+    
     <Grid Padding="10" RowDefinitions="0.1*,*">
 
         <Button Text="Add" 
