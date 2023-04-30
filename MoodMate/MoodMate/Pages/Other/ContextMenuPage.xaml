@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.Other.ContextMenuPage"
-             Title="ContextMenuPage">
-</ContentPage>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MoodMate.Pages.Other.ContextMenuPage"
+               Color="Transparent" 
+               VerticalOptions="Center">
+
+    <VerticalStackLayout >
+        <Button Text="Share" Clicked="Button_Clicked_Share" MinimumWidthRequest="200" MinimumHeightRequest="80"/>
+        <Button Text="Delete" Clicked="Button_Clicked_Delete" MinimumHeightRequest="80"/>
+        <Button Text="Edit" Clicked="Button_Clicked_Edit" MinimumHeightRequest="80"/>
+        <Button Text="Cancel" Clicked="Button_Clicked_Cancel" MinimumHeightRequest="80"/>
+    </VerticalStackLayout>
+
+</toolkit:Popup>
