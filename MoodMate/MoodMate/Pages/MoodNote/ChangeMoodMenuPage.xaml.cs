@@ -1,9 +1,12 @@
+using CommunityToolkit.Maui.Views;
+
 namespace MoodMate.Pages.MoodNote;
 
-public partial class ChangeMoodMenuPage : ContentPage
+public partial class ChangeMoodMenuPage : Popup
 {
-	public ChangeMoodMenuPage()
+	public ChangeMoodMenuPage(ChooseMoodPage model)
 	{
 		InitializeComponent();
+		BindingContext = model;
 	}
 }

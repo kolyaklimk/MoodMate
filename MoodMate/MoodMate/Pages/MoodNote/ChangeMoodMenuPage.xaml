@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.MoodNote.ChangeMoodMenuPage">
-</ContentPage>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MoodMate.Pages.MoodNote.ChangeMoodMenuPage"         
+               xmlns:model="clr-namespace:MoodMate.ViewModels"
+               x:DataType="model:ChooseMoodViewModel"
+               xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+               Color="Transparent" 
+               Opened="Popup_Opened">
+
+    <Grid Grid.RowDefinitions="0.2*,*">
+        <Button Grid.RowSpan="2" 
+                CornerRadius="25" 
+                IsEnabled="False"
+                BackgroundColor="#DFDFDF"/>
+        <CollectionView SelectionMode="Single" 
+                        Grid.Row="1" 
+                        HeightRequest="200" 
+                        WidthRequest="300"
+                        SelectionChanged="collection_SelectionChanged">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entity:FileService">
+                    <Grid Grid.RowDefinitions="*,*">
+                        <Image Source="{Binding Source}"/>
+                        <Label Text="{Binding Name}" 
+                               Grid.Row="1" 
+                               HorizontalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</toolkit:Popup>
