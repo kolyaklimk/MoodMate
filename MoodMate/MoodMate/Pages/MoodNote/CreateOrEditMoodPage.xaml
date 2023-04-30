@@ -18,11 +18,13 @@
         <Grid ColumnDefinitions="*,*">
             <Button Text="cancel"
                     Grid.Column="0"
-                    HorizontalOptions="Start"/>
+                    HorizontalOptions="Start"
+                    Clicked="Back_Clicked"/>
             <Button Text="ok"
                     Grid.Column="1"
                     HorizontalOptions="End"
-                    Command="{Binding CreateOrEditCommand}"/>
+                    Command="{Binding CreateOrEditCommand}"
+                    Clicked="Ok_Clicked"/>
         </Grid>
         
         <Grid Grid.Row="1" 
@@ -38,7 +40,8 @@
             <ImageButton Grid.Row="1"
                          Source="{Binding SelectedMood.Mood.Source}"/>
             
-            <Entry Grid.Row="2"
+            <Entry x:Name="NameMood"
+                   Grid.Row="2"
                    MaxLength="40"
                    FontSize="28"
                    FontFamily="OpenSansBold"
