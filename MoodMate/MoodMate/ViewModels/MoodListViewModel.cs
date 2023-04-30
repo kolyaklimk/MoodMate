@@ -15,22 +15,31 @@ public partial class MoodListViewModel : ObservableObject
     public MoodListViewModel(Note[] note)
     {
         MoodNote = note[0];
+
+        MessagingCenter.Subscribe<CreateOrEditMoodViewModel>(this,
+            "UpdateMoodNote", (sender) => UpdateMoodNote());
     }
 
     [RelayCommand]
     async void LoadMoodNote()
     {
         await MoodNote.note.LoadNote();
-        var moods = MoodNote.note.GetData();
-
-        MoodNotes.Clear();
-        foreach (var mood in moods)
-            MoodNotes.Add(mood);
+        UpdateMoodNote();
     }
 
     [RelayCommand]
     async void GoToChooseMoodPage()
     {
         await Shell.Current.GoToAsync(nameof(ChooseMoodPage));
+    }
+
+    [RelayCommand]
+    void UpdateMoodNote()
+    {
+        var moods = MoodNote.note.GetData();
+
+        MoodNotes.Clear();
+        foreach (var mood in moods)
+            MoodNotes.Add(mood);
     }
 }
