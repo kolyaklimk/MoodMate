@@ -17,10 +17,19 @@ public partial class ChooseMoodViewModel : ObservableObject
 
     [ObservableProperty] FileService selectedMood;
 
-    [RelayCommand] async void LoadMoodNote() => await Load();
-    [RelayCommand] async void GoToCreateOrEditPage() => await GoToCreateOrEdit();
+    [RelayCommand]
+    async void LoadMoodNote()
+    {
+        await Mood.LoadService(Constants.PathMoods);
+        var moods = Mood.GetServiceData();
 
-    private async Task GoToCreateOrEdit()
+        Moods.Clear();
+        foreach (var mood in moods)
+            Moods.Add(mood);
+    }
+
+    [RelayCommand]
+    async void GoToCreateOrEditPage()
     {
         if (SelectedMood != null)
         {
@@ -31,14 +40,4 @@ public partial class ChooseMoodViewModel : ObservableObject
             SelectedMood = null;
         }
     }
-    private async Task Load()
-    {
-        await Mood.LoadService(Constants.PathMoods);
-        var moods = Mood.GetServiceData();
-
-        Moods.Clear();
-        foreach (var mood in moods)
-            Moods.Add(mood);
-    }
-
 }
