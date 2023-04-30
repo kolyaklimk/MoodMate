@@ -12,9 +12,9 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     private readonly Note MoodNote;
     private readonly bool Create;
 
-    public CreateOrEditMoodViewModel(Note note)
+    public CreateOrEditMoodViewModel(Note[] note)
     {
-        MoodNote = note;
+        MoodNote = note[0];
     }
     [ObservableProperty] public MoodNote selectedMood;
 

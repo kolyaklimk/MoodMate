@@ -12,9 +12,9 @@ public partial class ChooseMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
     private readonly FileService Mood = new();
-    public ChooseMoodViewModel(Note note)
+    public ChooseMoodViewModel(Note[] note)
     {
-        MoodNote = note;
+        MoodNote = note[0];
     }
     public ObservableCollection<FileService> Moods { get; set; } = new();
 

@@ -12,9 +12,9 @@ public partial class MoodListViewModel : ObservableObject
     private readonly Note MoodNote;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
 
-    public MoodListViewModel(Note note)
+    public MoodListViewModel(Note[] note)
     {
-        MoodNote = note;
+        MoodNote = note[0];
     }
 
     [RelayCommand]
