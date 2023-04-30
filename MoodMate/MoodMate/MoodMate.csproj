@@ -65,6 +65,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Pages\Other\" />
+	  <Folder Include="Converters\" />
 	</ItemGroup>
 
 	<ItemGroup>
