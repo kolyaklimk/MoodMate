@@ -1,9 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Views;
+using Microsoft.VisualBasic;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using System.Collections.ObjectModel;
+using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels;
 
@@ -44,7 +47,32 @@ public partial class MoodListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void Popup(MoodNote note)
+    async void Popup(MoodNote note)
     {
+        var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
+
+        switch (result)
+        {
+            case 1:
+                await Share.Default.RequestAsync(new ShareTextRequest
+                {
+                    Text = "Date: " + note.Date.ToString() + '\n'
+                    + "Mood: " + note.Mood.Name + '\n'
+                    + "Description: " + note.Text,
+                    Title = "Share Text"
+                });
+                break;
+
+            case 2:
+                await MoodNote.note.DeleteNote(note.Id);
+                UpdateMoodNote();
+                break;
+
+            case 3:
+                await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
+                    new Dictionary<string, object>() {
+                    { "MoodNote", note}});
+                break;
+        }
     }
 }
