@@ -10,12 +10,12 @@ namespace MoodMate.ViewModels;
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
-    private readonly bool Create;
-
     public CreateOrEditMoodViewModel(Note[] note)
     {
         MoodNote = note[0];
     }
+
+    [ObservableProperty] private bool create;
     [ObservableProperty] public MoodNote selectedMood;
 
     [RelayCommand]
@@ -27,6 +27,8 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                 MoodNote.note.AddNote(SelectedMood);
             else
                 MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
+
+            MessagingCenter.Send(this, "UpdateMoodNote");
         }
     }
 }
