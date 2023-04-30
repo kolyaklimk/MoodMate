@@ -52,5 +52,6 @@ public static class MauiProgram
 
         //// Service
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
+        services.AddSingleton(new FileService());
     }
 }
