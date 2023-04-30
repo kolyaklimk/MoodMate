@@ -43,7 +43,7 @@
 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
-                                {x:Type model:ChooseMoodViewModel}}, Path=PopupCommand}"
+                                {x:Type model:MoodListViewModel}}, Path=PopupCommand}"
                                                   CommandParameter="{Binding}"/>
                         </Border.GestureRecognizers>
 
