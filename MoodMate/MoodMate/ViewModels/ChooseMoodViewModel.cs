@@ -43,6 +43,7 @@ public partial class ChooseMoodViewModel : ObservableObject
                     { "MoodNote", new MoodNote() { Mood = SelectedMood, Date = DateTime }},
                     { "Create", true}});
             SelectedMood = null;
+            DateTime = DateTime.Now;
         }
     }
 }
