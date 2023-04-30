@@ -16,12 +16,13 @@
           Padding="10">
         
         <Grid ColumnDefinitions="*,*">
-            <Button Text="cancel" 
-                         Grid.Column="0"
-                         HorizontalOptions="Start"/>
+            <Button Text="cancel"
+                    Grid.Column="0"
+                    HorizontalOptions="Start"/>
             <Button Text="ok"
-                         Grid.Column="1"
-                         HorizontalOptions="End"/>
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Command="{Binding CreateOrEditCommand}"/>
         </Grid>
         
         <Grid Grid.Row="1" 
