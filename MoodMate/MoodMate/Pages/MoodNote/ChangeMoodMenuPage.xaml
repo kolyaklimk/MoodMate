@@ -6,8 +6,7 @@
                xmlns:model="clr-namespace:MoodMate.ViewModels"
                x:DataType="model:ChooseMoodViewModel"
                xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-               Color="Transparent" 
-               Opened="Popup_Opened">
+               Color="Transparent">
 
     <Grid Grid.RowDefinitions="0.2*,*">
         <Button Grid.RowSpan="2" 
@@ -17,8 +16,7 @@
         <CollectionView SelectionMode="Single" 
                         Grid.Row="1" 
                         HeightRequest="200" 
-                        WidthRequest="300"
-                        SelectionChanged="collection_SelectionChanged">
+                        WidthRequest="300">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
