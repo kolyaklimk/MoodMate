@@ -8,11 +8,14 @@ using MoodMate.Components.Factory;
 
 namespace MoodMate.ViewModels;
 
-[QueryProperty(nameof(MoodNote), "Note")]
 public partial class ChooseMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
     private readonly FileService Mood = new();
+    public ChooseMoodViewModel(Note note)
+    {
+        MoodNote = note;
+    }
     public ObservableCollection<FileService> Moods { get; set; } = new();
 
     [ObservableProperty] FileService selectedMood;
@@ -31,12 +34,13 @@ public partial class ChooseMoodViewModel : ObservableObject
     [RelayCommand]
     async void GoToCreateOrEditPage()
     {
+        OnPropertyChanged(nameof(MoodNote));
         if (SelectedMood != null)
         {
             await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
                 new Dictionary<string, object>() {
-                    { "MoodNote", new MoodNote(){Mood = SelectedMood } },
-                    { "Note", MoodNote}});
+                    { "MoodNote", new MoodNote() { Mood = SelectedMood }},
+                    { "Create", true}});
             SelectedMood = null;
         }
     }

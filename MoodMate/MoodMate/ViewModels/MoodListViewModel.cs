@@ -9,8 +9,13 @@ namespace MoodMate.ViewModels;
 
 public partial class MoodListViewModel : ObservableObject
 {
-    private readonly Note MoodNote = new("Mood");
+    private readonly Note MoodNote;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
+
+    public MoodListViewModel(Note note)
+    {
+        MoodNote = note;
+    }
 
     [RelayCommand]
     async void LoadMoodNote()
@@ -26,7 +31,6 @@ public partial class MoodListViewModel : ObservableObject
     [RelayCommand]
     async void GoToChooseMoodPage()
     {
-        await Shell.Current.GoToAsync(nameof(ChooseMoodPage),
-            new Dictionary<string, object>() { { "Note", MoodNote } });
+        await Shell.Current.GoToAsync(nameof(ChooseMoodPage));
     }
 }

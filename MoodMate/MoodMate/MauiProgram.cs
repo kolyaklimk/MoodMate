@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
 using MoodMate.Pages.SimpleNote;
@@ -32,6 +33,8 @@ public static class MauiProgram
 
     private static void SetupServices(IServiceCollection services)
     {
+        //Service
+        services.AddSingleton(new Note("Mood"));
         //Pages
         services.AddSingleton<MusicListPage>();
 
