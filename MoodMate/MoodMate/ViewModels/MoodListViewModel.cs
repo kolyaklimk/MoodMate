@@ -37,13 +37,16 @@ public partial class MoodListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void UpdateMoodNote()
+    async void UpdateMoodNote()
     {
         var moods = MoodNote.note.GetData();
 
-        MoodNotes.Clear();
-        foreach (var mood in moods)
-            MoodNotes.Add(mood);
+        await MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            MoodNotes.Clear();
+            foreach (var mood in moods)
+                MoodNotes.Add(mood);
+        });
     }
 
     [RelayCommand]
