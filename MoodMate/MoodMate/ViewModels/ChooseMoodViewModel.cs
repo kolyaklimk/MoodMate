@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using System.Collections.ObjectModel;
 using MoodMate.Components;
+using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels;
 
@@ -16,8 +17,21 @@ public partial class ChooseMoodViewModel: ObservableObject
         LoadMoodNote();
     }
 
-    [RelayCommand]
-    async void LoadMoodNote() => await Load();
+    [ObservableProperty] FileService selectedMood;
+
+    [RelayCommand] async void LoadMoodNote() => await Load();
+
+    [RelayCommand] async void GoToCreateOrEditPage() => await GoToCreateOrEdit();
+
+    private async Task GoToCreateOrEdit()
+    {
+        if (SelectedMood != null)
+        {
+            SelectedMood = null;
+            await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
+                new Dictionary<string, object>() { { "Mood", SelectedMood } });
+        }
+    }
     private async Task Load()
     {
         await Mood.LoadService(Constants.PathMoods);

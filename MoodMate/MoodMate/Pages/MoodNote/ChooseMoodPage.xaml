@@ -18,8 +18,9 @@
           Grid.RowDefinitions="0.2*,0.3*,0.2*,*,0.2*">
         <Button Grid.Row="0"
                 VerticalOptions="Start"               
-                HorizontalOptions="End"
-                Text="back"/>
+                HorizontalOptions="Start"
+                Text="back"
+                Clicked="Back_Clicked"/>
         <Label Grid.Row="1"
                Text="How are you feeling?"
                FontFamily="OpenSansBold"
@@ -37,7 +38,8 @@
         
         <CollectionView Grid.Row="3"
                         SelectionMode="Single"
-                        ItemsSource="{Binding Moods}">
+                        ItemsSource="{Binding Moods}"
+                        SelectedItem="{Binding SelectedMood}">
             
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"                                           
@@ -51,13 +53,13 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
-                        
+
                         <Grid HeightRequest="100"
-                              Grid.ColumnDefinitions="0.3*,*">                            
+                              Grid.ColumnDefinitions="0.3*,*">
                             <Image  Source="{Binding Source}"
                                     Grid.Column="0" 
                                     Scale="0.8"/>
-                            
+
                             <Grid Grid.Column="1"
                                   Grid.RowDefinitions="0.9*,*">
                                 <Label Text="{Binding Name}" 
@@ -81,6 +83,7 @@
                 CornerRadius="25"
                 TextColor="#384D44"
                 FontFamily="OpenSansBold"
-                FontSize="28"/>
+                FontSize="28"
+                Command="{Binding GoToCreateOrEditPageCommand}"/>
     </Grid>
 </ContentPage>

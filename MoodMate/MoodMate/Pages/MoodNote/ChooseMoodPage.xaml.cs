@@ -9,4 +9,9 @@ public partial class ChooseMoodPage : ContentPage
 		InitializeComponent();
 		BindingContext = model;
 	}
+
+    private async void Back_Clicked(object sender, EventArgs e)
+    {
+		await Navigation.PopAsync();
+    }
 }
