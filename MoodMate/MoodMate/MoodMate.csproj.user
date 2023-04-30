@@ -21,6 +21,9 @@
     <MauiXaml Update="Pages\Music\MusicListPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\Other\ContextMenuPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\SimpleNote\NoteListPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
