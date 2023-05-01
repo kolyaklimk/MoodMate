@@ -48,8 +48,6 @@ public static class MauiProgram
         services.AddSingleton<ChooseMoodPage>();
         services.AddSingleton<CreateOrEditMoodPage>();
 
-        services.AddSingleton<ContextMenuPage>();
-
         //// Service
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
