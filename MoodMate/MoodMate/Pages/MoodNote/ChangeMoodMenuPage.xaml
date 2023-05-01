@@ -2,9 +2,7 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               x:Class="MoodMate.Pages.MoodNote.ChangeMoodMenuPage"         
-               xmlns:model="clr-namespace:MoodMate.ViewModels"
-               x:DataType="model:ChooseMoodViewModel"
+               x:Class="MoodMate.Pages.MoodNote.ChangeMoodMenuPage"    
                xmlns:entity="clr-namespace:MoodMate.Components.Entities"
                Color="Transparent">
 
@@ -14,7 +12,6 @@
                 IsEnabled="False"
                 BackgroundColor="#DFDFDF"/>
         <CollectionView x:Name="collection"
-                        SelectionMode="Single" 
                         Grid.Row="1" 
                         HeightRequest="200" 
                         WidthRequest="300">

@@ -39,7 +39,9 @@ public partial class ChooseMoodViewModel : ObservableObject
         {
             await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
                 new Dictionary<string, object>() {
-                    { "MoodNote", new MoodNote() { Mood = SelectedMood, Date = DateTime }},
+                    { "MoodNote", new MoodNote() {
+                        Mood = new FileService(){ Name=SelectedMood.Name, Source=SelectedMood.Source},
+                        Date = DateTime }},
                     { "Create", true}});
             SelectedMood = null;
             DateTime = DateTime.Now;
