@@ -10,6 +10,10 @@
              BackgroundColor="#DFDFDF"
              Shell.TabBarIsVisible="false">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="false"/>
+    </Shell.BackButtonBehavior>
+    
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding LoadMoodNoteCommand}"/>
