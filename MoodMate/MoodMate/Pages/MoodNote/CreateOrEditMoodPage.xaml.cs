@@ -9,15 +9,4 @@ public partial class CreateOrEditMoodPage : ContentPage
 		InitializeComponent();
 		BindingContext= model;
 	}
-
-    private async void Back_Clicked(object sender, EventArgs e)
-    {
-		await Navigation.PopAsync();
-    }
-
-    private async void Ok_Clicked(object sender, EventArgs e)
-    {
-        if (NameMood.Text != "")
-            await Navigation.PopToRootAsync();
-    }
 }

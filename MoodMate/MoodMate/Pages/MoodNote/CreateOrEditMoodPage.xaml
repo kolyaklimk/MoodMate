@@ -20,12 +20,11 @@
             <Button Text="cancel"
                     Grid.Column="0"
                     HorizontalOptions="Start"
-                    Clicked="Back_Clicked"/>
+                    Command="{Binding Back_ClickedCommand}"/>
             <Button Text="ok"
                     Grid.Column="1"
                     HorizontalOptions="End"
-                    Command="{Binding CreateOrEditCommand}"
-                    Clicked="Ok_Clicked"/>
+                    Command="{Binding CreateOrEditCommand}"/>
         </Grid>
         
         <Grid Grid.Row="1" 

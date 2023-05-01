@@ -47,4 +47,10 @@ public partial class ChooseMoodViewModel : ObservableObject
             DateTime = DateTime.Now;
         }
     }
+    
+    [RelayCommand]
+    async void Back_Clicked()
+    {
+        await Shell.Current.Navigation.PopAsync();
+    }
 }

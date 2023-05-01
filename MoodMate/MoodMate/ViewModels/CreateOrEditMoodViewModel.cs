@@ -23,7 +23,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     [ObservableProperty] public MoodNote selectedMood;
 
     [RelayCommand]
-    void CreateOrEdit()
+    async void CreateOrEdit()
     {
         if (SelectedMood.Mood.Name != "")
         {
@@ -36,6 +36,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                 MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
 
             MessagingCenter.Send(this, "UpdateMoodNote");
+            await Shell.Current.Navigation.PopToRootAsync();
         }
     }
 
@@ -45,9 +46,15 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         var result = await Shell.Current.ShowPopupAsync(new ChangeMoodMenuPage(MoodImages)) as Tuple<string, string>;
         if (result != null)
         {
-            SelectedMood.Mood.Source= result.Item1;
-            SelectedMood.Mood.Name= result.Item2;
+            SelectedMood.Mood.Source = result.Item1;
+            SelectedMood.Mood.Name = result.Item2;
             OnPropertyChanged(nameof(SelectedMood));
         }
+    }
+
+    [RelayCommand]
+    async void Back_Clicked()
+    {
+        await Shell.Current.Navigation.PopAsync();
     }
 }

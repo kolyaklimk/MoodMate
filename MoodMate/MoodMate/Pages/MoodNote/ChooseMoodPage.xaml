@@ -25,7 +25,7 @@
                 VerticalOptions="Start"               
                 HorizontalOptions="Start"
                 Text="back"
-                Clicked="Back_Clicked"/>
+                Command="{Binding Back_ClickedCommand}"/>
         <Label Grid.Row="1"
                Text="How are you feeling?"
                FontFamily="OpenSansBold"
