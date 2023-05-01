@@ -13,7 +13,8 @@
                 CornerRadius="25" 
                 IsEnabled="False"
                 BackgroundColor="#DFDFDF"/>
-        <CollectionView SelectionMode="Single" 
+        <CollectionView x:Name="collection"
+                        SelectionMode="Single" 
                         Grid.Row="1" 
                         HeightRequest="200" 
                         WidthRequest="300">
@@ -26,6 +27,9 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:FileService">
                     <Grid Grid.RowDefinitions="*,*">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
                         <Image Source="{Binding Source}"/>
                         <Label Text="{Binding Name}" 
                                Grid.Row="1" 
