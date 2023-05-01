@@ -47,7 +47,6 @@ public static class MauiProgram
         services.AddSingleton<MoodListPage>();
         services.AddSingleton<ChooseMoodPage>();
         services.AddSingleton<CreateOrEditMoodPage>();
-        services.AddSingleton<ChangeMoodMenuPage>();
 
         services.AddSingleton<ContextMenuPage>();
 

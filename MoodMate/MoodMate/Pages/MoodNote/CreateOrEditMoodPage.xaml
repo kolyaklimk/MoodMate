@@ -41,7 +41,8 @@
                         MaximumDate="{x:Static system:DateTime.Today}"/>
             
             <ImageButton Grid.Row="1"
-                         Source="{Binding SelectedMood.Mood.Source}"/>
+                         Source="{Binding SelectedMood.Mood.Source}"
+                         Command="{Binding ChooseImageCommand}"/>
             
             <Entry x:Name="NameMood"
                    Grid.Row="2"

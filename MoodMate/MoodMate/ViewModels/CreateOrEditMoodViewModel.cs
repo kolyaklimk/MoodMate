@@ -12,11 +12,11 @@ namespace MoodMate.ViewModels;
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
-    private readonly ChangeMoodMenuPage changeMoodMenuPage;
-    public CreateOrEditMoodViewModel(Note[] note, ChangeMoodMenuPage page)
+    private readonly FileService MoodImages;
+    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService)
     {
         MoodNote = note[0];
-        changeMoodMenuPage = page;
+        MoodImages = fileService[0];
     }
 
     [ObservableProperty] private bool create;
@@ -42,6 +42,12 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     [RelayCommand]
     async void ChooseImage()
     {
-        var result = await Shell.Current.ShowPopupAsync(changeMoodMenuPage);
+        var result = await Shell.Current.ShowPopupAsync(new ChangeMoodMenuPage(MoodImages)) as Tuple<string, string>;
+        if (result != null)
+        {
+            SelectedMood.Mood.Source= result.Item1;
+            SelectedMood.Mood.Name= result.Item2;
+            OnPropertyChanged(nameof(SelectedMood));
+        }
     }
 }
