@@ -1,4 +1,5 @@
-﻿using MoodMate.Pages.MoodNote;
+﻿using MoodMate.Components.Factory;
+using MoodMate.Pages.MoodNote;
 
 namespace MoodMate;
 

@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels;
 
@@ -10,9 +12,11 @@ namespace MoodMate.ViewModels;
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
-    public CreateOrEditMoodViewModel(Note[] note)
+    private readonly ChangeMoodMenuPage changeMoodMenuPage;
+    public CreateOrEditMoodViewModel(Note[] note, ChangeMoodMenuPage page)
     {
         MoodNote = note[0];
+        changeMoodMenuPage = page;
     }
 
     [ObservableProperty] private bool create;
@@ -33,5 +37,11 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 
             MessagingCenter.Send(this, "UpdateMoodNote");
         }
+    }
+
+    [RelayCommand]
+    async void ChooseImage()
+    {
+        var result = await Shell.Current.ShowPopupAsync(changeMoodMenuPage);
     }
 }

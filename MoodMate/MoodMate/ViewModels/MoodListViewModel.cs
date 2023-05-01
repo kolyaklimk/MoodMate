@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Views;
-using Microsoft.VisualBasic;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
@@ -13,21 +12,16 @@ namespace MoodMate.ViewModels;
 public partial class MoodListViewModel : ObservableObject
 {
     private readonly Note MoodNote;
+    private readonly ContextMenuPage contextMenuPage;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
 
-    public MoodListViewModel(Note[] note)
+    public MoodListViewModel(Note[] note, ContextMenuPage page)
     {
         MoodNote = note[0];
+        contextMenuPage = page;
 
         MessagingCenter.Subscribe<CreateOrEditMoodViewModel>(this,
             "UpdateMoodNote", (sender) => UpdateMoodNote());
-    }
-
-    [RelayCommand]
-    async void LoadMoodNote()
-    {
-        await MoodNote.note.LoadNote();
-        UpdateMoodNote();
     }
 
     [RelayCommand]
@@ -40,7 +34,6 @@ public partial class MoodListViewModel : ObservableObject
     async void UpdateMoodNote()
     {
         var moods = MoodNote.note.GetData();
-
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
             MoodNotes.Clear();
@@ -52,7 +45,7 @@ public partial class MoodListViewModel : ObservableObject
     [RelayCommand]
     async void Popup(MoodNote note)
     {
-        var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
+        var result = await Shell.Current.ShowPopupAsync(contextMenuPage);
 
         switch (result)
         {

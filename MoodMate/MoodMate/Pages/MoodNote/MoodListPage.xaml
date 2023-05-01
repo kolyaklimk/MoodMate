@@ -10,7 +10,7 @@
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
-                                        Command="{Binding LoadMoodNoteCommand}"/>
+                                        Command="{Binding UpdateMoodNoteCommand}"/>
     </ContentPage.Behaviors>
     
     <Grid Padding="10" RowDefinitions="0.1*,*">

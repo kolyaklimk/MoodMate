@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MoodMate.Components;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
+using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using MoodMate.ViewModels;
 
@@ -30,7 +29,6 @@ public static class MauiProgram
 #endif
 
         SetupServices(builder.Services);
-
         return builder.Build();
     }
 
@@ -49,9 +47,12 @@ public static class MauiProgram
         services.AddSingleton<MoodListPage>();
         services.AddSingleton<ChooseMoodPage>();
         services.AddSingleton<CreateOrEditMoodPage>();
+        services.AddSingleton<ChangeMoodMenuPage>();
+
+        services.AddSingleton<ContextMenuPage>();
 
         //// Service
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
-        services.AddSingleton(new FileService());
+        services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
     }
 }
