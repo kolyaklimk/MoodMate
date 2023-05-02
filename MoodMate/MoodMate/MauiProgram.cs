@@ -35,6 +35,9 @@ public static class MauiProgram
     private static void SetupServices(IServiceCollection services)
     {
         //// ViewModels
+        services.AddSingleton<NoteListViewModel>();
+        services.AddSingleton<CreateOrEditNoteViewModel>();
+
         services.AddSingleton<MoodListViewModel>();
         services.AddSingleton<ChooseMoodViewModel>();
         services.AddSingleton<CreateOrEditMoodViewModel>();
@@ -44,6 +47,7 @@ public static class MauiProgram
         services.AddSingleton<MusicListPage>();
 
         services.AddSingleton<NoteListPage>();
+        services.AddSingleton<CreateOrEditNotePage>();
 
         services.AddSingleton<MoodListPage>();
         services.AddSingleton<ChooseMoodPage>();
