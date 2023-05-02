@@ -31,6 +31,9 @@
     <MauiXaml Update="Pages\Other\ContextMenuPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\SimpleNote\CreateOrEditNotePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\SimpleNote\NoteListPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
