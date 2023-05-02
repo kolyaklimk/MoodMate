@@ -7,6 +7,7 @@ using MoodMate.Pages.Music;
 using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using MoodMate.ViewModels;
+using MoodMate.ViewModels.Music;
 
 namespace MoodMate;
 
@@ -35,6 +36,8 @@ public static class MauiProgram
     private static void SetupServices(IServiceCollection services)
     {
         //// ViewModels
+        services.AddSingleton<MusicListViewModel>();
+
         services.AddSingleton<NoteListViewModel>();
         services.AddSingleton<CreateOrEditNoteViewModel>();
 
