@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.Music.MusicListPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"     
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
+             x:DataType="model:MusicListViewModel"
+             xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+             x:Class="MoodMate.Pages.Music.MusicListPage"
+             BackgroundColor="SaddleBrown">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding LoadPageCommand}"/>
+    </ContentPage.Behaviors>
+    
+    <Grid Grid.RowDefinitions="*,*,*,*">
+        <Grid Grid.Row="0" 
+              Grid.RowDefinitions="0.2*,*">
+            <Label Text="Sound"/>
+            <CollectionView Grid.Row="1" 
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedSound}">
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="entity:FileService">
+                        <Grid Grid.RowDefinitions="*,0.2*" 
+                              Padding="10">
+                            <Image Source="{Binding Description}"/>
+                            <Label Text="{Binding Name}" Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Grid.RowDefinitions="0.2*,*">
+            <Label Text="Music"/>
+            <CollectionView Grid.Row="1" 
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedMusic}">
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="entity:FileService">
+                        <Grid Grid.RowDefinitions="*,0.2*" 
+                              Padding="10">
+                            <Image Source="{Binding Description}"/>
+                            <Label Text="{Binding Name}" Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.RowDefinitions="0.2*,*">
+            <Label Text="Продолжительность"/>
+            <TimePicker Grid.Row="1"
+                        Time="{Binding SelectedTime}"/>
+        </Grid>
+
+        <Button Text="Start" 
+                Grid.Row="3"
+                Command="{Binding GoToPlayCommand}"/>
+    </Grid>
 </ContentPage>
