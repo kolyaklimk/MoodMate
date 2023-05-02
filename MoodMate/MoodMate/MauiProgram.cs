@@ -38,6 +38,7 @@ public static class MauiProgram
         services.AddSingleton<MoodListViewModel>();
         services.AddSingleton<ChooseMoodViewModel>();
         services.AddSingleton<CreateOrEditMoodViewModel>();
+        services.AddSingleton<AnalysisMoodViewModel>();
 
         //// Pages
         services.AddSingleton<MusicListPage>();
@@ -47,6 +48,7 @@ public static class MauiProgram
         services.AddSingleton<MoodListPage>();
         services.AddSingleton<ChooseMoodPage>();
         services.AddSingleton<CreateOrEditMoodPage>();
+        services.AddSingleton<AnalysisMoodPage>();
 
         //// Service
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
