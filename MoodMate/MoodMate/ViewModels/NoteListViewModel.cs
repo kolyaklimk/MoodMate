@@ -24,7 +24,13 @@ public partial class NoteListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void UpdateSimpleNote()
+    async void GoToCreateOrEditPage()
+    {
+        await Shell.Current.GoToAsync(nameof(CreateOrEditNotePage));
+    }
+
+    [RelayCommand]
+    public async void UpdateSimpleNote()
     {
         var moods = SmpleNote.note.GetData();
         await MainThread.InvokeOnMainThreadAsync(() =>
@@ -36,7 +42,7 @@ public partial class NoteListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void Popup(MoodNote note)
+    public async void Popup(MoodNote note)
     {
         var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
 
