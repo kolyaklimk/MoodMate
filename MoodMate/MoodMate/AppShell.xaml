@@ -12,10 +12,10 @@
             <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"/>
         </Tab>
         <Tab Title="Music">
-            <ShellContent ContentTemplate="{DataTemplate simple:NoteListPage}" />
+            <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}" />
         </Tab>
         <Tab Title="Note">
-            <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}" />
+            <ShellContent ContentTemplate="{DataTemplate simple:NoteListPage}" />
         </Tab>
     </TabBar>
 </Shell>
