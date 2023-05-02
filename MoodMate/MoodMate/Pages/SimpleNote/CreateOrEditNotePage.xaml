@@ -2,11 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodMate.Pages.SimpleNote.CreateOrEditNotePage"
-             Title="CreateOrEditNotePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:DataType="model:CreateOrEditNoteViewModel"
+             Shell.TabBarIsVisible="false"
+             BackgroundColor="#384D44">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="false"/>
+    </Shell.BackButtonBehavior>
+    
+    <Grid RowDefinitions="0.1*,*"
+          Padding="20" 
+          RowSpacing="10">
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="cancel" 
+                    Grid.Column="0" 
+                    Command="{Binding Back_ClickedCommand}"
+                    HorizontalOptions="Start"/>
+            <Button Text="ok" 
+                    Grid.Column="1" 
+                    Command="{Binding CreateOrEditCommand}"
+                    HorizontalOptions="End"/>
+        </Grid>
+        <Editor Grid.Row="1" 
+                FontSize="18"
+                Placeholder="Write something here"
+                Text="{Binding SelectedNote.Text}"/>
+    </Grid>
 </ContentPage>
