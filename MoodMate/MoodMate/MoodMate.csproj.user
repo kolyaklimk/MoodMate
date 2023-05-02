@@ -10,6 +10,9 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="Pages\MoodNote\AnalysisMoodPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\MoodNote\ChangeMoodMenuPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
