@@ -53,9 +53,16 @@
 	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
 	  <None Remove="Resources\Images\good.png" />
+	  <None Remove="Resources\Images\music_ocean.png" />
+	  <None Remove="Resources\Images\no_sound.png" />
 	  <None Remove="Resources\Images\okey.png" />
 	  <None Remove="Resources\Images\sad.png" />
+	  <None Remove="Resources\Images\sound_click.png" />
 	  <None Remove="Resources\Raw\Moods.json" />
+	  <None Remove="Resources\Raw\Music.json" />
+	  <None Remove="Resources\Raw\music_ocean.mp3" />
+	  <None Remove="Resources\Raw\Sound.json" />
+	  <None Remove="Resources\Raw\sound_click.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
