@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.SimpleNote.NoteListPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:DataType="model:NoteListViewModel"
+             xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+             x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
+             BackgroundColor="#DFDFDF">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding UpdateSimpleNoteCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid Padding="10"
+          RowDefinitions="*,0.1*" 
+          ColumnDefinitions="*,*"
+          ColumnSpacing="10"
+          RowSpacing="10">
+        <CollectionView ItemsSource="{Binding SimpleNotes}"
+                        Grid.RowSpan="2">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"                                           
+                                   ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entity:SimpleNote">
+                    <Border BackgroundColor="#D5C5B9" 
+                            StrokeThickness="2" 
+                            Stroke="#384D44">
+                        
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="25"/>
+                        </Border.StrokeShape>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
+                                {x:Type model:NoteListViewModel}}, Path=PopupCommand}"
+                                                  CommandParameter="{Binding}"/>
+                        </Border.GestureRecognizers>
+
+                        <Grid Padding="10">
+                            <Label Text="{Binding Text}" 
+                                   LineBreakMode="CharacterWrap"
+                                   TextColor = "Black"
+                                   FontSize="14" 
+                                   MaximumHeightRequest="250"
+                                   MinimumHeightRequest="20"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>        
+        
+        <Button Text="add" 
+                Grid.Row="1" 
+                HorizontalOptions="End" 
+                Command="{Binding GoToCreateOrEditPageCommand}"/>
+    </Grid>
 </ContentPage>
