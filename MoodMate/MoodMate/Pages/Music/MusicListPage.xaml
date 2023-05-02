@@ -19,6 +19,7 @@
             <Label Text="Sound"/>
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
+                            ItemsSource="{Binding SoundList}"
                             SelectedItem="{Binding SelectedSound}">
                 
                 <CollectionView.ItemsLayout>
@@ -42,6 +43,7 @@
             <Label Text="Music"/>
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
+                            ItemsSource="{Binding MusicList}"
                             SelectedItem="{Binding SelectedMusic}">
                 
                 <CollectionView.ItemsLayout>
