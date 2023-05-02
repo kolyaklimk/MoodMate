@@ -26,7 +26,10 @@ public partial class NoteListViewModel : ObservableObject
     [RelayCommand]
     async void GoToCreateOrEditPage()
     {
-        await Shell.Current.GoToAsync(nameof(CreateOrEditNotePage));
+        await Shell.Current.GoToAsync(nameof(CreateOrEditNotePage),
+                new Dictionary<string, object>() {
+                    { "SimpleNote", new SimpleNote() { Date = DateTime.Now }},
+                    { "Create", true}});
     }
 
     [RelayCommand]
@@ -42,7 +45,7 @@ public partial class NoteListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async void Popup(MoodNote note)
+    public async void Popup(SimpleNote note)
     {
         var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
 
