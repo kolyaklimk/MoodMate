@@ -2,7 +2,7 @@
 
 namespace MoodMate.Components.Entities;
 
-internal class SimpleNote : ANote<SimpleNote>
+public class SimpleNote : ANote<SimpleNote>
 {
     public SimpleNote() { }
     public SimpleNote(DateTime date, string text)
