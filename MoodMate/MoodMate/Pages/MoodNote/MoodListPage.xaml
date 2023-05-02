@@ -22,7 +22,8 @@
 
         <Button Text="Analyse" 
                 Grid.Row="0" 
-                HorizontalOptions="Start" />
+                HorizontalOptions="Start"
+                Command="{Binding GoToAnalysisMoodPageCommand}"/>
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding MoodNotes}">
