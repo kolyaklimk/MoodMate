@@ -29,6 +29,12 @@ public partial class MoodListViewModel : ObservableObject
     }
 
     [RelayCommand]
+    async void GoToAnalysisMoodPage()
+    {
+        await Shell.Current.GoToAsync(nameof(AnalysisMoodPage));
+    }
+
+    [RelayCommand]
     async void UpdateMoodNote()
     {
         var moods = MoodNote.note.GetData();
