@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"     
+             x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
+             Shell.TabBarIsVisible="false">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="false"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding UpdateAnalyseCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="0.2*,*">
+        <Grid Grid.Row="0" 
+              Grid.ColumnDefinitions="*,*,*">
+            <Button Text="cancel" 
+                    HorizontalOptions="Start"
+                    Command="{Binding BackClickCommand}"/>
+            <Button Text="назад" 
+                    Command="{Binding PreviousMonthCommand}"
+                    Grid.Column="0" 
+                    HorizontalOptions="End"/>
+            <Label Text="{Binding SelectedDate, StringFormat='{}{0:MM-yyyy}'}" 
+                   TextColor="White" 
+                   Grid.Column="1"
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"/>
+            <Button Text="вперёд" 
+                    Command="{Binding NextMonthCommand}"
+                    Grid.Column="2" 
+                    HorizontalOptions="Start"/>
+        </Grid>
+        <Grid Grid.Row="1" 
+              RowDefinitions="0.1*,0.1*,*">
+            <Label Text="Статистика настроения"/>
+            <Label Text="{Binding Count}"  Grid.Row="1"/>
+            <CollectionView ItemsSource="{Binding AnalysisMood}"
+                            BackgroundColor="Brown" 
+                            Grid.Row="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10" 
+                              RowSpacing="10" 
+                              Padding="5"
+                              ColumnDefinitions="100,*">
+                            <Image Grid.Column="0" 
+                                   Source="{Binding Value[0]}" 
+                                   HeightRequest="100"/>
+                            <Grid Grid.Column="1"
+                                  RowDefinitions="*,*">
+                                <Slider Maximum="100" 
+                                        Value="{Binding Value[2]}" />
+                                <Grid Grid.Row="1"
+                                      ColumnDefinitions="*,50">
+                                    <Label Text="{Binding Key}"/>
+                                    <Label Grid.Column="1">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} / {1}%">
+                                                <Binding Path="Value[1]"/>
+                                                <Binding Path="Value[2]"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>
