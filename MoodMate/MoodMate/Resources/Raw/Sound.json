@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "click",
+    "Source": "sound_click.mp3",
+    "Description": "sound_click.png"
+  },
+  {
+    "Name": "no",
+    "Source": "no.mp3",
+    "Description": "no_sound.png"
+  }
+]
