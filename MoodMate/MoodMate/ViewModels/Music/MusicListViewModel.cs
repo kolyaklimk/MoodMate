@@ -40,7 +40,7 @@ public partial class MusicListViewModel : ObservableObject
     [RelayCommand]
     async void GoToPlay()
     {
-        if(SelectedMusic!=null && SelectedSound != null)
+        if(SelectedMusic!=null || SelectedSound != null)
         {
             SelectedMusic = null;
             SelectedSound = null;
