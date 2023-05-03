@@ -4,10 +4,10 @@ using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
-using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using MoodMate.ViewModels;
 using MoodMate.ViewModels.Music;
+using Plugin.Maui.Audio;
 
 namespace MoodMate;
 
@@ -37,6 +37,7 @@ public static class MauiProgram
     {
         //// ViewModels
         services.AddSingleton<MusicListViewModel>();
+        services.AddSingleton<PlayMusicViewModel>();
 
         services.AddSingleton<NoteListViewModel>();
         services.AddSingleton<CreateOrEditNoteViewModel>();
@@ -48,6 +49,7 @@ public static class MauiProgram
 
         //// Pages
         services.AddSingleton<MusicListPage>();
+        services.AddSingleton<PlayMusicPage>();
 
         services.AddSingleton<NoteListPage>();
         services.AddSingleton<CreateOrEditNotePage>();
@@ -60,5 +62,6 @@ public static class MauiProgram
         //// Service
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
+        services.AddSingleton(AudioManager.Current);
     }
 }
