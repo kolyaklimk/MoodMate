@@ -8,5 +8,10 @@ public partial class PlayMusicPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = model;
-	}
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }

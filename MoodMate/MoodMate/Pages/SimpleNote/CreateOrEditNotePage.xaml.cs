@@ -9,4 +9,9 @@ public partial class CreateOrEditNotePage : ContentPage
         InitializeComponent();
         BindingContext = model;
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }
