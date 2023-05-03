@@ -13,30 +13,21 @@
                                         Command="{Binding UpdateMoodNoteCommand}"/>
     </ContentPage.Behaviors>
     
-    <Grid Padding="10" RowDefinitions="0.1*,*">
+    <Grid Padding="10" RowDefinitions="*,50">
 
-        <Button Text="Add" 
-                Grid.Row="0" 
-                HorizontalOptions="End" 
-                Command="{Binding GoToChooseMoodPageCommand}"/>
-
-        <Button Text="Analyse" 
-                Grid.Row="0" 
-                HorizontalOptions="Start"
-                Command="{Binding GoToAnalysisMoodPageCommand}"/>
-
-        <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="0"
+                        Grid.RowSpan="2"
                         ItemsSource="{Binding MoodNotes}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"                                           
                                    ItemSpacing="5"/>
             </CollectionView.ItemsLayout>
-
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:MoodNote">
                     <Border BackgroundColor="#D5C5B9" 
-                            StrokeThickness="0" >
+                            StrokeThickness="0">
 
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
@@ -48,34 +39,33 @@
                                                   CommandParameter="{Binding}"/>
                         </Border.GestureRecognizers>
 
-                        <Grid ColumnSpacing="10" 
-                              RowSpacing="10"
-                              Grid.ColumnDefinitions="50,*"
+                        <Grid Grid.ColumnDefinitions="100,*"
                               Grid.RowDefinitions="30,100">
-
-                            <Label Grid.ColumnSpan="3" 
-                                   BackgroundColor="#384D44"/>
-
+                            
+                            <BoxView Grid.ColumnSpan="3"
+                                     Color="#384D44"/>
                             <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
                                    Grid.Column="1" 
                                    Grid.Row="0" 
                                    TextColor="#FFFFFF"
                                    HorizontalTextAlignment="Start" 
                                    VerticalTextAlignment="Center"/>
-
-                            <Image Source="{Binding Mood.Source}" 
-                                   Aspect="AspectFit"
+                            
+                            <Image Source="{Binding Mood.Source}"
+                                   Scale="0.8"
                                    Grid.Column="0" 
                                    Grid.Row="1"/>
 
                             <Grid Grid.Column="1" 
                                   Grid.Row="1"
                                   Grid.RowDefinitions="40,70">
+
                                 <Label Text="{Binding Mood.Name}" 
                                        Grid.Row="0" 
                                        TextColor = "#384D44" 
                                        FontSize="28"  
                                        FontFamily="OpenSansBold"/>
+
                                 <Label Text="{Binding Text}" 
                                        Grid.Row="1" 
                                        LineBreakMode="CharacterWrap"                       
@@ -87,5 +77,29 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Border BackgroundColor="#384D44"
+                StrokeThickness="0"
+                Grid.Row="1"
+                WidthRequest="150"
+                HorizontalOptions="End">
+            
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25"/>
+            </Border.StrokeShape>
+            <Grid ColumnDefinitions="70,10,70">
+
+                <Button Text="Add" 
+                        Grid.Column="2" 
+                        Command="{Binding GoToChooseMoodPageCommand}"/>
+
+                <Label Text="|"
+                       Grid.Column="1"/>
+                
+                <Button Text="Analyse" 
+                        Grid.Column="0" 
+                        Command="{Binding GoToAnalysisMoodPageCommand}"/>
+            </Grid>
+        </Border>
+
     </Grid>
 </ContentPage>
