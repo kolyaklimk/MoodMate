@@ -1,9 +1,12 @@
+using MoodMate.ViewModels.Music;
+
 namespace MoodMate.Pages.Music;
 
 public partial class PlayMusicPage : ContentPage
 {
-	public PlayMusicPage()
+	public PlayMusicPage(PlayMusicViewModel model)
 	{
 		InitializeComponent();
+		BindingContext = model;
 	}
 }
