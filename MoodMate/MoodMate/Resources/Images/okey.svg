@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFC961;}
+	.st1{fill:#4C4C4C;}
+	.st2{fill:none;stroke:#4C4C4C;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<g id="Body">
+	<circle class="st0" cx="500" cy="500" r="500"/>
+</g>
+<g id="Eyes">
+	<g>
+		<circle class="st1" cx="350" cy="340" r="45"/>
+		<circle class="st1" cx="650" cy="340" r="45"/>
+	</g>
+</g>
+<g id="Mouth">
+	<path class="st2" d="M200,500c54.1,341.6,545.9,341.6,600,0"/>
+</g>
+</svg>

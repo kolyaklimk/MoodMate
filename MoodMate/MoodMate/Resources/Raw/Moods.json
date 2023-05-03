@@ -1,7 +1,7 @@
 ﻿[
   {
     "Name": "Good",
-    "Source": "good.png",
+    "Source": "okey.png",
     "Description": "good, goood, gooooood :)"
   },
   {
@@ -11,7 +11,7 @@
   },
   {
     "Name": "Sad",
-    "Source": "sad.png",
+    "Source": "okey.png",
     "Description": "sad, very sad pepehands :("
   }
 ]
