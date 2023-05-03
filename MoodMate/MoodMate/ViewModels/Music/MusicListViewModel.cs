@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
+using MoodMate.Pages.Music;
 using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels.Music;
@@ -19,15 +20,15 @@ public partial class MusicListViewModel : ObservableObject
 
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
-    [ObservableProperty] TimeSpan selectedTime=new(0,1,0);
+    [ObservableProperty] TimeSpan selectedTime = new(0, 1, 0);
 
     [RelayCommand]
     void LoadPage()
     {
         var M = Music.GetServiceData();
         var S = Sound.GetServiceData();
-        
-        foreach(var m in M) 
+
+        foreach (var m in M)
         {
             MusicList.Add(m);
         }
@@ -40,8 +41,13 @@ public partial class MusicListViewModel : ObservableObject
     [RelayCommand]
     async void GoToPlay()
     {
-        if(SelectedMusic!=null || SelectedSound != null)
+        if (SelectedMusic != null || SelectedSound != null)
         {
+            await Shell.Current.GoToAsync(nameof(PlayMusicPage),
+                new Dictionary<string, object>() {
+                    { "SelectedMusic", SelectedMusic},
+                    { "SelectedSound", SelectedSound},
+                    { "Time", SelectedTime}});
             SelectedMusic = null;
             SelectedSound = null;
         }
