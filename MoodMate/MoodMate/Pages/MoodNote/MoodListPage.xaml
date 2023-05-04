@@ -6,7 +6,7 @@
              x:DataType="model:MoodListViewModel"
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             BackgroundColor="#DFDFDF">
+             BackgroundColor="#f6f6f6">
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
@@ -21,57 +21,72 @@
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"                                           
-                                   ItemSpacing="5"/>
+                                   ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:MoodNote">
-                    <Border BackgroundColor="#D5C5B9" 
+                    <Border BackgroundColor="White" 
                             StrokeThickness="0">
 
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
 
+                        <Border.Shadow>
+                            <Shadow Radius="60" 
+                                    Opacity="0.3"/>
+                        </Border.Shadow>
+                        
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
                                 {x:Type model:MoodListViewModel}}, Path=PopupCommand}"
                                                   CommandParameter="{Binding}"/>
                         </Border.GestureRecognizers>
 
-                        <Grid Grid.ColumnDefinitions="100,*"
-                              Grid.RowDefinitions="30,100">
-                            
-                            <BoxView Grid.ColumnSpan="3"
-                                     Color="#384D44"/>
-                            <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
-                                   Grid.Column="1" 
-                                   Grid.Row="0" 
-                                   TextColor="#FFFFFF"
-                                   HorizontalTextAlignment="Start" 
-                                   VerticalTextAlignment="Center"/>
-                            
-                            <Image Source="{Binding Mood.Source}"
-                                   Scale="0.8"
-                                   Grid.Column="0" 
-                                   Grid.Row="1"/>
+                        <Grid Grid.RowDefinitions="70,*"
+                              Padding="10"
+                              RowSpacing="10"
+                              MaximumHeightRequest="320">
 
-                            <Grid Grid.Column="1" 
-                                  Grid.Row="1"
-                                  Grid.RowDefinitions="40,70">
+                            <Grid Grid.Row="0"
+                                  Grid.ColumnDefinitions="70,*"
+                                  ColumnSpacing="10">
 
-                                <Label Text="{Binding Mood.Name}" 
-                                       Grid.Row="0" 
-                                       TextColor = "#384D44" 
-                                       FontSize="28"  
-                                       FontFamily="OpenSansBold"/>
+                                <Image Source="{Binding Mood.Source}"
+                                       Grid.Column="0"/>
 
-                                <Label Text="{Binding Text}" 
-                                       Grid.Row="1" 
-                                       LineBreakMode="CharacterWrap"                       
-                                       TextColor = "#4C4C4C" 
-                                       FontSize="14"/>
+                                <Grid Grid.RowDefinitions="40,20"
+                                      Grid.Column="1">
+
+                                    <Label Text="{Binding Mood.Name}" 
+                                           Grid.Row="0" 
+                                           TextColor = "#384D44" 
+                                           FontSize="28"  
+                                           VerticalOptions="Center"
+                                           FontFamily="OpenSansBold"/>
+
+                                    <Grid Grid.Row="1"
+                                          Grid.ColumnDefinitions="16,*"
+                                          ColumnSpacing="5">
+
+                                        <Image Source="time.png"
+                                               Grid.Column="0"/>
+
+                                        <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
+                                               TextColor="#4C4C4C"
+                                               FontSize="14"
+                                               VerticalOptions="Center"
+                                               Grid.Column="1"/>
+                                    </Grid>
+                                </Grid>
                             </Grid>
+
+                            <Label Text="{Binding Text}" 
+                                   Grid.Row="1" 
+                                   LineBreakMode="CharacterWrap"                       
+                                   TextColor = "#4C4C4C" 
+                                   FontSize="16"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
