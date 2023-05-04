@@ -56,6 +56,7 @@
 	  <None Remove="Resources\Images\no_sound.png" />
 	  <None Remove="Resources\Images\okey.png" />
 	  <None Remove="Resources\Images\sound_click.png" />
+	  <None Remove="Resources\Images\time.svg" />
 	  <None Remove="Resources\Raw\Moods.json" />
 	  <None Remove="Resources\Raw\Music.json" />
 	  <None Remove="Resources\Raw\music_ocean.mp3" />
