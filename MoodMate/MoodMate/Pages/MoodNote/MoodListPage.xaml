@@ -6,14 +6,15 @@
              x:DataType="model:MoodListViewModel"
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             BackgroundColor="#f6f6f6">
+             BackgroundColor="#f2f2f2">
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding UpdateMoodNoteCommand}"/>
     </ContentPage.Behaviors>
     
-    <Grid Padding="10" RowDefinitions="*,50">
+    <Grid Padding="10" 
+          RowDefinitions="*,100">
 
         <CollectionView Grid.Row="0"
                         Grid.RowSpan="2"
@@ -27,17 +28,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:MoodNote">
                     <Border BackgroundColor="White" 
-                            StrokeThickness="0">
+                            StrokeThickness="0.3">
 
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
 
-                        <Border.Shadow>
-                            <Shadow Radius="60" 
-                                    Opacity="0.3"/>
-                        </Border.Shadow>
-                        
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
                                 {x:Type model:MoodListViewModel}}, Path=PopupCommand}"
@@ -46,7 +42,7 @@
 
                         <Grid Grid.RowDefinitions="70,*"
                               Padding="10"
-                              RowSpacing="10"
+                              RowSpacing="5"
                               MaximumHeightRequest="320">
 
                             <Grid Grid.Row="0"
@@ -61,7 +57,7 @@
 
                                     <Label Text="{Binding Mood.Name}" 
                                            Grid.Row="0" 
-                                           TextColor = "#384D44" 
+                                           TextColor = "#2b5e4c"
                                            FontSize="28"  
                                            VerticalOptions="Center"
                                            FontFamily="OpenSansBold"/>
@@ -92,27 +88,34 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Border BackgroundColor="#384D44"
+
+        <Border BackgroundColor="#4e8973"
                 StrokeThickness="0"
                 Grid.Row="1"
-                WidthRequest="150"
+                WidthRequest="50"
                 HorizontalOptions="End">
             
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="25"/>
             </Border.StrokeShape>
-            <Grid ColumnDefinitions="70,10,70">
+            
+            <Grid RowDefinitions="50,50">
 
-                <Button Text="Add" 
-                        Grid.Column="2" 
-                        Command="{Binding GoToChooseMoodPageCommand}"/>
+                <Image Source="loop.png"
+                       Grid.Row="0"
+                       Scale="0.7">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToAnalysisMoodPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
 
-                <Label Text="|"
-                       Grid.Column="1"/>
-                
-                <Button Text="Analyse" 
-                        Grid.Column="0" 
-                        Command="{Binding GoToAnalysisMoodPageCommand}"/>
+                <Image Source="plus.png"
+                       Grid.Row="1"
+                       Scale="0.7">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToChooseMoodPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </Border>
 

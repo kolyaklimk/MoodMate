@@ -7,7 +7,7 @@
              x:DataType="model:ChooseMoodViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             BackgroundColor="#DFDFDF"
+             BackgroundColor="#f2f2f2"
              Shell.TabBarIsVisible="false">
 
     <Shell.BackButtonBehavior>
@@ -30,7 +30,7 @@
                Text="How are you feeling?"
                FontFamily="OpenSansBold"
                FontSize="28"
-               TextColor="#384D44"
+               TextColor="#2b5e4c"
                VerticalOptions="End"
                HorizontalOptions="Center"/>
         <DatePicker x:Name="date"
@@ -55,29 +55,36 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:FileService">
-                    <Border BackgroundColor="#9AC795" 
-                            StrokeThickness="0">
+                    <Border BackgroundColor="#4e8973" 
+                            StrokeThickness="0.3">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
 
-                        <Grid HeightRequest="100"
-                              Grid.ColumnDefinitions="0.3*,*">
-                            <Image  Source="{Binding Source}"
-                                    Grid.Column="0" 
-                                    Scale="0.8"/>
+                        <Grid Grid.RowDefinitions="70,*"
+                              Grid.ColumnDefinitions="70,*"
+                              Padding="10"
+                              RowSpacing="5"
+                              ColumnSpacing="10"
+                              MaximumHeightRequest="320">
 
-                            <Grid Grid.Column="1"
-                                  Grid.RowDefinitions="0.9*,*">
+                            <Image  Source="{Binding Source}"
+                                    Grid.Column="0"/>
+
+                            <Grid Grid.RowDefinitions="40,20"
+                                      Grid.Column="1">
+                                
                                 <Label Text="{Binding Name}" 
-                                   Grid.Row="0"
-                                   TextColor = "#384D44"
-                                   FontSize="28"
-                                   FontFamily="OpenSansBold"/>
-                                <Label Text="{Binding Description}" 
-                                   Grid.Row="1"                                
-                                   TextColor = "#4C4C4C" 
-                                   FontSize="18"/>
+                                       Grid.Row="0"
+                                       TextColor = "White"
+                                       FontSize="28"
+                                       VerticalOptions="Center"
+                                       FontFamily="OpenSansBold"/>
+                                
+                                <Label Text="{Binding Description}"
+                                       Grid.Row="1"                                
+                                       TextColor = "White" 
+                                       FontSize="16"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -88,7 +95,7 @@
         <Button Text="OK"
                 Grid.Row="4"
                 CornerRadius="25"
-                TextColor="#384D44"
+                TextColor="#2b5e4c"
                 FontFamily="OpenSansBold"
                 FontSize="28"
                 Command="{Binding GoToCreateOrEditPageCommand}"/>
