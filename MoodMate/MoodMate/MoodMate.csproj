@@ -52,9 +52,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
+	  <None Remove="Resources\Images\loop.svg" />
 	  <None Remove="Resources\Images\music_ocean.png" />
 	  <None Remove="Resources\Images\no_sound.png" />
 	  <None Remove="Resources\Images\okey.png" />
+	  <None Remove="Resources\Images\plus.svg" />
 	  <None Remove="Resources\Images\sound_click.png" />
 	  <None Remove="Resources\Images\time.svg" />
 	  <None Remove="Resources\Raw\Moods.json" />
