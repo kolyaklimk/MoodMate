@@ -119,5 +119,36 @@
             </Grid>
         </Border>
 
+        <Border Grid.Row="2"
+                BackgroundColor="#4e8973"
+                StrokeThickness="0">      
+            
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25"/>
+            </Border.StrokeShape>
+            
+            <Grid Grid.ColumnDefinitions="*,*,*">
+
+                <Image Source="icon_mood_selected.png"
+                       Grid.Column="0"
+                       Scale="0.7"/>
+
+                <Image Source="icon_music.png"
+                       Grid.Column="1"
+                       Scale="0.5">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                
+                <Image Source="icon_note.png"
+                       Grid.Column="2"
+                       Scale="0.5">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>

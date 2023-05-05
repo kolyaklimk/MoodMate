@@ -13,7 +13,7 @@
                                         Command="{Binding LoadPageCommand}"/>
     </ContentPage.Behaviors>
     
-    <Grid Grid.RowDefinitions="*,*,*,*">
+    <Grid Grid.RowDefinitions="*,*,*,*,70">
         <Grid Grid.Row="0" 
               Grid.RowDefinitions="0.2*,*">
             <Label Text="Sound"/>
@@ -71,5 +71,37 @@
         <Button Text="Start" 
                 Grid.Row="3"
                 Command="{Binding GoToPlayCommand}"/>
+
+        <Border Grid.Row="4"
+                BackgroundColor="#4e8973"
+                StrokeThickness="0">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25"/>
+            </Border.StrokeShape>
+
+            <Grid Grid.ColumnDefinitions="*,*,*">
+
+                <Image Source="icon_mood.png"
+                       Grid.Column="0"
+                       Scale="0.5">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="icon_music_selected.png"
+                       Grid.Column="1"
+                       Scale="0.7"/>
+
+                <Image Source="icon_note.png"
+                       Grid.Column="2"
+                       Scale="0.5">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>
