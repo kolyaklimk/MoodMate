@@ -1,17 +1,17 @@
 ﻿[
   {
     "Name": "Good",
-    "Source": "okey.png",
+    "Source": "mood_okey.png",
     "Description": "good, goood, gooooood :)"
   },
   {
     "Name": "Okey",
-    "Source": "okey.png",
+    "Source": "mood_okey.png",
     "Description": "okey, just okey bruh -_-"
   },
   {
     "Name": "Sad",
-    "Source": "okey.png",
+    "Source": "mood_okey.png",
     "Description": "sad, very sad pepehands :("
   }
 ]
