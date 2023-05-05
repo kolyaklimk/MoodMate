@@ -20,12 +20,16 @@
     </ContentPage.Behaviors>
 
     <Grid Padding="10"
-          Grid.RowDefinitions="0.2*,0.3*,0.2*,*,0.2*">
-        <Button Grid.Row="0"
-                VerticalOptions="Start"               
-                HorizontalOptions="Start"
-                Text="back"
-                Command="{Binding Back_ClickedCommand}"/>
+          Grid.RowDefinitions="25,50,40,*,60">
+        
+        <Image Source="icon_back.png" 
+               Grid.Row="0"             
+               HorizontalOptions="Start">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        
         <Label Grid.Row="1"
                Text="How are you feeling?"
                FontFamily="OpenSansBold"
@@ -33,12 +37,13 @@
                TextColor="#2b5e4c"
                VerticalOptions="End"
                HorizontalOptions="Center"/>
-        <DatePicker x:Name="date"
-                    Grid.Row="2"
+        
+        <DatePicker Grid.Row="2"
                     FontSize="22" 
                     TextColor="#4C4C4C"
                     VerticalOptions="Start" 
                     HorizontalOptions="Center"
+                    Format="dd/MM/yyyy"
                     MinimumDate="01/01/2023"
                     MaximumDate="{x:Static system:DateTime.Today}"
                     Date="{Binding DateTime}"/>
@@ -56,23 +61,22 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:FileService">
                     <Border BackgroundColor="#4e8973" 
-                            StrokeThickness="0.3">
+                            StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="25"/>
                         </Border.StrokeShape>
 
-                        <Grid Grid.RowDefinitions="70,*"
+                        <Grid Grid.RowDefinitions="70"
                               Grid.ColumnDefinitions="70,*"
                               Padding="10"
-                              RowSpacing="5"
                               ColumnSpacing="10"
                               MaximumHeightRequest="320">
 
                             <Image  Source="{Binding Source}"
                                     Grid.Column="0"/>
 
-                            <Grid Grid.RowDefinitions="40,20"
-                                      Grid.Column="1">
+                            <Grid Grid.RowDefinitions="40,40"
+                                  Grid.Column="1">
                                 
                                 <Label Text="{Binding Name}" 
                                        Grid.Row="0"
@@ -92,12 +96,14 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="OK"
+        <Button Text="Select"
                 Grid.Row="4"
                 CornerRadius="25"
                 TextColor="#2b5e4c"
                 FontFamily="OpenSansBold"
                 FontSize="28"
-                Command="{Binding GoToCreateOrEditPageCommand}"/>
+                Command="{Binding GoToCreateOrEditPageCommand}"
+                BorderWidth="1"
+                BorderColor="Black"/>
     </Grid>
 </ContentPage>

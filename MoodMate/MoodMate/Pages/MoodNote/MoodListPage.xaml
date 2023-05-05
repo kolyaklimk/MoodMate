@@ -14,7 +14,7 @@
     </ContentPage.Behaviors>
     
     <Grid Padding="10" 
-          RowDefinitions="*,100">
+          RowDefinitions="*,100,70">
 
         <CollectionView Grid.Row="0"
                         Grid.RowSpan="2"
@@ -66,7 +66,7 @@
                                           Grid.ColumnDefinitions="16,*"
                                           ColumnSpacing="5">
 
-                                        <Image Source="time.png"
+                                        <Image Source="icon_time.png"
                                                Grid.Column="0"/>
 
                                         <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
@@ -101,7 +101,7 @@
             
             <Grid RowDefinitions="50,50">
 
-                <Image Source="loop.png"
+                <Image Source="icon_loop.png"
                        Grid.Row="0"
                        Scale="0.7">
                     <Image.GestureRecognizers>
@@ -109,7 +109,7 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Image Source="plus.png"
+                <Image Source="icon_plus.png"
                        Grid.Row="1"
                        Scale="0.7">
                     <Image.GestureRecognizers>

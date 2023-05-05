@@ -6,29 +6,37 @@
              x:DataType="model:CreateOrEditMoodViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
-             BackgroundColor="#384D44"
+             BackgroundColor="#2b5e4c"
              Shell.TabBarIsVisible="false">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
     </Shell.BackButtonBehavior>
     
-    <Grid RowDefinitions="0.1*,*" 
+    <Grid RowDefinitions="25,*" 
           Padding="10">
         
         <Grid ColumnDefinitions="*,*">
-            <Button Text="cancel"
-                    Grid.Column="0"
-                    HorizontalOptions="Start"
-                    Command="{Binding Back_ClickedCommand}"/>
-            <Button Text="ok"
-                    Grid.Column="1"
-                    HorizontalOptions="End"
-                    Command="{Binding CreateOrEditCommand}"/>
+            
+            <Image Source="icon_back.png" 
+                   Grid.Column="0"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            
+            <Image Source="icon_accept.png" 
+                   Grid.Column="1"
+                   HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateOrEditCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
         </Grid>
         
         <Grid Grid.Row="1" 
-              RowDefinitions="0.2*,0.5*,0.2*,*"
+              RowDefinitions="40,150,50,*"
               RowSpacing="10">
             
             <DatePicker Grid.Row="0" 
@@ -36,16 +44,20 @@
                         VerticalOptions="Center"
                         FontSize="22"
                         Date="{Binding SelectedMood.Date}"
+                        Format="dd/MM/yyyy"
                         MinimumDate="01/01/2023"
                         MaximumDate="{x:Static system:DateTime.Today}"/>
-            
-            <ImageButton Grid.Row="1"
-                         Source="{Binding SelectedMood.Mood.Source}"
-                         Command="{Binding ChooseImageCommand}"/>
+
+            <Image Grid.Row="1"
+                   Source="{Binding SelectedMood.Mood.Source}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChooseImageCommand}"/>
+                </Image.GestureRecognizers>                
+            </Image>
             
             <Entry x:Name="NameMood"
                    Grid.Row="2"
-                   MaxLength="40"
+                   MaxLength="20"
                    FontSize="28"
                    FontFamily="OpenSansBold"
                    Placeholder="Enter your mood here"
