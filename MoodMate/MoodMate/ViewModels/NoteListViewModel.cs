@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Pages.MoodNote;
+using MoodMate.Pages.Music;
 using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
@@ -21,6 +23,18 @@ public partial class NoteListViewModel : ObservableObject
 
         MessagingCenter.Subscribe<CreateOrEditNoteViewModel>(this,
             "UpdateSimpleNote", (sender) => UpdateSimpleNote());
+    }
+
+    [RelayCommand]
+    async void GoToMusicPage()
+    {
+        await Shell.Current.GoToAsync(nameof(MusicListPage));
+    }
+
+    [RelayCommand]
+    async void GoToMoodPage()
+    {
+        await Shell.Current.GoToAsync(nameof(MoodListPage));
     }
 
     [RelayCommand]

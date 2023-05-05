@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
+using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
+using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels.Music;
@@ -22,6 +24,17 @@ public partial class MusicListViewModel : ObservableObject
     [ObservableProperty] FileService selectedSound;
     [ObservableProperty] TimeSpan selectedTime = new(0, 1, 0);
 
+    [RelayCommand]
+    async void GoToMoodPage()
+    {
+        await Shell.Current.GoToAsync(nameof(MoodListPage));
+    }
+
+    [RelayCommand]
+    async void GoToNotePage()
+    {
+        await Shell.Current.GoToAsync(nameof(NoteListPage));
+    }
     [RelayCommand]
     void LoadPage()
     {
