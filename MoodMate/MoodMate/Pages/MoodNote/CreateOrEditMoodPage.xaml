@@ -6,8 +6,7 @@
              x:DataType="model:CreateOrEditMoodViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
-             BackgroundColor="#2b5e4c"
-             Shell.TabBarIsVisible="false">
+             BackgroundColor="#2b5e4c">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>

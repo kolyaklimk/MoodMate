@@ -5,7 +5,6 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"
              x:DataType="model:CreateOrEditNoteViewModel"
-             Shell.TabBarIsVisible="false"
              BackgroundColor="#384D44">
     
     <Shell.BackButtonBehavior>

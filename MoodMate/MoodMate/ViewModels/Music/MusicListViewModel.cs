@@ -27,13 +27,13 @@ public partial class MusicListViewModel : ObservableObject
     [RelayCommand]
     async void GoToMoodPage()
     {
-        await Shell.Current.GoToAsync(nameof(MoodListPage));
+        await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
     }
 
     [RelayCommand]
     async void GoToNotePage()
     {
-        await Shell.Current.GoToAsync(nameof(NoteListPage));
+        await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
     }
     [RelayCommand]
     void LoadPage()
