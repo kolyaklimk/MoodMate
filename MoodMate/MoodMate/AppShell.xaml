@@ -3,19 +3,7 @@
     x:Class="MoodMate.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mood="clr-namespace:MoodMate.Pages.MoodNote"
-    xmlns:simple="clr-namespace:MoodMate.Pages.SimpleNote"
-    xmlns:music="clr-namespace:MoodMate.Pages.Music">
+    xmlns:mood="clr-namespace:MoodMate.Pages.MoodNote">
 
-    <TabBar>
-        <Tab Title="List">
-            <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"/>
-        </Tab>
-        <Tab Title="Music">
-            <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}" />
-        </Tab>
-        <Tab Title="Note">
-            <ShellContent ContentTemplate="{DataTemplate simple:NoteListPage}" />
-        </Tab>
-    </TabBar>
+    <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"/>
 </Shell>
