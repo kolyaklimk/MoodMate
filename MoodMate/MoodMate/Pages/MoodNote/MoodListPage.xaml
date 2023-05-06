@@ -6,32 +6,35 @@
              x:DataType="model:MoodListViewModel"
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             BackgroundColor="#f2f2f2">
+             BackgroundColor="#D1D0CF">
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding UpdateMoodNoteCommand}"/>
+        <toolkit:StatusBarBehavior StatusBarStyle="DarkContent"
+                                   StatusBarColor="#D1D0CF"/>
     </ContentPage.Behaviors>
     
-    <Grid Padding="10" 
-          RowDefinitions="*,100,70">
+    <Grid RowDefinitions="*,115,60">
 
         <CollectionView Grid.Row="0"
                         Grid.RowSpan="2"
-                        ItemsSource="{Binding MoodNotes}">
+                        ItemsSource="{Binding MoodNotes}"
+                        Margin="15,0,15,0"
+                        VerticalScrollBarVisibility="Never">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"                                           
-                                   ItemSpacing="10"/>
+                                   ItemSpacing="8"/>
             </CollectionView.ItemsLayout>
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:MoodNote">
-                    <Border BackgroundColor="White" 
-                            StrokeThickness="0.3">
+                    <Border BackgroundColor="#F2F1F0" 
+                            StrokeThickness="0">
 
                         <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="25"/>
+                            <RoundRectangle CornerRadius="15"/>
                         </Border.StrokeShape>
 
                         <Border.GestureRecognizers>
@@ -43,7 +46,7 @@
                         <Grid Grid.RowDefinitions="70,*"
                               Padding="10"
                               RowSpacing="5"
-                              MaximumHeightRequest="320">
+                              MaximumHeightRequest="315">
 
                             <Grid Grid.Row="0"
                                   Grid.ColumnDefinitions="70,*"
@@ -57,7 +60,7 @@
 
                                     <Label Text="{Binding Mood.Name}" 
                                            Grid.Row="0" 
-                                           TextColor = "#2b5e4c"
+                                           TextColor = "#454545"
                                            FontSize="28"  
                                            VerticalOptions="Center"
                                            FontFamily="OpenSansBold"/>
@@ -70,7 +73,7 @@
                                                Grid.Column="0"/>
 
                                         <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
-                                               TextColor="#4C4C4C"
+                                               TextColor="#676767"
                                                FontSize="14"
                                                VerticalOptions="Center"
                                                Grid.Column="1"/>
@@ -81,7 +84,7 @@
                             <Label Text="{Binding Text}" 
                                    Grid.Row="1" 
                                    LineBreakMode="CharacterWrap"                       
-                                   TextColor = "#4C4C4C" 
+                                   TextColor = "#676767" 
                                    FontSize="16"/>
                         </Grid>
                     </Border>
@@ -89,17 +92,18 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Border BackgroundColor="#4e8973"
+        <Border BackgroundColor="#AD5839"
                 StrokeThickness="0"
                 Grid.Row="1"
                 WidthRequest="50"
-                HorizontalOptions="End">
+                HorizontalOptions="End"
+                Margin="0,0,15,15">
             
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="25"/>
+                <RoundRectangle CornerRadius="15"/>
             </Border.StrokeShape>
             
-            <Grid RowDefinitions="50,50">
+            <Grid RowDefinitions="*,*">
 
                 <Image Source="icon_loop.png"
                        Grid.Row="0"
@@ -120,11 +124,12 @@
         </Border>
 
         <Border Grid.Row="2"
-                BackgroundColor="#4e8973"
-                StrokeThickness="0">      
+                BackgroundColor="#AD5839"
+                StrokeThickness="0"
+                Margin="0,0,0,-1">      
             
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="25"/>
+                <RoundRectangle CornerRadius="15,15,0,0"/>
             </Border.StrokeShape>
             
             <Grid Grid.ColumnDefinitions="*,*,*">
