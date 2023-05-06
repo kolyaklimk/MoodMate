@@ -6,18 +6,15 @@
              x:DataType="model:NoteListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
-             BackgroundColor="#DFDFDF">
+             BackgroundColor="#D1D0CF">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding UpdateSimpleNoteCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Padding="10"
-          RowDefinitions="*,0.1*,70" 
-          ColumnDefinitions="*,*"
-          ColumnSpacing="10"
-          RowSpacing="10">
+    <Grid RowDefinitions="*,65,60">
+        
         <CollectionView ItemsSource="{Binding SimpleNotes}"
                         Grid.RowSpan="2">
 
@@ -53,19 +50,35 @@
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>        
-        
-        <Button Text="add" 
-                Grid.Row="1" 
-                HorizontalOptions="End" 
-                Command="{Binding GoToCreateOrEditPageCommand}"/>
+        </CollectionView>
 
-        <Border Grid.Row="2"
-                BackgroundColor="#4e8973"
-                StrokeThickness="0">
+        <Border BackgroundColor="#B6CAF2"
+                StrokeThickness="0"
+                Grid.Row="1"
+                WidthRequest="50"
+                HorizontalOptions="End"
+                Margin="0,0,15,15">
 
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="25"/>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+
+            <Image Source="icon_plus.png"
+                       Grid.Row="1"
+                       Scale="0.7">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Border>
+
+        <Border Grid.Row="2"
+                BackgroundColor="#B6CAF2"
+                StrokeThickness="0"
+                Margin="0,0,0,-1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15,15,0,0"/>
             </Border.StrokeShape>
 
             <Grid Grid.ColumnDefinitions="*,*,*">
@@ -74,7 +87,7 @@
                        Grid.Column="0"
                        Scale="0.5">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                    <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
 
