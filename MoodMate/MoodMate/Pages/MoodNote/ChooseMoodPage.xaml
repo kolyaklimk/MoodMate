@@ -7,7 +7,7 @@
              x:DataType="model:ChooseMoodViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             BackgroundColor="#D1D0CF">
+             BackgroundColor="#e2d9c5">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
@@ -33,13 +33,13 @@
                Text="How are you feeling?"
                FontFamily="OpenSansBold"
                FontSize="28"
-               TextColor="#454545"
+               TextColor="#2F2F2C"
                VerticalOptions="End"
                HorizontalOptions="Center"/>
         
         <DatePicker Grid.Row="2"
                     FontSize="22" 
-                    TextColor="#676767"
+                    TextColor="#66645E"
                     VerticalOptions="Start" 
                     HorizontalOptions="Center"
                     Format="dd/MM/yyyy"
@@ -59,7 +59,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:FileService">
-                    <Border BackgroundColor="#AD5839" 
+                    <Border BackgroundColor="#936840" 
                             StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
@@ -79,14 +79,14 @@
                                 
                                 <Label Text="{Binding Name}" 
                                        Grid.Row="0"
-                                       TextColor = "#FFFEFC"
+                                       TextColor = "#FFF9ED"
                                        FontSize="28"
                                        VerticalOptions="Center"
                                        FontFamily="OpenSansBold"/>
                                 
                                 <Label Text="{Binding Description}"
                                        Grid.Row="1"                                
-                                       TextColor = "#F5F4F2" 
+                                       TextColor = "#FCF6EB" 
                                        FontSize="16"/>
                             </Grid>
                         </Grid>
@@ -98,10 +98,10 @@
         <Button Text="Select"
                 Grid.Row="4"
                 CornerRadius="15"
-                TextColor="#454545"
+                TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
                 FontSize="28"
-                BackgroundColor="#F2F1F0"
+                BackgroundColor="#fffbef"
                 Command="{Binding GoToCreateOrEditPageCommand}"/>
     </Grid>
 </ContentPage>

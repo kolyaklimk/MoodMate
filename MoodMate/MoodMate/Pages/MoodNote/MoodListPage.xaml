@@ -6,13 +6,13 @@
              x:DataType="model:MoodListViewModel"
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             BackgroundColor="#D1D0CF">
+             BackgroundColor="#e2d9c5">
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding UpdateMoodNoteCommand}"/>
         <toolkit:StatusBarBehavior StatusBarStyle="DarkContent"
-                                   StatusBarColor="#D1D0CF"/>
+                                   StatusBarColor="#e2d9c5"/>
     </ContentPage.Behaviors>
     
     <Grid RowDefinitions="*,115,60">
@@ -30,7 +30,7 @@
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:MoodNote">
-                    <Border BackgroundColor="#F2F1F0" 
+                    <Border BackgroundColor="#fffbef" 
                             StrokeThickness="0">
 
                         <Border.StrokeShape>
@@ -60,7 +60,7 @@
 
                                     <Label Text="{Binding Mood.Name}" 
                                            Grid.Row="0" 
-                                           TextColor = "#454545"
+                                           TextColor = "#2F2F2C"
                                            FontSize="28"  
                                            VerticalOptions="Center"
                                            FontFamily="OpenSansBold"/>
@@ -73,7 +73,7 @@
                                                Grid.Column="0"/>
 
                                         <Label Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" 
-                                               TextColor="#676767"
+                                               TextColor="#66645E"
                                                FontSize="14"
                                                VerticalOptions="Center"
                                                Grid.Column="1"/>
@@ -84,7 +84,7 @@
                             <Label Text="{Binding Text}" 
                                    Grid.Row="1" 
                                    LineBreakMode="CharacterWrap"                       
-                                   TextColor = "#676767" 
+                                   TextColor = "#66645E" 
                                    FontSize="16"/>
                         </Grid>
                     </Border>
@@ -92,7 +92,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Border BackgroundColor="#AD5839"
+        <Border BackgroundColor="#936840"
                 StrokeThickness="0"
                 Grid.Row="1"
                 WidthRequest="50"
@@ -124,7 +124,7 @@
         </Border>
 
         <Border Grid.Row="2"
-                BackgroundColor="#AD5839"
+                BackgroundColor="#936840"
                 StrokeThickness="0"
                 Margin="0,0,0,-1">      
             

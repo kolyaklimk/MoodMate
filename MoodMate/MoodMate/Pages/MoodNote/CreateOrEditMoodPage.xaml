@@ -6,7 +6,7 @@
              x:DataType="model:CreateOrEditMoodViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
-             BackgroundColor="#D1D0CF" >
+             BackgroundColor="#e2d9c5" >
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
@@ -42,7 +42,7 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         FontSize="22"
-                        TextColor="#676767"
+                        TextColor="#66645E"
                         Date="{Binding SelectedMood.Date}"
                         Format="dd/MM/yyyy"
                         MinimumDate="01/01/2023"
@@ -57,7 +57,7 @@
 
             <Border Grid.Row="2"
                     StrokeThickness="0"
-                    BackgroundColor="#AD5839"
+                    BackgroundColor="#936840"
                     Padding="5">
 
                 <Border.StrokeShape>
@@ -70,14 +70,14 @@
                     FontSize="28"
                     FontFamily="OpenSansBold"                    
                     Placeholder="Enter your mood here"
-                    TextColor="#FFFEFC"
+                    TextColor="#FFF9ED"
                     PlaceholderColor="#C9C9C9"
                     Text="{Binding SelectedMood.Mood.Name}"/>
             </Border>
             
             <Border Grid.Row="3"
                     StrokeThickness="0"
-                    BackgroundColor="#AD5839"
+                    BackgroundColor="#936840"
                     Padding="5">
 
                 <Border.StrokeShape>
@@ -87,7 +87,7 @@
                 <Editor FontSize="18"
                         MaxLength="5000"
                         Placeholder="Describe your mood here"
-                        TextColor="#F5F4F2"
+                        TextColor="#FFF9ED"
                         PlaceholderColor="#C9C9C9"
                         Text="{Binding SelectedMood.Text}"/>
             </Border>
