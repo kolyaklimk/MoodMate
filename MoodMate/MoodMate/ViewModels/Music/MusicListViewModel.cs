@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
+using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
 
@@ -23,6 +25,16 @@ public partial class MusicListViewModel : ObservableObject
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
     [ObservableProperty] TimeSpan selectedTime = new(0, 1, 0);
+
+    [RelayCommand]
+    async void ChooseTime()
+    {
+        var result = await Shell.Current.ShowPopupAsync(new TimePickerPage());
+        if (result != null)
+        {
+            SelectedTime = TimeSpan.Parse((string)result);
+        }
+    }
 
     [RelayCommand]
     async void GoToMoodPage()

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MoodMate.Pages.Other.TimePickerPage"
+               Color="Transparent"                
+               VerticalOptions="Center">
+    <Grid ColumnDefinitions="*,*,*"
+          RowDefinitions="*,*">
+        
+        <CollectionView x:Name="col1"
+                        Grid.Column="0" 
+                        Grid.Row="0"
+                        SelectionMode="Single"
+                        SelectedItem="0">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="5"
+                                    Stroke="#8C913F"
+                                    Grid.Row="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+
+                        <Label Text="{Binding .}" 
+                                   Grid.Row="1"
+                                   FontSize="18" 
+                                   TextColor="#66645E"
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="Center"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView x:Name="col2"
+                        Grid.Column="1" 
+                        Grid.Row="0"
+                        SelectionMode="Single"
+                        SelectedItem="1">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="5"
+                                    Stroke="#8C913F"
+                                    Grid.Row="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+
+                        <Label Text="{Binding .}" 
+                                   Grid.Row="1"
+                                   FontSize="18" 
+                                   TextColor="#66645E"
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="Center"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView x:Name="col3"
+                        Grid.Column="2" 
+                        Grid.Row="0"
+                        SelectionMode="Single"
+                        SelectedItem="0">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="5"
+                                    Stroke="#8C913F"
+                                    Grid.Row="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+
+                        <Label Text="{Binding .}" 
+                                   Grid.Row="1"
+                                   FontSize="18" 
+                                   TextColor="#66645E"
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="Center"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.ColumnSpan="3"
+              Grid.Row="1"
+              ColumnDefinitions="*,*">
+            
+            <Button Grid.Column="0"
+                    Text="ok"
+                    Clicked="Ok_Clicked"/>
+            
+            <Button Grid.Column="1"
+                    Text="cancel"
+                    Clicked="Cancel_Clicked"/>
+        </Grid>
+    </Grid>
+</toolkit:Popup>

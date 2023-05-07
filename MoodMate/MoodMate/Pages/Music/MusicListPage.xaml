@@ -66,7 +66,7 @@
         </Grid>
 
         <Grid Grid.Row="1" 
-              Grid.RowDefinitions="50,*"
+              Grid.RowDefinitions="*,150"
               Margin="15,0,15,0"
               MinimumHeightRequest="200">
             
@@ -118,15 +118,24 @@
         <Grid Grid.Row="2" 
               Grid.RowDefinitions="50,*"
               Margin="15,0,15,0">
+            
             <Label Text="Duration"
                    FontFamily="OpenSansBold"
                    FontSize="28"
                    TextColor="#2F2F2C"
                    VerticalOptions="End"
                    HorizontalOptions="Start"/>
-            
-            <TimePicker Grid.Row="1"
-                        Time="{Binding SelectedTime}"/>
+
+            <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
+                   Grid.Row="1"
+                   FontSize="22" 
+                   TextColor="#66645E"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="Start">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChooseTimeCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
         </Grid>
 
         <Button Text="Start" 
