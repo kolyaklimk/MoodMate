@@ -30,7 +30,8 @@
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
                             ItemsSource="{Binding SoundList}"
-                            SelectedItem="{Binding SelectedSound}">
+                            SelectedItem="{Binding SelectedSound}"
+                            HorizontalOptions="Center">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal"/>
@@ -80,7 +81,8 @@
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
                             ItemsSource="{Binding MusicList}"
-                            SelectedItem="{Binding SelectedMusic}">
+                            SelectedItem="{Binding SelectedMusic}"
+                            HorizontalOptions="Center">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal"/>
@@ -116,7 +118,7 @@
         </Grid>
 
         <Grid Grid.Row="2" 
-              Grid.RowDefinitions="*,150"
+              Grid.RowDefinitions="0.5*,*"
               Margin="15,0,15,0">
             
             <Label Text="Duration"
@@ -129,7 +131,7 @@
             <Border StrokeThickness="0"
                     BackgroundColor="#8C913F"
                     Grid.Row="1"
-                    Margin="90,0,90,0"
+                    HorizontalOptions="Center"
                     VerticalOptions="Start">
 
                 <Border.StrokeShape>
