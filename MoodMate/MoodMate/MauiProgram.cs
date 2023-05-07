@@ -63,5 +63,6 @@ public static class MauiProgram
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
         services.AddSingleton(AudioManager.Current);
+        services.AddSingleton(_ => new List<int>[] { new List<int>(), new List<int>() });
     }
 }

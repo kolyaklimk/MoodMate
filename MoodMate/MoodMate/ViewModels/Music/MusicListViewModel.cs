@@ -14,10 +14,12 @@ public partial class MusicListViewModel : ObservableObject
 {
     private readonly FileService Music;
     private readonly FileService Sound;
-    public MusicListViewModel(FileService[] fileService)
+    private readonly List<int>[] Sbytes;
+    public MusicListViewModel(FileService[] fileService, List<int>[] sbytes)
     {
         Music = fileService[1];
         Sound = fileService[2];
+        Sbytes = sbytes;
     }
     public ObservableCollection<FileService> MusicList { get; set; } = new();
     public ObservableCollection<FileService> SoundList { get; set; } = new();
@@ -29,7 +31,7 @@ public partial class MusicListViewModel : ObservableObject
     [RelayCommand]
     async void ChooseTime()
     {
-        var result = await Shell.Current.ShowPopupAsync(new TimePickerPage());
+        var result = await Shell.Current.ShowPopupAsync(new TimePickerPage(Sbytes));
         if (result != null)
         {
             SelectedTime = TimeSpan.Parse((string)result);

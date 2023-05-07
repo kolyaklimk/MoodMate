@@ -5,113 +5,180 @@
                x:Class="MoodMate.Pages.Other.TimePickerPage"
                Color="Transparent"                
                VerticalOptions="Center">
-    <Grid ColumnDefinitions="*,*,*"
-          RowDefinitions="*,*">
-        
-        <CollectionView x:Name="col1"
-                        Grid.Column="0" 
-                        Grid.Row="0"
-                        SelectionMode="Single"
-                        SelectedItem="0">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
+    <Border BackgroundColor="#e2d9c5" 
+            StrokeThickness="0"
+            WidthRequest="330"
+            HeightRequest="270"
+            Padding="15">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="15"/>
+        </Border.StrokeShape>
 
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
+        <Grid RowDefinitions="30,150,60">
 
-                        <Label Text="{Binding .}" 
+            <Grid ColumnDefinitions="*,*,*"
+                  Grid.Row="0">
+
+                <Label Text="Hours"
+                       Grid.Column="0"
+                       FontFamily="OpenSansBold"
+                       FontSize="18"
+                       TextColor="#2F2F2C"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="Minutes"
+                       Grid.Column="1"
+                       FontFamily="OpenSansBold"
+                       FontSize="18"
+                       TextColor="#2F2F2C"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="Seconds"
+                       Grid.Column="2"
+                       FontFamily="OpenSansBold"
+                       FontSize="18"
+                       TextColor="#2F2F2C"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*"
+                  Grid.Row="1">
+                
+                <CarouselView x:Name="col1"
+                              Grid.Column="0"
+                              Loop="False"
+                              VerticalScrollBarVisibility="Never"
+                              PeekAreaInsets="59">
+
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" 
+                                           SnapPointsType="Mandatory"
+                                           SnapPointsAlignment="Center"/>
+                    </CarouselView.ItemsLayout>
+
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" 
                                    Grid.Row="1"
-                                   FontSize="18" 
+                                   FontSize="22" 
                                    TextColor="#66645E"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="Center"/>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                   HorizontalTextAlignment="Center"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-        <CollectionView x:Name="col2"
-                        Grid.Column="1" 
-                        Grid.Row="0"
-                        SelectionMode="Single"
-                        SelectedItem="1">
+                <CarouselView x:Name="col2"
+                              Grid.Column="1"
+                              Loop="False"
+                              VerticalScrollBarVisibility="Never"
+                              PeekAreaInsets="59">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" 
+                                           SnapPointsType="Mandatory"
+                                           SnapPointsAlignment="Center"/>
+                    </CarouselView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
-
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
-                        <Label Text="{Binding .}" 
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" 
                                    Grid.Row="1"
-                                   FontSize="18" 
+                                   FontSize="22" 
                                    TextColor="#66645E"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="Center"/>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                   HorizontalTextAlignment="Center"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-        <CollectionView x:Name="col3"
-                        Grid.Column="2" 
-                        Grid.Row="0"
-                        SelectionMode="Single"
-                        SelectedItem="0">
+                <CarouselView x:Name="col3"
+                              Grid.Column="2"
+                              Loop="False"
+                              VerticalScrollBarVisibility="Never"
+                              PeekAreaInsets="59">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           SnapPointsType="Mandatory"
+                                           SnapPointsAlignment="Center"/>
+                    </CarouselView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
-
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
-                        <Label Text="{Binding .}" 
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" 
                                    Grid.Row="1"
-                                   FontSize="18" 
+                                   FontSize="22" 
                                    TextColor="#66645E"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="Center"/>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                   HorizontalTextAlignment="Center"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                
+                <Border Grid.ColumnSpan="3"
+                        StrokeThickness="0"
+                        HeightRequest="60"
+                        Margin="-1"
+                        VerticalOptions="Start">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#e2d9c5"
+                                          Offset="0.2" />
+                            <GradientStop Color="Transparent"
+                                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
 
-        <Grid Grid.ColumnSpan="3"
-              Grid.Row="1"
-              ColumnDefinitions="*,*">
-            
-            <Button Grid.Column="0"
-                    Text="ok"
-                    Clicked="Ok_Clicked"/>
-            
-            <Button Grid.Column="1"
-                    Text="cancel"
-                    Clicked="Cancel_Clicked"/>
+                <Border Grid.ColumnSpan="3"
+                        StrokeThickness="0"
+                        HeightRequest="60"
+                        Margin="-1"
+                        VerticalOptions="End">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="Transparent"
+                                          Offset="0.2" />
+                            <GradientStop Color="#e2d9c5"
+                                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border Grid.ColumnSpan="3"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="3"
+                    Stroke="#2F2F2C"
+                    VerticalOptions="Center"
+                    HeightRequest="40">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                </Border>
+            </Grid>
+
+            <Grid Grid.ColumnSpan="3"
+                  Grid.Row="2"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+                        Text="Ok"
+                        Clicked="Ok_Clicked"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="22"
+                        BackgroundColor="#fffbef"/>
+
+                <Button Grid.Column="1"
+                        Text="Cancel"
+                        Clicked="Cancel_Clicked"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="22"
+                        BackgroundColor="#fffbef"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </toolkit:Popup>
