@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
 using MoodMate.Components.Entities;
-using MoodMate.Pages.Music;
 using Plugin.Maui.Audio;
 
 namespace MoodMate.ViewModels.Music;
@@ -21,18 +19,22 @@ public partial class PlayMusicViewModel : ObservableObject
 
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
-    [ObservableProperty] int rotate;
     [ObservableProperty] bool isMusic;
     [ObservableProperty] bool isSound;
     [ObservableProperty] string buttonStr;
     [ObservableProperty] TimeSpan time;
     [ObservableProperty] double volumeMusic;
     [ObservableProperty] double volumeSound;
+    [ObservableProperty] bool isLoad;
 
     public PlayMusicViewModel(IAudioManager manager)
     {
         AudioManager = manager;
-
+        isLoad = true;
+        SetTimer();
+    }
+    private void SetTimer()
+    {
         var second = TimeSpan.FromSeconds(1);
         Timer.Interval = TimeSpan.FromSeconds(1);
         Timer.Tick += (s, e) =>
@@ -78,6 +80,7 @@ public partial class PlayMusicViewModel : ObservableObject
         SoundPlayer?.Play();
         Timer.Start();
         IsRunning = true;
+        IsLoad = false;
     }
 
     [RelayCommand]
