@@ -163,7 +163,7 @@
         <Border Grid.Row="4"
                 BackgroundColor="#8C913F"
                 StrokeThickness="0"
-                Margin="0,0,0,-1">
+                Margin="-1,0,-1,-1">
 
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15,15,0,0"/>
