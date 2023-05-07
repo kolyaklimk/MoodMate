@@ -3,74 +3,152 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"     
-             x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage">
+             x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
+             xmlns:converter="clr-namespace:MoodMate.Converters"
+             BackgroundColor="#e2d9c5">
     
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
     </Shell.BackButtonBehavior>
-
+    
+    <ContentPage.Resources>
+        <converter:ProgressBarConverter x:Key="ProgressBarConverter"/>
+        <converter:RandomColorConverter x:Key="RandomColorConverter"/>
+    </ContentPage.Resources>
+    
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding UpdateAnalyseCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="0.2*,*">
+    <Grid RowDefinitions="25,*"
+          Padding="15">
+
         <Grid Grid.Row="0" 
               Grid.ColumnDefinitions="*,*,*">
-            <Button Text="cancel" 
-                    HorizontalOptions="Start"
-                    Command="{Binding BackClickCommand}"/>
-            <Button Text="назад" 
-                    Command="{Binding PreviousMonthCommand}"
-                    Grid.Column="0" 
-                    HorizontalOptions="End"/>
-            <Label Text="{Binding SelectedDate, StringFormat='{}{0:MM-yyyy}'}" 
-                   TextColor="White" 
+            
+            <Image Source="icon_back.png" 
+                   Grid.Row="0"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            
+            <Image Source="icon_back.png" 
+                   Grid.Column="0"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PreviousMonthCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Label Text="{Binding SelectedDate, StringFormat='{}{0:MM.yyyy}'}" 
+                   FontFamily="OpenSansBold"
+                   FontSize="22"
+                   TextColor="#2F2F2C"
                    Grid.Column="1"
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center"/>
-            <Button Text="вперёд" 
-                    Command="{Binding NextMonthCommand}"
-                    Grid.Column="2" 
-                    HorizontalOptions="Start"/>
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+            
+            <Image Source="icon_back.png" 
+                   Grid.Column="2"
+                   Rotation="180"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextMonthCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
         </Grid>
+        
+        
         <Grid Grid.Row="1" 
-              RowDefinitions="0.1*,0.1*,*">
-            <Label Text="Статистика настроения"/>
-            <Label Text="{Binding Count}"  Grid.Row="1"/>
-            <CollectionView ItemsSource="{Binding AnalysisMood}"
-                            BackgroundColor="Brown" 
-                            Grid.Row="2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnSpacing="10" 
-                              RowSpacing="10" 
-                              Padding="5"
-                              ColumnDefinitions="100,*">
-                            <Image Grid.Column="0" 
-                                   Source="{Binding Value[0]}" 
-                                   HeightRequest="100"/>
-                            <Grid Grid.Column="1"
-                                  RowDefinitions="*,*">
-                                <Slider Maximum="100" 
-                                        Value="{Binding Value[2]}" />
-                                <Grid Grid.Row="1"
-                                      ColumnDefinitions="*,50">
-                                    <Label Text="{Binding Key}"/>
-                                    <Label Grid.Column="1">
-                                        <Label.Text>
-                                            <MultiBinding StringFormat="{}{0} / {1}%">
-                                                <Binding Path="Value[1]"/>
-                                                <Binding Path="Value[2]"/>
-                                            </MultiBinding>
-                                        </Label.Text>
-                                    </Label>
+              RowDefinitions="100,50,*">
+            
+            <Label Text="{Binding Count}" 
+                   Grid.Row="0"
+                   FontFamily="OpenSansBold"
+                   FontSize="70"
+                   TextColor="#2F2F2C"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
+            
+            <Label Text="Total number"
+                   Grid.Row="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   FontSize="22"
+                   TextColor="#66645E"/>
+
+            <Border Grid.Row="2"
+                    Padding="5"
+                    BackgroundColor="#936840"
+                    StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <CollectionView ItemsSource="{Binding AnalysisMood}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="8"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="10" 
+                                  RowSpacing="10" 
+                                  Padding="5"
+                                  ColumnDefinitions="70,*">
+                                
+                                <Image Grid.Column="0" 
+                                       Source="{Binding Value[0]}"/>
+                                
+                                <Grid Grid.Column="1"
+                                      RowDefinitions="*,*"
+                                      VerticalOptions="Center">
+
+                                    <Border StrokeThickness="0">
+
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="15"/>
+                                        </Border.StrokeShape>
+                                        
+                                        <ProgressBar Progress="{Binding Value[2], Converter={StaticResource ProgressBarConverter}}"
+                                                     ScaleY="4"
+                                                     ProgressColor="{Binding Converter={StaticResource RandomColorConverter}}"
+                                                     BackgroundColor="#2F2F2C"/>                                        
+                                    </Border>
+
+                                    <Grid Grid.Row="1"
+                                          ColumnDefinitions="*,*">
+                                        
+                                        <Label Text="{Binding Key}"
+                                               HorizontalOptions="Start"
+                                               TextColor="#FCF6EB"
+                                               FontSize="18"/>
+                                        
+                                        <Label Grid.Column="1"
+                                               HorizontalOptions="End"
+                                               TextColor="#FCF6EB">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} / {1}%">
+                                                    <Binding Path="Value[1]"/>
+                                                    <Binding Path="Value[2]"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Border>
         </Grid>
     </Grid>
 </ContentPage>
