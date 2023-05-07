@@ -5,28 +5,47 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"
              x:DataType="model:CreateOrEditNoteViewModel"
-             BackgroundColor="#384D44">
+             BackgroundColor="#e2d9c5">
     
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
     </Shell.BackButtonBehavior>
     
-    <Grid RowDefinitions="0.1*,*"
+    <Grid RowDefinitions="25,*"
           Padding="20" 
           RowSpacing="10">
         <Grid ColumnDefinitions="*,*">
-            <Button Text="cancel" 
-                    Grid.Column="0" 
-                    Command="{Binding Back_ClickedCommand}"
-                    HorizontalOptions="Start"/>
-            <Button Text="ok" 
-                    Grid.Column="1" 
-                    Command="{Binding CreateOrEditCommand}"
-                    HorizontalOptions="End"/>
+            <Image Source="icon_back.png" 
+                   Grid.Column="0"
+                   HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image Source="icon_accept.png" 
+                   Grid.Column="1"
+                   HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateOrEditCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
         </Grid>
-        <Editor Grid.Row="1" 
-                FontSize="18"
-                Placeholder="Write something here"
-                Text="{Binding SelectedNote.Text}"/>
+
+        <Border Grid.Row="1"
+                    StrokeThickness="0"
+                    BackgroundColor="#2C3963"
+                    Padding="5">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+            
+            <Editor FontSize="18"
+                    TextColor="#FFF9ED"
+                    Placeholder="Write something here"
+                    PlaceholderColor="#C9C9C9"
+                    Text="{Binding SelectedNote.Text}"/>
+        </Border>
     </Grid>
 </ContentPage>

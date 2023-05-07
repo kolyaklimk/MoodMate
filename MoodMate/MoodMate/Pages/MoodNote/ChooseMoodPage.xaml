@@ -18,7 +18,7 @@
                                         Command="{Binding LoadMoodNoteCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Grid.RowDefinitions="25,60,55,*,60"
+    <Grid Grid.RowDefinitions="25,80,55,*,60"
           Padding="15">
         
         <Image Source="icon_back.png" 

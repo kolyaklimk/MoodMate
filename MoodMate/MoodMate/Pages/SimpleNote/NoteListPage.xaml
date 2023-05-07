@@ -6,7 +6,7 @@
              x:DataType="model:NoteListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
-             BackgroundColor="#D1D0CF">
+             BackgroundColor="#e2d9c5">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
@@ -14,23 +14,27 @@
     </ContentPage.Behaviors>
 
     <Grid RowDefinitions="*,65,60">
-        
+
         <CollectionView ItemsSource="{Binding SimpleNotes}"
-                        Grid.RowSpan="2">
+                        Margin="15,0,15,0"
+                        Grid.RowSpan="2"
+                        VerticalScrollBarVisibility="Never">
 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"                                           
-                                   ItemSpacing="5"/>
+                <GridItemsLayout Orientation="Vertical"                                           
+                                 Span="2"
+                                 HorizontalItemSpacing="8"
+                                 VerticalItemSpacing="8"/>
             </CollectionView.ItemsLayout>
-
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:SimpleNote">
-                    <Border BackgroundColor="#D5C5B9" 
-                            StrokeThickness="2" 
-                            Stroke="#384D44">
+                    <Border BackgroundColor="#fffbef" 
+                            StrokeThickness="0"
+                            HeightRequest="170">
                         
                         <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="25"/>
+                            <RoundRectangle CornerRadius="15"/>
                         </Border.StrokeShape>
 
                         <Border.GestureRecognizers>
@@ -42,7 +46,7 @@
                         <Grid Padding="10">
                             <Label Text="{Binding Text}" 
                                    LineBreakMode="CharacterWrap"
-                                   TextColor = "Black"
+                                   TextColor = "#2F2F2C"
                                    FontSize="14" 
                                    MaximumHeightRequest="250"
                                    MinimumHeightRequest="20"/>
@@ -52,7 +56,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Border BackgroundColor="#B6CAF2"
+        <Border BackgroundColor="#2C3963"
                 StrokeThickness="0"
                 Grid.Row="1"
                 WidthRequest="50"
@@ -64,8 +68,8 @@
             </Border.StrokeShape>
 
             <Image Source="icon_plus.png"
-                       Grid.Row="1"
-                       Scale="0.7">
+                   Grid.Row="1"
+                   Scale="0.7">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
                 </Image.GestureRecognizers>
@@ -73,7 +77,7 @@
         </Border>
 
         <Border Grid.Row="2"
-                BackgroundColor="#B6CAF2"
+                BackgroundColor="#2C3963"
                 StrokeThickness="0"
                 Margin="0,0,0,-1">
 
