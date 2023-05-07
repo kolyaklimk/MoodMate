@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using MoodMate.Components.Entities;
+using MoodMate.Pages.Music;
 using Plugin.Maui.Audio;
 
 namespace MoodMate.ViewModels.Music;
@@ -23,10 +24,10 @@ public partial class PlayMusicViewModel : ObservableObject
     [ObservableProperty] int rotate;
     [ObservableProperty] bool isMusic;
     [ObservableProperty] bool isSound;
-    [ObservableProperty] string buttonStr = "Stop";
+    [ObservableProperty] string buttonStr;
     [ObservableProperty] TimeSpan time;
-    [ObservableProperty] double volumeMusic = 1;
-    [ObservableProperty] double volumeSound = 1;
+    [ObservableProperty] double volumeMusic;
+    [ObservableProperty] double volumeSound;
 
     public PlayMusicViewModel(IAudioManager manager)
     {
@@ -38,12 +39,14 @@ public partial class PlayMusicViewModel : ObservableObject
         {
             if (Time == zero)
             {
+                MessagingCenter.Send(this, "Stop");
                 MusicPlayer?.Pause();
                 SoundPlayer?.Pause();
                 Timer.Stop();
             }
             else
             {
+                MessagingCenter.Send(this, "Start");
                 Time = Time.Subtract(second);
             }
         };
@@ -52,20 +55,25 @@ public partial class PlayMusicViewModel : ObservableObject
     [RelayCommand]
     async void LoadPage()
     {
-        if (SelectedMusic != null)
+        if (SelectedMusic != null && SelectedMusic.Name != "Silence")
         {
             IsMusic = true;
             MusicPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedMusic.Source));
             MusicPlayer.Loop = true;
-
         }
-        if (SelectedSound != null)
+
+        if (SelectedSound != null && SelectedSound?.Name != "Silence")
         {
             IsSound = true;
             SoundPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedSound.Source));
             SoundPlayer.Loop = true;
         }
 
+        ButtonStr = "Stop";
+        VolumeMusic = 1;
+        VolumeSound = 1;
+
+        MessagingCenter.Send(this, "Start");
         MusicPlayer?.Play();
         SoundPlayer?.Play();
         Timer.Start();
@@ -79,6 +87,7 @@ public partial class PlayMusicViewModel : ObservableObject
         {
             if (IsRunning)
             {
+                MessagingCenter.Send(this, "Stop");
                 ButtonStr = "Continue";
                 MusicPlayer?.Pause();
                 SoundPlayer?.Pause();
@@ -87,6 +96,7 @@ public partial class PlayMusicViewModel : ObservableObject
             }
             else
             {
+                MessagingCenter.Send(this, "Start");
                 ButtonStr = "Stop";
                 MusicPlayer?.Play();
                 SoundPlayer?.Play();
@@ -103,10 +113,6 @@ public partial class PlayMusicViewModel : ObservableObject
         MusicPlayer?.Dispose();
         SoundPlayer?.Dispose();
         Timer.Stop();
-        SelectedMusic = null;
-        SelectedSound = null; 
-        VolumeMusic = 1;
-        VolumeSound = 1;
     }
 
     [RelayCommand]

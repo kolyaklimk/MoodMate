@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
              x:DataType="model:PlayMusicViewModel"
              x:Class="MoodMate.Pages.Music.PlayMusicPage"
-             BackgroundColor="Red">
+             BackgroundColor="#e2d9c5">
     
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="false"/>
@@ -16,75 +16,122 @@
                                         Command="{Binding LoadPageCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Grid.RowDefinitions="*,*,*,*,*">
-        <Button Grid.Row="0"
-                     VerticalOptions="Start" 
-                     HorizontalOptions="End"
-                     Text="cancel"
-                Command="{Binding BackClickCommand}"/>
+    <Grid Grid.RowDefinitions="25,*,*,0.5*,60"
+          Padding="15">
 
-        <Grid Grid.ColumnDefinitions="*,*,*,*"
-              Grid.Row="1">
-            <Grid Grid.Column="1" 
-                  Grid.RowDefinitions="*,0.2*">
-                <Image Grid.Row="0"
-                       Source="{Binding SelectedMusic.Description}"/>
-                <Label Grid.Row="1"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       Text="{Binding SelectedMusic.Name}"/>
-            </Grid>
-            <Grid Grid.Column="2" 
-                  Grid.RowDefinitions="*,0.2*">
-                <Image Grid.Row="0"
+        <Image Source="icon_back.png" 
+               Grid.Row="0"             
+               HorizontalOptions="Start">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        
+        <Grid Grid.Row="1"
+              RowDefinitions="*,30,30" 
+              IsVisible="{Binding IsSound}">
+
+            <Border StrokeThickness="0"
+                    HeightRequest="180"
+                    WidthRequest="180"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="90"/>
+                </Border.StrokeShape>
+
+                <Image x:Name="ImageSound" 
                        Source="{Binding SelectedSound.Description}"/>
-                <Label Grid.Row="1"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       Text="{Binding SelectedSound.Name}"/>
-            </Grid>
+            </Border>
+
+            <Label Grid.Row="1"
+                   FontSize="18" 
+                   TextColor="#66645E"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Start"
+                   Text="{Binding SelectedSound.Name}"/>
+
+            <Slider Grid.Row="2"
+                    Maximum="1" 
+                    Minimum="0"
+                    VerticalOptions="End"
+                    Value="{Binding VolumeSound}"
+                    MaximumTrackColor="#2F2F2C"
+                    MinimumTrackColor="#8C913F"
+                    ThumbColor="#8C913F">
+                <Slider.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="ValueChanged"
+                                                    Command="{Binding ChangeSoundVolumeCommand}"/>
+                </Slider.Behaviors>
+            </Slider>
+        </Grid>
+        
+        <Grid Grid.Row="2"
+              RowDefinitions="*,30,30"
+              IsVisible="{Binding IsMusic}">
+
+            <Border StrokeThickness="0"
+                    HeightRequest="180"
+                    WidthRequest="180"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="90"/>
+                </Border.StrokeShape>
+
+                <Image x:Name="ImageMusic" 
+                       Source="{Binding SelectedMusic.Description}"/>
+            </Border>
+
+
+            <Label Grid.Row="1"
+                   FontSize="18" 
+                   TextColor="#66645E"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Start"
+                   Text="{Binding SelectedMusic.Name}"/>
+
+            <Slider Grid.Row="2"
+                    Maximum="1" 
+                    Minimum="0"
+                    VerticalOptions="End"
+                    Value="{Binding VolumeMusic}"
+                    MaximumTrackColor="#2F2F2C"
+                    MinimumTrackColor="#8C913F"
+                    ThumbColor="#8C913F">
+                <Slider.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="ValueChanged"
+                                                    Command="{Binding ChangeMusicVolumeCommand}"/>
+                </Slider.Behaviors>
+            </Slider>
         </Grid>
 
-        <Label Grid.Row="2" 
-               FontSize="24" 
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               Text="{Binding Time,StringFormat='{}{HH:mm:ss}'}"/>
+        <Border StrokeThickness="0"
+                BackgroundColor="#8C913F"
+                Grid.Row="3" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
 
-        <Grid Grid.Row="3"
-              Grid.RowDefinitions="*,*">
-            <Grid Grid.Row="0" 
-                  Grid.ColumnDefinitions="0.5*,*">
-                <Label Grid.Column="0" 
-                       Text="Music"/>
-                <Slider Grid.Column="1"
-                        Maximum="1" 
-                        Minimum="0"
-                        Value="{Binding VolumeMusic}">
-                    <Slider.Behaviors>
-                        <toolkit:EventToCommandBehavior EventName="ValueChanged"
-                                        Command="{Binding ChangeMusicVolumeCommand}"/>
-                    </Slider.Behaviors>
-                </Slider>
-            </Grid>
-            <Grid Grid.Row="1" 
-                  Grid.ColumnDefinitions="0.5*,*">
-                <Label  Grid.Column="0"
-                        Text="Sound"/>
-                <Slider Grid.Column="1"
-                        Maximum="1"
-                        Minimum="0"
-                        Value="{Binding VolumeSound}">
-                    <Slider.Behaviors>
-                        <toolkit:EventToCommandBehavior EventName="ValueChanged"
-                                        Command="{Binding ChangeSoundVolumeCommand}"/>
-                    </Slider.Behaviors>
-                </Slider>
-            </Grid>
-        </Grid>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
 
+            <Label TextColor = "#FFF9ED"
+                   FontSize="42"
+                   FontFamily="OpenSansBold"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   Text="{Binding Time,StringFormat='{}{HH:mm:ss}'}"/>
+        </Border>
+        
         <Button Text="{Binding ButtonStr}"
                 Command="{Binding ButtonClickCommand}"
-                Grid.Row="4"/>
+                Grid.Row="4"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"/>
     </Grid>
 </ContentPage>

@@ -37,7 +37,7 @@ public static class MauiProgram
     {
         //// ViewModels
         services.AddSingleton<MusicListViewModel>();
-        services.AddSingleton<PlayMusicViewModel>();
+        services.AddTransient<PlayMusicViewModel>();
 
         services.AddSingleton<NoteListViewModel>();
         services.AddSingleton<CreateOrEditNoteViewModel>();
@@ -49,7 +49,7 @@ public static class MauiProgram
 
         //// Pages
         services.AddSingleton<MusicListPage>();
-        services.AddSingleton<PlayMusicPage>();
+        services.AddTransient<PlayMusicPage>();
 
         services.AddSingleton<NoteListPage>();
         services.AddSingleton<CreateOrEditNotePage>();
