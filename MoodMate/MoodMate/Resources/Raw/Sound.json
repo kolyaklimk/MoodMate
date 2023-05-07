@@ -5,8 +5,7 @@
     "Description": "sound_click.png"
   },
   {
-    "Name": "no",
-    "Source": "no.mp3",
+    "Name": "Silence",
     "Description": "no_sound.png"
   }
 ]
