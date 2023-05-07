@@ -25,7 +25,7 @@
                    FontSize="28"
                    TextColor="#2F2F2C"
                    VerticalOptions="End"
-                   HorizontalOptions="Start"/>
+                   HorizontalOptions="Center"/>
 
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
@@ -75,7 +75,7 @@
                    FontSize="28"
                    TextColor="#2F2F2C"
                    VerticalOptions="End"
-                   HorizontalOptions="Start"/>
+                   HorizontalOptions="Center"/>
             
             <CollectionView Grid.Row="1" 
                             SelectionMode="Single"
@@ -116,7 +116,7 @@
         </Grid>
 
         <Grid Grid.Row="2" 
-              Grid.RowDefinitions="50,*"
+              Grid.RowDefinitions="*,150"
               Margin="15,0,15,0">
             
             <Label Text="Duration"
@@ -124,24 +124,40 @@
                    FontSize="28"
                    TextColor="#2F2F2C"
                    VerticalOptions="End"
-                   HorizontalOptions="Start"/>
+                   HorizontalOptions="Center"/>
 
-            <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
-                   Grid.Row="1"
-                   FontSize="22" 
-                   TextColor="#66645E"
-                   VerticalOptions="Start" 
-                   HorizontalOptions="Start">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChooseTimeCommand}"/>
-                </Label.GestureRecognizers>
-            </Label>
+            <Border StrokeThickness="0"
+                    BackgroundColor="#8C913F"
+                    Grid.Row="1"
+                    Margin="90,0,90,0"
+                    VerticalOptions="Start">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
+                       Grid.Row="1"
+                       TextColor = "#FFF9ED"
+                       FontSize="42"
+                       FontFamily="OpenSansBold"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChooseTimeCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
         </Grid>
 
         <Button Text="Start" 
                 Grid.Row="3"
                 Command="{Binding GoToPlayCommand}"
                 CornerRadius="15"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
                 Margin="15,0,15,15"/>
 
         <Border Grid.Row="4"
