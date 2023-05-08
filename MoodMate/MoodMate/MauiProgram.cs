@@ -25,11 +25,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Bold.ttf", "OpenSansBold");
             });
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
-
         SetupServices(builder.Services);
+
         return builder.Build();
     }
 

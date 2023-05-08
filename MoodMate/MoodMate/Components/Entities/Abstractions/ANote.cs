@@ -8,7 +8,6 @@ public abstract class ANote<T>
     public int Id { get; set; }
     public DateTime Date { get; set; }
     public string Text { get; set; }
-
     public List<T> GetData()
     {
         return NoteControl.Data.ToList();

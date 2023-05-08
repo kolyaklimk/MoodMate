@@ -5,12 +5,10 @@ namespace MoodMate.Pages.MoodNote;
 
 public partial class ChangeMoodMenuPage : Popup
 {
-    FileService Moods;
     public ChangeMoodMenuPage(FileService fileServices)
     {
         InitializeComponent();
-        Moods = fileServices;
-        collection.ItemsSource = Moods.GetServiceData();
+        collection.ItemsSource = fileServices.GetServiceData();
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
