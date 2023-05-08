@@ -87,7 +87,7 @@
                 </Border.StrokeShape>
 
                 <Editor FontSize="18"
-                        MaxLength="5000"
+                        MaxLength="10000"
                         Placeholder="Describe your mood here"
                         TextColor="#FCF6EB"
                         PlaceholderColor="#D1CCC2"
