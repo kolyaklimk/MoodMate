@@ -12,9 +12,11 @@
     </Shell.BackButtonBehavior>
     
     <Grid RowDefinitions="25,*"
-          Padding="20" 
+          Padding="15" 
           RowSpacing="10">
+        
         <Grid ColumnDefinitions="*,*">
+
             <Image Source="icon_back.png" 
                    Grid.Column="0"
                    HorizontalOptions="Start">
@@ -42,9 +44,10 @@
             </Border.StrokeShape>
             
             <Editor FontSize="18"
-                    TextColor="#FFF9ED"
+                    TextColor="#FCF6EB"
+                    MaxLength="10000"
                     Placeholder="Write something here"
-                    PlaceholderColor="#C9C9C9"
+                    PlaceholderColor="#D1CCC2"
                     Text="{Binding SelectedNote.Text}"/>
         </Border>
     </Grid>
