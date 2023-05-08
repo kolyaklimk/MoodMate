@@ -19,10 +19,13 @@ public partial class MoodListViewModel : ObservableObject
     public MoodListViewModel(Note[] note)
     {
         MoodNote = note[0];
+        IsRefreshing = false;
 
         MessagingCenter.Subscribe<CreateOrEditMoodViewModel>(this,
             "UpdateMoodNote", (sender) => UpdateMoodNote());
     }
+
+    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async void GoToMusicPage()
@@ -57,6 +60,7 @@ public partial class MoodListViewModel : ObservableObject
             MoodNotes.Clear();
             foreach (var mood in moods)
                 MoodNotes.Add(mood);
+            IsRefreshing = false;
         });
     }
 
