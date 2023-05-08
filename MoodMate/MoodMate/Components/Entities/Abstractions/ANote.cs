@@ -1,13 +1,14 @@
-﻿using MoodMate.Components.Data;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MoodMate.Components.Data;
 
 namespace MoodMate.Components.Entities.Abstractions;
 
-public abstract class ANote<T>
+public abstract partial class ANote<T> : ObservableObject
 {
     protected DataControl<T> NoteControl { get; set; } = new();
-    public int Id { get; set; }
-    public DateTime Date { get; set; }
-    public string Text { get; set; }
+    [ObservableProperty] public int id;
+    [ObservableProperty] public DateTime date;
+    [ObservableProperty] public string text;
     public List<T> GetData()
     {
         return NoteControl.Data.ToList();

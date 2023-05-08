@@ -1,14 +1,15 @@
-﻿using MoodMate.Components.Data;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MoodMate.Components.Data;
 using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Entities;
 
-public class FileService : IFileService
+public partial class FileService : ObservableObject, IFileService
 {
     private DataLoading<FileService> ServiceLoading = new();
-    public string Name { get; set; }
-    public string Source { get; set; }
-    public string Description { get; set; }
+    [ObservableProperty] public string name;
+    [ObservableProperty] public string source;
+    [ObservableProperty] public string description;
 
     public FileService() { }
     public async Task LoadService(string path)
