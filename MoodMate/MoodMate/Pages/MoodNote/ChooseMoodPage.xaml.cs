@@ -8,5 +8,10 @@ public partial class ChooseMoodPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = model;
-	}
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }
