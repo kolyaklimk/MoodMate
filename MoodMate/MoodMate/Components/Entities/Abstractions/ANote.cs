@@ -11,7 +11,7 @@ public abstract class ANote<T>
 
     public List<T> GetData()
     {
-        return NoteControl.Data;
+        return NoteControl.Data.ToList();
     }
     public abstract Task LoadNote();
     public abstract Task AddNote(T obj);
