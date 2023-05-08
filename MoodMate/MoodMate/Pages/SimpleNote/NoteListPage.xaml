@@ -15,47 +15,63 @@
 
     <Grid RowDefinitions="*,75,60">
 
-        <CollectionView ItemsSource="{Binding SimpleNotes}"
-                        Margin="15,0,15,0"
-                        Grid.RowSpan="2"
-                        VerticalScrollBarVisibility="Never">
+        <RefreshView Command="{Binding UpdateSimpleNoteCommand}"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="#2C3963"
+                     Grid.Row="0"
+                     Grid.RowSpan="2"
+                     Margin="15,0,15,0">
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"                                           
-                                 Span="2"
-                                 HorizontalItemSpacing="10"
-                                 VerticalItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            
-            <CollectionView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding SimpleNotes}"
+                            VerticalScrollBarVisibility="Never">
                 
-                <DataTemplate x:DataType="entity:SimpleNote">
-                    
-                    <Border BackgroundColor="#fffbef" 
-                            StrokeThickness="0">
-                        
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
+                <CollectionView.EmptyView>
 
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
+                    <Label Text="Start recording your thoughts and ideas"
+                           FontSize="22" 
+                           TextColor="#66645E"
+                           HorizontalOptions="Center"
+                           VerticalTextAlignment="Center"/>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate x:DataType="entity:SimpleNote">
+
+                        <Border BackgroundColor="#fffbef" 
+                                StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
                                 {x:Type model:NoteListViewModel}}, Path=PopupCommand}"
-                                                  CommandParameter="{Binding}"/>
-                        </Border.GestureRecognizers>
+                                                      CommandParameter="{Binding}"/>
+                            </Border.GestureRecognizers>
 
-                        <Grid Padding="10">
-                            
-                            <Label Text="{Binding Text}" 
-                                   LineBreakMode="CharacterWrap"
-                                   TextColor = "#66645E"
-                                   MaxLines="15"
-                                   FontSize="15"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            <Grid Padding="10">
+
+                                <Label Text="{Binding Text}" 
+                                       LineBreakMode="CharacterWrap"
+                                       TextColor = "#66645E"
+                                       MaxLines="15"
+                                       FontSize="15"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
         <Border BackgroundColor="#2C3963"
                 StrokeThickness="0"

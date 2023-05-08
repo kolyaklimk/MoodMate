@@ -20,10 +20,13 @@ public partial class NoteListViewModel : ObservableObject
     public NoteListViewModel(Note[] note)
     {
         SmpleNote = note[1];
+        IsRefreshing = false;
 
         MessagingCenter.Subscribe<CreateOrEditNoteViewModel>(this,
             "UpdateSimpleNote", (sender) => UpdateSimpleNote());
     }
+
+    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async void GoToMusicPage()
@@ -55,6 +58,7 @@ public partial class NoteListViewModel : ObservableObject
             SimpleNotes.Clear();
             foreach (var mood in moods)
                 SimpleNotes.Add(mood);
+            IsRefreshing = false;
         });
     }
 
