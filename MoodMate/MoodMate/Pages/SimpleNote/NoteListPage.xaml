@@ -27,12 +27,25 @@
                             VerticalScrollBarVisibility="Never">
                 
                 <CollectionView.EmptyView>
+                    
+                    <StackLayout Spacing="10"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center">
 
-                    <Label Text="Start recording your thoughts and ideas"
-                           FontSize="22" 
-                           TextColor="#66645E"
-                           HorizontalOptions="Center"
-                           VerticalTextAlignment="Center"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
+                        </StackLayout.GestureRecognizers>
+
+                        <Image Source="mood_okey.png"
+                               HeightRequest="100"/>
+
+                        <Label Text="Write down your notes"
+                               FontSize="22" 
+                               TextColor="#66645E"
+                               HorizontalOptions="Center"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    
                 </CollectionView.EmptyView>
                 
                 <CollectionView.ItemsLayout>

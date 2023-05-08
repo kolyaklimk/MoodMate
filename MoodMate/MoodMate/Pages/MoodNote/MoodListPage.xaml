@@ -31,10 +31,13 @@
                             VerticalScrollBarVisibility="Never">
 
                 <CollectionView.EmptyView>
-
                     <StackLayout Spacing="10"
                                  VerticalOptions="Center"
                                  HorizontalOptions="Center">
+                        
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToChooseMoodPageCommand}"/>
+                        </StackLayout.GestureRecognizers>
 
                         <Image Source="mood_okey.png"
                                HeightRequest="100"/>
