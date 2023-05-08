@@ -6,35 +6,48 @@
                xmlns:entity="clr-namespace:MoodMate.Components.Entities"
                Color="Transparent">
 
-    <Grid Grid.RowDefinitions="0.2*,*">
-        <Button Grid.RowSpan="2" 
-                CornerRadius="25" 
-                IsEnabled="False"
-                BackgroundColor="#DFDFDF"/>
-        <CollectionView x:Name="collection"
-                        Grid.Row="1" 
-                        HeightRequest="200" 
-                        WidthRequest="300">
+    <Grid>
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
-                                 Span="3" />
-            </CollectionView.ItemsLayout>
+        <Border BackgroundColor="#e2d9c5"
+                StrokeThickness="0"
+                Padding="15"
+                MaximumHeightRequest="450">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="entity:FileService">
-                    <Grid Grid.RowDefinitions="*,*">
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                        </Grid.GestureRecognizers>
-                        <Image Source="{Binding Source}"/>
-                        <Label Text="{Binding Name}" 
-                               Grid.Row="1" 
-                               HorizontalOptions="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+
+            <CollectionView x:Name="collection">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="3"
+                                     HorizontalItemSpacing="8"
+                                     VerticalItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="entity:FileService">
+
+                        <Grid Grid.RowDefinitions="70,Auto">
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Grid.GestureRecognizers>
+
+                            <Image Source="{Binding Source}"
+                                   Grid.Row="0"/>
+
+                            <Label Text="{Binding Name}" 
+                                   Grid.Row="1" 
+                                   FontSize="16" 
+                                   TextColor="#66645E"
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
     </Grid>
-
 </toolkit:Popup>
