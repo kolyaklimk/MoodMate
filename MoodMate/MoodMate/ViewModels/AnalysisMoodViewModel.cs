@@ -44,16 +44,20 @@ public partial class AnalysisMoodViewModel : ObservableObject
     async Task UpdateAnalyse()
     {
         await MoodNote.note.InitAnalyse(SelectedDate);
-        MoodNote.note.FindPercentsMood();
-        Count = MoodNote.note.GetCountMood();
 
-        var items = MoodNote.note.GetAnalysedData();
-        AnalysisMood.Clear();
-        foreach (var item in items)
+        await Task.Run(() =>
         {
-            AnalysisMood.Add(item);
-        }
-        OnPropertyChanged(nameof(AnalysisMood));
+            MoodNote.note.FindPercentsMood();
+            Count = MoodNote.note.GetCountMood();
+
+            var items = MoodNote.note.GetAnalysedData();
+
+            AnalysisMood.Clear();
+            foreach (var item in items)
+            {
+                AnalysisMood.Add(item);
+            }
+        });
     }
 
     [RelayCommand]

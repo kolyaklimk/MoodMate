@@ -22,19 +22,21 @@ public partial class ChooseMoodViewModel : ObservableObject
     [ObservableProperty] DateTime dateTime = DateTime.Now;
 
     [RelayCommand]
-    void LoadMoodNote()
+    async Task LoadMoodNote()
     {
-        var moods = Mood.GetServiceData();
+        await Task.Run(() =>
+        {
+            var moods = Mood.GetServiceData();
 
-        Moods.Clear();
-        foreach (var mood in moods)
-            Moods.Add(mood);
+            Moods.Clear();
+            foreach (var mood in moods)
+                Moods.Add(mood);
+        });
     }
 
     [RelayCommand]
     async void GoToCreateOrEditPage()
     {
-        OnPropertyChanged(nameof(MoodNote));
         if (SelectedMood != null)
         {
             await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),

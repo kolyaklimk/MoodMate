@@ -23,7 +23,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         MoodNote = note[0];
         IsRefreshing = false;
 
-        WeakReferenceMessenger.Default.Register<UpdateMoodNoteMessage>(this);
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -55,10 +55,10 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async Task UpdateMoodNote()
     {
-        var moods = MoodNote.note.GetData();
-
         await Task.Run(() =>
         {
+            var moods = MoodNote.note.GetData();
+
             MoodNotes.Clear();
             foreach (var mood in moods)
                 MoodNotes.Add(mood);

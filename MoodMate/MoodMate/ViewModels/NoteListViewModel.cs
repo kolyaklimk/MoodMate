@@ -24,7 +24,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
         SmpleNote = note[1];
         IsRefreshing = false;
 
-        WeakReferenceMessenger.Default.Register<UpdateSimpleNoteMessage>(this);
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -53,10 +53,10 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     [RelayCommand]
     async Task UpdateSimpleNote()
     {
-        var moods = SmpleNote.note.GetData();
-
         await Task.Run(() =>
         {
+            var moods = SmpleNote.note.GetData();
+
             SimpleNotes.Clear();
             foreach (var mood in moods)
                 SimpleNotes.Add(mood);

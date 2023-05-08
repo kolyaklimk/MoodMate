@@ -26,7 +26,7 @@ public partial class MusicListViewModel : ObservableObject
 
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
-    [ObservableProperty] TimeSpan selectedTime = new(0, 1, 0);
+    [ObservableProperty] TimeSpan selectedTime;
 
     [RelayCommand]
     async void ChooseTime()
@@ -49,20 +49,26 @@ public partial class MusicListViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
     }
-    [RelayCommand]
-    void LoadPage()
-    {
-        var M = Music.GetServiceData();
-        var S = Sound.GetServiceData();
 
-        foreach (var m in M)
+    [RelayCommand]
+    async Task LoadPage()
+    {
+        await Task.Run(() =>
         {
-            MusicList.Add(m);
-        }
-        foreach (var s in S)
-        {
-            SoundList.Add(s);
-        }
+            SelectedTime = new(0, 1, 0);
+
+            var M = Music.GetServiceData();
+            var S = Sound.GetServiceData();
+
+            foreach (var m in M)
+            {
+                MusicList.Add(m);
+            }
+            foreach (var s in S)
+            {
+                SoundList.Add(s);
+            }
+        });
     }
 
     [RelayCommand]

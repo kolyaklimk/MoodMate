@@ -31,25 +31,21 @@ public partial class PlayMusicViewModel : ObservableObject
     [ObservableProperty] TimeSpan time;
     [ObservableProperty] double volumeMusic;
     [ObservableProperty] double volumeSound;
-    [ObservableProperty] bool isLoad;
 
     public PlayMusicViewModel(IAudioManager manager, StopRotateMessage stop, StartRotateMessage start)
     {
         AudioManager = manager;
-        isLoad = true;
         StopRotateMessage = stop;
         StartRotateMessage = start;
     }
     private void SetTimer()
     {
         Timer = new(Second);
-        Timer.Elapsed += (sender, e) =>
+        Timer.Elapsed += async (sender, e) =>
         {
             if (Time == Zero)
             {
-                MusicPlayer?.Pause();
-                SoundPlayer?.Pause();
-                Timer.Stop();
+                await BackClick();
                 WeakReferenceMessenger.Default.Send(StopRotateMessage);
             }
             else
@@ -63,34 +59,37 @@ public partial class PlayMusicViewModel : ObservableObject
     [RelayCommand]
     async Task LoadPage()
     {
-        if (SelectedMusic != null && SelectedMusic.Name != "Silence")
+        await Task.Run(async () =>
         {
-            IsMusic = true;
-            MusicPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedMusic.Source));
-            MusicPlayer.Loop = true;
-        }
+            ButtonStr = "Stop";
+            VolumeMusic = 1;
+            VolumeSound = 1;
 
-        if (SelectedSound != null && SelectedSound?.Name != "Silence")
-        {
-            IsSound = true;
-            SoundPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedSound.Source));
-            SoundPlayer.Loop = true;
-        }
+            if (SelectedMusic != null && SelectedMusic.Name != "Silence")
+            {
+                IsMusic = true;
+                MusicPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedMusic.Source));
+                MusicPlayer.Loop = true;
+            }
 
-        ButtonStr = "Stop";
-        VolumeMusic = 1;
-        VolumeSound = 1;
-        Zero = TimeSpan.FromSeconds(0);
-        Second = TimeSpan.FromSeconds(1);
+            if (SelectedSound != null && SelectedSound?.Name != "Silence")
+            {
+                IsSound = true;
+                SoundPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedSound.Source));
+                SoundPlayer.Loop = true;
+            }
 
-        SetTimer();
+            Zero = TimeSpan.FromSeconds(0);
+            Second = TimeSpan.FromSeconds(1);
 
-        WeakReferenceMessenger.Default.Send(StartRotateMessage);
-        MusicPlayer?.Play();
-        SoundPlayer?.Play();
-        Timer.Start();
-        IsRunning = true;
-        IsLoad = false;
+            SetTimer();
+
+            WeakReferenceMessenger.Default.Send(StartRotateMessage);
+            MusicPlayer?.Play();
+            SoundPlayer?.Play();
+            Timer.Start();
+            IsRunning = true;
+        });
     }
 
     [RelayCommand]
@@ -120,7 +119,7 @@ public partial class PlayMusicViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void BackClick()
+    async Task BackClick()
     {
         await Shell.Current.Navigation.PopAsync();
         MusicPlayer?.Dispose();
