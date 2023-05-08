@@ -12,7 +12,7 @@ public partial class App : Application
         LoadeService(notes, fileServices, sbytes);
         MainPage = new AppShell();
     }
-    private async Task LoadeService(Note[] notes, FileService[] fileServices, List<int>[] sbytes)
+    private async void LoadeService(Note[] notes, FileService[] fileServices, List<int>[] sbytes)
     {
         notes[0].note.LoadNote();
         notes[1].note.LoadNote();
