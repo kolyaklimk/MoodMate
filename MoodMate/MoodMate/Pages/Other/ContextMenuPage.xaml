@@ -6,7 +6,7 @@
                Color="Transparent" 
                VerticalOptions="Center">
 
-    <VerticalStackLayout Spacing="8">
+    <VerticalStackLayout Spacing="10">
 
         <Button Text="Share" 
                 Clicked="Button_Clicked_Share" 
@@ -14,7 +14,7 @@
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"
+                FontSize="28"
                 MinimumHeightRequest="60"
                 MinimumWidthRequest="200"/>
 
@@ -24,7 +24,7 @@
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"
+                FontSize="28"
                 MinimumHeightRequest="60"
                 MinimumWidthRequest="200"/>
 
@@ -34,7 +34,7 @@
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"
+                FontSize="28"
                 MinimumHeightRequest="60"
                 MinimumWidthRequest="200"/>
 
@@ -44,7 +44,7 @@
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"
+                FontSize="28"
                 MinimumHeightRequest="60"
                 MinimumWidthRequest="200"/>
     </VerticalStackLayout>
