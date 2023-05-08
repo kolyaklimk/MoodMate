@@ -64,10 +64,10 @@
         
         
         <Grid Grid.Row="1" 
-              RowDefinitions="100,50,*">
+              RowDefinitions="20,80,50,*">
             
             <Label Text="{Binding Count}" 
-                   Grid.Row="0"
+                   Grid.Row="1"
                    FontFamily="OpenSansBold"
                    FontSize="70"
                    TextColor="#2F2F2C"
@@ -75,13 +75,13 @@
                    HorizontalOptions="Center"/>
             
             <Label Text="Total number"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    HorizontalOptions="Center"
                    VerticalOptions="Start"
                    FontSize="22"
                    TextColor="#66645E"/>
 
-            <Border Grid.Row="2"
+            <Border Grid.Row="3"
                     Padding="5"
                     BackgroundColor="#936840"
                     StrokeThickness="0">
@@ -98,9 +98,10 @@
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
+                        
                         <DataTemplate>
+                            
                             <Grid ColumnSpacing="10" 
-                                  RowSpacing="10" 
                                   Padding="5"
                                   ColumnDefinitions="70,*">
                                 
@@ -108,7 +109,7 @@
                                        Source="{Binding Value[0]}"/>
                                 
                                 <Grid Grid.Column="1"
-                                      RowDefinitions="*,*"
+                                      RowDefinitions="*,0.5*"
                                       VerticalOptions="Center">
 
                                     <Border StrokeThickness="0">
@@ -124,7 +125,7 @@
                                     </Border>
 
                                     <Grid Grid.Row="1"
-                                          ColumnDefinitions="*,*">
+                                          ColumnDefinitions="*,100">
                                         
                                         <Label Text="{Binding Key}"
                                                HorizontalOptions="Start"
@@ -134,7 +135,7 @@
                                         <Label Grid.Column="1"
                                                HorizontalOptions="End"
                                                TextColor="#FCF6EB"
-                                               FontSize="14">
+                                               FontSize="16">
                                             <Label.Text>
                                                 <MultiBinding StringFormat="{}{0} / {1}%">
                                                     <Binding Path="Value[1]"/>
@@ -148,7 +149,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
             </Border>
         </Grid>
     </Grid>

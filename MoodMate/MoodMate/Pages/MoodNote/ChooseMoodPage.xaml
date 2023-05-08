@@ -54,19 +54,21 @@
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"                                           
-                                   ItemSpacing="8"/>
+                                   ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
+                
                 <DataTemplate x:DataType="entity:FileService">
+                    
                     <Border BackgroundColor="#936840" 
                             StrokeThickness="0">
+                        
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
                         </Border.StrokeShape>
 
-                        <Grid Grid.RowDefinitions="70"
-                              Grid.ColumnDefinitions="70,*"
+                        <Grid Grid.ColumnDefinitions="70,*"
                               Padding="10"
                               ColumnSpacing="10"
                               MaximumHeightRequest="320">
@@ -74,18 +76,17 @@
                             <Image  Source="{Binding Source}"
                                     Grid.Column="0"/>
 
-                            <Grid Grid.RowDefinitions="40,40"
+                            <Grid Grid.RowDefinitions="40,30"
                                   Grid.Column="1">
                                 
                                 <Label Text="{Binding Name}" 
                                        Grid.Row="0"
-                                       TextColor = "#FFF9ED"
+                                       TextColor = "#fffbef"
                                        FontSize="28"
-                                       VerticalOptions="Center"
                                        FontFamily="OpenSansBold"/>
                                 
                                 <Label Text="{Binding Description}"
-                                       Grid.Row="1"                                
+                                       Grid.Row="1"
                                        TextColor = "#FCF6EB" 
                                        FontSize="16"/>
                             </Grid>

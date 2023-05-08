@@ -11,7 +11,8 @@
         <Border BackgroundColor="#e2d9c5"
                 StrokeThickness="0"
                 Padding="15"
-                MaximumHeightRequest="450">
+                MaximumHeightRequest="450"
+                MaximumWidthRequest="350">
 
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15"/>
@@ -22,8 +23,8 @@
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
                                      Span="3"
-                                     HorizontalItemSpacing="8"
-                                     VerticalItemSpacing="8"/>
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
@@ -39,11 +40,12 @@
                                    Grid.Row="0"/>
 
                             <Label Text="{Binding Name}" 
-                                   Grid.Row="1" 
-                                   FontSize="16" 
+                                   Grid.Row="1"
+                                   FontSize="16"
                                    TextColor="#66645E"
                                    VerticalOptions="Center" 
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

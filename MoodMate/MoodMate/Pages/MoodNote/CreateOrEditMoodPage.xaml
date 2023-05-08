@@ -35,12 +35,12 @@
         </Grid>
 
         <Grid Grid.Row="1" 
-              RowDefinitions="55,150,60,*"
+              RowDefinitions="55,150,65,*"
               RowSpacing="10">
 
             <DatePicker Grid.Row="0" 
                         HorizontalOptions="Center"
-                        VerticalOptions="Center"
+                        VerticalOptions="End"
                         FontSize="22"
                         TextColor="#66645E"
                         Date="{Binding SelectedMood.Date}"
@@ -49,7 +49,9 @@
                         MaximumDate="{x:Static system:DateTime.Today}"/>
 
             <Image Grid.Row="1"
-                   Source="{Binding SelectedMood.Mood.Source}">
+                   Source="{Binding SelectedMood.Mood.Source}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ChooseImageCommand}"/>
                 </Image.GestureRecognizers>
@@ -66,12 +68,12 @@
                 
                 <Entry
                     Grid.Row="2"
-                    MaxLength="20"
+                    MaxLength="15"
                     FontSize="28"
                     FontFamily="OpenSansBold"                    
                     Placeholder="Enter your mood here"
-                    TextColor="#FFF9ED"
-                    PlaceholderColor="#C9C9C9"
+                    TextColor="#fffbef"
+                    PlaceholderColor="#D1CCC2"
                     Text="{Binding SelectedMood.Mood.Name}"/>
             </Border>
             
@@ -87,8 +89,8 @@
                 <Editor FontSize="18"
                         MaxLength="5000"
                         Placeholder="Describe your mood here"
-                        TextColor="#FFF9ED"
-                        PlaceholderColor="#C9C9C9"
+                        TextColor="#FCF6EB"
+                        PlaceholderColor="#D1CCC2"
                         Text="{Binding SelectedMood.Text}"/>
             </Border>
         </Grid>
