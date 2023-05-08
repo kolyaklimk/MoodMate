@@ -12,7 +12,8 @@ public partial class TimePickerPage : Popup
         col3.ItemsSource = sbytes[1];
     }
 
-    private void Ok_Clicked(object sender, EventArgs e) {
+    private void Ok_Clicked(object sender, EventArgs e)
+    {
         Task.WaitAny();
         Close(col1.CurrentItem.ToString() + ':' + col2.CurrentItem.ToString() + ':' + col3.CurrentItem.ToString());
     }

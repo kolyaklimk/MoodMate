@@ -4,9 +4,9 @@ namespace MoodMate.Pages.SimpleNote;
 
 public partial class NoteListPage : ContentPage
 {
-	public NoteListPage(NoteListViewModel model)
-	{
-		InitializeComponent();
-		BindingContext = model;
-	}
+    public NoteListPage(NoteListViewModel model)
+    {
+        InitializeComponent();
+        BindingContext = model;
+    }
 }

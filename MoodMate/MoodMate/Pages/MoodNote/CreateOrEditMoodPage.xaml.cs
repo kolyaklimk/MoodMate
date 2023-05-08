@@ -4,10 +4,10 @@ namespace MoodMate.Pages.MoodNote;
 
 public partial class CreateOrEditMoodPage : ContentPage
 {
-	public CreateOrEditMoodPage(CreateOrEditMoodViewModel model)
-	{
-		InitializeComponent();
-		BindingContext= model;
+    public CreateOrEditMoodPage(CreateOrEditMoodViewModel model)
+    {
+        InitializeComponent();
+        BindingContext = model;
     }
 
     protected override bool OnBackButtonPressed()

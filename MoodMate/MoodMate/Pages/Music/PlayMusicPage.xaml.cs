@@ -4,10 +4,10 @@ namespace MoodMate.Pages.Music;
 
 public partial class PlayMusicPage : ContentPage
 {
-	public PlayMusicPage(PlayMusicViewModel model)
-	{
-		InitializeComponent();
-		BindingContext = model;
+    public PlayMusicPage(PlayMusicViewModel model)
+    {
+        InitializeComponent();
+        BindingContext = model;
 
         MessagingCenter.Subscribe<PlayMusicViewModel>(this, "Start", (sender) =>
         {
