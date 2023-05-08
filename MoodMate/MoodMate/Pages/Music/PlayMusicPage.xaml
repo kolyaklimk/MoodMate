@@ -22,7 +22,7 @@
         <ActivityIndicator IsRunning="{Binding IsLoad}"
                            Grid.RowSpan="3"
                            Grid.Row="1"
-                           Color="#2F2F2C"/>
+                           Color="#66645E"/>
 
         <Image Source="icon_back.png" 
                Grid.Row="0"             
