@@ -19,11 +19,6 @@
     <Grid Grid.RowDefinitions="25,*,70,*,100,60"
           Padding="15">
 
-        <ActivityIndicator IsRunning="{Binding IsLoad}"
-                           Grid.RowSpan="3"
-                           Grid.Row="1"
-                           Color="#66645E"/>
-
         <Image Source="icon_back.png" 
                Grid.Row="0"             
                HorizontalOptions="Start">
