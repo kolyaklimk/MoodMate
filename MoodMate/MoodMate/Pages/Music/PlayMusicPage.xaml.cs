@@ -20,10 +20,10 @@ public partial class PlayMusicPage : ContentPage, IRecipient<StopRotateMessage>,
         ImageMusic.CancelAnimations();
     }
 
-    public void Receive(StartRotateMessage message)
+    public async void Receive(StartRotateMessage message)
     {
-        ImageSound.RelRotateTo(-30, 1200);
-        ImageMusic.RelRotateTo(30, 1200);
+        await ImageSound.RelRotateTo(-7, 1200);
+        await ImageMusic.RelRotateTo(10, 1200);
     }
 
     protected override bool OnBackButtonPressed()
