@@ -48,7 +48,6 @@
 
                         <Grid Padding="10"
                               Grid.RowDefinitions="70,*"
-                              MaximumHeightRequest="315"
                               RowSpacing="4">
 
                             <Grid Grid.Row="0"
@@ -87,6 +86,7 @@
                                    FontSize="16"
                                    LineBreakMode="CharacterWrap"
                                    Text="{Binding Text}"
+                                   MaxLines="10"
                                    TextColor="#66645E"/>
                         </Grid>
                     </Border>
