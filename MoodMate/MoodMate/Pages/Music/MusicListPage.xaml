@@ -17,8 +17,7 @@
 
         <Grid Grid.Row="0" 
               Grid.RowDefinitions="*,150"
-              Margin="15,0,15,0"
-              MinimumHeightRequest="200">
+              Margin="15,0,15,0">
 
             <Label Text="Sound"
                    FontFamily="OpenSansBold"
@@ -68,8 +67,7 @@
 
         <Grid Grid.Row="1" 
               Grid.RowDefinitions="*,150"
-              Margin="15,0,15,0"
-              MinimumHeightRequest="200">
+              Margin="15,0,15,0">
             
             <Label Text="Music"
                    FontFamily="OpenSansBold"
@@ -140,7 +138,7 @@
 
                 <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
                        Grid.Row="1"
-                       TextColor = "#FFF9ED"
+                       TextColor = "#fffbef"
                        FontSize="42"
                        FontFamily="OpenSansBold"
                        VerticalOptions="Center" 

@@ -16,11 +16,11 @@
                                         Command="{Binding LoadPageCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Grid.RowDefinitions="25,*,*,0.5*,60"
+    <Grid Grid.RowDefinitions="25,*,70,*,100,60"
           Padding="15">
 
         <ActivityIndicator IsRunning="{Binding IsLoad}"
-                           Grid.RowSpan="2"
+                           Grid.RowSpan="3"
                            Grid.Row="1"
                            Color="#2F2F2C"/>
 
@@ -34,7 +34,8 @@
         
         <Grid Grid.Row="1"
               RowDefinitions="*,30,30" 
-              IsVisible="{Binding IsSound}">
+              IsVisible="{Binding IsSound}"
+              VerticalOptions="End">
 
             <Border StrokeThickness="0"
                     HeightRequest="180"
@@ -51,15 +52,13 @@
             </Border>
 
             <Label Grid.Row="1"
-                   FontSize="18" 
+                   FontSize="22" 
                    TextColor="#66645E"
                    HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
                    Text="{Binding SelectedSound.Name}"/>
 
             <Slider Grid.Row="2"
-                    Maximum="1" 
-                    Minimum="0"
                     VerticalOptions="End"
                     Value="{Binding VolumeSound}"
                     MaximumTrackColor="#2F2F2C"
@@ -72,9 +71,10 @@
             </Slider>
         </Grid>
         
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="3"
               RowDefinitions="*,30,30"
-              IsVisible="{Binding IsMusic}">
+              IsVisible="{Binding IsMusic}"
+              VerticalOptions="Start">
 
             <Border StrokeThickness="0"
                     HeightRequest="180"
@@ -92,15 +92,13 @@
 
 
             <Label Grid.Row="1"
-                   FontSize="18" 
+                   FontSize="22" 
                    TextColor="#66645E"
                    HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
                    Text="{Binding SelectedMusic.Name}"/>
 
             <Slider Grid.Row="2"
-                    Maximum="1" 
-                    Minimum="0"
                     VerticalOptions="End"
                     Value="{Binding VolumeMusic}"
                     MaximumTrackColor="#2F2F2C"
@@ -115,7 +113,7 @@
 
         <Border StrokeThickness="0"
                 BackgroundColor="#8C913F"
-                Grid.Row="3" 
+                Grid.Row="4" 
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
 
@@ -123,7 +121,7 @@
                 <RoundRectangle CornerRadius="15"/>
             </Border.StrokeShape>
 
-            <Label TextColor = "#FFF9ED"
+            <Label TextColor = "#fffbef"
                    FontSize="42"
                    FontFamily="OpenSansBold"
                    VerticalOptions="Center" 
@@ -133,7 +131,8 @@
         
         <Button Text="{Binding ButtonStr}"
                 Command="{Binding ButtonClickCommand}"
-                Grid.Row="4"
+                Grid.Row="5"
+                CornerRadius="15"
                 BackgroundColor="#fffbef"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
