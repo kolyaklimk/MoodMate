@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Messages;
 using Plugin.Maui.Audio;
-using static System.Net.Mime.MediaTypeNames;
+using System.Timers;
 
 namespace MoodMate.ViewModels.Music;
 
@@ -13,8 +13,9 @@ namespace MoodMate.ViewModels.Music;
 [QueryProperty(nameof(Time), "Time")]
 public partial class PlayMusicViewModel : ObservableObject
 {
-    private IDispatcherTimer Timer = Shell.Current.Dispatcher.CreateTimer();
-    private TimeSpan zero = TimeSpan.FromSeconds(0);
+    private System.Timers.Timer Timer;
+    private TimeSpan Zero;
+    private TimeSpan Second;
     private IAudioManager AudioManager;
     private IAudioPlayer MusicPlayer;
     private IAudioPlayer SoundPlayer;
@@ -36,17 +37,15 @@ public partial class PlayMusicViewModel : ObservableObject
     {
         AudioManager = manager;
         isLoad = true;
-        SetTimer();
         StopRotateMessage = stop;
         StartRotateMessage = start;
     }
     private void SetTimer()
     {
-        var second = TimeSpan.FromSeconds(1);
-        Timer.Interval = TimeSpan.FromSeconds(1);
-        Timer.Tick += (s, e) =>
+        Timer = new(Second);
+        Timer.Elapsed += (sender, e) =>
         {
-            if (Time == zero)
+            if (Time == Zero)
             {
                 MusicPlayer?.Pause();
                 SoundPlayer?.Pause();
@@ -55,14 +54,14 @@ public partial class PlayMusicViewModel : ObservableObject
             }
             else
             {
-                Time = Time.Subtract(second);
+                Time = Time.Subtract(Second);
                 WeakReferenceMessenger.Default.Send(StartRotateMessage);
             }
         };
     }
 
     [RelayCommand]
-    async void LoadPage()
+    async Task LoadPage()
     {
         if (SelectedMusic != null && SelectedMusic.Name != "Silence")
         {
@@ -81,6 +80,10 @@ public partial class PlayMusicViewModel : ObservableObject
         ButtonStr = "Stop";
         VolumeMusic = 1;
         VolumeSound = 1;
+        Zero = TimeSpan.FromSeconds(0);
+        Second = TimeSpan.FromSeconds(1);
+
+        SetTimer();
 
         WeakReferenceMessenger.Default.Send(StartRotateMessage);
         MusicPlayer?.Play();
@@ -93,7 +96,7 @@ public partial class PlayMusicViewModel : ObservableObject
     [RelayCommand]
     void ButtonClick()
     {
-        if (Time != zero)
+        if (Time != Zero)
         {
             if (IsRunning)
             {
