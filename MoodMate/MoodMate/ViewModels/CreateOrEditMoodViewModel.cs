@@ -52,7 +52,6 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         {
             SelectedMood.Mood.Source = result.Item1;
             SelectedMood.Mood.Name = result.Item2;
-            OnPropertyChanged(nameof(SelectedMood));
         }
     }
 
