@@ -19,31 +19,31 @@ public partial class AnalysisMoodViewModel : ObservableObject
     public ObservableCollection<KeyValuePair<string, (string, int, int)>> AnalysisMood { get; set; } = new();
 
     [RelayCommand]
-    void NextMonth()
+    async Task NextMonth()
     {
         if (DateTime.Parse(SelectedDate.Month + ".01." + SelectedDate.Year) <
             DateTime.Parse(DateTime.Now.Month + ".01." + DateTime.Now.Year))
         {
             SelectedDate = SelectedDate.AddMonths(1);
-            UpdateAnalyse();
+            await UpdateAnalyse();
         }
     }
 
     [RelayCommand]
-    void PreviousMonth()
+    async Task PreviousMonth()
     {
         if (DateTime.Parse(SelectedDate.Month + ".01." + SelectedDate.Year) >
             DateTime.Parse("01.01.2023"))
         {
             SelectedDate = SelectedDate.AddMonths(-1);
-            UpdateAnalyse();
+            await UpdateAnalyse();
         }
     }
 
     [RelayCommand]
-    void UpdateAnalyse()
+    async Task UpdateAnalyse()
     {
-        MoodNote.note.InitAnalyse(SelectedDate);
+        await MoodNote.note.InitAnalyse(SelectedDate);
         MoodNote.note.FindPercentsMood();
         Count = MoodNote.note.GetCountMood();
 

@@ -23,17 +23,17 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     [ObservableProperty] public MoodNote selectedMood;
 
     [RelayCommand]
-    async void CreateOrEdit()
+    async Task CreateOrEdit()
     {
         if (SelectedMood.Mood.Name != "")
         {
             if (Create)
             {
                 SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
-                MoodNote.note.AddNote(SelectedMood);
+                await MoodNote.note.AddNote(SelectedMood);
             }
             else
-                MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
+                await MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
 
             MessagingCenter.Send(this, "UpdateMoodNote");
             await Shell.Current.Navigation.PopToRootAsync();

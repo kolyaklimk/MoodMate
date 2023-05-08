@@ -24,14 +24,12 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
     }
     public async Task UpdateFile(string path)
     {
-        var json = JsonSerializer.Serialize(Data);
-
         try
         {
             string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, path);
-            using (StreamWriter writer = new StreamWriter(targetFile, false))
+            using (FileStream fs = new FileStream(targetFile, FileMode.Create))
             {
-                await writer.WriteLineAsync(json);
+                await JsonSerializer.SerializeAsync(fs, Data);
             }
         }
         catch

@@ -22,7 +22,7 @@ public partial class MoodListViewModel : ObservableObject
         IsRefreshing = false;
 
         MessagingCenter.Subscribe<CreateOrEditMoodViewModel>(this,
-            "UpdateMoodNote", (sender) => UpdateMoodNote());
+            "UpdateMoodNote", async (sender) => await UpdateMoodNote());
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -52,10 +52,11 @@ public partial class MoodListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void UpdateMoodNote()
+    async Task UpdateMoodNote()
     {
         var moods = MoodNote.note.GetData();
-        await MainThread.InvokeOnMainThreadAsync(() =>
+
+        await Task.Run(() =>
         {
             MoodNotes.Clear();
             foreach (var mood in moods)
@@ -83,7 +84,7 @@ public partial class MoodListViewModel : ObservableObject
 
             case 2:
                 await MoodNote.note.DeleteNote(note.Id);
-                UpdateMoodNote();
+                await UpdateMoodNote();
                 break;
 
             case 3:

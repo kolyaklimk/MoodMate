@@ -20,17 +20,17 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     [ObservableProperty] SimpleNote selectedNote;
 
     [RelayCommand]
-    async void CreateOrEdit()
+    async Task CreateOrEdit()
     {
         if (SelectedNote.Text != "")
         {
             if (Create)
             {
                 SelectedNote.Date = SelectedNote.Date.Date.Add(DateTime.Now.TimeOfDay);
-                SimpleNote.note.AddNote(SelectedNote);
+                await SimpleNote.note.AddNote(SelectedNote);
             }
             else
-                SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
+                await SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
 
             MessagingCenter.Send(this, "UpdateSimpleNote");
             await Shell.Current.Navigation.PopToRootAsync();

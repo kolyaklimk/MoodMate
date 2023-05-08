@@ -15,12 +15,10 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         Mood.Source = sourse;
         Text = text;
     }
-
     public override async Task LoadNote()
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
-
     public override async Task AddNote(MoodNote obj)
     {
         NoteControl.Add(obj);
@@ -39,7 +37,6 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
         }
     }
-
     public override async Task DeleteNote(int id)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
@@ -60,13 +57,16 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
 
     // Analyse methot's
-    public void InitAnalyse(DateTime date)
+    public async Task InitAnalyse(DateTime date)
     {
         MoodAnalysis.AnalysedData.Clear();
-        foreach (var item in NoteControl.Data)
+        await Task.Run(() =>
         {
-            MoodAnalysis.AddItem(item.Mood.Name, item.Mood.Source, item.Date, date);
-        }
+            foreach (var item in NoteControl.Data)
+            {
+                MoodAnalysis.AddItem(item.Mood.Name, item.Mood.Source, item.Date, date);
+            }
+        });
     }
     public List<KeyValuePair<string, (string, int, int)>> GetAnalysedData()
     {
