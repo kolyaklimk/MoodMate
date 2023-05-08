@@ -129,11 +129,12 @@
                                         <Label Text="{Binding Key}"
                                                HorizontalOptions="Start"
                                                TextColor="#FCF6EB"
-                                               FontSize="18"/>
+                                               FontSize="16"/>
                                         
                                         <Label Grid.Column="1"
                                                HorizontalOptions="End"
-                                               TextColor="#FCF6EB">
+                                               TextColor="#FCF6EB"
+                                               FontSize="14">
                                             <Label.Text>
                                                 <MultiBinding StringFormat="{}{0} / {1}%">
                                                     <Binding Path="Value[1]"/>
