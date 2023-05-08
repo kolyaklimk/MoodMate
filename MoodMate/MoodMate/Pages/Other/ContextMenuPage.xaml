@@ -10,39 +10,42 @@
 
         <Button Text="Share" 
                 Clicked="Button_Clicked_Share" 
-                MinimumWidthRequest="200" 
-                MinimumHeightRequest="60"
                 BackgroundColor="#e2d9c5"
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"/>
+                FontSize="22"
+                MinimumHeightRequest="60"
+                MinimumWidthRequest="200"/>
 
         <Button Text="Delete" 
                 Clicked="Button_Clicked_Delete"
-                MinimumHeightRequest="60"
                 BackgroundColor="#e2d9c5"
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"/>
+                FontSize="22"
+                MinimumHeightRequest="60"
+                MinimumWidthRequest="200"/>
 
         <Button Text="Edit" 
                 Clicked="Button_Clicked_Edit"
-                MinimumHeightRequest="60"
                 BackgroundColor="#e2d9c5"
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"/>
+                FontSize="22"
+                MinimumHeightRequest="60"
+                MinimumWidthRequest="200"/>
 
         <Button Text="Cancel" 
                 Clicked="Button_Clicked_Cancel" 
-                MinimumHeightRequest="60"
                 BackgroundColor="#e2d9c5"
                 CornerRadius="15"
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
-                FontSize="22"/>
+                FontSize="22"
+                MinimumHeightRequest="60"
+                MinimumWidthRequest="200"/>
     </VerticalStackLayout>
 </toolkit:Popup>
