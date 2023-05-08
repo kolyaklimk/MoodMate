@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
 using MoodMate.Pages.Other;
@@ -11,7 +13,7 @@ using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
 
-public partial class NoteListViewModel : ObservableObject
+public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimpleNoteMessage>
 {
 
     private readonly Note SmpleNote;
@@ -22,8 +24,7 @@ public partial class NoteListViewModel : ObservableObject
         SmpleNote = note[1];
         IsRefreshing = false;
 
-        MessagingCenter.Subscribe<CreateOrEditNoteViewModel>(this,
-            "UpdateSimpleNote", async (sender) => await UpdateSimpleNote());
+        WeakReferenceMessenger.Default.Register<UpdateSimpleNoteMessage>(this);
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -89,5 +90,10 @@ public partial class NoteListViewModel : ObservableObject
                     { "SimpleNote", note}});
                 break;
         }
+    }
+
+    public async void Receive(UpdateSimpleNoteMessage message)
+    {
+        await UpdateSimpleNote();
     }
 }

@@ -1,24 +1,29 @@
+using CommunityToolkit.Mvvm.Messaging;
+using MoodMate.Messages;
 using MoodMate.ViewModels.Music;
 
 namespace MoodMate.Pages.Music;
 
-public partial class PlayMusicPage : ContentPage
+public partial class PlayMusicPage : ContentPage, IRecipient<StopRotateMessage>, IRecipient<StartRotateMessage>
 {
     public PlayMusicPage(PlayMusicViewModel model)
     {
         InitializeComponent();
         BindingContext = model;
+        WeakReferenceMessenger.Default.Register<StopRotateMessage>(this);
+        WeakReferenceMessenger.Default.Register<StartRotateMessage>(this);
+    }
 
-        MessagingCenter.Subscribe<PlayMusicViewModel>(this, "Start", (sender) =>
-        {
-            ImageSound.RelRotateTo(-30, 2000);
-            ImageMusic.RelRotateTo(30, 2000);
-        });
-        MessagingCenter.Subscribe<PlayMusicViewModel>(this, "Stop", (sender) =>
-        {
-            ImageSound.CancelAnimations();
-            ImageMusic.CancelAnimations();
-        });
+    public void Receive(StopRotateMessage message)
+    {
+        ImageSound.CancelAnimations();
+        ImageMusic.CancelAnimations();
+    }
+
+    public void Receive(StartRotateMessage message)
+    {
+        ImageSound.RelRotateTo(-30, 1200);
+        ImageMusic.RelRotateTo(30, 1200);
     }
 
     protected override bool OnBackButtonPressed()

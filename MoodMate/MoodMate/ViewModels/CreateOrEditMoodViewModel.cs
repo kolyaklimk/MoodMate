@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels;
@@ -13,10 +15,12 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
     private readonly FileService MoodImages;
-    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService)
+    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
+    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService, UpdateMoodNoteMessage update)
     {
         MoodNote = note[0];
         MoodImages = fileService[0];
+        UpdateMoodNoteMessage = update;
     }
 
     [ObservableProperty] private bool create;
@@ -35,7 +39,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
             else
                 await MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
 
-            MessagingCenter.Send(this, "UpdateMoodNote");
+            WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
             await Shell.Current.Navigation.PopToRootAsync();
         }
     }

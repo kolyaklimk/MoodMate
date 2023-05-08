@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Messages;
 
 namespace MoodMate.ViewModels;
 
@@ -11,9 +13,11 @@ namespace MoodMate.ViewModels;
 public partial class CreateOrEditNoteViewModel : ObservableObject
 {
     private readonly Note SimpleNote;
-    public CreateOrEditNoteViewModel(Note[] note)
+    private readonly UpdateSimpleNoteMessage UpdateSimpleNoteMessage;
+    public CreateOrEditNoteViewModel(Note[] note, UpdateSimpleNoteMessage update)
     {
         SimpleNote = note[1];
+        UpdateSimpleNoteMessage = update;
     }
 
     [ObservableProperty] private bool create;
@@ -32,7 +36,7 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
             else
                 await SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
 
-            MessagingCenter.Send(this, "UpdateSimpleNote");
+            WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
             await Shell.Current.Navigation.PopToRootAsync();
         }
     }

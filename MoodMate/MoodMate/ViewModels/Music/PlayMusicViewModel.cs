@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Messages;
 using Plugin.Maui.Audio;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MoodMate.ViewModels.Music;
 
@@ -16,6 +19,8 @@ public partial class PlayMusicViewModel : ObservableObject
     private IAudioPlayer MusicPlayer;
     private IAudioPlayer SoundPlayer;
     private bool IsRunning;
+    private readonly StartRotateMessage StartRotateMessage;
+    private readonly StopRotateMessage StopRotateMessage;
 
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
@@ -27,11 +32,13 @@ public partial class PlayMusicViewModel : ObservableObject
     [ObservableProperty] double volumeSound;
     [ObservableProperty] bool isLoad;
 
-    public PlayMusicViewModel(IAudioManager manager)
+    public PlayMusicViewModel(IAudioManager manager, StopRotateMessage stop, StartRotateMessage start)
     {
         AudioManager = manager;
         isLoad = true;
         SetTimer();
+        StopRotateMessage = stop;
+        StartRotateMessage = start;
     }
     private void SetTimer()
     {
@@ -41,15 +48,15 @@ public partial class PlayMusicViewModel : ObservableObject
         {
             if (Time == zero)
             {
-                MessagingCenter.Send(this, "Stop");
                 MusicPlayer?.Pause();
                 SoundPlayer?.Pause();
                 Timer.Stop();
+                WeakReferenceMessenger.Default.Send(StopRotateMessage);
             }
             else
             {
-                MessagingCenter.Send(this, "Start");
                 Time = Time.Subtract(second);
+                WeakReferenceMessenger.Default.Send(StartRotateMessage);
             }
         };
     }
@@ -75,7 +82,7 @@ public partial class PlayMusicViewModel : ObservableObject
         VolumeMusic = 1;
         VolumeSound = 1;
 
-        MessagingCenter.Send(this, "Start");
+        WeakReferenceMessenger.Default.Send(StartRotateMessage);
         MusicPlayer?.Play();
         SoundPlayer?.Play();
         Timer.Start();
@@ -90,7 +97,7 @@ public partial class PlayMusicViewModel : ObservableObject
         {
             if (IsRunning)
             {
-                MessagingCenter.Send(this, "Stop");
+                WeakReferenceMessenger.Default.Send(StopRotateMessage);
                 ButtonStr = "Continue";
                 MusicPlayer?.Pause();
                 SoundPlayer?.Pause();
@@ -99,7 +106,7 @@ public partial class PlayMusicViewModel : ObservableObject
             }
             else
             {
-                MessagingCenter.Send(this, "Start");
+                WeakReferenceMessenger.Default.Send(StartRotateMessage);
                 ButtonStr = "Stop";
                 MusicPlayer?.Play();
                 SoundPlayer?.Play();

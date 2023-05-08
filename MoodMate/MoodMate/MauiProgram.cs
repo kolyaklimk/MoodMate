@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
+using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
 using MoodMate.Pages.SimpleNote;
@@ -61,5 +62,9 @@ public static class MauiProgram
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
         services.AddSingleton(AudioManager.Current);
         services.AddSingleton(_ => new List<int>[] { new List<int>(), new List<int>() });
+        services.AddSingleton<StopRotateMessage>();
+        services.AddSingleton<StartRotateMessage>();
+        services.AddSingleton<UpdateMoodNoteMessage>();
+        services.AddSingleton<UpdateSimpleNoteMessage>();
     }
 }
