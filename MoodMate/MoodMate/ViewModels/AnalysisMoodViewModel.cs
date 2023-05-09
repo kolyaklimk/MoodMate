@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Factory;
+using MoodMate.Templates;
 using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
@@ -16,7 +17,7 @@ public partial class AnalysisMoodViewModel : ObservableObject
     [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
     [ObservableProperty] KeyValuePair<string, (string, int, int)> template = new();
     [ObservableProperty] int count = new();
-    public ObservableCollection<KeyValuePair<string, (string, int, int)>> AnalysisMood { get; set; } = new();
+    public ObservableCollection<MyKeyValue> AnalysisMood { get; set; } = new();
 
     [RelayCommand]
     async Task NextMonth()

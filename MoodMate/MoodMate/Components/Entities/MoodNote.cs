@@ -1,5 +1,6 @@
 ﻿using MoodMate.Components.Data;
 using MoodMate.Components.Entities.Abstractions;
+using MoodMate.Templates;
 
 namespace MoodMate.Components.Entities;
 
@@ -68,9 +69,14 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             }
         });
     }
-    public List<KeyValuePair<string, (string, int, int)>> GetAnalysedData()
+    public List<MyKeyValue> GetAnalysedData()
     {
-        return MoodAnalysis.AnalysedData.ToList();
+        return MoodAnalysis.AnalysedData.Select(kvp => new MyKeyValue { 
+            Key = kvp.Key,
+            Value1 = kvp.Value.Item1,
+            Value2 = kvp.Value.Item2,
+            Value3 = kvp.Value.Item3,
+        }).ToList();
     }
     public int GetCountMood()
     {

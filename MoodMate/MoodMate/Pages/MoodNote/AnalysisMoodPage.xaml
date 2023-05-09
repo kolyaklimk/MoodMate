@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"     
+             x:DataType="model:AnalysisMoodViewModel"
              x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
              xmlns:converter="clr-namespace:MoodMate.Converters"
+             xmlns:entity="clr-namespace:MoodMate.Templates"
              BackgroundColor="#e2d9c5">
     
     <Shell.BackButtonBehavior>
@@ -99,14 +101,15 @@
 
                     <CollectionView.ItemTemplate>
                         
-                        <DataTemplate>
+                        <DataTemplate x:DataType="entity:MyKeyValue">
                             
                             <Grid ColumnSpacing="10" 
                                   Padding="5"
-                                  ColumnDefinitions="70,*">
+                                  ColumnDefinitions="70,*"
+                                  HeightRequest="70">
                                 
                                 <Image Grid.Column="0" 
-                                       Source="{Binding Value[0]}"/>
+                                       Source="{Binding Value1}"/>
                                 
                                 <Grid Grid.Column="1"
                                       RowDefinitions="*,0.5*"
@@ -118,7 +121,7 @@
                                             <RoundRectangle CornerRadius="15"/>
                                         </Border.StrokeShape>
                                         
-                                        <ProgressBar Progress="{Binding Value[2], Converter={StaticResource ProgressBarConverter}}"
+                                        <ProgressBar Progress="{Binding Value3, Converter={StaticResource ProgressBarConverter}}"
                                                      ScaleY="4"
                                                      ProgressColor="{Binding Converter={StaticResource RandomColorConverter}}"
                                                      BackgroundColor="#2F2F2C"/>                                        
@@ -138,8 +141,8 @@
                                                FontSize="16">
                                             <Label.Text>
                                                 <MultiBinding StringFormat="{}{0} / {1}%">
-                                                    <Binding Path="Value[1]"/>
-                                                    <Binding Path="Value[2]"/>
+                                                    <Binding Path="Value2"/>
+                                                    <Binding Path="Value3"/>
                                                 </MultiBinding>
                                             </Label.Text>
                                         </Label>
