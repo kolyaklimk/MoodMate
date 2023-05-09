@@ -78,6 +78,7 @@ public partial class PlayMusicViewModel : ObservableObject
                 SoundPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedSound.Source));
                 SoundPlayer.Loop = true;
             }
+            WeakReferenceMessenger.Default.Send(StartRotateMessage);
 
             Zero = TimeSpan.FromSeconds(0);
             Second = TimeSpan.FromSeconds(1);
