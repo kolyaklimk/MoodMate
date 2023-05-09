@@ -105,8 +105,7 @@
                             
                             <Grid ColumnSpacing="10" 
                                   Padding="5"
-                                  ColumnDefinitions="70,*"
-                                  HeightRequest="70">
+                                  ColumnDefinitions="70,*">
                                 
                                 <Image Grid.Column="0" 
                                        Source="{Binding Value1}"/>
