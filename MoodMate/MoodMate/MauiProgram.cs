@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
@@ -50,6 +52,7 @@ public static class MauiProgram
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
         services.AddSingleton(AudioManager.Current);
         services.AddSingleton(_ => new List<int>[] { new List<int>(), new List<int>() });
+        services.AddSingleton(_ => new IToast[4]);
         services.AddSingleton<StopRotateMessage>();
         services.AddSingleton<StartRotateMessage>();
         services.AddSingleton<UpdateMoodNoteMessage>();

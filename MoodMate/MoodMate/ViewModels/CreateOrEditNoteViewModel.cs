@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
@@ -14,10 +15,12 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
 {
     private readonly Note SimpleNote;
     private readonly UpdateSimpleNoteMessage UpdateSimpleNoteMessage;
-    public CreateOrEditNoteViewModel(Note[] note, UpdateSimpleNoteMessage update)
+    private IToast Alert;
+    public CreateOrEditNoteViewModel(Note[] note, UpdateSimpleNoteMessage update, IToast[] toasts)
     {
         SimpleNote = note[1];
         UpdateSimpleNoteMessage = update;
+        Alert = toasts[2];
     }
 
     [ObservableProperty] private bool create;
@@ -26,7 +29,7 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     [RelayCommand]
     async Task CreateOrEdit()
     {
-        if (SelectedNote.Text != "")
+        if (SelectedNote.Text != "" && SelectedNote.Text != null)
         {
             if (Create)
             {
@@ -38,6 +41,10 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
 
             WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
             await Shell.Current.Navigation.PopToRootAsync();
+        }
+        else
+        {
+            await Alert.Show();
         }
     }
 

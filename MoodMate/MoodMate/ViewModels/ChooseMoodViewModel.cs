@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
@@ -11,10 +13,12 @@ public partial class ChooseMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
     private readonly FileService Mood;
-    public ChooseMoodViewModel(Note[] note, FileService[] service)
+    private IToast Alert;
+    public ChooseMoodViewModel(Note[] note, FileService[] service, IToast[] toasts)
     {
         MoodNote = note[0];
         Mood = service[0];
+        Alert = toasts[0];
     }
     public ObservableCollection<FileService> Moods { get; set; } = new();
 
@@ -47,6 +51,10 @@ public partial class ChooseMoodViewModel : ObservableObject
                     { "Create", true}});
             SelectedMood = null;
             DateTime = DateTime.Now;
+        }
+        else
+        {
+            await Alert.Show();
         }
     }
 

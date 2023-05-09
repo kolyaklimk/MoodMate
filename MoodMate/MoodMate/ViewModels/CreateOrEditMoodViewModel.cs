@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -16,11 +18,13 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     private readonly Note MoodNote;
     private readonly FileService MoodImages;
     private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
-    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService, UpdateMoodNoteMessage update)
+    private IToast Alert;
+    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService, UpdateMoodNoteMessage update, IToast[] toasts)
     {
         MoodNote = note[0];
         MoodImages = fileService[0];
         UpdateMoodNoteMessage = update;
+        Alert = toasts[1];
     }
 
     [ObservableProperty] private bool create;
@@ -41,6 +45,10 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 
             WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
             await Shell.Current.Navigation.PopToRootAsync();
+        }
+        else
+        {
+            await Alert.Show();
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
@@ -15,11 +16,13 @@ public partial class MusicListViewModel : ObservableObject
     private readonly FileService Music;
     private readonly FileService Sound;
     private readonly List<int>[] Sbytes;
-    public MusicListViewModel(FileService[] fileService, List<int>[] sbytes)
+    private IToast Alert;
+    public MusicListViewModel(FileService[] fileService, List<int>[] sbytes, IToast[] toasts)
     {
         Music = fileService[1];
         Sound = fileService[2];
         Sbytes = sbytes;
+        Alert = toasts[3];
     }
     public ObservableCollection<FileService> MusicList { get; set; } = new();
     public ObservableCollection<FileService> SoundList { get; set; } = new();
@@ -83,6 +86,10 @@ public partial class MusicListViewModel : ObservableObject
                     { "Time", SelectedTime}});
             SelectedMusic = null;
             SelectedSound = null;
+        }
+        else
+        {
+            await Alert.Show();
         }
     }
 }

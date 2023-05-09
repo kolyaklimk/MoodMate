@@ -85,7 +85,6 @@ public partial class PlayMusicViewModel : ObservableObject
 
             SetTimer();
 
-            WeakReferenceMessenger.Default.Send(StartRotateMessage);
             MusicPlayer?.Play();
             SoundPlayer?.Play();
             Timer.Start();
