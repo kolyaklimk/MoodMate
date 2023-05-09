@@ -33,31 +33,19 @@ public static class MauiProgram
 
     private static void SetupServices(IServiceCollection services)
     {
-        //// ViewModels
-        services.AddSingleton<MusicListViewModel>();
-        services.AddTransient<PlayMusicViewModel>();
+        // Pages and ViewModels
+        services.AddSingleton<MusicListPage, MusicListViewModel>();
+        services.AddTransient<PlayMusicPage, PlayMusicViewModel>();
 
-        services.AddSingleton<NoteListViewModel>();
-        services.AddSingleton<CreateOrEditNoteViewModel>();
+        services.AddSingleton<NoteListPage, NoteListViewModel>();
+        services.AddSingleton<CreateOrEditNotePage, CreateOrEditNoteViewModel>();
 
-        services.AddSingleton<MoodListViewModel>();
-        services.AddSingleton<ChooseMoodViewModel>();
-        services.AddSingleton<CreateOrEditMoodViewModel>();
-        services.AddSingleton<AnalysisMoodViewModel>();
+        services.AddSingleton<MoodListPage, MoodListViewModel>();
+        services.AddSingleton<ChooseMoodPage, ChooseMoodViewModel>();
+        services.AddSingleton<CreateOrEditMoodPage, CreateOrEditMoodViewModel>();
+        services.AddSingleton<AnalysisMoodPage, AnalysisMoodViewModel>();
 
-        //// Pages
-        services.AddSingleton<MusicListPage>();
-        services.AddTransient<PlayMusicPage>();
-
-        services.AddSingleton<NoteListPage>();
-        services.AddSingleton<CreateOrEditNotePage>();
-
-        services.AddSingleton<MoodListPage>();
-        services.AddSingleton<ChooseMoodPage>();
-        services.AddSingleton<CreateOrEditMoodPage>();
-        services.AddSingleton<AnalysisMoodPage>();
-
-        //// Service
+        // Services
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
         services.AddSingleton(AudioManager.Current);
