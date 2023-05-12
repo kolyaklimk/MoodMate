@@ -6,7 +6,7 @@ internal class RandomColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var colors = new string[] { "#2C3963", "#e2d9c5", "#8C913F" };
+        var colors = new string[] { "#ffc961", "#53a2ff", "#ef6355", "#d2ddff", "#d9564f", "#ffad61" };
         Random random = new Random();
         return Color.FromArgb(colors[random.Next(0, colors.Length)]);
     }
