@@ -125,6 +125,14 @@
                   ColumnSpacing="10">
 
                 <Button Grid.Column="0"
+                        Text="Cancel"
+                        Clicked="Cancel_Clicked"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="22"
+                        BackgroundColor="#fffbef"/>
+                
+                <Button Grid.Column="1"
                         Text="Ok"
                         Clicked="Ok_Clicked"
                         TextColor="#2F2F2C"
@@ -132,13 +140,6 @@
                         FontSize="22"
                         BackgroundColor="#fffbef"/>
 
-                <Button Grid.Column="1"
-                        Text="Cancel"
-                        Clicked="Cancel_Clicked"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
-                        FontSize="22"
-                        BackgroundColor="#fffbef"/>
             </Grid>
         </Grid>
     </Border>
