@@ -32,6 +32,32 @@ public partial class MusicListViewModel : ObservableObject
     [ObservableProperty] TimeSpan selectedTime;
 
     [RelayCommand]
+    void SelectedItemMusic(FileService music)
+    {
+        if (SelectedMusic == music)
+        {
+            SelectedMusic = null;
+        }
+        else
+        {
+            SelectedMusic = music;
+        }
+    }
+
+    [RelayCommand]
+    void SelectedItemSound(FileService sound)
+    {
+        if (SelectedSound == sound)
+        {
+            SelectedSound = null;
+        }
+        else
+        {
+            SelectedSound = sound;
+        }
+    }
+
+    [RelayCommand]
     async void ChooseTime()
     {
         var result = await Shell.Current.ShowPopupAsync(new TimePickerPage(Sbytes));

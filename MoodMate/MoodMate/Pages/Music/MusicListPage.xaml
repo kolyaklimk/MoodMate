@@ -41,7 +41,12 @@
 
                         <Grid Grid.RowDefinitions="120,*"
                               WidthRequest="120">
-                            
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemSoundCommand}"/>
+                            </Grid.GestureRecognizers>
+
                             <Border StrokeThickness="5"
                                     Stroke="#8C913F"
                                     Grid.Row="0">
@@ -91,6 +96,11 @@
 
                         <Grid Grid.RowDefinitions="120,*"
                               WidthRequest="120">
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemMusicCommand}"/>
+                            </Grid.GestureRecognizers>
 
                             <Border StrokeThickness="5"
                                     Stroke="#8C913F"
