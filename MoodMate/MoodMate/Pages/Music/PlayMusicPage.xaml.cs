@@ -6,10 +6,12 @@ namespace MoodMate.Pages.Music;
 
 public partial class PlayMusicPage : ContentPage, IRecipient<StopRotateMessage>, IRecipient<StartRotateMessage>
 {
+    private readonly PlayMusicViewModel Model;
     public PlayMusicPage(PlayMusicViewModel model)
     {
         InitializeComponent();
         BindingContext = model;
+        Model = model;
         WeakReferenceMessenger.Default.Register<StopRotateMessage>(this);
         WeakReferenceMessenger.Default.Register<StartRotateMessage>(this);
     }
@@ -28,6 +30,7 @@ public partial class PlayMusicPage : ContentPage, IRecipient<StopRotateMessage>,
 
     protected override bool OnBackButtonPressed()
     {
+        Model.BackClick();
         return true;
     }
 }
