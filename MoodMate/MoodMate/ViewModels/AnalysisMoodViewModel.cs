@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Factory;
+using MoodMate.Pages.MoodNote;
 using MoodMate.Templates;
 using System.Collections.ObjectModel;
 
@@ -9,14 +10,15 @@ namespace MoodMate.ViewModels;
 public partial class AnalysisMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
+    private bool IsFirst = true;
+    private readonly MyKeyValue ForCollection = new();
     public AnalysisMoodViewModel(Note[] note)
     {
         MoodNote = note[0];
     }
 
     [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
-    [ObservableProperty] KeyValuePair<string, (string, int, int)> template = new();
-    [ObservableProperty] int count = new();
+    [ObservableProperty] int count;
     public ObservableCollection<MyKeyValue> AnalysisMood { get; set; } = new();
 
     [RelayCommand]
@@ -58,12 +60,22 @@ public partial class AnalysisMoodViewModel : ObservableObject
             {
                 AnalysisMood.Add(item);
             }
+
+            if (IsFirst)
+            {
+                if (AnalysisMood.Count == 0)
+                {
+                    AnalysisMood.Add(new MyKeyValue());
+                    AnalysisMood.RemoveAt(0);
+                }
+                IsFirst = false;
+            }
         });
     }
 
     [RelayCommand]
     async void BackClick()
     {
-        await Shell.Current.Navigation.PopAsync();
+        await Shell.Current.GoToAsync("//" + nameof(MoodListPage), false);
     }
 }
