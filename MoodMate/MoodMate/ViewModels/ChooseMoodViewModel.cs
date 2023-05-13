@@ -26,6 +26,19 @@ public partial class ChooseMoodViewModel : ObservableObject
     [ObservableProperty] DateTime dateTime = DateTime.Now;
 
     [RelayCommand]
+    void SelectedItem(FileService mood)
+    {
+        if(SelectedMood == mood)
+        {
+            SelectedMood = null;
+        }
+        else
+        {
+            SelectedMood = mood;
+        }
+    }
+
+    [RelayCommand]
     async Task LoadMoodNote()
     {
         await Task.Run(() =>
