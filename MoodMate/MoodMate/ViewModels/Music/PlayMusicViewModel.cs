@@ -65,14 +65,14 @@ public partial class PlayMusicViewModel : ObservableObject
             VolumeMusic = 1;
             VolumeSound = 1;
 
-            if (SelectedMusic != null && SelectedMusic.Name != "Silence")
+            if (SelectedMusic != null)
             {
                 IsMusic = true;
                 MusicPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedMusic.Source));
                 MusicPlayer.Loop = true;
             }
 
-            if (SelectedSound != null && SelectedSound?.Name != "Silence")
+            if (SelectedSound != null)
             {
                 IsSound = true;
                 SoundPlayer = AudioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(SelectedSound.Source));

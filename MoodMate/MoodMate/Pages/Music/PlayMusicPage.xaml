@@ -16,7 +16,7 @@
                                         Command="{Binding LoadPageCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Grid.RowDefinitions="25,*,70,*,100,60"
+    <Grid Grid.RowDefinitions="25,*,100,60"
           Padding="15">
 
         <Image Source="icon_back.png" 
@@ -26,89 +26,95 @@
                 <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
             </Image.GestureRecognizers>
         </Image>
-        
-        <Grid Grid.Row="1"
-              RowDefinitions="*,30,30" 
-              IsVisible="{Binding IsSound}"
-              VerticalOptions="End">
 
-            <Border StrokeThickness="0"
-                    HeightRequest="180"
-                    WidthRequest="180"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
+        <Grid RowDefinitions="Auto,Auto"
+              Grid.Row="1"
+              VerticalOptions="Center"
+              RowSpacing="50">
+            
+            <Grid Grid.Row="0"
+                  RowDefinitions="*,30,30" 
+                  IsVisible="{Binding IsSound}"
+                  VerticalOptions="End">
 
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="90"/>
-                </Border.StrokeShape>
+                <Border StrokeThickness="0"
+                        HeightRequest="180"
+                        WidthRequest="180"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
 
-                <Image x:Name="ImageSound" 
-                       Source="{Binding SelectedSound.Description}"/>
-            </Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="90"/>
+                    </Border.StrokeShape>
 
-            <Label Grid.Row="1"
-                   FontSize="22" 
-                   TextColor="#66645E"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   Text="{Binding SelectedSound.Name}"/>
+                    <Image x:Name="ImageSound" 
+                           Source="{Binding SelectedSound.Description}"/>
+                </Border>
 
-            <Slider Grid.Row="2"
-                    VerticalOptions="End"
-                    Value="{Binding VolumeSound}"
-                    MaximumTrackColor="#2F2F2C"
-                    MinimumTrackColor="#8C913F"
-                    ThumbColor="#8C913F">
-                <Slider.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ValueChanged"
-                                                    Command="{Binding ChangeSoundVolumeCommand}"/>
-                </Slider.Behaviors>
-            </Slider>
-        </Grid>
-        
-        <Grid Grid.Row="3"
-              RowDefinitions="*,30,30"
-              IsVisible="{Binding IsMusic}"
-              VerticalOptions="Start">
+                <Label Grid.Row="1"
+                       FontSize="22" 
+                       TextColor="#66645E"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"
+                       Text="{Binding SelectedSound.Name}"/>
 
-            <Border StrokeThickness="0"
-                    HeightRequest="180"
-                    WidthRequest="180"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
+                <Slider Grid.Row="2"
+                        VerticalOptions="End"
+                        Value="{Binding VolumeSound}"
+                        MaximumTrackColor="#2F2F2C"
+                        MinimumTrackColor="#8C913F"
+                        ThumbColor="#8C913F">
+                    <Slider.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="ValueChanged"
+                                                        Command="{Binding ChangeSoundVolumeCommand}"/>
+                    </Slider.Behaviors>
+                </Slider>
+            </Grid>
 
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="90"/>
-                </Border.StrokeShape>
+            <Grid Grid.Row="1"
+                  RowDefinitions="*,30,30"
+                  IsVisible="{Binding IsMusic}"
+                  VerticalOptions="Start">
+                
+                <Border StrokeThickness="0"
+                        HeightRequest="180"
+                        WidthRequest="180"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
 
-                <Image x:Name="ImageMusic" 
-                       Source="{Binding SelectedMusic.Description}"/>
-            </Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="90"/>
+                    </Border.StrokeShape>
+
+                    <Image x:Name="ImageMusic" 
+                           Source="{Binding SelectedMusic.Description}"/>
+                </Border>
 
 
-            <Label Grid.Row="1"
-                   FontSize="22" 
-                   TextColor="#66645E"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   Text="{Binding SelectedMusic.Name}"/>
-
-            <Slider Grid.Row="2"
-                    VerticalOptions="End"
-                    Value="{Binding VolumeMusic}"
-                    MaximumTrackColor="#2F2F2C"
-                    MinimumTrackColor="#8C913F"
-                    ThumbColor="#8C913F">
-                <Slider.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ValueChanged"
-                                                    Command="{Binding ChangeMusicVolumeCommand}"/>
-                </Slider.Behaviors>
-            </Slider>
+                <Label Grid.Row="1"
+                       FontSize="22" 
+                       TextColor="#66645E"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"
+                       Text="{Binding SelectedMusic.Name}"/>
+                
+                <Slider Grid.Row="2"
+                        VerticalOptions="End"
+                        Value="{Binding VolumeMusic}"
+                        MaximumTrackColor="#2F2F2C"
+                        MinimumTrackColor="#8C913F"
+                        ThumbColor="#8C913F">
+                    <Slider.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="ValueChanged"
+                                                        Command="{Binding ChangeMusicVolumeCommand}"/>
+                    </Slider.Behaviors>
+                </Slider>
+            </Grid>
         </Grid>
 
         <Border StrokeThickness="0"
                 BackgroundColor="#8C913F"
-                Grid.Row="4" 
+                Grid.Row="2" 
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
 
@@ -126,7 +132,7 @@
         
         <Button Text="{Binding ButtonStr}"
                 Command="{Binding ButtonClickCommand}"
-                Grid.Row="5"
+                Grid.Row="3"
                 CornerRadius="15"
                 BackgroundColor="#fffbef"
                 TextColor="#2F2F2C"
