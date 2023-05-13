@@ -3,9 +3,5 @@
     "Name": "ocean",
     "Source": "music_ocean.mp3",
     "Description": "music_ocean.png"
-  },
-  {
-    "Name": "Silence",
-    "Description": "no_sound.png"
   }
 ]

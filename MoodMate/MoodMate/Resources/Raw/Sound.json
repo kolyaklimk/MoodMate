@@ -3,9 +3,5 @@
     "Name": "click",
     "Source": "sound_click.mp3",
     "Description": "sound_click.png"
-  },
-  {
-    "Name": "Silence",
-    "Description": "no_sound.png"
   }
 ]
