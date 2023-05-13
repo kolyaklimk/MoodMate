@@ -29,25 +29,25 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
-    async void GoToMusicPage()
+    async Task GoToMusicPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MusicListPage));
     }
 
     [RelayCommand]
-    async void GoToNotePage()
+    async Task GoToNotePage()
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
     }
 
     [RelayCommand]
-    async void GoToChooseMoodPage()
+    async Task GoToChooseMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(ChooseMoodPage));
     }
 
     [RelayCommand]
-    async void GoToAnalysisMoodPage()
+    async Task GoToAnalysisMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(AnalysisMoodPage));
     }
@@ -67,7 +67,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
-    async void Popup(MoodNote note)
+    async Task Popup(MoodNote note)
     {
         var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
 

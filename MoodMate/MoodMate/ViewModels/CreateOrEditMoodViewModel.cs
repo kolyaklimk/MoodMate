@@ -55,7 +55,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void ChooseImage()
+    async Task ChooseImage()
     {
         var result = await Shell.Current.ShowPopupAsync(new ChangeMoodMenuPage(MoodImages)) as Tuple<string, string>;
         if (result != null)
@@ -66,7 +66,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void Back_Clicked()
+    public async Task Back_Clicked()
     {
         if (Create)
         {

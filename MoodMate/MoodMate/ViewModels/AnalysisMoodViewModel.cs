@@ -74,7 +74,7 @@ public partial class AnalysisMoodViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void BackClick()
+    public async Task BackClick()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage), false);
         SelectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);

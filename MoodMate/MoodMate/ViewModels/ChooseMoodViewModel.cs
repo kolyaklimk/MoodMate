@@ -52,7 +52,7 @@ public partial class ChooseMoodViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void GoToCreateOrEditPage()
+    async Task GoToCreateOrEditPage()
     {
         if (SelectedMood != null)
         {
@@ -72,7 +72,7 @@ public partial class ChooseMoodViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void Back_Clicked()
+    public async Task Back_Clicked()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         SelectedMood = null;

@@ -30,19 +30,19 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
-    async void GoToMusicPage()
+    async Task GoToMusicPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MusicListPage));
     }
 
     [RelayCommand]
-    async void GoToMoodPage()
+    async Task GoToMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
     }
 
     [RelayCommand]
-    async void GoToCreateOrEditPage()
+    async Task GoToCreateOrEditPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
                 new Dictionary<string, object>() {
@@ -65,7 +65,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     }
 
     [RelayCommand]
-    public async void Popup(SimpleNote note)
+    public async Task Popup(SimpleNote note)
     {
         var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
 

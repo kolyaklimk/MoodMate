@@ -16,7 +16,7 @@ public partial class MusicListViewModel : ObservableObject
     private readonly FileService Music;
     private readonly FileService Sound;
     private readonly List<int>[] Sbytes;
-    private IToast Alert;
+    private readonly IToast Alert;
     public MusicListViewModel(FileService[] fileService, List<int>[] sbytes, IToast[] toasts)
     {
         Music = fileService[1];
@@ -58,7 +58,7 @@ public partial class MusicListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void ChooseTime()
+    async Task ChooseTime()
     {
         var result = await Shell.Current.ShowPopupAsync(new TimePickerPage(Sbytes));
         if (result != null)
@@ -68,7 +68,7 @@ public partial class MusicListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void GoToMoodPage()
+    async Task GoToMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         SelectedMusic = null;
@@ -76,7 +76,7 @@ public partial class MusicListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void GoToNotePage()
+    async Task GoToNotePage()
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
         SelectedMusic = null;
@@ -105,7 +105,7 @@ public partial class MusicListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void GoToPlay()
+    async Task GoToPlay()
     {
         if (SelectedMusic != null || SelectedSound != null)
         {

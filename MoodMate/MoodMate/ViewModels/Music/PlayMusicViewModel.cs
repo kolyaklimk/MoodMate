@@ -119,7 +119,7 @@ public partial class PlayMusicViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task BackClick()
+    public async Task BackClick()
     {
         await Shell.Current.Navigation.PopAsync();
         MusicPlayer?.Dispose();

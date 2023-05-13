@@ -52,7 +52,7 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async void Back_Clicked()
+    public async Task Back_Clicked()
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
         if (!Create)
