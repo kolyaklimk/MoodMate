@@ -8,10 +8,6 @@
              x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
              BackgroundColor="#e2d9c5" >
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="false"/>
-    </Shell.BackButtonBehavior>
-
     <Grid RowDefinitions="25,*" 
           Padding="15">
 

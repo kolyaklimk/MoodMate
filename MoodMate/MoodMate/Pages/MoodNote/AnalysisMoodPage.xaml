@@ -9,10 +9,6 @@
              xmlns:entity="clr-namespace:MoodMate.Templates"
              BackgroundColor="#e2d9c5">
     
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="false"/>
-    </Shell.BackButtonBehavior>
-    
     <ContentPage.Resources>
         <converter:ProgressBarConverter x:Key="ProgressBarConverter"/>
         <converter:RandomColorConverter x:Key="RandomColorConverter"/>

@@ -9,10 +9,6 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              BackgroundColor="#e2d9c5">
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="false"/>
-    </Shell.BackButtonBehavior>
-    
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
                                         Command="{Binding LoadMoodNoteCommand}"/>
