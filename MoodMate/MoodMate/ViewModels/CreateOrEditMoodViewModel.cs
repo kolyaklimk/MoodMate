@@ -13,6 +13,7 @@ namespace MoodMate.ViewModels;
 
 [QueryProperty(nameof(SelectedMood), "MoodNote")]
 [QueryProperty(nameof(Create), "Create")]
+[QueryProperty(nameof(SavededMood), "Save")]
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly Note MoodNote;
@@ -29,6 +30,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 
     [ObservableProperty] private bool create;
     [ObservableProperty] public MoodNote selectedMood;
+    [ObservableProperty] private MoodNote savededMood;
 
     [RelayCommand]
     async Task CreateOrEdit()
@@ -44,7 +46,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                 await MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
 
             WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
-            await Shell.Current.Navigation.PopToRootAsync();
+            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         }
         else
         {
@@ -66,6 +68,17 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     [RelayCommand]
     async void Back_Clicked()
     {
-        await Shell.Current.Navigation.PopAsync();
+        if (Create)
+        {
+            await Shell.Current.GoToAsync("//" + nameof(ChooseMoodPage));
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            SelectedMood.Mood.Source = SavededMood.Mood.Source;
+            SelectedMood.Mood.Name = SavededMood.Mood.Name;
+            SelectedMood.Text = SavededMood.Text;
+            SelectedMood.Date = SavededMood.Date;
+        }
     }
 }

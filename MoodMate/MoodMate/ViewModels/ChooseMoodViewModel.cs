@@ -43,7 +43,7 @@ public partial class ChooseMoodViewModel : ObservableObject
     {
         if (SelectedMood != null)
         {
-            await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
+            await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
                 new Dictionary<string, object>() {
                     { "MoodNote", new MoodNote() {
                         Mood = new FileService(){ Name=SelectedMood.Name, Source=SelectedMood.Source},
@@ -61,6 +61,8 @@ public partial class ChooseMoodViewModel : ObservableObject
     [RelayCommand]
     async void Back_Clicked()
     {
-        await Shell.Current.Navigation.PopAsync();
+        await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+        SelectedMood = null;
+        DateTime = DateTime.Now;
     }
 }

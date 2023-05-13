@@ -44,7 +44,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     [RelayCommand]
     async void GoToCreateOrEditPage()
     {
-        await Shell.Current.GoToAsync(nameof(CreateOrEditNotePage),
+        await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
                 new Dictionary<string, object>() {
                     { "SimpleNote", new SimpleNote() { Date = DateTime.Now }},
                     { "Create", true}});
@@ -85,9 +85,10 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
                 break;
 
             case 3:
-                await Shell.Current.GoToAsync(nameof(CreateOrEditNotePage),
+                await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
                     new Dictionary<string, object>() {
-                    { "SimpleNote", note}});
+                        {"SimpleNote", note},
+                        {"Save", new SimpleNote(note.Date, note.Text)}});
                 break;
         }
     }

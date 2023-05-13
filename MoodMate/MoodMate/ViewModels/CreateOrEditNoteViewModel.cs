@@ -5,12 +5,14 @@ using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
+using MoodMate.Pages.SimpleNote;
 
 namespace MoodMate.ViewModels;
 
 
 [QueryProperty(nameof(SelectedNote), "SimpleNote")]
 [QueryProperty(nameof(Create), "Create")]
+[QueryProperty(nameof(SavededNote), "Save")]
 public partial class CreateOrEditNoteViewModel : ObservableObject
 {
     private readonly Note SimpleNote;
@@ -25,22 +27,23 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
 
     [ObservableProperty] private bool create;
     [ObservableProperty] SimpleNote selectedNote;
+    [ObservableProperty] private SimpleNote savededNote;
 
     [RelayCommand]
     async Task CreateOrEdit()
     {
         if (SelectedNote.Text != "" && SelectedNote.Text != null)
         {
+            SelectedNote.Date = SelectedNote.Date.Date.Add(DateTime.Now.TimeOfDay);
             if (Create)
             {
-                SelectedNote.Date = SelectedNote.Date.Date.Add(DateTime.Now.TimeOfDay);
                 await SimpleNote.note.AddNote(SelectedNote);
             }
             else
                 await SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
 
             WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
-            await Shell.Current.Navigation.PopToRootAsync();
+            await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
         }
         else
         {
@@ -51,6 +54,11 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     [RelayCommand]
     async void Back_Clicked()
     {
-        await Shell.Current.Navigation.PopAsync();
+        await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
+        if (!Create)
+        {
+            SelectedNote.Text = SavededNote.Text;
+            SelectedNote.Date = SavededNote.Date;
+        }
     }
 }

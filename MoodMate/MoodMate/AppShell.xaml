@@ -9,10 +9,22 @@
     
     <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"
                   Route="MoodListPage"/>
-    
+
+    <ShellContent ContentTemplate="{DataTemplate mood:AnalysisMoodPage}"
+                  Route="AnalysisMoodPage"/>
+
+    <ShellContent ContentTemplate="{DataTemplate mood:ChooseMoodPage}"
+                  Route="ChooseMoodPage"/>
+
+    <ShellContent ContentTemplate="{DataTemplate mood:CreateOrEditMoodPage}"
+                  Route="CreateOrEditMoodPage"/>
+
     <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}"
                   Route="MusicListPage"/>
 
     <ShellContent ContentTemplate="{DataTemplate note:NoteListPage}"
                   Route="NoteListPage"/>
+
+    <ShellContent ContentTemplate="{DataTemplate note:CreateOrEditNotePage}"
+                  Route="CreateOrEditNotePage"/>
 </Shell>

@@ -43,13 +43,13 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async void GoToChooseMoodPage()
     {
-        await Shell.Current.GoToAsync(nameof(ChooseMoodPage));
+        await Shell.Current.GoToAsync("//" + nameof(ChooseMoodPage));
     }
 
     [RelayCommand]
     async void GoToAnalysisMoodPage()
     {
-        await Shell.Current.GoToAsync(nameof(AnalysisMoodPage));
+        await Shell.Current.GoToAsync("//" + nameof(AnalysisMoodPage));
     }
 
     [RelayCommand]
@@ -89,9 +89,10 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                 break;
 
             case 3:
-                await Shell.Current.GoToAsync(nameof(CreateOrEditMoodPage),
+                await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
                     new Dictionary<string, object>() {
-                    { "MoodNote", note}});
+                        {"MoodNote", note},
+                        {"Save", new MoodNote(note.Date, note.Mood.Name, note.Mood.Source, note.Text)}});
                 break;
         }
     }

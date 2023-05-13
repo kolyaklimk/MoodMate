@@ -19,7 +19,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded"
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
                                         Command="{Binding UpdateAnalyseCommand}"/>
     </ContentPage.Behaviors>
 

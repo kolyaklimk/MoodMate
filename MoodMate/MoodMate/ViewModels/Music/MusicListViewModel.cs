@@ -45,12 +45,16 @@ public partial class MusicListViewModel : ObservableObject
     async void GoToMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+        SelectedMusic = null;
+        SelectedSound = null;
     }
 
     [RelayCommand]
     async void GoToNotePage()
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
+        SelectedMusic = null;
+        SelectedSound = null;
     }
 
     [RelayCommand]
