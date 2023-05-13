@@ -36,7 +36,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     }
 
     [RelayCommand]
-    async Task GoToMoodPage()
+    public async Task GoToMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
     }

@@ -68,7 +68,7 @@ public partial class MusicListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task GoToMoodPage()
+    public async Task GoToMoodPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         SelectedMusic = null;
