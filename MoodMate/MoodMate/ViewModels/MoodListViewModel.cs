@@ -53,6 +53,15 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    async Task GoToEdit(MoodNote note)
+    {
+        await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
+            new Dictionary<string, object>() {
+                {"MoodNote", note},
+                {"Save", new MoodNote(note.Date, note.Mood.Name, note.Mood.Source, note.Text)}});
+    }
+
+    [RelayCommand]
     async Task UpdateMoodNote()
     {
         await Task.Run(() =>
