@@ -52,6 +52,24 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task ShareItem()
+    {
+        await Share.Default.RequestAsync(new ShareTextRequest
+        {
+            Text = "Date: " + SelectedNote.Date.ToString() + '\n'
+                    + "Text: " + SelectedNote.Text
+        });
+    }
+
+    [RelayCommand]
+    public async Task DeleteItem()
+    {
+        await SimpleNote.note.DeleteNote(SelectedNote.Id);
+        WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
+        await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
+    }
+
+    [RelayCommand]
     public async Task Back_Clicked()
     {
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));

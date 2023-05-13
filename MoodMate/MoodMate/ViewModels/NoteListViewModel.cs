@@ -16,12 +16,12 @@ namespace MoodMate.ViewModels;
 public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimpleNoteMessage>
 {
 
-    private readonly Note SmpleNote;
+    private readonly Note SimpleNote;
     public ObservableCollection<SimpleNote> SimpleNotes { get; set; } = new();
 
     public NoteListViewModel(Note[] note)
     {
-        SmpleNote = note[1];
+        SimpleNote = note[1];
         IsRefreshing = false;
 
         WeakReferenceMessenger.Default.Register(this);
@@ -42,6 +42,15 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     }
 
     [RelayCommand]
+    async Task GoToEditPage(SimpleNote note)
+    {
+        await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
+            new Dictionary<string, object>() {
+                {"SimpleNote", note},
+                {"Save", new SimpleNote(note.Date, note.Text)}});
+    }
+
+    [RelayCommand]
     async Task GoToCreateOrEditPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
@@ -55,42 +64,13 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     {
         await Task.Run(() =>
         {
-            var moods = SmpleNote.note.GetData();
+            var moods = SimpleNote.note.GetData();
 
             SimpleNotes.Clear();
             foreach (var mood in moods)
                 SimpleNotes.Add(mood);
             IsRefreshing = false;
         });
-    }
-
-    [RelayCommand]
-    public async Task Popup(SimpleNote note)
-    {
-        var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
-
-        switch (result)
-        {
-            case 1:
-                await Share.Default.RequestAsync(new ShareTextRequest
-                {
-                    Text = "Date: " + note.Date.ToString() + '\n'
-                    + "Text: " + note.Text
-                });
-                break;
-
-            case 2:
-                await SmpleNote.note.DeleteNote(note.Id);
-                await UpdateSimpleNote();
-                break;
-
-            case 3:
-                await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
-                    new Dictionary<string, object>() {
-                        {"SimpleNote", note},
-                        {"Save", new SimpleNote(note.Date, note.Text)}});
-                break;
-        }
     }
 
     public async void Receive(UpdateSimpleNoteMessage message)

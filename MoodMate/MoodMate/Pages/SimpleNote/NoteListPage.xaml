@@ -68,7 +68,7 @@
 
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
-                                {x:Type model:NoteListViewModel}}, Path=PopupCommand}"
+                                {x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
                                                       CommandParameter="{Binding}"/>
                             </Border.GestureRecognizers>
 
