@@ -16,15 +16,24 @@
 
     <Grid Grid.RowDefinitions="25,80,55,*,60"
           Padding="15">
-        
-        <Image Source="icon_back.png" 
-               Grid.Row="0"             
-               HorizontalOptions="Start">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
-            </Image.GestureRecognizers>
-        </Image>
-        
+
+        <Grid ColumnDefinitions="25,*">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+        </Grid>
+
         <Label Grid.Row="1"
                Text="How are you feeling?"
                FontFamily="OpenSansBold"

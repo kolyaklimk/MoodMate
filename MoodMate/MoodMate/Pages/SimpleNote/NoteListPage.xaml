@@ -93,17 +93,17 @@
                 HorizontalOptions="End"
                 Margin="0,0,15,15">
 
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
+            </Border.GestureRecognizers>
+            
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15"/>
             </Border.StrokeShape>
 
             <Image Source="icon_plus.png"
                    Grid.Row="1"
-                   Scale="0.7">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                   Scale="0.7"/>
         </Border>
 
         <Border Grid.Row="2"
@@ -117,21 +117,31 @@
 
             <Grid Grid.ColumnDefinitions="*,*,*">
 
-                <Image Source="icon_mood.png"
-                       Grid.Column="0"
-                       Scale="0.5">
-                    <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                <Border Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
 
-                <Image Source="icon_music.png"
-                       Grid.Column="1"
-                       Scale="0.5">
-                    <Image.GestureRecognizers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.5"
+                       Source="icon_mood.png">
+                    </Image>
+                </Border>
+
+                <Border Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.5"
+                       Source="icon_music.png">
+                    </Image>
+                </Border>
 
                 <Image Source="icon_note_selected.png"
                        Grid.Column="2"

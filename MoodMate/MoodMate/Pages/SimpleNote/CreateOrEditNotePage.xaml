@@ -10,24 +10,36 @@
     <Grid RowDefinitions="25,*"
           Padding="15" 
           RowSpacing="10">
-        
-        <Grid ColumnDefinitions="*,*">
 
-            <Image Source="icon_back.png" 
-                   Grid.Column="0"
-                   HorizontalOptions="Start">
-                <Image.GestureRecognizers>
+        <Grid ColumnDefinitions="25,*,25">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                </Border.GestureRecognizers>
 
-            <Image Source="icon_accept.png" 
-                   Grid.Column="1"
-                   HorizontalOptions="End">
-                <Image.GestureRecognizers>
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CreateOrEditCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_accept.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
         </Grid>
 
         <Border Grid.Row="1"

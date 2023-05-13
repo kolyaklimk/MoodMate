@@ -68,7 +68,7 @@
 
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=PopupCommand}"/>
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
                             </Border.GestureRecognizers>
 
                             <Grid Padding="10"
@@ -77,7 +77,7 @@
 
                                 <Grid Grid.Row="0"
                                       ColumnSpacing="10"
-                                      Grid.ColumnDefinitions="70,*">
+                                      Grid.ColumnDefinitions="70,*,10">
                                     
                                     <Image Grid.Column="0" 
                                            Source="{Binding Mood.Source}"/>
@@ -105,6 +105,17 @@
                                                    TextColor="#66645E"/>
                                         </Grid>
                                     </Grid>
+
+                                    <Image Grid.Column="2" 
+                                           Source="icon_settings.png"
+                                           HeightRequest="30"
+                                           Margin="-35,-30,-30,0">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=PopupCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
                                 </Grid>
 
                                 <Label Grid.Row="1"
@@ -133,21 +144,31 @@
 
             <Grid RowDefinitions="*,*">
 
-                <Image Grid.Row="0"
-                       Scale="0.7"
-                       Source="icon_loop.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToAnalysisMoodPageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                <Border Grid.Row="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
 
-                <Image Grid.Row="1"
-                       Scale="0.7"
-                       Source="icon_plus.png">
-                    <Image.GestureRecognizers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToAnalysisMoodPageCommand}"/>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.7"
+                           Source="icon_loop.png">
+                    </Image>
+                </Border>
+
+                <Border Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToChooseMoodPageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.7"
+                           Source="icon_plus.png">
+                    </Image>
+                </Border>
             </Grid>
         </Border>
 
@@ -167,21 +188,31 @@
                        Scale="0.7"
                        Source="icon_mood_selected.png"/>
                 
-                <Image Grid.Column="1"
-                       Scale="0.5"
-                       Source="icon_music.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                <Border Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
 
-                <Image Grid.Column="2"
-                       Scale="0.5"
-                       Source="icon_note.png">
-                    <Image.GestureRecognizers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
+                    </Border.GestureRecognizers>
+                    
+                    <Image Scale="0.5"
+                       Source="icon_music.png">
+                    </Image>
+                </Border>
+
+                <Border Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.5"
+                       Source="icon_note.png">
+                    </Image>
+                </Border>                
             </Grid>
         </Border>
     </Grid>

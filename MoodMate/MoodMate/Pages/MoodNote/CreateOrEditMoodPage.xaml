@@ -11,23 +11,35 @@
     <Grid RowDefinitions="25,*" 
           Padding="15">
 
-        <Grid ColumnDefinitions="*,*">
+        <Grid ColumnDefinitions="25,*,25">
 
-            <Image Source="icon_back.png" 
-                   Grid.Column="0"
-                   HorizontalOptions="Start">
-                <Image.GestureRecognizers>
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                </Border.GestureRecognizers>
 
-            <Image Source="icon_accept.png" 
-                   Grid.Column="1"
-                   HorizontalOptions="End">
-                <Image.GestureRecognizers>
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+            
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CreateOrEditCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_accept.png"
+                       Scale="0.5">
+                </Image>
+            </Border>
         </Grid>
 
         <Grid Grid.Row="1" 
@@ -64,7 +76,7 @@
                 
                 <Entry
                     Grid.Row="2"
-                    MaxLength="15"
+                    MaxLength="14"
                     FontSize="28"
                     FontFamily="OpenSansBold"                    
                     Placeholder="Enter your mood here"

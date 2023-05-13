@@ -18,14 +18,23 @@
 
     <Grid Grid.RowDefinitions="25,*,100,60"
           Padding="15">
+        
+        <Grid ColumnDefinitions="25,*">
 
-        <Image Source="icon_back.png" 
-               Grid.Row="0"             
-               HorizontalOptions="Start">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
-            </Image.GestureRecognizers>
-        </Image>
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+        </Grid>
 
         <Grid RowDefinitions="Auto,Auto"
               Grid.Row="1"
