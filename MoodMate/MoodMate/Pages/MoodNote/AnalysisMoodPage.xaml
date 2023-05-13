@@ -105,11 +105,28 @@
                     <RoundRectangle CornerRadius="15"/>
                 </Border.StrokeShape>
 
-                <CollectionView ItemsSource="{Binding AnalysisMood}">
+                <CollectionView ItemsSource="{Binding AnalysisMood}"
+                                VerticalScrollBarVisibility="Never">
+                    
+                    <CollectionView.EmptyView>
+                        <StackLayout Spacing="10"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center">
+
+                            <Image Source="icon_month.png"
+                                   HeightRequest="100"/>
+
+                            <Label Text="No notes this month"
+                                   FontSize="22" 
+                                   TextColor="#FCF6EB"
+                                   HorizontalOptions="Center"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
-                                           ItemSpacing="8"/>
+                                           ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
