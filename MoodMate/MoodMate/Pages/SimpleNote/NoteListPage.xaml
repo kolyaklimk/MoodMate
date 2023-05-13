@@ -36,7 +36,7 @@
                             <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
                         </StackLayout.GestureRecognizers>
 
-                        <Image Source="mood_okey.png"
+                        <Image Source="icon_note2.png"
                                HeightRequest="100"/>
 
                         <Label Text="Write down your notes"

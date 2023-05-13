@@ -39,7 +39,7 @@
                             <TapGestureRecognizer Command="{Binding GoToChooseMoodPageCommand}"/>
                         </StackLayout.GestureRecognizers>
 
-                        <Image Source="mood_okey.png"
+                        <Image Source="mood_good.png"
                                HeightRequest="100"/>
 
                         <Label Text="Time to track your mood"
