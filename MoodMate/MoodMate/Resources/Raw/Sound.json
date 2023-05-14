@@ -1,5 +1,30 @@
 [
   {
+    "Name": "Bonfire",
+    "Source": "sound_bonfire.mp3",
+    "Description": "sound_bonfire.png"
+  },
+  {
+    "Name": "Rain",
+    "Source": "sound_rain.mp3",
+    "Description": "sound_rain.png"
+  },
+  {
+    "Name": "Wind",
+    "Source": "sound_wind.mp3",
+    "Description": "sound_wind.png"
+  },
+  {
+    "Name": "Cat",
+    "Source": "sound_cat.mp3",
+    "Description": "sound_cat.png"
+  },
+  {
+    "Name": "Birds",
+    "Source": "sound_birds.mp3",
+    "Description": "sound_birds.png"
+  },
+  {
     "Name": "click",
     "Source": "sound_click.mp3",
     "Description": "sound_click.png"

@@ -1,7 +1,32 @@
 ﻿[
   {
-    "Name": "ocean",
+    "Name": "Ocean",
     "Source": "music_ocean.mp3",
     "Description": "music_ocean.png"
+  },
+  {
+    "Name": "Cafe",
+    "Source": "music_cafe.mp3",
+    "Description": "music_cafe.png"
+  },
+  {
+    "Name": "Thunderstorm",
+    "Source": "music_thunderstorm.mp3",
+    "Description": "music_thunderstorm.png"
+  },
+  {
+    "Name": "Tropical",
+    "Source": "music_tropical.mp3",
+    "Description": "music_tropical.png"
+  },
+  {
+    "Name": "Water",
+    "Source": "music_water.mp3",
+    "Description": "music_water.png"
+  },
+  {
+    "Name": "Night forest",
+    "Source": "music_night_forest.mp3",
+    "Description": "music_night_forest.png"
   }
 ]
