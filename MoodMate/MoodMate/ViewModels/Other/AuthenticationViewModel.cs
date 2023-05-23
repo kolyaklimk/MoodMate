@@ -15,26 +15,42 @@ public partial class AuthenticationViewModel : ObservableObject
     [RelayCommand]
     async Task ClickButton()
     {
-        try
+        var config = new FirebaseAuthConfig
         {
-            var config = new FirebaseAuthConfig
-            {
-                ApiKey = "AIzaSyCt26JPyhXQM-XsLj0vNZN2tappF3Y17s4\r\n",
-                AuthDomain = "moodmate-d9422-default-rtdb.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[] { new EmailProvider() },
-            };
+            ApiKey = "AIzaSyCt26JPyhXQM-XsLj0vNZN2tappF3Y17s4",
+            AuthDomain = "moodmate-d9422.firebaseapp.com",
+            Providers = new FirebaseAuthProvider[] { 
+                new EmailProvider(),
+                new GoogleProvider().AddScopes("email") 
+            },
+        };
 
-            var client = new FirebaseAuthClient(config);
-            var userCredential = await client.SignInWithEmailAndPasswordAsync(Email, Password);
-            if (userCredential == null)
-            {
-                Debug.WriteLine("create");
-                userCredential = await client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            }
-            Debug.WriteLine("sing");
-        }
-        catch (Exception ex)
+        var client = new FirebaseAuthClient(config);
+        UserCredential userCredential;
+        string token;
+        if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
         {
+            try
+            {
+                userCredential = await client.SignInWithEmailAndPasswordAsync(Email, Password);
+                Debug.WriteLine("Sing");
+            }
+            catch
+            {
+                try
+                {
+                    userCredential = await client.CreateUserWithEmailAndPasswordAsync(Email, Password);
+                    Debug.WriteLine("Create");
+                }
+                catch
+                {
+                    Debug.WriteLine("Errur");
+                }
+            }
+        }
+        else
+        {
+            Debug.WriteLine("No Internet connection");
         }
     }
 }

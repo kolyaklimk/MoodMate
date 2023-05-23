@@ -7,11 +7,11 @@
     <Grid RowDefinitions="*,*,*,*,*">
         <Label Grid.Row="0"
                Text="Email"/>
-        <Label Grid.Row="1"
+        <Entry Grid.Row="1"
                Text="{Binding Email}"/>
         <Label Grid.Row="2"
                Text="Password"/>
-        <Label Grid.Row="3"               
+        <Entry Grid.Row="3"               
                Text="{Binding Password}"/>
         <Button Grid.Row="4"
                 Text="Sing On/Up"
