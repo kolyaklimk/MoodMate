@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using Microsoft.Extensions.Logging;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;

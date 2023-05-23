@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
@@ -28,7 +27,7 @@ public partial class ChooseMoodViewModel : ObservableObject
     [RelayCommand]
     void SelectedItem(FileService mood)
     {
-        if(SelectedMood == mood)
+        if (SelectedMood == mood)
         {
             SelectedMood = null;
         }

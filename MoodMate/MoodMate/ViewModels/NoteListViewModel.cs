@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
@@ -7,7 +6,6 @@ using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
-using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
 

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using Microsoft.Maui.Animations;
 using MoodMate.Components;
 using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;

@@ -1,6 +1,4 @@
-﻿using MoodMate.Pages.MoodNote;
-using MoodMate.Pages.Music;
-using MoodMate.Pages.SimpleNote;
+﻿using MoodMate.Pages.Music;
 
 namespace MoodMate;
 
