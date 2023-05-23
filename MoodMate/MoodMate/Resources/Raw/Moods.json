@@ -1,0 +1,62 @@
+﻿[
+  {
+    "Name": "Happy",
+    "Source": "mood_smile.png",
+    "Description": "Smiling from ear to ear"
+  },
+  {
+    "Name": "Love",
+    "Source": "mood_love.png",
+    "Description": "Wrapped in love"
+  },
+  {
+    "Name": "Cool",
+    "Source": "mood_cool.png",
+    "Description": "Relaxed and stylish"
+  },
+  {
+    "Name": "Sad",
+    "Source": "mood_sad.png",
+    "Description": "A pervasive sadness"
+  },
+  {
+    "Name": "Cry",
+    "Source": "mood_cry.png",
+    "Description": "In tears and sorrow"
+  },
+  {
+    "Name": "Heart",
+    "Source": "mood_heart.png",
+    "Description": "Full of love and passion"
+  },
+  {
+    "Name": "Laugh",
+    "Source": "mood_laugh.png",
+    "Description": "Laughing until you cry"
+  },
+  {
+    "Name": "Angry",
+    "Source": "mood_angry.png",
+    "Description": "Burning with rage"
+  },
+  {
+    "Name": "Inspired",
+    "Source": "mood_bookworm.png",
+    "Description": "Immersed in business"
+  },
+  {
+    "Name": "Sleep",
+    "Source": "mood_sleep.png",
+    "Description": "Plunged into a deep sleep"
+  },
+  {
+    "Name": "Tired",
+    "Source": "mood_tired.png",
+    "Description": "Tired and tired"
+  },
+  {
+    "Name": "Good",
+    "Source": "mood_good.png",
+    "Description": "Full of positivity"
+  }
+]

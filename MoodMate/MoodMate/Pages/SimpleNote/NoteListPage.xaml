@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:DataType="model:NoteListViewModel"
+             xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+             x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
+             BackgroundColor="#e2d9c5">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding UpdateSimpleNoteCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="*,75,60">
+
+        <RefreshView Command="{Binding UpdateSimpleNoteCommand}"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="#2C3963"
+                     Grid.Row="0"
+                     Grid.RowSpan="2"
+                     Margin="15,0,15,0">
+
+            <CollectionView ItemsSource="{Binding SimpleNotes}"
+                            VerticalScrollBarVisibility="Never">
+                
+                <CollectionView.EmptyView>
+                    
+                    <StackLayout Spacing="10"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
+                        </StackLayout.GestureRecognizers>
+
+                        <Image Source="icon_note2.png"
+                               HeightRequest="100"/>
+
+                        <Label Text="Write down your notes"
+                               FontSize="22" 
+                               TextColor="#66645E"
+                               HorizontalOptions="Center"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate x:DataType="entity:SimpleNote">
+
+                        <Border BackgroundColor="#fffbef" 
+                                StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
+                                {x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
+                                                      CommandParameter="{Binding}"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid Padding="10">
+
+                                <Label Text="{Binding Text}" 
+                                       LineBreakMode="CharacterWrap"
+                                       TextColor = "#66645E"
+                                       MaxLines="15"
+                                       FontSize="15"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Border BackgroundColor="#2C3963"
+                StrokeThickness="0"
+                Grid.Row="1"
+                WidthRequest="60"
+                HorizontalOptions="End"
+                Margin="0,0,15,15">
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
+            </Border.GestureRecognizers>
+            
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+
+            <Image Source="icon_plus.png"
+                   Grid.Row="1"
+                   Scale="0.7"/>
+        </Border>
+
+        <Border Grid.Row="2"
+                BackgroundColor="#2C3963"
+                StrokeThickness="0"
+                Margin="-1,0,-1,-1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15,15,0,0"/>
+            </Border.StrokeShape>
+
+            <Grid Grid.ColumnDefinitions="*,*,*">
+
+                <Border Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.5"
+                       Source="icon_mood.png">
+                    </Image>
+                </Border>
+
+                <Border Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
+                    </Border.GestureRecognizers>
+
+                    <Image Scale="0.5"
+                       Source="icon_music.png">
+                    </Image>
+                </Border>
+
+                <Image Source="icon_note_selected.png"
+                       Grid.Column="2"
+                       Scale="0.7"/>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

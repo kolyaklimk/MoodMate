@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"     
+             x:DataType="model:AnalysisMoodViewModel"
+             x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
+             xmlns:converter="clr-namespace:MoodMate.Converters"
+             xmlns:entity="clr-namespace:MoodMate.Templates"
+             BackgroundColor="#e2d9c5">
+    
+    <ContentPage.Resources>
+        <converter:ProgressBarConverter x:Key="ProgressBarConverter"/>
+        <converter:RandomColorConverter x:Key="RandomColorConverter"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                        Command="{Binding UpdateAnalyseCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="25,*"
+          Padding="15">
+
+        <Grid ColumnDefinitions="25,*,25">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackClickCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+
+            <Border Grid.Column="1"
+                    HorizontalOptions="Center"
+                StrokeThickness="0"
+                BackgroundColor="#936840"
+                Margin="0,-10,0,-10">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="*,Auto,*">
+                    <Image Source="icon_back.png" 
+                       Grid.Column="0"
+                       Scale="0.55"
+                       VerticalOptions="Center">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="#fffbef" />
+                        </Image.Behaviors>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PreviousMonthCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="{Binding SelectedDate, StringFormat='{}{0:MM.yyyy}'}" 
+                   FontFamily="OpenSansBold"
+                   FontSize="22"
+                   TextColor="#fffbef"
+                   Grid.Column="1"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+                    <Image Source="icon_back.png" 
+                       Grid.Column="2"
+                       Scale="0.55"
+                       Rotation="180">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="#fffbef" />
+                        </Image.Behaviors>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextMonthCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              RowDefinitions="20,80,50,*">
+            
+            <Label Text="{Binding Count}" 
+                   Grid.Row="1"
+                   FontFamily="OpenSansBold"
+                   FontSize="70"
+                   TextColor="#2F2F2C"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
+            
+            <Label Text="Total number"
+                   Grid.Row="2"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   FontSize="22"
+                   TextColor="#66645E"/>
+
+            <Border Grid.Row="3"
+                    Padding="5"
+                    BackgroundColor="#936840"
+                    StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <CollectionView ItemsSource="{Binding AnalysisMood}"
+                                VerticalScrollBarVisibility="Never">
+                    
+                    <CollectionView.EmptyView>
+                        <StackLayout Spacing="10"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center">
+
+                            <Image Source="icon_month.png"
+                                   HeightRequest="100"/>
+
+                            <Label Text="No notes this month"
+                                   FontSize="22" 
+                                   TextColor="#FCF6EB"
+                                   HorizontalOptions="Center"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        
+                        <DataTemplate x:DataType="entity:MyKeyValue">
+                            
+                            <Grid ColumnSpacing="10" 
+                                  Padding="5"
+                                  ColumnDefinitions="70,*">
+                                
+                                <Image Grid.Column="0" 
+                                       Source="{Binding Value1}"/>
+                                
+                                <Grid Grid.Column="1"
+                                      RowDefinitions="*,0.5*"
+                                      VerticalOptions="Center">
+
+                                    <Border StrokeThickness="0">
+
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="15"/>
+                                        </Border.StrokeShape>
+                                        
+                                        <ProgressBar Progress="{Binding Value3, Converter={StaticResource ProgressBarConverter}}"
+                                                     ScaleY="4"
+                                                     ProgressColor="{Binding Converter={StaticResource RandomColorConverter}}"
+                                                     BackgroundColor="#2F2F2C"/>                                        
+                                    </Border>
+
+                                    <Grid Grid.Row="1"
+                                          ColumnDefinitions="*,100">
+                                        
+                                        <Label Text="{Binding Key}"
+                                               HorizontalOptions="Start"
+                                               TextColor="#FCF6EB"
+                                               FontSize="16"/>
+                                        
+                                        <Label Grid.Column="1"
+                                               HorizontalOptions="End"
+                                               TextColor="#FCF6EB"
+                                               FontSize="16">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} / {1}%">
+                                                    <Binding Path="Value2"/>
+                                                    <Binding Path="Value3"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

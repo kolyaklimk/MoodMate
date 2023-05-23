@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"        
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:Class="MoodMate.Pages.MoodNote.ChooseMoodPage"
+             x:DataType="model:ChooseMoodViewModel"
+             xmlns:entity="clr-namespace:MoodMate.Components.Entities"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             BackgroundColor="#e2d9c5">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        Command="{Binding LoadMoodNoteCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid Grid.RowDefinitions="25,80,55,*,60"
+          Padding="15">
+
+        <Grid ColumnDefinitions="25,*">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+        </Grid>
+
+        <Label Grid.Row="1"
+               Text="How are you feeling?"
+               FontFamily="OpenSansBold"
+               FontSize="28"
+               TextColor="#2F2F2C"
+               VerticalOptions="End"
+               HorizontalOptions="Center"/>
+        
+        <DatePicker Grid.Row="2"
+                    FontSize="22" 
+                    TextColor="#66645E"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Center"
+                    Format="dd/MM/yyyy"
+                    MinimumDate="01/01/2023"
+                    MaximumDate="{x:Static system:DateTime.Today}"
+                    Date="{Binding DateTime}"/>
+
+        <CollectionView Grid.Row="3"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Moods}"
+                        SelectedItem="{Binding SelectedMood}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"                                           
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                
+                <DataTemplate x:DataType="entity:FileService">
+                    
+                    <Border BackgroundColor="#936840" 
+                            StrokeThickness="0">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding}"
+                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type model:ChooseMoodViewModel}}, Path=SelectedItemCommand}"/>
+                        </Border.GestureRecognizers>
+                        
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+
+                        <Grid Grid.ColumnDefinitions="70,*"
+                              Padding="10"
+                              ColumnSpacing="10"
+                              MaximumHeightRequest="320">
+
+                            <Image  Source="{Binding Source}"
+                                    Grid.Column="0"/>
+
+                            <Grid Grid.RowDefinitions="40,30"
+                                  Grid.Column="1">
+                                
+                                <Label Text="{Binding Name}" 
+                                       Grid.Row="0"
+                                       TextColor = "#fffbef"
+                                       FontSize="28"
+                                       FontFamily="OpenSansBold"/>
+                                
+                                <Label Text="{Binding Description}"
+                                       Grid.Row="1"
+                                       TextColor = "#FCF6EB" 
+                                       FontSize="16"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Select"
+                Grid.Row="4"
+                CornerRadius="15"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
+                BackgroundColor="#fffbef"
+                Command="{Binding GoToCreateOrEditPageCommand}"/>
+    </Grid>
+</ContentPage>

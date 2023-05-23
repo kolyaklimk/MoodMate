@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels"
+             x:DataType="model:CreateOrEditMoodViewModel"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Class="MoodMate.Pages.MoodNote.CreateOrEditMoodPage"
+             BackgroundColor="#e2d9c5" >
+
+    <Grid RowDefinitions="25,*" 
+          Padding="15">
+
+        <Grid ColumnDefinitions="25,*,25">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Back_ClickedCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+            
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateOrEditCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_accept.png"
+                       Scale="0.5">
+                </Image>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              RowDefinitions="55,150,65,*"
+              RowSpacing="10">
+
+            <DatePicker Grid.Row="0" 
+                        HorizontalOptions="Center"
+                        VerticalOptions="End"
+                        FontSize="22"
+                        TextColor="#66645E"
+                        Date="{Binding SelectedMood.Date}"
+                        Format="dd/MM/yyyy"
+                        MinimumDate="01/01/2023"
+                        MaximumDate="{x:Static system:DateTime.Today}"/>
+
+            <Image Grid.Row="1"
+                   Source="{Binding SelectedMood.Mood.Source}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChooseImageCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Border Grid.Row="2"
+                    StrokeThickness="0"
+                    BackgroundColor="#936840"
+                    Padding="5">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                
+                <Entry
+                    Grid.Row="2"
+                    MaxLength="14"
+                    FontSize="28"
+                    FontFamily="OpenSansBold"                    
+                    Placeholder="Enter your mood here"
+                    TextColor="#fffbef"
+                    PlaceholderColor="#D1CCC2"
+                    Text="{Binding SelectedMood.Mood.Name}"/>
+            </Border>
+            
+            <Border Grid.Row="3"
+                    StrokeThickness="0"
+                    BackgroundColor="#936840"
+                    Padding="5">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <Editor FontSize="18"
+                        MaxLength="10000"
+                        Placeholder="Describe your mood here"
+                        TextColor="#FCF6EB"
+                        PlaceholderColor="#D1CCC2"
+                        Text="{Binding SelectedMood.Text}"/>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
