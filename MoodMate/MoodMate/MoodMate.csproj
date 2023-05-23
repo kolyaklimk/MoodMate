@@ -52,6 +52,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Reference Include="SerializationTools">
+	    <HintPath>dll\SerializationTools.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Pages\MoodNote\AnalysisMoodPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
