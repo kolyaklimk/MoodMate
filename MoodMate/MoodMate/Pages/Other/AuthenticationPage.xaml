@@ -3,18 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodMate.Pages.Other.AuthenticationPage"
              xmlns:model="clr-namespace:MoodMate.ViewModels.Other"
-             x:DataType="model:AuthenticationViewModel">
-    <Grid RowDefinitions="*,*,*,*,*">
-        <Label Grid.Row="0"
-               Text="Email"/>
-        <Entry Grid.Row="1"
-               Text="{Binding Email}"/>
-        <Label Grid.Row="2"
-               Text="Password"/>
-        <Entry Grid.Row="3"               
-               Text="{Binding Password}"/>
-        <Button Grid.Row="4"
-                Text="Sing On/Up"
-                Command="{Binding ClickButtonCommand}"/>
+             x:DataType="model:AuthenticationViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="#e2d9c5">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#e2d9c5" 
+                                   StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
+    <Grid Padding="15">
+
+        <ActivityIndicator IsRunning="{Binding IsRefreshing}"
+                           Color="#936840"
+                           VerticalOptions="Start"
+                           HeightRequest="60"/>
+        
+        <Grid RowDefinitions="60,60,60,60"
+              RowSpacing="15"
+              VerticalOptions="Center">
+
+            <Border Grid.Row="0"
+                    StrokeThickness="0"
+                    BackgroundColor="#936840"
+                    Padding="5">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <Entry FontSize="21"
+                       FontFamily="OpenSansBold"                    
+                       Placeholder="Email"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#fffbef"
+                       PlaceholderColor="#D1CCC2"
+                       Text="{Binding Email}"/>
+            </Border>
+
+            <Border Grid.Row="1"
+                    StrokeThickness="0"
+                    BackgroundColor="#936840"
+                    Padding="5">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <Entry FontSize="21"
+                       FontFamily="OpenSansBold"      
+                       TextColor="#fffbef"         
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Password"
+                       PlaceholderColor="#D1CCC2"
+                       IsPassword="True"
+                       Text="{Binding Password}"/>
+            </Border>
+
+            <Button Grid.Row="2"
+                    Text="Sing In/Up"
+                    CornerRadius="15"
+                    BackgroundColor="#fffbef"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="28"
+                    Command="{Binding ClickButtonCommand}"/>
+        </Grid>
+
+        <Button Text="Offline"
+                    CornerRadius="15"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    BackgroundColor="#fffbef"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="28"
+                    Command="{Binding CancelCommand}"/>
     </Grid>
 </ContentPage>
