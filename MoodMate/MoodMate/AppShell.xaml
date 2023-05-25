@@ -9,7 +9,7 @@
        Shell.FlyoutBehavior="Disabled">
 
     <ShellContent ContentTemplate="{DataTemplate other:AuthenticationPage}"
-                  Route="MoodListPage"/>
+                  Route="AuthenticationPage"/>
     
     <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"
                   Route="MoodListPage"/>
