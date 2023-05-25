@@ -14,7 +14,6 @@ public class User: IUser
     public FirebaseAuthClient Client { get; set; }
     public MimeMessage EmailMessage { get; set; }
     public IToast[] Alerts { get; set; }
-    public UserCredential UserCredential { get; set; }
 
     public User()
     {
@@ -41,11 +40,11 @@ public class User: IUser
         {
             try
             {
-                UserCredential = await Client.SignInWithEmailAndPasswordAsync(email, password);
+                await Client.SignInWithEmailAndPasswordAsync(email, password);
 
-                if(!UserCredential.User.Info.IsEmailVerified)
+                if(!Client.User.Info.IsEmailVerified)
                 {
-                    UserCredential = null;
+                    Client.SignOut();
                     await Alerts[0].Show();
                 }
                 else
@@ -72,13 +71,14 @@ public class User: IUser
         {
             try
             {
-                UserCredential = await Client.CreateUserWithEmailAndPasswordAsync(email, password);
+                await Client.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 try
                 {
                     var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(email);
                     await Task.Run(() => SendEmail(email, link));
 
+                    Client.SignOut();
                     await Alerts[0].Show();
 
                     return true;

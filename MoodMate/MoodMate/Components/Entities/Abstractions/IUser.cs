@@ -11,7 +11,6 @@ public interface IUser
     FirebaseAuthClient Client { get; set; }
     MimeMessage EmailMessage { get; set; }
     IToast[] Alerts { get; set; }
-    UserCredential UserCredential { get; set; }
 
     Task<bool> SingIn(string email, string password);
     Task<bool> SingUp(string email, string password);
