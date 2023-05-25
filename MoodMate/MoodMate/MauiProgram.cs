@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
@@ -59,5 +60,6 @@ public static class MauiProgram
         services.AddSingleton<StartRotateMessage>();
         services.AddSingleton<UpdateMoodNoteMessage>();
         services.AddSingleton<UpdateSimpleNoteMessage>();
+        services.AddSingleton<IUser, User>();
     }
 }
