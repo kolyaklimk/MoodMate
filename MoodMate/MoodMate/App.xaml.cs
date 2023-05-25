@@ -21,13 +21,13 @@ public partial class App : Application
     {
         notes[0].note.LoadNote();
         notes[1].note.LoadNote();
-        fileServices[0].LoadService(Constants.PathMoods);
-        fileServices[1].LoadService(Constants.PathMusic);
-        fileServices[2].LoadService(Constants.PathSound);
+        await fileServices[0].LoadService(Constants.PathMoods);
+        await fileServices[1].LoadService(Constants.PathMusic);
+        await fileServices[2].LoadService(Constants.PathSound);
         sbytes[0] = await Task.Run(() => Enumerable.Range(0, 24).ToList());
         sbytes[1] = await Task.Run(() => Enumerable.Range(0, 60).ToList());
 
-        Task.Run(() =>
+        await Task.Run(() =>
         {
             toasts[0] = Toast.Make("Please choose mood!", ToastDuration.Short, 16);
             toasts[1] = Toast.Make("Please enter your mood!", ToastDuration.Short, 16);
