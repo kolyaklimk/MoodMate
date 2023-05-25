@@ -18,11 +18,23 @@ public partial class AuthenticationViewModel : ObservableObject
     }
 
     [RelayCommand]
+    async Task Load()
+    {
+        try
+        {
+            var emailAndPassword = await User.LoadEmailAndPasswordLocal();
+            Email = emailAndPassword.Email;
+            Password = emailAndPassword.Password;
+        }
+        catch { }
+    }
+
+    [RelayCommand]
     async Task Cancel()
     {
         if (!IsRefreshing)
         {
-            if(User.Client.User!=null)
+            if (User.Client.User != null)
                 User.Client.SignOut();
             await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         }
@@ -36,7 +48,10 @@ public partial class AuthenticationViewModel : ObservableObject
             IsRefreshing = true;
 
             if (await User.SingIn(Email, Password))
+            {
+                await User.SaveEmailAndPasswordLocal(Email, Password);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            }
 
             IsRefreshing = false;
         }
