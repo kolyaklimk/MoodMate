@@ -5,15 +5,16 @@ using Firebase.Auth.Providers;
 using FirebaseAdmin.Auth;
 using MailKit.Net.Smtp;
 using MimeKit;
+using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Entities;
 
-public class User
+public class User: IUser
 {
-    public FirebaseAuthClient Client;
-    public MimeMessage EmailMessage;
-    public IToast[] Alerts;
-    public UserCredential UserCredential;
+    public FirebaseAuthClient Client { get; set; }
+    public MimeMessage EmailMessage { get; set; }
+    public IToast[] Alerts { get; set; }
+    public UserCredential UserCredential { get; set; }
 
     public User()
     {
