@@ -44,7 +44,6 @@ public class User: IUser
 
                 if(!Client.User.Info.IsEmailVerified)
                 {
-                    Client.SignOut();
                     await Alerts[0].Show();
                 }
                 else
@@ -65,7 +64,7 @@ public class User: IUser
         return false;
     }
 
-    public async Task<bool> SingUp(string email, string password)
+    public async Task SingUp(string email, string password)
     {
         if(Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
         {
@@ -78,10 +77,7 @@ public class User: IUser
                     var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(email);
                     await Task.Run(() => SendEmail(email, link));
 
-                    Client.SignOut();
                     await Alerts[0].Show();
-
-                    return true;
                 }
                 catch
                 {
@@ -91,15 +87,12 @@ public class User: IUser
             catch
             {
                 await Alerts[1].Show();
-                return false;
             }
         }
         else
         {
             await Alerts[2].Show();
         }
-
-        return true;
     }
 
     public void SendEmail(string email, string link)

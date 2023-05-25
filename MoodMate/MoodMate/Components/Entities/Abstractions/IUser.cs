@@ -13,6 +13,6 @@ public interface IUser
     IToast[] Alerts { get; set; }
 
     Task<bool> SingIn(string email, string password);
-    Task<bool> SingUp(string email, string password);
+    Task SingUp(string email, string password);
     void SendEmail(string email, string link);
 }
