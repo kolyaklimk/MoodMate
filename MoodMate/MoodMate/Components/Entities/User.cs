@@ -6,6 +6,8 @@ using FirebaseAdmin.Auth;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MoodMate.Components.Entities.Abstractions;
+using MoodMate.Templates;
+using SerializationTools;
 
 namespace MoodMate.Components.Entities;
 
@@ -123,5 +125,21 @@ public class User : IUser
                 smtpClient.Disconnect(true);
             }
         });
+    }
+
+    public async Task SaveEmailAndPasswordLocal(string email, string password)
+    {
+        string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, Constants.PathUser);
+        using (FileStream fs = new FileStream(targetFile, FileMode.Create))
+        {
+            await DataSerializer.JsonSerializeAsync(fs, new EmailAndPassword(email, password));
+        }
+    }
+
+    public async Task<EmailAndPassword> LoadEmailAndPasswordLocal()
+    {
+        string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, Constants.PathUser);
+        using (StreamReader reader = new StreamReader(targetFile))
+            return await DataSerializer.JsonDeserializeAsync<EmailAndPassword>(reader.BaseStream);
     }
 }
