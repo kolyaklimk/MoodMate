@@ -10,14 +10,14 @@ namespace MoodMate.Components.Entities;
 
 public class User
 {
-    public FirebaseAuthClient client;
+    public FirebaseAuthClient Client;
     public MimeMessage EmailMessage;
     public IToast[] Alerts;
     public UserCredential UserCredential;
 
     public User()
     {
-        client = new FirebaseAuthClient(new FirebaseAuthConfig()
+        Client = new FirebaseAuthClient(new FirebaseAuthConfig()
         {
             ApiKey = PrivateConstants.ApiKey,
             AuthDomain = PrivateConstants.AuthDomain,
@@ -40,7 +40,7 @@ public class User
         {
             try
             {
-                UserCredential = await client.SignInWithEmailAndPasswordAsync(email, password);
+                UserCredential = await Client.SignInWithEmailAndPasswordAsync(email, password);
 
                 if(!UserCredential.User.Info.IsEmailVerified)
                 {
@@ -71,7 +71,7 @@ public class User
         {
             try
             {
-                UserCredential = await client.CreateUserWithEmailAndPasswordAsync(email, password);
+                UserCredential = await Client.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 try
                 {
