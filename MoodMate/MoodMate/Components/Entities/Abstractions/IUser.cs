@@ -6,7 +6,7 @@ using MimeKit;
 
 namespace MoodMate.Components.Entities.Abstractions;
 
-internal interface IUser
+public interface IUser
 {
     FirebaseAuthClient Client { get; set; }
     MimeMessage EmailMessage { get; set; }
