@@ -5,7 +5,7 @@ using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels.Other;
 
-public partial class AuthenticationViewModel: ObservableObject
+public partial class AuthenticationViewModel : ObservableObject
 {
     private readonly IUser User;
 
@@ -20,25 +20,23 @@ public partial class AuthenticationViewModel: ObservableObject
     [RelayCommand]
     async Task Cancel()
     {
-        if(!IsRefreshing)
+        if (!IsRefreshing)
+        {
+            if(User.Client.User!=null)
+                User.Client.SignOut();
             await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+        }
     }
 
     [RelayCommand]
     async Task SingIn()
     {
-        if(!IsRefreshing)
+        if (!IsRefreshing)
         {
             IsRefreshing = true;
 
-            if(await User.SingIn(Email, Password) == true)
-            {
+            if (await User.SingIn(Email, Password))
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
-            }
-            else
-            {
-                Password = null;
-            }
 
             IsRefreshing = false;
         }
@@ -47,12 +45,11 @@ public partial class AuthenticationViewModel: ObservableObject
     [RelayCommand]
     async Task SingUp()
     {
-        if(!IsRefreshing)
+        if (!IsRefreshing)
         {
             IsRefreshing = true;
 
-            if(await User.SingUp(Email, Password) == false)
-                Password = null;
+            await User.SingUp(Email, Password);
 
             IsRefreshing = false;
         }
