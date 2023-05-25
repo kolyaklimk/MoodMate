@@ -20,7 +20,7 @@
                            HeightRequest="60"/>
         
         <Grid RowDefinitions="60,60,60,60"
-              RowSpacing="15"
+              RowSpacing="10"
               VerticalOptions="Center">
 
             <Border Grid.Row="0"
@@ -33,6 +33,7 @@
                 </Border.StrokeShape>
 
                 <Entry FontSize="21"
+                       IsReadOnly="{Binding IsRefreshing}"
                        FontFamily="OpenSansBold"                    
                        Placeholder="Email"
                        HorizontalTextAlignment="Center"
@@ -51,6 +52,7 @@
                 </Border.StrokeShape>
 
                 <Entry FontSize="21"
+                       IsReadOnly="{Binding IsRefreshing}"
                        FontFamily="OpenSansBold"      
                        TextColor="#fffbef"         
                        HorizontalTextAlignment="Center"
@@ -60,24 +62,38 @@
                        Text="{Binding Password}"/>
             </Border>
 
-            <Button Grid.Row="2"
-                    Text="Sing In/Up"
-                    CornerRadius="15"
-                    BackgroundColor="#fffbef"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
-                    FontSize="28"
-                    Command="{Binding ClickButtonCommand}"/>
+            <Grid ColumnDefinitions="*,*"
+                  Grid.Row="2"
+                  ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+                        Text="Sing Up"
+                        CornerRadius="15"
+                        BackgroundColor="#fffbef"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="28"
+                        Command="{Binding SingUpCommand}"/>
+
+                <Button Grid.Column="1"
+                        Text="Sing In"
+                        CornerRadius="15"
+                        BackgroundColor="#fffbef"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="28"
+                        Command="{Binding SingInCommand}"/>
+            </Grid>
         </Grid>
 
         <Button Text="Offline"
-                    CornerRadius="15"
-                    HeightRequest="60"
-                    VerticalOptions="End"
-                    BackgroundColor="#fffbef"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
-                    FontSize="28"
-                    Command="{Binding CancelCommand}"/>
+                CornerRadius="15"
+                HeightRequest="60"
+                VerticalOptions="End"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
+                Command="{Binding CancelCommand}"/>
     </Grid>
 </ContentPage>
