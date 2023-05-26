@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Google.Cloud.Firestore;
 using MoodMate.Components.Data;
 
 namespace MoodMate.Components.Entities.Abstractions;
@@ -6,6 +7,7 @@ namespace MoodMate.Components.Entities.Abstractions;
 public abstract partial class ANote<T> : ObservableObject
 {
     protected DataControl<T> NoteControl { get; set; } = new();
+    protected FirestoreDb Db { get; set; }
     [ObservableProperty] public uint id;
     [ObservableProperty] public DateTime date;
     [ObservableProperty] public string text;
@@ -14,8 +16,10 @@ public abstract partial class ANote<T> : ObservableObject
         return NoteControl.Data.ToList();
     }
     public abstract List<T> GetDataSortByDate();
-    public abstract Task LoadNote();
-    public abstract Task AddNote(T obj);
-    public abstract Task ChangeNote(T obj, uint id);
-    public abstract Task DeleteNote(uint id);
+    public abstract Task LoadNoteLocal();
+    public abstract Task LoadNoteLocalToCloud(string uid);
+    public abstract Task LoadNoteCloud(string uid);
+    public abstract Task AddNote(T obj, string uid = null);
+    public abstract Task ChangeNote(T obj, string uid = null);
+    public abstract Task DeleteNote(T obj, string uid = null);
 }
