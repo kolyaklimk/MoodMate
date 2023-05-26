@@ -22,38 +22,27 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
     public override async Task AddNote(MoodNote obj)
     {
+        if (NoteControl.Data.Count > 0)
+            obj.Id = NoteControl.Data.Last().Id + 1;
         NoteControl.Add(obj);
-        await NoteControl.SortByDate(Constants.SortByData);
-        UpdateAllId();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
-    public override async Task ChangeNote(MoodNote obj, int id)
+    public override async Task ChangeNote(MoodNote obj, uint id)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
         {
             NoteControl.Change(index, obj);
-            await NoteControl.SortByDate(Constants.SortByData);
-            UpdateAllId();
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
         }
     }
-    public override async Task DeleteNote(int id)
+    public override async Task DeleteNote(uint id)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
         {
             NoteControl.Delete(index);
-            await NoteControl.SortByDate(Constants.SortByData);
-            UpdateAllId();
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
-        }
-    }
-    public override void UpdateAllId()
-    {
-        foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
-        {
-            item.value.Id = item.index;
         }
     }
 
@@ -71,7 +60,8 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
     public List<MyKeyValue> GetAnalysedData()
     {
-        return MoodAnalysis.AnalysedData.Select(kvp => new MyKeyValue { 
+        return MoodAnalysis.AnalysedData.Select(kvp => new MyKeyValue
+        {
             Key = kvp.Key,
             Value1 = kvp.Value.Item1,
             Value2 = kvp.Value.Item2,

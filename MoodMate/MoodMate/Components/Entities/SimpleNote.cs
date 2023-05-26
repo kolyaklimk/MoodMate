@@ -16,38 +16,27 @@ public class SimpleNote : ANote<SimpleNote>
     }
     public override async Task AddNote(SimpleNote obj)
     {
+        if (NoteControl.Data.Count > 0)
+            obj.Id = NoteControl.Data.Last().Id + 1;
         NoteControl.Add(obj);
-        await NoteControl.SortByDate(Constants.SortByData);
-        UpdateAllId();
         await NoteControl.UpdateFile(Constants.PathNotes);
     }
-    public override async Task ChangeNote(SimpleNote obj, int id)
+    public override async Task ChangeNote(SimpleNote obj, uint id)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
         {
             NoteControl.Change(index, obj);
-            await NoteControl.SortByDate(Constants.SortByData);
-            UpdateAllId();
             await NoteControl.UpdateFile(Constants.PathNotes);
         }
     }
-    public override async Task DeleteNote(int id)
+    public override async Task DeleteNote(uint id)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
         {
             NoteControl.Delete(index);
-            await NoteControl.SortByDate(Constants.SortByData);
-            UpdateAllId();
             await NoteControl.UpdateFile(Constants.PathNotes);
-        }
-    }
-    public override void UpdateAllId()
-    {
-        foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
-        {
-            item.value.Id = item.index;
         }
     }
 }
