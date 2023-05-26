@@ -14,7 +14,7 @@ public class SimpleNote : ANote<SimpleNote>
     {
         return NoteControl.Data.OrderByDescending(x => x.Date).ToList();
     }
-    public override async Task LoadNote()
+    public override async Task LoadNoteLocal()
     {
         await NoteControl.Load(Constants.PathNotes, false);
     }
