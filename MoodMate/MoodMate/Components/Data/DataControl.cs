@@ -1,5 +1,4 @@
 ﻿using MoodMate.Components.Data.Abstractions;
-using MoodMate.Components.Data.Comparer;
 using SerializationTools;
 
 namespace MoodMate.Components.Data;
