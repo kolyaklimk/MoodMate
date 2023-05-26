@@ -4,7 +4,7 @@ using SerializationTools;
 
 namespace MoodMate.Components.Data;
 
-public class DataControl<T>: DataLoading<T>, IDataControl<T>
+public class DataControl<T> : DataLoading<T>, IDataControl<T>
 {
     public void Add(T item)
     {
@@ -18,7 +18,7 @@ public class DataControl<T>: DataLoading<T>, IDataControl<T>
     {
         Data.RemoveAt(index);
     }
-    public async Task SortByDate(string sortColumn)
+    public async Task GetListSortByDate(string sortColumn)
     {
         await Task.Run(() => Data.Sort(new GenericComparer<T>(sortColumn)));
     }
@@ -27,13 +27,11 @@ public class DataControl<T>: DataLoading<T>, IDataControl<T>
         try
         {
             string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, path);
-            using(FileStream fs = new FileStream(targetFile, FileMode.Create))
+            using (FileStream fs = new FileStream(targetFile, FileMode.Create))
             {
                 await DataSerializer.JsonSerializeAsync(fs, Data);
             }
         }
-        catch
-        {
-        }
+        catch { }
     }
 }
