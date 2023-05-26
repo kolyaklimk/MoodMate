@@ -16,6 +16,10 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         Mood.Source = sourse;
         Text = text;
     }
+    public override List<MoodNote> GetDataSortByDate()
+    {
+        return NoteControl.Data.OrderByDescending(x => x.Date).ToList();
+    }
     public override async Task LoadNote()
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);

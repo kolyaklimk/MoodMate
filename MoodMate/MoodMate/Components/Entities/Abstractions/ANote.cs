@@ -13,6 +13,7 @@ public abstract partial class ANote<T> : ObservableObject
     {
         return NoteControl.Data.ToList();
     }
+    public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNote();
     public abstract Task AddNote(T obj);
     public abstract Task ChangeNote(T obj, uint id);

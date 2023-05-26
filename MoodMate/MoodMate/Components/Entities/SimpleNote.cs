@@ -10,6 +10,10 @@ public class SimpleNote : ANote<SimpleNote>
         Date = date;
         Text = text;
     }
+    public override List<SimpleNote> GetDataSortByDate()
+    {
+        return NoteControl.Data.OrderByDescending(x => x.Date).ToList();
+    }
     public override async Task LoadNote()
     {
         await NoteControl.Load(Constants.PathNotes, false);
