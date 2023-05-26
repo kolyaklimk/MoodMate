@@ -66,7 +66,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     {
         await Task.Run(() =>
         {
-            var moods = MoodNote.note.GetData();
+            var moods = MoodNote.note.GetDataSortByDate();
 
             MoodNotes.Clear();
             foreach (var mood in moods)

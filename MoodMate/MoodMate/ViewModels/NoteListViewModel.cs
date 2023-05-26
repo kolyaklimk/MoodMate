@@ -62,7 +62,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     {
         await Task.Run(() =>
         {
-            var moods = SimpleNote.note.GetData();
+            var moods = SimpleNote.note.GetDataSortByDate();
 
             SimpleNotes.Clear();
             foreach (var mood in moods)
