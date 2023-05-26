@@ -36,7 +36,7 @@
                     <RoundRectangle CornerRadius="15"/>
                 </Border.StrokeShape>
 
-                <Entry FontSize="21"
+                <Entry FontSize="22"
                        IsReadOnly="{Binding IsRefreshing}"
                        FontFamily="OpenSansBold"                    
                        Placeholder="Email"
@@ -55,7 +55,7 @@
                     <RoundRectangle CornerRadius="15"/>
                 </Border.StrokeShape>
 
-                <Entry FontSize="21"
+                <Entry FontSize="22"
                        IsReadOnly="{Binding IsRefreshing}"
                        FontFamily="OpenSansBold"      
                        TextColor="#fffbef"         
