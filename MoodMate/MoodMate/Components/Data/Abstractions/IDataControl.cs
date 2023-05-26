@@ -5,6 +5,5 @@ internal interface IDataControl<T>
     void Delete(int index);
     void Add(T item);
     void Change(int index, T item);
-    Task GetListSortByDate(string sortColumn);
     Task UpdateFile(string path);
 }

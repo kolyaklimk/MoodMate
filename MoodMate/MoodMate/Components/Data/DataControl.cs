@@ -18,10 +18,6 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
     {
         Data.RemoveAt(index);
     }
-    public async Task GetListSortByDate(string sortColumn)
-    {
-        await Task.Run(() => Data.Sort(new GenericComparer<T>(sortColumn)));
-    }
     public async Task UpdateFile(string path)
     {
         try
