@@ -15,11 +15,15 @@ public abstract partial class ANote<T> : ObservableObject
     {
         return NoteControl.Data.ToList();
     }
+    public void CreateDb(string projectId)
+    {
+        Db = FirestoreDb.Create(projectId);
+    }
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
-    public abstract Task LoadNoteCloudAndSaveLocal(string uid);
-    public abstract Task LoadNoteCloud(string uid);
-    public abstract Task AddNote(T obj, string uid = null);
-    public abstract Task ChangeNote(T obj, string uid = null);
-    public abstract Task DeleteNote(T obj, string uid = null);
+    public abstract Task LoadNoteCloudAndSaveLocal(Firebase.Auth.User user);
+    public abstract Task LoadNoteCloud(Firebase.Auth.User user);
+    public abstract Task AddNote(T obj, Firebase.Auth.User user = null);
+    public abstract Task ChangeNote(T obj, Firebase.Auth.User user = null);
+    public abstract Task DeleteNote(T obj, Firebase.Auth.User user = null);
 }
