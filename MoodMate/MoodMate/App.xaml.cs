@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using FirebaseAdmin.Messaging;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using MoodMate.Components;
@@ -33,15 +32,15 @@ public partial class App : Application
             toasts[3] = Toast.Make("Please choose a sound or music!", ToastDuration.Short, 16);
         });
 
-        var stream = await FileSystem.OpenAppPackageFileAsync("admin.json");
-        var jsonContent = new StreamReader(stream).ReadToEnd();
+        var localPath = Path.Combine(FileSystem.CacheDirectory, "admin.json");
+        using var json = await FileSystem.OpenAppPackageFileAsync("admin.json");
+        using (FileStream dest = File.Create(localPath))
+            await json.CopyToAsync(dest);
 
-        if (FirebaseMessaging.DefaultInstance == null)
+        FirebaseApp.Create(new AppOptions()
         {
-            FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromJson(jsonContent)
-            });
-        }
+            Credential = GoogleCredential.FromFile(localPath)
+        });
+        Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", localPath);
     }
 }
