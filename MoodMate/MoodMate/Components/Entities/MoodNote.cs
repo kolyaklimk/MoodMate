@@ -46,7 +46,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         var snapshot = await Db.Collection("Users").Document(uid).Collection("MoodNote").GetSnapshotAsync();
 
-        NoteControl.Data.Append(snapshot.Documents.Select(doc =>
+        NoteControl.Data.AddRange(snapshot.Documents.Select(doc =>
         {
             return new MoodNote
             {
