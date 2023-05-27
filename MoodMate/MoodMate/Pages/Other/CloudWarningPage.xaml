@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"          
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MoodMate.Pages.Other.CloudWarningPage"
+               Color="Transparent"                
+               VerticalOptions="Center"
+               CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <Border BackgroundColor="#e2d9c5" 
+            StrokeThickness="0"
+            WidthRequest="300"
+            Padding="15">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="15"/>
+        </Border.StrokeShape>
+
+        <Grid RowDefinitions="100,10,60">
+
+            <Grid Grid.Row="0"
+                  RowDefinitions="20.*">
+
+                <Label Grid.Row="0"
+                       FontSize="22" 
+                       FontFamily="OpenSansBold"
+                       TextColor="#2F2F2C"
+                       Text="Warning!"
+                       HorizontalOptions="Center"/>
+                
+                <Label Grid.Row="0"
+                       FontSize="22" 
+                       TextColor="#66645E"
+                       Text="Unsynchronized data detected"/>                
+            </Grid>
+        
+            <Grid Grid.ColumnSpan="5"
+                  Grid.Row="2"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+                        Text="Go offline"
+                        Clicked="Offline_Clicked"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="22"
+                        BackgroundColor="#fffbef"/>
+
+                <Button Grid.Column="1"
+                        Text="Synchronize"
+                        Clicked="Synchronize_Clicked"
+                        TextColor="#2F2F2C"
+                        FontFamily="OpenSansBold"
+                        FontSize="22"
+                        BackgroundColor="#fffbef"/>
+
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>
