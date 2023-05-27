@@ -29,34 +29,56 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
-    public override async Task LoadNoteLocalToCloud(string uid)
+    public override async Task LoadNoteCloudAndSaveLocal(string uid)
     {
-        var lastId = NoteControl.Data.Last().Id;
+        var snapshot = await Db.Collection("Users").Document(uid).Collection("MoodNote").GetSnapshotAsync();
+        var cloudData = snapshot.Documents.Select(doc =>
+        {
+            return new MoodNote
+            {
+                Id = doc.GetValue<uint>("Id"),
+                Date = doc.GetValue<DateTime>("Date"),
+                Text = doc.GetValue<string>("Text"),
+                Mood = new()
+                {
+                    Name = doc.GetValue<string>("Name"),
+                    Source = doc.GetValue<string>("Source"),
+                }
+            };
+        }).ToList();
+
+        var lastId = cloudData.Last().Id;
 
         foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
         {
             item.value.Id = (uint)item.index + lastId;
-            await Db.Collection("Users").Document(uid).Collection("MoodNote").Document(item.value.Id.ToString()).SetAsync(item);
+            await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                Document(item.value.Id.ToString()).SetAsync(item);
         }
+
+        cloudData.AddRange(NoteControl.Data);
 
         NoteControl.Data.Clear();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
+
+        NoteControl.Data = cloudData;
     }
     public override async Task LoadNoteCloud(string uid)
     {
+        NoteControl.Data.Clear();
         var snapshot = await Db.Collection("Users").Document(uid).Collection("MoodNote").GetSnapshotAsync();
 
         NoteControl.Data.AddRange(snapshot.Documents.Select(doc =>
         {
             return new MoodNote
             {
-                Id = doc.GetValue<uint>("id"),
-                Date = doc.GetValue<DateTime>("date"),
-                Text = doc.GetValue<string>("text"),
+                Id = doc.GetValue<uint>("Id"),
+                Date = doc.GetValue<DateTime>("Date"),
+                Text = doc.GetValue<string>("Text"),
                 Mood = new()
                 {
-                    Name = doc.GetValue<string>("name"),
-                    Source = doc.GetValue<string>("source"),
+                    Name = doc.GetValue<string>("Name"),
+                    Source = doc.GetValue<string>("Source"),
                 }
             };
         }).ToList());
@@ -68,7 +90,16 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 
         if (uid != null)
         {
-            await Db.Collection("Users").Document(uid).Collection("MoodNote").Document(obj.Id.ToString()).SetAsync(obj);
+            await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                Document(obj.Id.ToString()).SetAsync(new Dictionary<string, object>
+                {
+                    { "Id", obj.Id },
+                    { "Date", obj.Date },
+                    { "Text", obj.Text },
+                    { "Name", obj.Mood.Name },
+                    { "Source", obj.Mood.Source }
+                });
+            NoteControl.Add(obj);
         }
         else
         {
@@ -83,7 +114,15 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         {
             if (uid != null)
             {
-                await Db.Collection("Users").Document(uid).Collection("MoodNote").Document(obj.Id.ToString()).SetAsync(obj);
+                await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                    Document(obj.Id.ToString()).SetAsync(new Dictionary<string, object>
+                    {
+                        { "Date", obj.Date },
+                        { "Text", obj.Text },
+                        { "Name", obj.Mood.Name },
+                        { "Source", obj.Mood.Source }
+                    });
+                NoteControl.Change(index, obj);
             }
             else
             {
@@ -99,7 +138,9 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         {
             if (uid != null)
             {
-                await Db.Collection("Users").Document(uid).Collection("MoodNote").Document(obj.Id.ToString()).DeleteAsync();
+                await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                    Document(obj.Id.ToString()).DeleteAsync();
+                NoteControl.Delete(index);
             }
             else
             {
