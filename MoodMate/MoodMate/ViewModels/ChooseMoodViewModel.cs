@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
-using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using System.Collections.ObjectModel;
 
@@ -10,12 +9,10 @@ namespace MoodMate.ViewModels;
 
 public partial class ChooseMoodViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
     private readonly FileService Mood;
     private IToast Alert;
-    public ChooseMoodViewModel(Note[] note, FileService[] service, IToast[] toasts)
+    public ChooseMoodViewModel(FileService[] service, IToast[] toasts)
     {
-        MoodNote = note[0];
         Mood = service[0];
         Alert = toasts[0];
     }
