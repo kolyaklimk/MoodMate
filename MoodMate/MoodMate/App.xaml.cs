@@ -19,8 +19,6 @@ public partial class App : Application
     }
     private async void LoadeService(Note[] notes, FileService[] fileServices, List<int>[] sbytes, IToast[] toasts)
     {
-        notes[0].note.LoadNote();
-        notes[1].note.LoadNote();
         await fileServices[0].LoadService(Constants.PathMoods);
         await fileServices[1].LoadService(Constants.PathMusic);
         await fileServices[2].LoadService(Constants.PathSound);
