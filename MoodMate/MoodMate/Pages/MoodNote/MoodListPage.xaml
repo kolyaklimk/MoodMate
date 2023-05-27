@@ -9,8 +9,8 @@
              BackgroundColor="#e2d9c5">
     
     <ContentPage.Behaviors>
-        
-        <toolkit:EventToCommandBehavior Command="{Binding UpdateMoodNoteCommand}" 
+
+        <toolkit:EventToCommandBehavior Command="{Binding RefreshMoodNoteCommand}" 
                                         EventName="Loaded"/>
         
         <toolkit:StatusBarBehavior StatusBarColor="#e2d9c5" 
@@ -19,7 +19,7 @@
 
     <Grid RowDefinitions="*,135,60">
 
-        <RefreshView Command="{Binding UpdateMoodNoteCommand}"
+        <RefreshView Command="{Binding RefreshMoodNoteCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="#e2d9c5"
                      BackgroundColor="#936840"

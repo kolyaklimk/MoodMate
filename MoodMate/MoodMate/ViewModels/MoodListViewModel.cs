@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
@@ -16,11 +17,13 @@ namespace MoodMate.ViewModels;
 public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMoodNoteMessage>
 {
     private readonly Note MoodNote;
+    private readonly IUser User;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
 
-    public MoodListViewModel(Note[] note)
+    public MoodListViewModel(Note[] note, IUser user)
     {
         MoodNote = note[0];
+        User = user;
         IsRefreshing = false;
 
         WeakReferenceMessenger.Default.Register(this);
@@ -62,8 +65,51 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    async Task RefreshMoodNote()
+    {
+        IsRefreshing = true;
+        await Task.Run(async () =>
+        {
+            await MoodNote.note.LoadNoteLocal();
+            var moods = MoodNote.note.GetDataSortByDate();
+
+            if (User.Client.User.Uid != null)
+            {
+                try
+                {
+                    if (moods.Count() != 0)
+                    {
+                        if ((bool)await Shell.Current.ShowPopupAsync(new CloudWarningPage()))
+                        {
+                            await MoodNote.note.LoadNoteCloudAndSaveLocal(User.Client.User.Uid);
+                        }
+                        else
+                        {
+                            await MoodNote.note.LoadNoteCloud(User.Client.User.Uid);
+                        }
+                    }
+                    else
+                    {
+                        await MoodNote.note.LoadNoteCloud(User.Client.User.Uid);
+                    }
+                }
+                catch
+                {
+                    await User.Alerts[2].Show();
+                }
+            }
+
+            MoodNotes.Clear();
+            foreach (var mood in moods)
+                MoodNotes.Add(mood);
+            IsRefreshing = false;
+        });
+    }
+
+    [RelayCommand]
     async Task UpdateMoodNote()
     {
+        IsRefreshing = true;
         await Task.Run(() =>
         {
             var moods = MoodNote.note.GetDataSortByDate();
