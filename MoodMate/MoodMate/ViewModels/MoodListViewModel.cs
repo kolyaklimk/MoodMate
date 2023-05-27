@@ -17,18 +17,18 @@ namespace MoodMate.ViewModels;
 
 public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMoodNoteMessage>
 {
-    private readonly Note MoodNote;
+    private readonly MoodNote MoodNote;
     private readonly IUser User;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
 
     public MoodListViewModel(Note[] note, IUser user)
     {
-        MoodNote = note[0];
+        MoodNote = note[0].note;
         User = user;
         IsRefreshing = false;
 
         WeakReferenceMessenger.Default.Register(this);
-        MoodNote.note.CreateDb();
+        MoodNote.CreateDb();
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -73,8 +73,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     async Task RefreshMoodNote()
     {
         MoodNotes.Clear();
-        await MoodNote.note.LoadNoteLocal();
-        var moods = MoodNote.note.GetDataSortByDate() as List<MoodNote>;
+        await MoodNote.LoadNoteLocal();
+        var moods = MoodNote.GetDataSortByDate() as List<MoodNote>;
 
         if (User.Client.User != null)
         {
@@ -85,22 +85,22 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                     var rezult = await Shell.Current.ShowPopupAsync(new CloudWarningPage());
                     if ((bool)rezult)
                     {
-                        await MoodNote.note.LoadNoteCloudAndSaveLocal(User.Client);
+                        await MoodNote.LoadNoteCloudAndSaveLocal(User.Client.User);
                     }
                     else
                     {
-                        await MoodNote.note.LoadNoteCloud(User.Client);
+                        await MoodNote.LoadNoteCloud(User.Client.User);
                     }
                 }
                 else
                 {
-                    await MoodNote.note.LoadNoteCloud(User.Client);
+                    await MoodNote.LoadNoteCloud(User.Client.User);
                 }
-                moods = MoodNote.note.GetDataSortByDate();
+                moods = MoodNote.GetDataSortByDate();
             }
             catch
             {
-                //await User.Alerts[2].Show();
+                await User.Alerts[2].Show();
             }
         }
 
@@ -119,7 +119,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         IsRefreshing = true;
         await Task.Run(() =>
         {
-            var moods = MoodNote.note.GetDataSortByDate();
+            var moods = MoodNote.GetDataSortByDate();
 
             MoodNotes.Clear();
             foreach (var mood in moods)
@@ -148,7 +148,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
             case 2:
                 try
                 {
-                    await MoodNote.note.DeleteNote(note.Id, User.Client);
+                    await MoodNote.DeleteNote(note, User.Client.User);
                     await UpdateMoodNote();
                 }
                 catch

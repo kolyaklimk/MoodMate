@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MoodMate.Components.Entities;
 using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Templates;
@@ -9,12 +10,12 @@ namespace MoodMate.ViewModels;
 
 public partial class AnalysisMoodViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
+    private readonly MoodNote MoodNote;
     private bool IsFirst = true;
     private readonly MyKeyValue ForCollection = new();
     public AnalysisMoodViewModel(Note[] note)
     {
-        MoodNote = note[0];
+        MoodNote = note[0].note;
     }
 
     [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -46,14 +47,14 @@ public partial class AnalysisMoodViewModel : ObservableObject
     [RelayCommand]
     async Task UpdateAnalyse()
     {
-        await MoodNote.note.InitAnalyse(SelectedDate);
+        await MoodNote.InitAnalyse(SelectedDate);
 
         await Task.Run(() =>
         {
-            MoodNote.note.FindPercentsMood();
-            Count = MoodNote.note.GetCountMood();
+            MoodNote.FindPercentsMood();
+            Count = MoodNote.GetCountMood();
 
-            var items = MoodNote.note.GetAnalysedData();
+            var items = MoodNote.GetAnalysedData();
 
             AnalysisMood.Clear();
             foreach (var item in items)

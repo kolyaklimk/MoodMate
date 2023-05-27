@@ -16,7 +16,7 @@ namespace MoodMate.ViewModels;
 [QueryProperty(nameof(SavededMood), "Save")]
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
+    private readonly MoodNote MoodNote;
     private readonly FileService MoodImages;
     private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
     private IToast Alert;
@@ -24,7 +24,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService,
         UpdateMoodNoteMessage update, IToast[] toasts, IUser user)
     {
-        MoodNote = note[0];
+        MoodNote = note[0].note;
         MoodImages = fileService[0];
         UpdateMoodNoteMessage = update;
         Alert = toasts[1];
@@ -45,10 +45,10 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                 if (Create)
                 {
                     SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
-                    await MoodNote.note.AddNote(SelectedMood, User.Client);
+                    await MoodNote.AddNote(SelectedMood, User.Client.User);
                 }
                 else
-                    await MoodNote.note.ChangeNote(SelectedMood, User.Client);
+                    await MoodNote.ChangeNote(SelectedMood, User.Client.User);
 
                 WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
