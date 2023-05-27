@@ -16,26 +16,30 @@
             <RoundRectangle CornerRadius="15"/>
         </Border.StrokeShape>
 
-        <Grid RowDefinitions="100,10,60">
+        <Grid RowDefinitions="Auto,60"
+              RowSpacing="10">
 
             <Grid Grid.Row="0"
-                  RowDefinitions="20.*">
+                  RowDefinitions="Auto,Auto"
+                  RowSpacing="10">
 
                 <Label Grid.Row="0"
                        FontSize="22" 
                        FontFamily="OpenSansBold"
                        TextColor="#2F2F2C"
                        Text="Warning!"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
                 
-                <Label Grid.Row="0"
+                <Label Grid.Row="1"
                        FontSize="22" 
                        TextColor="#66645E"
-                       Text="Unsynchronized data detected"/>                
+                       Text="Unsynchronized data detected"
+                       VerticalOptions="Center"/>                
             </Grid>
         
             <Grid Grid.ColumnSpan="5"
-                  Grid.Row="2"
+                  Grid.Row="1"
                   ColumnDefinitions="*,*"
                   ColumnSpacing="10">
 
