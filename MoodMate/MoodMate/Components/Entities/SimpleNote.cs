@@ -18,14 +18,14 @@ public class SimpleNote : ANote<SimpleNote>
     {
         await NoteControl.Load(Constants.PathNotes, false);
     }
-    public override async Task AddNote(SimpleNote obj)
+    public override async Task AddNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         if (NoteControl.Data.Count > 0)
             obj.Id = NoteControl.Data.Last().Id + 1;
         NoteControl.Add(obj);
         await NoteControl.UpdateFile(Constants.PathNotes);
     }
-    public override async Task ChangeNote(SimpleNote obj, uint id)
+    public override async Task ChangeNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
@@ -34,7 +34,7 @@ public class SimpleNote : ANote<SimpleNote>
             await NoteControl.UpdateFile(Constants.PathNotes);
         }
     }
-    public override async Task DeleteNote(uint id)
+    public override async Task DeleteNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => item.Id == id);
         if (index > -1)
@@ -42,5 +42,15 @@ public class SimpleNote : ANote<SimpleNote>
             NoteControl.Delete(index);
             await NoteControl.UpdateFile(Constants.PathNotes);
         }
+    }
+
+    public override Task LoadNoteCloudAndSaveLocal(Firebase.Auth.User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override Task LoadNoteCloud(Firebase.Auth.User user)
+    {
+        throw new NotImplementedException();
     }
 }

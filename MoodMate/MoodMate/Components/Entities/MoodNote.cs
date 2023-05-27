@@ -1,6 +1,4 @@
-﻿using FirebaseAdmin;
-using Google.Cloud.Firestore;
-using MoodMate.Components.Data;
+﻿using MoodMate.Components.Data;
 using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Templates;
 
@@ -10,10 +8,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 {
     public DataAnalysis<MoodNote> MoodAnalysis { get; set; } = new();
     public FileService Mood { get; set; } = new();
-    public MoodNote()
-    {
-        Db = FirestoreDb.Create(FirebaseApp.DefaultInstance.Options.ProjectId);
-    }
+    public MoodNote() { }
     public MoodNote(DateTime date, string name, string sourse, string text)
     {
         Date = date;
@@ -29,9 +24,9 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
-    public override async Task LoadNoteCloudAndSaveLocal(string uid)
+    public override async Task LoadNoteCloudAndSaveLocal(Firebase.Auth.User user)
     {
-        var snapshot = await Db.Collection("Users").Document(uid).Collection("MoodNote").GetSnapshotAsync();
+        var snapshot = await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").GetSnapshotAsync();
         var cloudData = snapshot.Documents.Select(doc =>
         {
             return new MoodNote
@@ -52,7 +47,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
         {
             item.value.Id = (uint)item.index + lastId;
-            await Db.Collection("Users").Document(uid).Collection("MoodNote").
+            await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                 Document(item.value.Id.ToString()).SetAsync(item);
         }
 
@@ -63,10 +58,10 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 
         NoteControl.Data = cloudData;
     }
-    public override async Task LoadNoteCloud(string uid)
+    public override async Task LoadNoteCloud(Firebase.Auth.User user)
     {
         NoteControl.Data.Clear();
-        var snapshot = await Db.Collection("Users").Document(uid).Collection("MoodNote").GetSnapshotAsync();
+        var snapshot = await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").GetSnapshotAsync();
 
         NoteControl.Data.AddRange(snapshot.Documents.Select(doc =>
         {
@@ -83,14 +78,14 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             };
         }).ToList());
     }
-    public override async Task AddNote(MoodNote obj, string uid = null)
+    public override async Task AddNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         if (NoteControl.Data.Count > 0)
             obj.Id = NoteControl.Data.Last().Id + 1;
 
-        if (uid != null)
+        if (user != null)
         {
-            await Db.Collection("Users").Document(uid).Collection("MoodNote").
+            await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                 Document(obj.Id.ToString()).SetAsync(new Dictionary<string, object>
                 {
                     { "Id", obj.Id },
@@ -107,14 +102,14 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
         }
     }
-    public override async Task ChangeNote(MoodNote obj, string uid = null)
+    public override async Task ChangeNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == Id);
         if (index > -1)
         {
-            if (uid != null)
+            if (user != null)
             {
-                await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                     Document(obj.Id.ToString()).SetAsync(new Dictionary<string, object>
                     {
                         { "Date", obj.Date },
@@ -131,14 +126,14 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             }
         }
     }
-    public override async Task DeleteNote(MoodNote obj, string uid = null)
+    public override async Task DeleteNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == Id);
         if (index > -1)
         {
-            if (uid != null)
+            if (user != null)
             {
-                await Db.Collection("Users").Document(uid).Collection("MoodNote").
+                await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                     Document(obj.Id.ToString()).DeleteAsync();
                 NoteControl.Delete(index);
             }
