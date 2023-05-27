@@ -11,6 +11,7 @@ using MoodMate.Pages.Music;
 using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MoodMate.ViewModels;
 
@@ -27,6 +28,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         IsRefreshing = false;
 
         WeakReferenceMessenger.Default.Register(this);
+        MoodNote.note.CreateDb();
     }
 
     [ObservableProperty] bool isRefreshing;
@@ -65,41 +67,46 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    void Load() => IsRefreshing = true;
+
+    [RelayCommand]
     async Task RefreshMoodNote()
     {
-        IsRefreshing = true;
-        await Task.Run(async () =>
-        {
-            await MoodNote.note.LoadNoteLocal();
-            var moods = MoodNote.note.GetDataSortByDate();
+        MoodNotes.Clear();
+        await MoodNote.note.LoadNoteLocal();
+        var moods = MoodNote.note.GetDataSortByDate() as List<MoodNote>;
 
-            if (User.Client.User.Uid != null)
+        if (User.Client.User != null)
+        {
+            try
             {
-                try
+                if (moods.Count() != 0)
                 {
-                    if (moods.Count() != 0)
+                    var rezult = await Shell.Current.ShowPopupAsync(new CloudWarningPage());
+                    if ((bool)rezult)
                     {
-                        if ((bool)await Shell.Current.ShowPopupAsync(new CloudWarningPage()))
-                        {
-                            await MoodNote.note.LoadNoteCloudAndSaveLocal(User.Client.User.Uid);
-                        }
-                        else
-                        {
-                            await MoodNote.note.LoadNoteCloud(User.Client.User.Uid);
-                        }
+                        await MoodNote.note.LoadNoteCloudAndSaveLocal(User.Client);
                     }
                     else
                     {
-                        await MoodNote.note.LoadNoteCloud(User.Client.User.Uid);
+                        await MoodNote.note.LoadNoteCloud(User.Client);
                     }
                 }
-                catch
+                else
                 {
-                    await User.Alerts[2].Show();
+                    await MoodNote.note.LoadNoteCloud(User.Client);
                 }
+                moods = MoodNote.note.GetDataSortByDate();
             }
+            catch
+            {
+                //await User.Alerts[2].Show();
+            }
+        }
 
-            MoodNotes.Clear();
+        await Task.Run(() =>
+        {
+
             foreach (var mood in moods)
                 MoodNotes.Add(mood);
             IsRefreshing = false;
@@ -139,8 +146,15 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                 break;
 
             case 2:
-                await MoodNote.note.DeleteNote(note.Id);
-                await UpdateMoodNote();
+                try
+                {
+                    await MoodNote.note.DeleteNote(note.Id, User.Client);
+                    await UpdateMoodNote();
+                }
+                catch
+                {
+                    await User.Alerts[2].Show();
+                }
                 break;
 
             case 3:

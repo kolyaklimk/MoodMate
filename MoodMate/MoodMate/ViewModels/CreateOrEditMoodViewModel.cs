@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
@@ -19,12 +20,15 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     private readonly FileService MoodImages;
     private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
     private IToast Alert;
-    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService, UpdateMoodNoteMessage update, IToast[] toasts)
+    private readonly IUser User;
+    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService,
+        UpdateMoodNoteMessage update, IToast[] toasts, IUser user)
     {
         MoodNote = note[0];
         MoodImages = fileService[0];
         UpdateMoodNoteMessage = update;
         Alert = toasts[1];
+        User = user;
     }
 
     [ObservableProperty] private bool create;
@@ -36,16 +40,23 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     {
         if (SelectedMood.Mood.Name != "")
         {
-            if (Create)
+            try
             {
-                SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
-                await MoodNote.note.AddNote(SelectedMood);
-            }
-            else
-                await MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
+                if (Create)
+                {
+                    SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
+                    await MoodNote.note.AddNote(SelectedMood, User.Client);
+                }
+                else
+                    await MoodNote.note.ChangeNote(SelectedMood, User.Client);
 
-            WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
-            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+                WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
+                await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
         }
         else
         {
