@@ -17,7 +17,7 @@ public abstract partial class ANote<T> : ObservableObject
     }
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
-    public abstract Task LoadNoteLocalToCloud(string uid);
+    public abstract Task LoadNoteCloudAndSaveLocal(string uid);
     public abstract Task LoadNoteCloud(string uid);
     public abstract Task AddNote(T obj, string uid = null);
     public abstract Task ChangeNote(T obj, string uid = null);
