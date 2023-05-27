@@ -40,8 +40,8 @@
                   ColumnSpacing="10">
 
                 <Button Grid.Column="0"
-                        Text="Go offline"
-                        Clicked="Offline_Clicked"
+                        Text="Cancel"
+                        Clicked="Cancel_Clicked"
                         TextColor="#2F2F2C"
                         FontFamily="OpenSansBold"
                         FontSize="22"

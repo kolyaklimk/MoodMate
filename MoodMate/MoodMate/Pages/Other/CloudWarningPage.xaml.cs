@@ -9,6 +9,6 @@ public partial class CloudWarningPage : Popup
 		InitializeComponent();
 	}
 
-    private void Offline_Clicked(object sender, EventArgs e) => Close(false);
+    private void Cancel_Clicked(object sender, EventArgs e) => Close(false);
     private void Synchronize_Clicked(object sender, EventArgs e) => Close(true);
 }
