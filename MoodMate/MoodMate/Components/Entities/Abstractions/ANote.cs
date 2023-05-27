@@ -15,9 +15,9 @@ public abstract partial class ANote<T> : ObservableObject
     {
         return NoteControl.Data.ToList();
     }
-    public void CreateDb(string projectId)
+    public void CreateDb()
     {
-        Db = FirestoreDb.Create(projectId);
+        Db = FirestoreDb.Create(PrivateConstants.ProjectId);
     }
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
