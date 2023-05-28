@@ -27,7 +27,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
     public override async Task DeleteNoteLocal()
     {
-        NoteControl.Data.Clear();
+        ClearNotes();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
     public override async Task SaveLocalToCloud(Firebase.Auth.User user)
@@ -43,13 +43,13 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
                     { "Source", item.value.Mood.Source }
                 });
         }
-        NoteControl.Data.Clear();
+        ClearNotes();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
     public override async Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
     {
         if (refresh)
-            NoteControl.Data.Clear();
+            ClearNotes();
 
         var snapshot = await Db.Collection("Users").Document(user.Uid).
             Collection("MoodNote").OrderByDescending("Date").Offset(offset).Limit(limit).GetSnapshotAsync();
