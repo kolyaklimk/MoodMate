@@ -25,52 +25,21 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
-    public override async Task LoadNoteCloudAndSaveLocal(Firebase.Auth.User user)
+    public override async Task SaveLocalToCloud(Firebase.Auth.User user)
     {
-        var snapshot = await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").GetSnapshotAsync();
-        List<MoodNote> cloudData = new();
-
-        foreach (var item in snapshot)
-        {
-            var dictionary = item.ToDictionary();
-
-            cloudData.Add(new MoodNote
-            {
-                Id = uint.Parse(dictionary["Id"].ToString()),
-                Date = ((Timestamp)dictionary["Date"]).ToDateTime(),
-                Text = dictionary["Text"]?.ToString(),
-                Mood = new()
-                {
-                    Name = dictionary["Name"]?.ToString(),
-                    Source = dictionary["Source"]?.ToString()
-                }
-            });
-        }
-
-        uint lastId = 0;
-        if (cloudData.Count() != 0)
-            lastId = cloudData.Last().Id;
-
         foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
         {
-            item.value.Id = (uint)item.index + lastId + 1;
             await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                Document(item.value.Id.ToString()).SetAsync(new Dictionary<string, object>
+                AddAsync(new Dictionary<string, object>
                 {
-                    { "Id", item.value.Id },
-                    { "Date", item.value.Date },
+                    { "Date", TimeZoneInfo.ConvertTimeToUtc(item.value.Date) },
                     { "Text", item.value.Text },
                     { "Name", item.value.Mood.Name },
                     { "Source", item.value.Mood.Source }
                 });
         }
-
-        cloudData.AddRange(NoteControl.Data);
-
         NoteControl.Data.Clear();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
-
-        NoteControl.Data = cloudData;
     }
     public override async Task LoadNoteCloud(Firebase.Auth.User user)
     {
@@ -84,8 +53,8 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 
             NoteControl.Data.Add(new MoodNote
             {
-                Id = uint.Parse(dictionary["Id"].ToString()),
-                Date = ((Timestamp)dictionary["Date"]).ToDateTime(),
+                Id = item.Id,
+                Date = ((Timestamp)dictionary["Date"]).ToDateTime().ToLocalTime(),
                 Text = dictionary["Text"]?.ToString(),
                 Mood = new()
                 {
@@ -97,24 +66,26 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
     public override async Task AddNote(MoodNote obj, Firebase.Auth.User user = null)
     {
-        if (NoteControl.Data.Count > 0)
-            obj.Id = NoteControl.Data.Last().Id + 1;
-
         if (user != null)
         {
-            await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                Document(obj.Id.ToString()).SetAsync(new Dictionary<string, object>
+            var rezult = await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
+                AddAsync(new Dictionary<string, object>
                 {
-                    { "Id", obj.Id },
-                    { "Date", obj.Date },
+                    { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                     { "Text", obj.Text },
                     { "Name", obj.Mood.Name },
                     { "Source", obj.Mood.Source }
                 });
+            obj.Id = rezult.Id;
             NoteControl.Add(obj);
         }
         else
         {
+            obj.Id = NoteControl.GenerateKey();
+            while (NoteControl.Data.Any(n => n.Id == obj.Id))
+            {
+                obj.Id = NoteControl.GenerateKey();
+            }
             NoteControl.Add(obj);
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
         }
@@ -129,7 +100,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
                 await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                     Document(obj.Id.ToString()).UpdateAsync(new Dictionary<string, object>
                     {
-                        { "Date", obj.Date },
+                        { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                         { "Text", obj.Text },
                         { "Name", obj.Mood.Name },
                         { "Source", obj.Mood.Source }
@@ -151,7 +122,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             if (user != null)
             {
                 await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                    Document(obj.Id.ToString()).DeleteAsync();
+                    Document(obj.Id).DeleteAsync();
                 NoteControl.Delete(index);
             }
             else
