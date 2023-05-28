@@ -1,8 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
+using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
+using MoodMate.Pages.Other;
 using MoodMate.Templates;
 using System.Collections.ObjectModel;
 
@@ -13,9 +18,14 @@ public partial class AnalysisMoodViewModel : ObservableObject
     private readonly MoodNote MoodNote;
     private bool IsFirst = true;
     private readonly MyKeyValue ForCollection = new();
-    public AnalysisMoodViewModel(Note[] note)
+    private readonly IUser User;
+    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
+    public AnalysisMoodViewModel(Note[] note, IUser user,
+        UpdateMoodNoteMessage update)
     {
         MoodNote = note[0].note;
+        User = user;
+        UpdateMoodNoteMessage = update;
     }
 
     [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -47,20 +57,24 @@ public partial class AnalysisMoodViewModel : ObservableObject
     [RelayCommand]
     async Task UpdateAnalyse()
     {
-        await MoodNote.InitAnalyse(SelectedDate);
-
-        await Task.Run(() =>
+        try
         {
-            MoodNote.FindPercentsMood();
-            Count = MoodNote.GetCountMood();
+            await MoodNote.InitAnalyse(SelectedDate, User.Client.User);
 
-            var items = MoodNote.GetAnalysedData();
-
-            AnalysisMood.Clear();
-            foreach (var item in items)
+            await Task.Run(() =>
             {
-                AnalysisMood.Add(item);
-            }
+                MoodNote.FindPercentsMood();
+                Count = MoodNote.GetCountMood();
+
+                var items = MoodNote.GetAnalysedData();
+
+                AnalysisMood.Clear();
+                foreach (var item in items)
+                {
+                    AnalysisMood.Add(item);
+                }
+            });
+
 
             if (IsFirst)
             {
@@ -71,7 +85,17 @@ public partial class AnalysisMoodViewModel : ObservableObject
                 }
                 IsFirst = false;
             }
-        });
+        }
+        catch
+        {
+            if ((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage()))
+            {
+                User.Client.SignOut();
+                MoodNote.ClearNotes();
+                await BackClick();
+                WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
+            }
+        }
     }
 
     [RelayCommand]

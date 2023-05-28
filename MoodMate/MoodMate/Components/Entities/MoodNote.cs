@@ -141,16 +141,37 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
 
     // Analyse methot's
-    public async Task InitAnalyse(DateTime date)
+    public async Task InitAnalyse(DateTime date, Firebase.Auth.User user = null)
     {
         MoodAnalysis.AnalysedData.Clear();
-        await Task.Run(() =>
+
+        if (user != null)
+        {
+            var firstDay = TimeZoneInfo.ConvertTimeToUtc(date);
+            var lastDay = TimeZoneInfo.ConvertTimeToUtc(
+                new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month)).AddDays(1));
+
+            var snapshot = await Db.Collection("Users").Document(user.Uid).
+            Collection("MoodNote").
+            WhereGreaterThanOrEqualTo("Date", firstDay).
+            WhereLessThan("Date", lastDay).GetSnapshotAsync();
+
+            foreach (var item in snapshot)
+            {
+                var dictionary = item.ToDictionary();
+                MoodAnalysis.AddItem(
+                    dictionary["Name"]?.ToString(),
+                    dictionary["Source"]?.ToString(),
+                    ((Timestamp)dictionary["Date"]).ToDateTime().ToLocalTime(), date);
+            }
+        }
+        else
         {
             foreach (var item in NoteControl.Data)
             {
                 MoodAnalysis.AddItem(item.Mood.Name, item.Mood.Source, item.Date, date);
             }
-        });
+        }
     }
     public List<MyKeyValue> GetAnalysedData()
     {
