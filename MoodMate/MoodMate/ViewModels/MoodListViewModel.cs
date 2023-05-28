@@ -158,8 +158,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
             case 2:
                 try
                 {
+                    IsRefreshing = true;
                     await MoodNote.DeleteNote(note, User.Client.User);
-                    await UpdateMoodNote();
                 }
                 catch
                 {
@@ -176,7 +176,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         }
     }
 
-    public async void Receive(UpdateMoodNoteMessage message)
+    public void Receive(UpdateMoodNoteMessage message)
     {
         IsRefreshing = true;
     }
