@@ -35,10 +35,9 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
         if (SelectedNote.Text != "" && SelectedNote.Text != null)
         {
             SelectedNote.Date = DateTime.SpecifyKind(SelectedNote.Date.Date.Add(DateTime.Now.TimeOfDay), DateTimeKind.Utc);
+
             if (Create)
-            {
                 await SimpleNote.note.AddNote(SelectedNote);
-            }
             else
                 await SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
 
