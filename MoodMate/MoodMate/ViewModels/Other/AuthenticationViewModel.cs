@@ -11,10 +11,11 @@ public partial class AuthenticationViewModel : ObservableObject
 
     [ObservableProperty] string email;
     [ObservableProperty] string password;
-    [ObservableProperty] bool isRefreshing = false;
+    [ObservableProperty] bool isRefreshing;
     public AuthenticationViewModel(IUser user)
     {
         User = user;
+        IsRefreshing = false;
     }
 
     [RelayCommand]
