@@ -17,6 +17,10 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
     {
         Data.RemoveAt(index);
     }
+    public void ClearData()
+    {
+        Data.Clear();
+    }
     public async Task UpdateFile(string path)
     {
         try

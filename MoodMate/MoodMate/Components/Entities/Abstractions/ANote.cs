@@ -19,6 +19,10 @@ public abstract partial class ANote<T> : ObservableObject
     {
         Db = FirestoreDb.Create(PrivateConstants.ProjectId);
     }
+    public void ClearNotes()
+    {
+        NoteControl.ClearData();
+    }
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
     public abstract Task DeleteNoteLocal();
