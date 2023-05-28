@@ -28,7 +28,9 @@
                      Margin="15,0,15,0">
             
             <CollectionView ItemsSource="{Binding MoodNotes}"
-                            VerticalScrollBarVisibility="Never">
+                            VerticalScrollBarVisibility="Never"
+                            RemainingItemsThreshold="0"
+                            RemainingItemsThresholdReachedCommand="{Binding AddItemsCommand}">
 
                 <CollectionView.EmptyView>
                     <StackLayout Spacing="10"

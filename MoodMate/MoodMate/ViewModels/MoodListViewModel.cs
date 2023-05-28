@@ -86,6 +86,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                             User.Client.SignOut();
                             break;
                         case 2:
+                            await MoodNote.DeleteNoteLocal();
                             await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                             break;
                         case 3:
@@ -110,8 +111,31 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
             MoodNotes.Clear();
             foreach (var mood in MoodNote.GetData())
                 MoodNotes.Add(mood);
-            IsRefreshing = false;
         });
+        IsRefreshing = false;
+    }
+
+    [RelayCommand]
+    async Task AddItems()
+    {
+        if (User.Client.User != null && !IsRefreshing)
+        {
+            try
+            {
+                var countItemsBefore = MoodNote.GetData().Count;
+                await MoodNote.LoadNoteCloud(countItemsBefore, 10, User.Client.User, false);
+                var moods = MoodNote.GetData();
+
+                for (var i = countItemsBefore; i < moods.Count; i++)
+                {
+                    MoodNotes.Add(moods[i]);
+                }
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
+        }
     }
 
     [RelayCommand]
