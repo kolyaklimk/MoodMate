@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="MoodMate.Pages.Other.GoOfflinePage"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               Color="Transparent"                
+               VerticalOptions="Center"
+               CanBeDismissedByTappingOutsideOfPopup="False">
+    
+    <Border BackgroundColor="#e2d9c5" 
+            StrokeThickness="0"
+            WidthRequest="300"
+            Padding="15">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="15"/>
+        </Border.StrokeShape>
+
+        <Grid RowDefinitions="Auto,Auto,60,60"
+              RowSpacing="10">
+
+            <Label Grid.Row="0"
+                   FontSize="22" 
+                   FontFamily="OpenSansBold"
+                   TextColor="#2F2F2C"
+                   Text="Warning!"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <Label Grid.Row="1"
+                   FontSize="18" 
+                   TextColor="#66645E"
+                   Text="No internet connection! You can go offline, save your data."
+                   VerticalOptions="Center"/>
+
+            <Button Grid.Row="2"
+                    Text="Go offline"
+                    Clicked="Offline_Clicked"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="22"
+                    BackgroundColor="#fffbef"/>
+
+            <Button Grid.Row="3"
+                    Text="Cancel"
+                    Clicked="Cancel_Clicked"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="22"
+                    BackgroundColor="#fffbef"/>
+        </Grid>
+    </Border>
+</toolkit:Popup>
