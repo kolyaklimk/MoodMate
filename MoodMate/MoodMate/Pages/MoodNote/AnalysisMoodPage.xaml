@@ -102,7 +102,7 @@
                    VerticalOptions="Start"
                    FontSize="22"
                    TextColor="#66645E"/>
-
+            
             <Border Grid.Row="3"
                     Padding="5"
                     BackgroundColor="#936840"
@@ -189,6 +189,13 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Border>
+            
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Grid.Row="3"
+                         RefreshColor="#936840"
+                         BackgroundColor="#e2d9c5">
+                <StackLayout/>
+            </RefreshView>
         </Grid>
     </Grid>
 </ContentPage>

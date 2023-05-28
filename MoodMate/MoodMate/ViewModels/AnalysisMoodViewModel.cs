@@ -26,37 +26,48 @@ public partial class AnalysisMoodViewModel : ObservableObject
         MoodNote = note[0].note;
         User = user;
         UpdateMoodNoteMessage = update;
+        IsRefreshing = false;
     }
 
     [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
     [ObservableProperty] int count;
+    [ObservableProperty] bool isRefreshing;
     public ObservableCollection<MyKeyValue> AnalysisMood { get; set; } = new();
 
     [RelayCommand]
     async Task NextMonth()
     {
+        IsRefreshing = true;
+
         if (DateTime.Parse(SelectedDate.Month + ".01." + SelectedDate.Year) <
             DateTime.Parse(DateTime.Now.Month + ".01." + DateTime.Now.Year))
         {
             SelectedDate = SelectedDate.AddMonths(1);
             await UpdateAnalyse();
         }
+
+        IsRefreshing = false;
     }
 
     [RelayCommand]
     async Task PreviousMonth()
     {
+        IsRefreshing = true;
+
         if (DateTime.Parse(SelectedDate.Month + ".01." + SelectedDate.Year) >
             DateTime.Parse("01.01.2023"))
         {
             SelectedDate = SelectedDate.AddMonths(-1);
             await UpdateAnalyse();
         }
+
+        IsRefreshing = false;
     }
 
     [RelayCommand]
     async Task UpdateAnalyse()
     {
+        IsRefreshing = true;
         try
         {
             await MoodNote.InitAnalyse(SelectedDate, User.Client.User);
@@ -96,6 +107,7 @@ public partial class AnalysisMoodViewModel : ObservableObject
                 WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
             }
         }
+        IsRefreshing = false;
     }
 
     [RelayCommand]
