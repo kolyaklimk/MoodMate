@@ -99,17 +99,22 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                 {
                     await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                 }
+                moods = MoodNote.GetData();
             }
             catch
             {
                 await User.Alerts[2].Show();
             }
         }
+        else
+        {
+            moods = MoodNote.GetDataSortByDate();
+        }
 
         await Task.Run(() =>
         {
             MoodNotes.Clear();
-            foreach (var mood in MoodNote.GetData())
+            foreach (var mood in moods)
                 MoodNotes.Add(mood);
         });
         IsRefreshing = false;
