@@ -29,4 +29,10 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
         }
         catch { }
     }
+    public string GenerateKey()
+    {
+        var random = new Random();
+        return new string(Enumerable.Range(1, 16).
+            Select(x => Constants.ForGenerateKey[random.Next(Constants.ForGenerateKey.Length)]).ToArray());
+    }
 }

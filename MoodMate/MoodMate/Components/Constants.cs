@@ -8,4 +8,5 @@ static class Constants
     public const string PathSound = "Sound.json";
     public const string PathNotes = "Notes.json";
     public const string PathUser = "User.json";
+    public const string ForGenerateKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 }

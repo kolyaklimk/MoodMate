@@ -6,4 +6,5 @@ internal interface IDataControl<T>
     void Add(T item);
     void Change(int index, T item);
     Task UpdateFile(string path);
+    string GenerateKey();
 }
