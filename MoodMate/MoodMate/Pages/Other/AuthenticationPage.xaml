@@ -18,10 +18,11 @@
 
     <Grid Padding="15">
 
-        <ActivityIndicator IsRunning="{Binding IsRefreshing}"
-                           Color="#936840"
-                           VerticalOptions="Start"
-                           HeightRequest="60"/>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="#936840">
+            <StackLayout/>
+        </RefreshView>
         
         <Grid RowDefinitions="60,60,60,60"
               RowSpacing="10"
