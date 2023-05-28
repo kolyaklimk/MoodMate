@@ -42,12 +42,17 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         {
             try
             {
-                SelectedMood.Date = DateTime.SpecifyKind(SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay), DateTimeKind.Utc);
 
                 if (Create)
+                {
+                    SelectedMood.Date = DateTime.SpecifyKind(SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay), DateTimeKind.Utc);
                     await MoodNote.AddNote(SelectedMood, User.Client.User);
+                }
                 else
+                {
+                    SelectedMood.Date = DateTime.SpecifyKind(SelectedMood.Date, DateTimeKind.Utc);
                     await MoodNote.ChangeNote(SelectedMood, User.Client.User);
+                }
 
                 WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
