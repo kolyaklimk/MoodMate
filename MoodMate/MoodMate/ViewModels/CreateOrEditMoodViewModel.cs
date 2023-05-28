@@ -59,7 +59,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
             }
             catch
             {
-                if((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage()))
+                if((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage(" You can go offline to save your data.")))
                 {
                     User.Client.SignOut();
                     Create = true;

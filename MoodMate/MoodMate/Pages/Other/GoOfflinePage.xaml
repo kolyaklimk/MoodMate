@@ -27,10 +27,11 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
-            <Label Grid.Row="1"
+            <Label x:Name="Text"
+                   Grid.Row="1"
                    FontSize="18" 
                    TextColor="#66645E"
-                   Text="No internet connection! You can go offline to save your data."
+                   Text="No internet connection!"
                    VerticalOptions="Center"/>
 
             <Button Grid.Row="2"
