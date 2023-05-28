@@ -11,8 +11,6 @@ using MoodMate.Pages.Music;
 using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 
 namespace MoodMate.ViewModels;
 
@@ -78,9 +76,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         if (IsUpdating)
             return;
 
-        MoodNotes.Clear();
         await MoodNote.LoadNoteLocal();
-        var moods = MoodNote.GetDataSortByDate();
+        var moods = MoodNote.GetData();
 
         if (User.Client.User != null)
         {
@@ -89,20 +86,23 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                 if (moods.Count() != 0)
                 {
                     var rezult = await Shell.Current.ShowPopupAsync(new CloudWarningPage());
-                    if ((bool)rezult)
+                    switch (rezult)
                     {
-                        await MoodNote.LoadNoteCloudAndSaveLocal(User.Client.User);
-                    }
-                    else
-                    {
-                        await MoodNote.LoadNoteCloud(User.Client.User);
+                        case 1:
+                            User.Client.SignOut();
+                            break;
+                        case 2:
+                            await MoodNote.LoadNoteCloud(User.Client.User);
+                            break;
+                        case 3:
+                            await MoodNote.LoadNoteCloudAndSaveLocal(User.Client.User);
+                            break;
                     }
                 }
                 else
                 {
                     await MoodNote.LoadNoteCloud(User.Client.User);
                 }
-                moods = MoodNote.GetDataSortByDate();
             }
             catch
             {
@@ -112,7 +112,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 
         await Task.Run(() =>
         {
-            foreach (var mood in moods)
+            MoodNotes.Clear();
+            foreach (var mood in MoodNote.GetDataSortByDate())
                 MoodNotes.Add(mood);
             IsRefreshing = false;
         });
@@ -121,15 +122,15 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async Task UpdateMoodNote()
     {
-        IsUpdating = true;
-        IsRefreshing = true;
         await Task.Run(() =>
         {
-            var moods = MoodNote.GetDataSortByDate();
+            IsUpdating = true;
+            IsRefreshing = true;
 
             MoodNotes.Clear();
-            foreach (var mood in moods)
+            foreach (var mood in MoodNote.GetDataSortByDate())
                 MoodNotes.Add(mood);
+
             IsRefreshing = false;
             IsUpdating = false;
         });
