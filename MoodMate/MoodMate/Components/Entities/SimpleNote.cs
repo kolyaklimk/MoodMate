@@ -18,6 +18,10 @@ public class SimpleNote : ANote<SimpleNote>
     {
         await NoteControl.Load(Constants.PathNotes, false);
     }
+    public override async Task DeleteNoteLocal()
+    {
+        await NoteControl.Load(Constants.PathNotes, false);
+    }
     public override async Task AddNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         if (NoteControl.Data.Count > 0)
