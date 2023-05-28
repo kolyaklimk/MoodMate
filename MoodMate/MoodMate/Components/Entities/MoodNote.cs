@@ -25,6 +25,11 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
+    public override async Task DeleteNoteLocal()
+    {
+        NoteControl.Data.Clear();
+        await NoteControl.UpdateFile(Constants.PathMoodNotes);
+    }
     public override async Task SaveLocalToCloud(Firebase.Auth.User user)
     {
         foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
