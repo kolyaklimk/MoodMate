@@ -102,5 +102,11 @@
                         Text="{Binding SelectedMood.Text}"/>
             </Border>
         </Grid>
+        
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="#936840">
+            <StackLayout/>
+        </RefreshView>
     </Grid>
 </ContentPage>

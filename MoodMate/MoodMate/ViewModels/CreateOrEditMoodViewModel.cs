@@ -30,15 +30,19 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         UpdateMoodNoteMessage = update;
         Alert = toasts[1];
         User = user;
+        IsRefreshing = false;
     }
 
     [ObservableProperty] private bool create;
     [ObservableProperty] public MoodNote selectedMood;
     [ObservableProperty] private MoodNote savededMood;
+    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async Task CreateOrEdit()
     {
+        IsRefreshing = true;
+
         if (SelectedMood.Mood.Name != "")
         {
             try
@@ -59,7 +63,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
             }
             catch
             {
-                if((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage(" You can go offline to save your data.")))
+                if ((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage(" You can go offline to save your data.")))
                 {
                     User.Client.SignOut();
                     Create = true;
@@ -72,6 +76,8 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         {
             await Alert.Show();
         }
+
+        IsRefreshing = false;
     }
 
     [RelayCommand]
