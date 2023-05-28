@@ -8,6 +8,7 @@ using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
+using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels;
 
@@ -58,7 +59,13 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
             }
             catch
             {
-                await User.Alerts[2].Show();
+                if((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage()))
+                {
+                    User.Client.SignOut();
+                    Create = true;
+                    MoodNote.ClearNotes();
+                    await CreateOrEdit();
+                }
             }
         }
         else
