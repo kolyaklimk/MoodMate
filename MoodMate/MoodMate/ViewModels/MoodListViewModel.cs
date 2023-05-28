@@ -95,7 +95,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                             await MoodNote.LoadNoteCloud(User.Client.User);
                             break;
                         case 3:
-                            await MoodNote.LoadNoteCloudAndSaveLocal(User.Client.User);
+                            await MoodNote.SaveLocalToCloud(User.Client.User);
+                            await MoodNote.LoadNoteCloud(User.Client.User);
                             break;
                     }
                 }
