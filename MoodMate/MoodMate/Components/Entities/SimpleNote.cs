@@ -27,7 +27,7 @@ public class SimpleNote : ANote<SimpleNote>
     }
     public override async Task ChangeNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
-        var index = NoteControl.Data.FindIndex(item => item.Id == id);
+        var index = NoteControl.Data.FindIndex(item => item.Id == obj.Id);
         if (index > -1)
         {
             NoteControl.Change(index, obj);
@@ -36,7 +36,7 @@ public class SimpleNote : ANote<SimpleNote>
     }
     public override async Task DeleteNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
-        var index = NoteControl.Data.FindIndex(item => item.Id == id);
+        var index = NoteControl.Data.FindIndex(item => item.Id == obj.Id);
         if (index > -1)
         {
             NoteControl.Delete(index);
@@ -44,7 +44,7 @@ public class SimpleNote : ANote<SimpleNote>
         }
     }
 
-    public override Task LoadNoteCloudAndSaveLocal(Firebase.Auth.User user)
+    public override Task SaveLocalToCloud(Firebase.Auth.User user)
     {
         throw new NotImplementedException();
     }
