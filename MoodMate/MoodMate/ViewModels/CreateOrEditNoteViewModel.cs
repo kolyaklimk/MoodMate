@@ -41,8 +41,8 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
             else
                 await SimpleNote.note.ChangeNote(SelectedNote, SelectedNote.Id);
 
-            WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
             await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
+            WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
         }
         else
         {
@@ -64,8 +64,8 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     public async Task DeleteItem()
     {
         await SimpleNote.note.DeleteNote(SelectedNote.Id);
-        WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
         await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
+        WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
     }
 
     [RelayCommand]

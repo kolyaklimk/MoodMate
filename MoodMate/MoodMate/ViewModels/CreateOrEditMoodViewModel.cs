@@ -53,8 +53,8 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                     await MoodNote.ChangeNote(SelectedMood, User.Client.User);
                 }
 
-                WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+                WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
             }
             catch
             {
