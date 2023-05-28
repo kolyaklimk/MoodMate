@@ -19,7 +19,7 @@
 
     <Grid RowDefinitions="*,135,60">
 
-        <RefreshView Command="{Binding RefreshMoodNoteCommand}"
+        <RefreshView Command="{Binding UpdateMoodNoteCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="#e2d9c5"
                      BackgroundColor="#936840"

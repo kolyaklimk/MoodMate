@@ -18,7 +18,6 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 {
     private readonly MoodNote MoodNote;
     private readonly IUser User;
-    private bool IsUpdating;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
     [ObservableProperty] bool isRefreshing;
 
@@ -27,12 +26,10 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         MoodNote = note[0].note;
         User = user;
         IsRefreshing = false;
-        IsUpdating = false;
 
         WeakReferenceMessenger.Default.Register(this);
         MoodNote.CreateDb();
     }
-
 
     [RelayCommand]
     async Task GoToMusicPage()
@@ -71,11 +68,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     void Load() => IsRefreshing = true;
 
     [RelayCommand]
-    async Task RefreshMoodNote()
+    async Task UpdateMoodNote()
     {
-        if (IsUpdating)
-            return;
-
         await MoodNote.LoadNoteLocal();
         var moods = MoodNote.GetData();
 
@@ -114,26 +108,9 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         await Task.Run(() =>
         {
             MoodNotes.Clear();
-            foreach (var mood in MoodNote.GetDataSortByDate())
+            foreach (var mood in MoodNote.GetData())
                 MoodNotes.Add(mood);
             IsRefreshing = false;
-        });
-    }
-
-    [RelayCommand]
-    async Task UpdateMoodNote()
-    {
-        await Task.Run(() =>
-        {
-            IsUpdating = true;
-            IsRefreshing = true;
-
-            MoodNotes.Clear();
-            foreach (var mood in MoodNote.GetDataSortByDate())
-                MoodNotes.Add(mood);
-
-            IsRefreshing = false;
-            IsUpdating = false;
         });
     }
 
@@ -177,6 +154,6 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 
     public async void Receive(UpdateMoodNoteMessage message)
     {
-        await UpdateMoodNote();
+        IsRefreshing = true;
     }
 }
