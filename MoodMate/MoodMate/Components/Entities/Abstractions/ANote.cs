@@ -22,7 +22,7 @@ public abstract partial class ANote<T> : ObservableObject
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
     public abstract Task SaveLocalToCloud(Firebase.Auth.User user);
-    public abstract Task LoadNoteCloud(Firebase.Auth.User user);
+    public abstract Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true);
     public abstract Task AddNote(T obj, Firebase.Auth.User user = null);
     public abstract Task ChangeNote(T obj, Firebase.Auth.User user = null);
     public abstract Task DeleteNote(T obj, Firebase.Auth.User user = null);

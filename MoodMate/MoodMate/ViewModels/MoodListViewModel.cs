@@ -92,17 +92,17 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                             User.Client.SignOut();
                             break;
                         case 2:
-                            await MoodNote.LoadNoteCloud(User.Client.User);
+                            await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                             break;
                         case 3:
                             await MoodNote.SaveLocalToCloud(User.Client.User);
-                            await MoodNote.LoadNoteCloud(User.Client.User);
+                            await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                             break;
                     }
                 }
                 else
                 {
-                    await MoodNote.LoadNoteCloud(User.Client.User);
+                    await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                 }
             }
             catch

@@ -41,11 +41,13 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         NoteControl.Data.Clear();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
-    public override async Task LoadNoteCloud(Firebase.Auth.User user)
+    public override async Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
     {
-        NoteControl.Data.Clear();
+        if (refresh)
+            NoteControl.Data.Clear();
+
         var snapshot = await Db.Collection("Users").Document(user.Uid).
-            Collection("MoodNote").GetSnapshotAsync();
+            Collection("MoodNote").OrderByDescending("Date").Offset(offset).Limit(limit).GetSnapshotAsync();
 
         foreach (var item in snapshot)
         {

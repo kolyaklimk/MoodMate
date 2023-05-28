@@ -49,7 +49,7 @@ public class SimpleNote : ANote<SimpleNote>
         throw new NotImplementedException();
     }
 
-    public override Task LoadNoteCloud(Firebase.Auth.User user)
+    public override Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
     {
         throw new NotImplementedException();
     }
