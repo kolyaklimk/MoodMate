@@ -12,6 +12,7 @@ using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MoodMate.ViewModels;
 
@@ -19,19 +20,21 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 {
     private readonly MoodNote MoodNote;
     private readonly IUser User;
+    private bool IsUpdating;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
+    [ObservableProperty] bool isRefreshing;
 
     public MoodListViewModel(Note[] note, IUser user)
     {
         MoodNote = note[0].note;
         User = user;
         IsRefreshing = false;
+        IsUpdating = false;
 
         WeakReferenceMessenger.Default.Register(this);
         MoodNote.CreateDb();
     }
 
-    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async Task GoToMusicPage()
@@ -72,9 +75,12 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async Task RefreshMoodNote()
     {
+        if (IsUpdating)
+            return;
+
         MoodNotes.Clear();
         await MoodNote.LoadNoteLocal();
-        var moods = MoodNote.GetDataSortByDate() as List<MoodNote>;
+        var moods = MoodNote.GetDataSortByDate();
 
         if (User.Client.User != null)
         {
@@ -106,7 +112,6 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 
         await Task.Run(() =>
         {
-
             foreach (var mood in moods)
                 MoodNotes.Add(mood);
             IsRefreshing = false;
@@ -116,6 +121,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async Task UpdateMoodNote()
     {
+        IsUpdating = true;
         IsRefreshing = true;
         await Task.Run(() =>
         {
@@ -125,6 +131,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
             foreach (var mood in moods)
                 MoodNotes.Add(mood);
             IsRefreshing = false;
+            IsUpdating = false;
         });
     }
 
