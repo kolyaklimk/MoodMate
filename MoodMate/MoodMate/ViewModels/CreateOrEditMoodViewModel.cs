@@ -45,12 +45,11 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 
                 if (Create)
                 {
-                    SelectedMood.Date = DateTime.SpecifyKind(SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay), DateTimeKind.Utc);
+                    SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
                     await MoodNote.AddNote(SelectedMood, User.Client.User);
                 }
                 else
                 {
-                    SelectedMood.Date = DateTime.SpecifyKind(SelectedMood.Date, DateTimeKind.Utc);
                     await MoodNote.ChangeNote(SelectedMood, User.Client.User);
                 }
 
