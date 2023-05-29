@@ -24,6 +24,7 @@ public class DataLoading<T>: IDataLoading<T>
         }
         catch
         {
+            Data.Clear();
         }
     }
 }
