@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels.Other"
+             x:DataType="model:UserViewModel"
+             x:Class="MoodMate.Pages.Other.UserPage"
+             BackgroundColor="#e2d9c5">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                        Command="{Binding LoadCommand}"/>
+    </ContentPage.Behaviors>
+    
+    <Grid Padding="15"
+          VerticalOptions="Center"
+          RowSpacing="10"
+          RowDefinitions="*,*,*,*">
+
+        <Grid RowDefinitions="60,60"
+              RowSpacing="10"
+              Grid.Row="0"
+              VerticalOptions="Center"
+              IsVisible="{Binding IsLogIn}">
+
+            <Label Grid.Row="0" 
+                   FontFamily="OpenSansBold"
+                   FontSize="28"
+                   TextColor="#2F2F2C"
+                   HorizontalOptions="Center"
+                   Text="Email"/>
+            
+            <Label FontSize="22"   
+                   TextColor="#2F2F2C"         
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Email}"/>
+        </Grid>
+
+        <Button Text="{Binding SingInOut}"
+                Grid.Row="1"
+                CornerRadius="15"
+                HeightRequest="60"
+                VerticalOptions="End"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
+                Command="{Binding SignInOutCommand}"/>
+
+        <Button Text="Delete account"
+                Grid.Row="2"
+                IsVisible="{Binding IsLogIn}"
+                CornerRadius="15"
+                HeightRequest="60"
+                VerticalOptions="End"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
+                Command="{Binding DeleteUserCommand}"/>
+
+        <Button Text="Reset password"
+                Grid.Row="3"
+                IsVisible="{Binding IsLogIn}"
+                CornerRadius="15"
+                HeightRequest="60"
+                VerticalOptions="End"
+                BackgroundColor="#fffbef"
+                TextColor="#2F2F2C"
+                FontFamily="OpenSansBold"
+                FontSize="28"
+                Command="{Binding ResetPasswordCommand}"/>
+    </Grid>
+</ContentPage>
