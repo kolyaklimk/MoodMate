@@ -13,6 +13,7 @@ public interface IUser
 
     Task<bool> SingIn(string email, string password);
     Task SingUp(string email, string password);
+    void SignOut();
     Task SendEmailVerificationLink(string email);
     Task SaveEmailAndPasswordLocal(string email, string password);
     Task<EmailAndPassword> LoadEmailAndPasswordLocal();

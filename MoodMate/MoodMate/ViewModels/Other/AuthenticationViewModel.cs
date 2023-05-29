@@ -36,7 +36,7 @@ public partial class AuthenticationViewModel : ObservableObject
         if (!IsRefreshing)
         {
             if (User.Client.User != null)
-                User.Client.SignOut();
+                User.SignOut();
             await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         }
     }

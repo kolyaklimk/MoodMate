@@ -104,6 +104,11 @@ public class User : IUser
         }
     }
 
+    public void SignOut()
+    {
+        Client.SignOut();
+    }
+
     public async Task SendEmailVerificationLink(string email)
     {
         var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(email);

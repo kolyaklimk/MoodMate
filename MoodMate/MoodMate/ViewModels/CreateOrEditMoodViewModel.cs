@@ -65,7 +65,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
             {
                 if ((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage(" You can go offline to save your data.")))
                 {
-                    User.Client.SignOut();
+                    User.SignOut();
                     Create = true;
                     MoodNote.ClearNotes();
                     await CreateOrEdit();

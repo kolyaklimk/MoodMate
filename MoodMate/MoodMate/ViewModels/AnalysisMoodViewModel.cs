@@ -101,7 +101,7 @@ public partial class AnalysisMoodViewModel : ObservableObject
         {
             if ((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage()))
             {
-                User.Client.SignOut();
+                User.SignOut();
                 MoodNote.ClearNotes();
                 await BackClick();
                 WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);

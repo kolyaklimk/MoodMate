@@ -104,7 +104,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                     switch (rezult)
                     {
                         case 1:
-                            User.Client.SignOut();
+                            User.SignOut();
                             break;
                         case 2:
                             await MoodNote.DeleteNoteLocal();
