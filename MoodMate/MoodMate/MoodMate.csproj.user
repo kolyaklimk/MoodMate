@@ -44,6 +44,9 @@
     <MauiXaml Update="Pages\Other\TimePickerPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\Other\UserPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\SimpleNote\CreateOrEditNotePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
