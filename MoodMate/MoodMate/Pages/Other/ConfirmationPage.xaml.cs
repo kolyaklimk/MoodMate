@@ -4,9 +4,10 @@ namespace MoodMate.Pages.Other;
 
 public partial class ConfirmationPage : Popup
 {
-    public ConfirmationPage()
+    public ConfirmationPage(string text)
     {
         InitializeComponent();
+        Text.Text = text;
     }
 
     private void Cancel_Clicked(object sender, EventArgs e) => Close(null);

@@ -19,8 +19,8 @@
               RowSpacing="10">
 
             <Label Grid.Row="0"
+                   x:Name="Text"
                    FontSize="18" 
-                   Text="Delete selected record?"
                    TextColor="#66645E"
                    VerticalOptions="Center"/>
 
