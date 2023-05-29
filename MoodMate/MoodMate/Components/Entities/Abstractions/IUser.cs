@@ -14,7 +14,10 @@ public interface IUser
     Task<bool> SingIn(string email, string password);
     Task SingUp(string email, string password);
     void SignOut();
-    Task SendEmailVerificationLink(string email);
+    Task DeleteUser();
+    Task SendEmailVerificationLink();
+    Task SendEmailPasswordResetLink();
+    Task SendEmailLink(string link, string text);
     Task SaveEmailAndPasswordLocal(string email, string password);
     Task<EmailAndPassword> LoadEmailAndPasswordLocal();
 }

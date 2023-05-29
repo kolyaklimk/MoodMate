@@ -49,7 +49,7 @@ public class User : IUser
                 {
                     try
                     {
-                        await SendEmailVerificationLink(email);
+                        await SendEmailVerificationLink();
                         await Alerts[0].Show();
                     }
                     catch
@@ -85,7 +85,7 @@ public class User : IUser
 
                 try
                 {
-                    await SendEmailVerificationLink(email);
+                    await SendEmailVerificationLink();
                     await Alerts[0].Show();
                 }
                 catch
@@ -109,16 +109,31 @@ public class User : IUser
         Client.SignOut();
     }
 
-    public async Task SendEmailVerificationLink(string email)
+    public async Task DeleteUser()
     {
-        var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(email);
+        await FirebaseAuth.DefaultInstance.DeleteUserAsync(Client.User.Uid);
+    }
 
+    public async Task SendEmailVerificationLink()
+    {
+        var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(Client.User.Info.Email);
+        await SendEmailLink(link, "verify your email address");
+    }
+
+    public async Task SendEmailPasswordResetLink()
+    {
+        var link = await FirebaseAuth.DefaultInstance.GeneratePasswordResetLinkAsync(Client.User.Info.Email);
+        await SendEmailLink(link, "reset the password");
+    }
+
+    public async Task SendEmailLink(string link, string text)
+    {
         await Task.Run(() =>
         {
-            EmailMessage.To.Add(new MailboxAddress("", email));
+            EmailMessage.To.Add(new MailboxAddress("", Client.User.Info.Email));
             EmailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = "<h2><a href=" + link + ">Сlick here</a> to verify your email address.</h2><br>"
+                Text = "<h2><a href=" + link + ">Сlick here</a> to " + text + ".</h2><br>"
             };
 
             using (var smtpClient = new SmtpClient())
