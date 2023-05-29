@@ -30,11 +30,13 @@ public class User : IUser
         EmailMessage.From.Add(new MailboxAddress("MoodMate", PrivateConstants.Email));
         EmailMessage.Subject = "Verify your email address";
 
-        Alerts = new IToast[4];
+        Alerts = new IToast[6];
         Alerts[0] = Toast.Make("Check your email for verification!", ToastDuration.Short, 16);
         Alerts[1] = Toast.Make("Wrong email or password!", ToastDuration.Short, 16);
         Alerts[2] = Toast.Make("No internet connection!", ToastDuration.Short, 16);
         Alerts[3] = Toast.Make("Email is not verified, try again in 1 minute to resend the mail!", ToastDuration.Short, 16);
+        Alerts[4] = Toast.Make("Check your email to reset your password!", ToastDuration.Short, 16);
+        Alerts[5] = Toast.Make("Reset password sent to email, try again in 1 minute to resend the email!", ToastDuration.Short, 16);
     }
 
     public async Task<bool> SingIn(string email, string password)
@@ -111,7 +113,14 @@ public class User : IUser
 
     public async Task DeleteUser()
     {
-        await FirebaseAuth.DefaultInstance.DeleteUserAsync(Client.User.Uid);
+        try
+        {
+            await FirebaseAuth.DefaultInstance.DeleteUserAsync(Client.User.Uid);
+        }
+        catch
+        {
+            await Alerts[2].Show();
+        }
     }
 
     public async Task SendEmailVerificationLink()
@@ -122,8 +131,23 @@ public class User : IUser
 
     public async Task SendEmailPasswordResetLink()
     {
-        var link = await FirebaseAuth.DefaultInstance.GeneratePasswordResetLinkAsync(Client.User.Info.Email);
-        await SendEmailLink(link, "reset the password");
+        if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+        {
+            try
+            {
+                var link = await FirebaseAuth.DefaultInstance.GeneratePasswordResetLinkAsync(Client.User.Info.Email);
+                await SendEmailLink(link, "reset the password");
+                await Alerts[4].Show();
+            }
+            catch
+            {
+                await Alerts[5].Show();
+            }
+        }
+        else
+        {
+            await Alerts[2].Show();
+        }
     }
 
     public async Task SendEmailLink(string link, string text)
