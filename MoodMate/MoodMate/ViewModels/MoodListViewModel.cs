@@ -14,11 +14,12 @@ using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
 
-public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodNoteMessage>
+public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMoodNoteMessage>, IRecipient<LoadedMoodNoteMessage>
 {
     private readonly MoodNote MoodNote;
     private readonly IUser User;
     private bool IsUpdating;
+    private bool IsLoaded;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
     [ObservableProperty] bool isRefreshing;
 
@@ -28,8 +29,10 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
         User = user;
         IsRefreshing = false;
         IsUpdating = false;
+        IsLoaded = true;
 
-        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.Register<UpdateMoodNoteMessage>(this);
+        WeakReferenceMessenger.Default.Register<LoadedMoodNoteMessage>(this);
         MoodNote.CreateDb();
     }
 
@@ -69,23 +72,36 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
     [RelayCommand]
     void Load() => IsRefreshing = true;
 
+
     [RelayCommand]
     async Task UpdateMoodNote()
     {
-        if(IsUpdating)
+        if (IsUpdating)
             return;
 
-        await MoodNote.LoadNoteLocal();
-        var moods = MoodNote.GetData();
+        if (IsLoaded)
+            await MoodNote.LoadNoteLocal();
 
-        if(User.Client.User != null)
+        List<MoodNote> moods;
+
+        if (User.Client.User != null)
         {
+            if (IsLoaded)
+            {
+                IsLoaded = false;
+            }
+            else
+            {
+                MoodNote.ClearNotes();
+            }
+            moods = MoodNote.GetData();
+
             try
             {
-                if(moods.Count() != 0)
+                if (moods.Count != 0)
                 {
                     var rezult = await Shell.Current.ShowPopupAsync(new CloudWarningPage());
-                    switch(rezult)
+                    switch (rezult)
                     {
                         case 1:
                             User.Client.SignOut();
@@ -113,13 +129,16 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
         }
         else
         {
+            if (IsLoaded)
+                IsLoaded = false;
+
             moods = MoodNote.GetDataSortByDate();
         }
 
         await Task.Run(() =>
         {
             MoodNotes.Clear();
-            foreach(var mood in moods)
+            foreach (var mood in moods)
                 MoodNotes.Add(mood);
         });
         IsRefreshing = false;
@@ -128,7 +147,7 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
     [RelayCommand]
     async Task AddItems()
     {
-        if(User.Client.User != null && !IsRefreshing)
+        if (User.Client.User != null && !IsRefreshing)
         {
             try
             {
@@ -136,7 +155,7 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
                 await MoodNote.LoadNoteCloud(countItemsBefore, 10, User.Client.User, false);
                 var moods = MoodNote.GetData();
 
-                for(var i = countItemsBefore; i < moods.Count; i++)
+                for (var i = countItemsBefore; i < moods.Count; i++)
                 {
                     MoodNotes.Add(moods[i]);
                 }
@@ -178,8 +197,7 @@ public partial class MoodListViewModel: ObservableObject, IRecipient<UpdateMoodN
         IsUpdating = false;
     }
 
-    public void Receive(UpdateMoodNoteMessage message)
-    {
-        IsRefreshing = true;
-    }
+    void IRecipient<UpdateMoodNoteMessage>.Receive(UpdateMoodNoteMessage message) => IsRefreshing = true;
+
+    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message) => IsLoaded = true;
 }
