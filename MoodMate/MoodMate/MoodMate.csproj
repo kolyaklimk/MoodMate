@@ -108,9 +108,6 @@
 	  <MauiXaml Update="Pages\Other\CloudWarningPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Other\ContextMenuPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\Other\GoOfflinePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -38,9 +38,6 @@
     <MauiXaml Update="Pages\Other\CloudWarningPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Other\ContextMenuPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="Pages\Other\GoOfflinePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
