@@ -184,14 +184,18 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     {
         IsUpdating = true;
         IsRefreshing = true;
-        try
+
+        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage()) != null)
         {
-            await MoodNote.DeleteNote(note, User.Client.User);
-            MoodNotes.Remove(note);
-        }
-        catch
-        {
-            await User.Alerts[2].Show();
+            try
+            {
+                await MoodNote.DeleteNote(note, User.Client.User);
+                MoodNotes.Remove(note);
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
         }
         IsRefreshing = false;
         IsUpdating = false;
