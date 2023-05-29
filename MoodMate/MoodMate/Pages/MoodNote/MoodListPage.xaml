@@ -61,19 +61,59 @@
 
                     <DataTemplate x:DataType="entity:MoodNote">
 
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        <Border BackgroundColor="#936840"
+                                                HorizontalOptions="End"
+                                                StrokeThickness="0"
+                                                WidthRequest="120">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="15"/>
+                                            </Border.StrokeShape>
+
+                                            <Grid ColumnDefinitions="*,*">
+
+                                                <Image Grid.Column="0"
+                                                       Scale="0.7"
+                                                       Source="icon_share.png">
+                                                    
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=ShareNoteCommand}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+
+                                                <Image Grid.Column="1"
+                                                       Scale="0.7"
+                                                       Source="icon_delete.png">
+                                                    
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=DeleteNoteCommand}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>                           
+                            </SwipeView.LeftItems>
+                           
                         <Border BackgroundColor="#fffbef" 
                                 StrokeThickness="0">
 
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"/>
-                            </Border.StrokeShape>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
 
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding}"
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
-                            </Border.GestureRecognizers>
-
-                            <Grid Padding="10"
+                                </Border.GestureRecognizers>
+                            
+                                <Grid Padding="10"
                                   Grid.RowDefinitions="70,*"
                                   RowSpacing="4">
 
@@ -107,17 +147,6 @@
                                                    TextColor="#66645E"/>
                                         </Grid>
                                     </Grid>
-
-                                    <Image Grid.Column="2" 
-                                           Source="icon_settings.png"
-                                           HeightRequest="30"
-                                           Margin="-35,-30,-30,0">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding}"
-                                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=PopupCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-
                                 </Grid>
 
                                 <Label Grid.Row="1"
@@ -128,6 +157,7 @@
                                        TextColor="#66645E"/>
                             </Grid>
                         </Border>
+                    </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -146,34 +176,25 @@
 
             <Grid RowDefinitions="*,*">
 
-                <Border Grid.Row="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                <Image Grid.Row="0"
+                       Scale="0.7"
+                       Source="icon_loop.png">
+                    
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding GoToAnalysisMoodPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
 
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToAnalysisMoodPageCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Scale="0.7"
-                           Source="icon_loop.png">
-                    </Image>
-                </Border>
-
-                <Border Grid.Row="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToChooseMoodPageCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Scale="0.7"
-                           Source="icon_plus.png">
-                    </Image>
-                </Border>
+                <Image Grid.Row="1"
+                       Scale="0.7"
+                       Source="icon_plus.png">
+                    
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding GoToChooseMoodPageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </Border>
-
         
         <Border Grid.Row="2"            
                 Margin="-1,0,-1,-1"
