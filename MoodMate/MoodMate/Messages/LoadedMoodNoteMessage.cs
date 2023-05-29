@@ -3,7 +3,7 @@
 
 namespace MoodMate.Messages;
 
-internal class LoadedMoodNoteMessage : ValueChangedMessage<object>
+public class LoadedMoodNoteMessage : ValueChangedMessage<object>
 {
     public LoadedMoodNoteMessage() : base(null) { }
 }
