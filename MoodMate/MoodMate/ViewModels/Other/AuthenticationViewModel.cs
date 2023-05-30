@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities.Abstractions;
+using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 
 namespace MoodMate.ViewModels.Other;
@@ -8,14 +10,16 @@ namespace MoodMate.ViewModels.Other;
 public partial class AuthenticationViewModel : ObservableObject
 {
     private readonly IUser User;
+    private readonly LoadedMoodNoteMessage LoadedMoodNoteMessage;
 
     [ObservableProperty] string email;
     [ObservableProperty] string password;
     [ObservableProperty] bool isRefreshing;
-    public AuthenticationViewModel(IUser user)
+    public AuthenticationViewModel(IUser user, LoadedMoodNoteMessage loaded)
     {
         User = user;
         IsRefreshing = false;
+        LoadedMoodNoteMessage = loaded;
     }
 
     [RelayCommand]
@@ -38,6 +42,7 @@ public partial class AuthenticationViewModel : ObservableObject
             if (User.Client.User != null)
                 User.SignOut();
             await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
         }
     }
 
@@ -52,6 +57,7 @@ public partial class AuthenticationViewModel : ObservableObject
             {
                 await User.SaveEmailAndPasswordLocal(Email, Password);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+                WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
             }
 
             IsRefreshing = false;
