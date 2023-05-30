@@ -59,7 +59,7 @@ public partial class UserViewModel : ObservableObject
     async Task DeleteUser()
     {
         IsRefreshing = true;
-        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete the account?")) != null)
+        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete the account?", "Delete")) != null)
         {
             try
             {

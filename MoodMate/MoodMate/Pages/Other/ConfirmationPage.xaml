@@ -35,10 +35,10 @@
                         FontFamily="OpenSansBold"
                         FontSize="22"
                         BackgroundColor="#fffbef"/>
-                
+
                 <Button Grid.Column="1"
+                        x:Name="TextButton"
                         Clicked="Delete_Clicked"
-                        Text="Delete"
                         TextColor="#2F2F2C"
                         FontFamily="OpenSansBold"
                         FontSize="22"

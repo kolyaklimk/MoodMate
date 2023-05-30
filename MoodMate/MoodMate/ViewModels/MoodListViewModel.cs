@@ -196,7 +196,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         IsUpdating = true;
         IsRefreshing = true;
 
-        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete selected record?")) != null)
+        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete selected record?", "Delete")) != null)
         {
             try
             {
