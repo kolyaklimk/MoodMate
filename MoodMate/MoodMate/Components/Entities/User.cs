@@ -113,14 +113,7 @@ public class User : IUser
 
     public async Task DeleteUser()
     {
-        try
-        {
-            await FirebaseAuth.DefaultInstance.DeleteUserAsync(Client.User.Uid);
-        }
-        catch
-        {
-            await Alerts[2].Show();
-        }
+        await FirebaseAuth.DefaultInstance.DeleteUserAsync(Client.User.Uid);
     }
 
     public async Task SendEmailVerificationLink()
