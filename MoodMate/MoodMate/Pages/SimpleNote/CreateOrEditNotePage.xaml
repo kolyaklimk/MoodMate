@@ -27,41 +27,6 @@
                 </Image>
             </Border>
             
-            <Grid ColumnDefinitions="30,30"
-                  ColumnSpacing="50"
-                  Grid.Column="1"
-                  HorizontalOptions="Center"
-                  IsVisible="{Binding Create, Converter={toolkit:InvertedBoolConverter}}">
-                
-                <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0"
-                        Margin="-15">
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShareItemCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Source="icon_share.png"
-                           Scale="0.5">
-                    </Image>
-                </Border>
-
-                <Border Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0"
-                        Margin="-15">
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding DeleteItemCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Source="icon_delete.png"
-                           Scale="0.5">
-                    </Image>
-                </Border>
-            </Grid>
-
             <Border Grid.Column="2"
                     BackgroundColor="Transparent"
                     StrokeThickness="0"
