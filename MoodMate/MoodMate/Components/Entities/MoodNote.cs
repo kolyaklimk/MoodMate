@@ -32,18 +32,19 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     }
     public override async Task SaveLocalToCloud(Firebase.Auth.User user)
     {
-        foreach (var item in NoteControl.Data.Select((value, index) => new { value, index }))
+        var data = GetData();
+        while (data.Count != 0)
         {
             await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
                 AddAsync(new Dictionary<string, object>
                 {
-                    { "Date", TimeZoneInfo.ConvertTimeToUtc(item.value.Date) },
-                    { "Text", item.value.Text },
-                    { "Name", item.value.Mood.Name },
-                    { "Source", item.value.Mood.Source }
+                    { "Date", TimeZoneInfo.ConvertTimeToUtc(data[0].Date) },
+                    { "Text", data[0].Text },
+                    { "Name", data[0].Mood.Name },
+                    { "Source", data[0].Mood.Source }
                 });
+            data.RemoveAt(0);
         }
-        ClearNotes();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
     public override async Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
