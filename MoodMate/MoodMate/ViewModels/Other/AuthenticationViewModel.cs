@@ -11,15 +11,17 @@ public partial class AuthenticationViewModel : ObservableObject
 {
     private readonly IUser User;
     private readonly LoadedMoodNoteMessage LoadedMoodNoteMessage;
+    private readonly LoadedSimpleNoteMessage LoadedSimpleNoteMessage;
 
     [ObservableProperty] string email;
     [ObservableProperty] string password;
     [ObservableProperty] bool isRefreshing;
-    public AuthenticationViewModel(IUser user, LoadedMoodNoteMessage loaded)
+    public AuthenticationViewModel(IUser user, LoadedMoodNoteMessage loaded1, LoadedSimpleNoteMessage loaded2)
     {
         User = user;
         IsRefreshing = false;
-        LoadedMoodNoteMessage = loaded;
+        LoadedMoodNoteMessage = loaded1;
+        LoadedSimpleNoteMessage = loaded2;
     }
 
     [RelayCommand]
@@ -43,6 +45,7 @@ public partial class AuthenticationViewModel : ObservableObject
                 User.SignOut();
             await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
             WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
+            WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
         }
     }
 
@@ -58,6 +61,7 @@ public partial class AuthenticationViewModel : ObservableObject
                 await User.SaveEmailAndPasswordLocal(Email, Password);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
                 WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
+                WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
             }
 
             IsRefreshing = false;

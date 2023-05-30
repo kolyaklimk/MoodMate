@@ -2,7 +2,7 @@
 
 namespace MoodMate.Messages;
 
-internal class LoadedSimpleNoteMessage : ValueChangedMessage<object>
+public class LoadedSimpleNoteMessage : ValueChangedMessage<object>
 {
     public LoadedSimpleNoteMessage() : base(null) { }
 }

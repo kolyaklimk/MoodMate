@@ -9,21 +9,25 @@ using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels.Other;
 
+[QueryProperty(nameof(Page), "Page")]
 [QueryProperty(nameof(Color), "Color")]
 public partial class UserViewModel : ObservableObject
 {
     private IUser User;
     private readonly LoadedMoodNoteMessage LoadedMoodNoteMessage;
-    public UserViewModel(IUser user, LoadedMoodNoteMessage loaded)
+    private readonly LoadedSimpleNoteMessage LoadedSimpleNoteMessage;
+    public UserViewModel(IUser user, LoadedMoodNoteMessage loaded1, LoadedSimpleNoteMessage loaded2)
     {
         User = user;
-        LoadedMoodNoteMessage = loaded;
+        LoadedMoodNoteMessage = loaded1;
+        LoadedSimpleNoteMessage = loaded2;
         IsRefreshing = false;
     }
 
     [ObservableProperty] string email;
     [ObservableProperty] string singInOut;
     [ObservableProperty] string label;
+    [ObservableProperty] string page;
     [ObservableProperty] Color color;
     [ObservableProperty] bool isLogIn;
     [ObservableProperty] bool isRefreshing;
@@ -83,8 +87,9 @@ public partial class UserViewModel : ObservableObject
             User.SignOut();
             IsLogIn = false;
             SingInOut = "Sign In";
-            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            await Shell.Current.GoToAsync("//" + Page);
             WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
+            WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
         }
         else
         {
@@ -96,6 +101,6 @@ public partial class UserViewModel : ObservableObject
     [RelayCommand]
     public async Task GoToMoodPage()
     {
-        await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+        await Shell.Current.GoToAsync("//" + Page);
     }
 }

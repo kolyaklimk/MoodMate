@@ -62,6 +62,7 @@ public static class MauiProgram
         services.AddSingleton<UpdateMoodNoteMessage>();
         services.AddSingleton<UpdateSimpleNoteMessage>();
         services.AddSingleton<LoadedMoodNoteMessage>();
+        services.AddSingleton<LoadedSimpleNoteMessage>();
         services.AddSingleton<IUser, User>();
     }
 }
