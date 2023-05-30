@@ -13,7 +13,7 @@ public abstract partial class ANote<T> : ObservableObject
     [ObservableProperty] public string text;
     public List<T> GetData()
     {
-        return NoteControl.Data.ToList();
+        return NoteControl.Data;
     }
     public void CreateDb()
     {
