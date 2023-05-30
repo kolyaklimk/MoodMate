@@ -49,6 +49,7 @@ public static class MauiProgram
         services.AddSingleton<AnalysisMoodPage, AnalysisMoodViewModel>();
 
         services.AddSingleton<AuthenticationPage, AuthenticationViewModel>();
+        services.AddSingleton<UserPage, UserViewModel>();
 
         // Services
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
@@ -60,6 +61,7 @@ public static class MauiProgram
         services.AddSingleton<StartRotateMessage>();
         services.AddSingleton<UpdateMoodNoteMessage>();
         services.AddSingleton<UpdateSimpleNoteMessage>();
+        services.AddSingleton<LoadedMoodNoteMessage>();
         services.AddSingleton<IUser, User>();
     }
 }
