@@ -43,9 +43,9 @@ public partial class AuthenticationViewModel : ObservableObject
         {
             if (User.Client.User != null)
                 User.SignOut();
-            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
             WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
             WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
+            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
         }
     }
 
@@ -58,9 +58,9 @@ public partial class AuthenticationViewModel : ObservableObject
             if (await User.SingIn(Email, Password) == 1)
             {
                 await User.SaveEmailAndPasswordLocal(Email, Password);
-                await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
                 WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
                 WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
+                await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
             }
             IsRefreshing = false;
         }

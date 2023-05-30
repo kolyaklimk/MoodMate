@@ -66,7 +66,14 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     }
 
     [RelayCommand]
-    void Load() => IsRefreshing = true;
+    void Load()
+    {
+        if (IsLoaded || IsUpdating)
+        {
+            IsUpdating = false;
+            IsRefreshing = true;
+        }
+    }
 
     [RelayCommand]
     async Task GoToCreateOrEditPage()
@@ -208,14 +215,7 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
         IsUpdating = false;
     }
 
-    void IRecipient<UpdateSimpleNoteMessage>.Receive(UpdateSimpleNoteMessage message) => IsRefreshing = true;
+    void IRecipient<UpdateSimpleNoteMessage>.Receive(UpdateSimpleNoteMessage message) => IsUpdating = true;
 
-    void IRecipient<LoadedSimpleNoteMessage>.Receive(LoadedSimpleNoteMessage message)
-    {
-        if (!IsRefreshing)
-        {
-            IsLoaded = true;
-            IsRefreshing = true;
-        }
-    }
+    void IRecipient<LoadedSimpleNoteMessage>.Receive(LoadedSimpleNoteMessage message) => IsLoaded = true;
 }

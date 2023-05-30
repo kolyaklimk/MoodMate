@@ -85,9 +85,9 @@ public partial class UserViewModel : ObservableObject
             User.SignOut();
             IsLogIn = false;
             SingInOut = "Sign In";
-            await Shell.Current.GoToAsync("//" + Page);
             WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
             WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
+            await Shell.Current.GoToAsync("//" + Page);
         }
         else
         {

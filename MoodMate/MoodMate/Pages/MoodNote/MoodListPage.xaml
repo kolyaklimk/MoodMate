@@ -11,10 +11,8 @@
     <ContentPage.Behaviors>
         
         <toolkit:EventToCommandBehavior Command="{Binding LoadCommand}" 
-                                        EventName="Loaded"/>
-
-        <toolkit:StatusBarBehavior StatusBarColor="#e2d9c5" 
-                                   StatusBarStyle="DarkContent"/>
+                                        EventName="NavigatedTo"/>
+        
     </ContentPage.Behaviors>
 
     <Grid RowDefinitions="75,*,135,60">

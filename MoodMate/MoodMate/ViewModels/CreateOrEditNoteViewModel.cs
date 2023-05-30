@@ -52,8 +52,8 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
                 {
                     await SimpleNote.ChangeNote(SelectedNote, User.Client.User);
                 }
-                await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
                 WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
+                await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
             }
             catch
             {

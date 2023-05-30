@@ -76,7 +76,14 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
-    void Load() => IsRefreshing = true;
+    void Load()
+    {
+        if (IsLoaded || IsUpdating)
+        {
+            IsUpdating = false;
+            IsRefreshing = true;
+        }
+    }
 
     [RelayCommand]
     async Task UpdateMoodNote()
@@ -208,14 +215,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
         IsUpdating = false;
     }
 
-    void IRecipient<UpdateMoodNoteMessage>.Receive(UpdateMoodNoteMessage message) => IsRefreshing = true;
+    void IRecipient<UpdateMoodNoteMessage>.Receive(UpdateMoodNoteMessage message) => IsUpdating = true;
 
-    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message)
-    {
-        if (!IsRefreshing)
-        {
-            IsLoaded = true;
-            IsRefreshing = true;
-        }
-    }
+    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message) => IsLoaded = true;
 }
