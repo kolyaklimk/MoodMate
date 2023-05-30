@@ -19,7 +19,7 @@ namespace MoodMate.ViewModels;
 public partial class CreateOrEditNoteViewModel : ObservableObject
 {
     private readonly SimpleNote SimpleNote;
-    private readonly UpdateSimpleNoteMessage UpdateSimpleNoteMessage;
+    private readonly UpdateSimpleNoteMessage UpdateSimpleNoteMessage = new();
     private readonly IUser User;
     private IToast Alert;
 
@@ -28,11 +28,9 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
     [ObservableProperty] private SimpleNote savededNote;
     [ObservableProperty] bool isRefreshing = false;
 
-    public CreateOrEditNoteViewModel(Note[] note, IToast[] toasts,
-        UpdateSimpleNoteMessage update, IUser user)
+    public CreateOrEditNoteViewModel(Note[] note, IToast[] toasts, IUser user)
     {
         SimpleNote = note[1].note;
-        UpdateSimpleNoteMessage = update;
         Alert = toasts[2];
         User = user;
     }

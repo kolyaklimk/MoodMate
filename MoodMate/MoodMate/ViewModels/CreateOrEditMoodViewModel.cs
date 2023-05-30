@@ -19,7 +19,7 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
 {
     private readonly MoodNote MoodNote;
     private readonly FileService MoodImages;
-    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
+    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage = new();
     private IToast Alert;
     private readonly IUser User;
 
@@ -29,11 +29,10 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     [ObservableProperty] bool isRefreshing = false;
 
     public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService,
-        UpdateMoodNoteMessage update, IToast[] toasts, IUser user)
+        IToast[] toasts, IUser user)
     {
         MoodNote = note[0].note;
         MoodImages = fileService[0];
-        UpdateMoodNoteMessage = update;
         Alert = toasts[1];
         User = user;
     }
