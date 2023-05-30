@@ -10,7 +10,10 @@
 
     <ShellContent ContentTemplate="{DataTemplate other:AuthenticationPage}"
                   Route="AuthenticationPage"/>
-    
+
+    <ShellContent ContentTemplate="{DataTemplate other:UserPage}"
+                  Route="UserPage"/>
+
     <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"
                   Route="MoodListPage"/>
 

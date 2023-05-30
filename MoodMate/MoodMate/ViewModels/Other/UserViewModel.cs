@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities.Abstractions;
+using MoodMate.Messages;
+using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels.Other;
@@ -9,29 +12,34 @@ namespace MoodMate.ViewModels.Other;
 public partial class UserViewModel : ObservableObject
 {
     private IUser User;
-    public UserViewModel(IUser user)
+    private readonly LoadedMoodNoteMessage LoadedMoodNoteMessage;
+    public UserViewModel(IUser user, LoadedMoodNoteMessage loaded)
     {
         User = user;
+        LoadedMoodNoteMessage = loaded;
     }
 
     [ObservableProperty] string email;
     [ObservableProperty] string singInOut;
+    [ObservableProperty] string label;
     [ObservableProperty] bool isLogIn;
 
     [RelayCommand]
     void Load()
     {
-        Email = User.Client.User.Info.Email;
 
         if (User.Client.User != null)
         {
+            Email = User.Client.User.Info.Email;
             IsLogIn = true;
             SingInOut = "Sign Out";
+            Label = "Email";
         }
         else
         {
             IsLogIn = false;
             SingInOut = "Sign In";
+            Label = "Offline";
         }
     }
 
@@ -47,6 +55,7 @@ public partial class UserViewModel : ObservableObject
         if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete the account?")) != null)
         {
             await User.DeleteUser();
+            await Shell.Current.GoToAsync("//" + nameof(AuthenticationPage));
         }
     }
 
@@ -58,6 +67,8 @@ public partial class UserViewModel : ObservableObject
             User.SignOut();
             IsLogIn = false;
             SingInOut = "Sign In";
+            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
         }
         else
         {

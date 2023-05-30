@@ -11,33 +11,28 @@
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"
                                         Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
-    
+
     <Grid Padding="15"
           VerticalOptions="Center"
           RowSpacing="10"
-          RowDefinitions="*,*,*,*">
+          RowDefinitions="*,*,*,*,*">
+        
+        <Label Grid.Row="0" 
+               FontFamily="OpenSansBold"
+               FontSize="28"
+               TextColor="#2F2F2C"
+               HorizontalOptions="Center"
+               Text="{Binding Label}"/>
 
-        <Grid RowDefinitions="60,60"
-              RowSpacing="10"
-              Grid.Row="0"
-              VerticalOptions="Center"
-              IsVisible="{Binding IsLogIn}">
-
-            <Label Grid.Row="0" 
-                   FontFamily="OpenSansBold"
-                   FontSize="28"
-                   TextColor="#2F2F2C"
-                   HorizontalOptions="Center"
-                   Text="Email"/>
-            
-            <Label FontSize="22"   
-                   TextColor="#2F2F2C"         
-                   HorizontalTextAlignment="Center"
-                   Text="{Binding Email}"/>
-        </Grid>
-
-        <Button Text="{Binding SingInOut}"
-                Grid.Row="1"
+        <Label Grid.Row="1" 
+               FontSize="22"   
+               TextColor="#2F2F2C"         
+               HorizontalTextAlignment="Center"
+               Text="{Binding Email}"
+               IsVisible="{Binding IsLogIn}"/>
+    
+            <Button Text="{Binding SingInOut}"
+                Grid.Row="2"
                 CornerRadius="15"
                 HeightRequest="60"
                 VerticalOptions="End"
@@ -47,8 +42,8 @@
                 FontSize="28"
                 Command="{Binding SignInOutCommand}"/>
 
-        <Button Text="Delete account"
-                Grid.Row="2"
+            <Button Text="Delete account"
+                Grid.Row="3"
                 IsVisible="{Binding IsLogIn}"
                 CornerRadius="15"
                 HeightRequest="60"
@@ -59,8 +54,8 @@
                 FontSize="28"
                 Command="{Binding DeleteUserCommand}"/>
 
-        <Button Text="Reset password"
-                Grid.Row="3"
+            <Button Text="Reset password"
+                Grid.Row="4"
                 IsVisible="{Binding IsLogIn}"
                 CornerRadius="15"
                 HeightRequest="60"
