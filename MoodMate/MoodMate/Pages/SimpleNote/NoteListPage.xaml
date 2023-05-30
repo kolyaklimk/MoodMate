@@ -9,7 +9,7 @@
              BackgroundColor="#e2d9c5">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded"
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
                                         Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
 
@@ -58,21 +58,18 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:SimpleNote">
-                        
-                        <SwipeView>
+                        <Border BackgroundColor="Transparent"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+                            <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItemView>
-                                        <Border BackgroundColor="#2C3963"
-                                                HorizontalOptions="End"
-                                                StrokeThickness="0"
-                                                WidthRequest="120">
-
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="15"/>
-                                            </Border.StrokeShape>
-
-                                            <Grid ColumnDefinitions="*,*">
+                                        <SwipeItemView>
+                                            <Grid ColumnDefinitions="*,*"
+                                                  WidthRequest="120"
+                                                  BackgroundColor="#2C3963">
 
                                                 <Image Grid.Column="0"
                                                        Scale="0.7"
@@ -94,19 +91,13 @@
                                                     </Image.GestureRecognizers>
                                                 </Image>
                                             </Grid>
-                                        </Border>
-                                    </SwipeItemView>
+                                        </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
-                            
-                            <Border BackgroundColor="#fffbef" 
+
+                                <Border BackgroundColor="#fffbef" 
                                 StrokeThickness="0">
-
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"/>
-                            </Border.StrokeShape>
-
-                            <Border.GestureRecognizers>
+                                    <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
                                 {x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
                                                       CommandParameter="{Binding}"/>
@@ -115,12 +106,13 @@
                                 <Label Text="{Binding Text}" 
                                        LineBreakMode="CharacterWrap"
                                        TextColor = "#66645E"
-                                       MinimumHeightRequest="80"
+                                       MinimumHeightRequest="90"
                                        MaxLines="15"
                                        FontSize="15"
                                        Padding="10"/>
                             </Border>
                         </SwipeView>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

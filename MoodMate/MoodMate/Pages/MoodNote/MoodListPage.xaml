@@ -58,26 +58,23 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:MoodNote">
-
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItemView>
-                                        <Border BackgroundColor="#936840"
-                                                HorizontalOptions="End"
-                                                StrokeThickness="0"
-                                                WidthRequest="120">
-
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="15"/>
-                                            </Border.StrokeShape>
-
-                                            <Grid ColumnDefinitions="*,*">
+                        <Border BackgroundColor="Transparent"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItemView>
+                                            <Grid ColumnDefinitions="*,*"
+                                                WidthRequest="120"
+                                                      BackgroundColor="#936840">
 
                                                 <Image Grid.Column="0"
                                                        Scale="0.7"
                                                        Source="icon_share.png">
-                                                    
+
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer CommandParameter="{Binding}"
                                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=ShareNoteCommand}"/>
@@ -87,75 +84,68 @@
                                                 <Image Grid.Column="1"
                                                        Scale="0.7"
                                                        Source="icon_delete.png">
-                                                    
+
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer CommandParameter="{Binding}"
                                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=DeleteNoteCommand}"/>
                                                     </Image.GestureRecognizers>
                                                 </Image>
                                             </Grid>
-                                        </Border>
-                                    </SwipeItemView>
-                                </SwipeItems>                           
-                            </SwipeView.LeftItems>
-                           
-                        <Border BackgroundColor="#fffbef" 
-                                StrokeThickness="0">
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
 
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
-                                </Border.GestureRecognizers>
-                            
                                 <Grid Padding="10"
-                                  Grid.RowDefinitions="70,*"
-                                  RowSpacing="4">
+                                      Grid.RowDefinitions="70,*"
+                                      RowSpacing="4"
+                                      BackgroundColor="#fffbef">
 
-                                <Grid Grid.Row="0"
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <Grid Grid.Row="0"
                                       ColumnSpacing="10"
                                       Grid.ColumnDefinitions="70,*,10">
-                                    
-                                    <Image Grid.Column="0" 
+
+                                        <Image Grid.Column="0" 
                                            Source="{Binding Mood.Source}"/>
 
-                                    <Grid Grid.Column="1" 
+                                        <Grid Grid.Column="1" 
                                           Grid.RowDefinitions="40,20">
 
-                                        <Label Grid.Row="0"
+                                            <Label Grid.Row="0"
                                                FontFamily="OpenSansBold"
                                                FontSize="28"
                                                Text="{Binding Mood.Name}"
                                                TextColor="#2F2F2C"/>
 
-                                        <Grid Grid.Row="1"
+                                            <Grid Grid.Row="1"
                                               ColumnSpacing="5"
                                               Grid.ColumnDefinitions="15,*">
 
-                                            <Image Grid.Column="0"
+                                                <Image Grid.Column="0"
                                                Source="icon_time.png"
                                                VerticalOptions="Center"/>
 
-                                            <Label Grid.Column="1"
+                                                <Label Grid.Column="1"
                                                    FontSize="14"
                                                    Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
                                                    TextColor="#66645E"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
 
-                                <Label Grid.Row="1"
+                                    <Label Grid.Row="1"
                                        FontSize="16"
                                        LineBreakMode="CharacterWrap"
                                        Text="{Binding Text}"
                                        MaxLines="10"
                                        TextColor="#66645E"/>
-                            </Grid>
+                                </Grid>
+                            </SwipeView>
                         </Border>
-                    </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
