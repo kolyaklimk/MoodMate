@@ -12,58 +12,79 @@
                                         Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid Padding="15"
-          VerticalOptions="Center"
-          RowSpacing="10"
-          RowDefinitions="*,*,*,*,*">
+    <Grid RowDefinitions="25,*"
+          Padding="15">
+
+        <Grid ColumnDefinitions="25,*">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45">
+                </Image>
+            </Border>
+        </Grid>
         
-        <Label Grid.Row="0" 
-               FontFamily="OpenSansBold"
-               FontSize="28"
-               TextColor="#2F2F2C"
-               HorizontalOptions="Center"
-               Text="{Binding Label}"/>
-
-        <Label Grid.Row="1" 
-               FontSize="22"   
-               TextColor="#2F2F2C"         
-               HorizontalTextAlignment="Center"
-               Text="{Binding Email}"
-               IsVisible="{Binding IsLogIn}"/>
-    
+        <Grid Grid.RowSpan="2"
+              VerticalOptions="Center"
+              RowSpacing="10"
+              RowDefinitions="Auto,Auto,15,*,*,*">
+            
+            <Label Grid.Row="0" 
+                   FontFamily="OpenSansBold"
+                   FontSize="28"
+                   TextColor="#2F2F2C"
+                   HorizontalOptions="Center"
+                   Text="{Binding Label}"/>
+            
+            <Label Grid.Row="1" 
+                   FontSize="22"   
+                   TextColor="#2F2F2C"         
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Email}"
+                   IsVisible="{Binding IsLogIn}"/>
+            
             <Button Text="{Binding SingInOut}"
-                Grid.Row="2"
-                CornerRadius="15"
-                HeightRequest="60"
-                VerticalOptions="End"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
-                Command="{Binding SignInOutCommand}"/>
-
+                    Grid.Row="3"
+                    CornerRadius="15"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    BackgroundColor="#fffbef"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="28"
+                    Command="{Binding SignInOutCommand}"/>
+            
             <Button Text="Delete account"
-                Grid.Row="3"
-                IsVisible="{Binding IsLogIn}"
-                CornerRadius="15"
-                HeightRequest="60"
-                VerticalOptions="End"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
-                Command="{Binding DeleteUserCommand}"/>
-
+                    Grid.Row="4"
+                    IsVisible="{Binding IsLogIn}"
+                    CornerRadius="15"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    BackgroundColor="#fffbef"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="28"
+                    Command="{Binding DeleteUserCommand}"/>
+            
             <Button Text="Reset password"
-                Grid.Row="4"
-                IsVisible="{Binding IsLogIn}"
-                CornerRadius="15"
-                HeightRequest="60"
-                VerticalOptions="End"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
-                Command="{Binding ResetPasswordCommand}"/>
+                    Grid.Row="5"
+                    IsVisible="{Binding IsLogIn}"
+                    CornerRadius="15"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    BackgroundColor="#fffbef"
+                    TextColor="#2F2F2C"
+                    FontFamily="OpenSansBold"
+                    FontSize="28"
+                    Command="{Binding ResetPasswordCommand}"/>
+        </Grid>
     </Grid>
-</ContentPage>
+</ContentPage>    

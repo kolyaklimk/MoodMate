@@ -33,7 +33,7 @@ public partial class UserViewModel : ObservableObject
             Email = User.Client.User.Info.Email;
             IsLogIn = true;
             SingInOut = "Sign Out";
-            Label = "Email";
+            Label = "Email:";
         }
         else
         {
@@ -54,8 +54,15 @@ public partial class UserViewModel : ObservableObject
     {
         if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete the account?")) != null)
         {
-            await User.DeleteUser();
-            await Shell.Current.GoToAsync("//" + nameof(AuthenticationPage));
+            try
+            {
+                await User.DeleteUser();
+                await Shell.Current.GoToAsync("//" + nameof(AuthenticationPage));
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
         }
     }
 
@@ -74,5 +81,11 @@ public partial class UserViewModel : ObservableObject
         {
             await Shell.Current.GoToAsync("//" + nameof(AuthenticationPage));
         }
+    }
+
+    [RelayCommand]
+    public async Task GoToMoodPage()
+    {
+        await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
     }
 }
