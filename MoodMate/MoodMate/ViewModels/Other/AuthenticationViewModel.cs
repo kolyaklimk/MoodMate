@@ -37,7 +37,7 @@ public partial class AuthenticationViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Cancel()
+    async Task Offline()
     {
         if (!IsRefreshing)
         {

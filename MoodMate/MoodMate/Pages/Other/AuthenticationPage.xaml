@@ -99,6 +99,6 @@
                 TextColor="#2F2F2C"
                 FontFamily="OpenSansBold"
                 FontSize="28"
-                Command="{Binding CancelCommand}"/>
+                Command="{Binding OfflineCommand}"/>
     </Grid>
 </ContentPage>
