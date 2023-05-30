@@ -64,7 +64,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     async Task GoToUserPage()
     {
-        await Shell.Current.GoToAsync("//" + nameof(UserPage));
+        await Shell.Current.GoToAsync("//" + nameof(UserPage), new Dictionary<string, object>() {
+                {"Color", Color.FromArgb("#936840")} });
     }
 
     [RelayCommand]

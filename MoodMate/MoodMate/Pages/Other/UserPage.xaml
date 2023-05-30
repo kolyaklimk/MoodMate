@@ -15,6 +15,12 @@
     <Grid RowDefinitions="25,*"
           Padding="15">
 
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="{Binding Color}">
+            <StackLayout/>
+        </RefreshView>
+
         <Grid ColumnDefinitions="25,*">
 
             <Border Grid.Column="0"
