@@ -22,6 +22,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     private bool IsLoaded;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
     [ObservableProperty] bool isRefreshing;
+    [ObservableProperty] string icon;
 
     public MoodListViewModel(Note[] note, IUser user)
     {
@@ -61,6 +62,12 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    async Task GoToUserPage()
+    {
+        await Shell.Current.GoToAsync("//" + nameof(UserPage));
+    }
+
+    [RelayCommand]
     async Task GoToEdit(MoodNote note)
     {
         await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
@@ -86,6 +93,8 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 
         if (User.Client.User != null)
         {
+            Icon = "icon_user_yes";
+
             if (IsLoaded)
             {
                 IsLoaded = false;
@@ -132,6 +141,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
             if (IsLoaded)
                 IsLoaded = false;
 
+            Icon = "icon_user_no";
             moods = MoodNote.GetDataSortByDate();
         }
 
@@ -203,5 +213,12 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 
     void IRecipient<UpdateMoodNoteMessage>.Receive(UpdateMoodNoteMessage message) => IsRefreshing = true;
 
-    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message) => IsLoaded = true;
+    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message)
+    {
+        if (!IsRefreshing)
+        {
+            IsLoaded = true;
+            IsRefreshing = true;
+        }
+    }
 }

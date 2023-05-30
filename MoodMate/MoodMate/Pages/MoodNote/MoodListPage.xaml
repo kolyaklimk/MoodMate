@@ -7,24 +7,24 @@
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
              BackgroundColor="#e2d9c5">
-    
-    <ContentPage.Behaviors>
 
+    <ContentPage.Behaviors>
+        
         <toolkit:EventToCommandBehavior Command="{Binding LoadCommand}" 
                                         EventName="Loaded"/>
-        
+
         <toolkit:StatusBarBehavior StatusBarColor="#e2d9c5" 
                                    StatusBarStyle="DarkContent"/>
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="*,135,60">
+    <Grid RowDefinitions="75,*,135,60">
 
         <RefreshView Command="{Binding UpdateMoodNoteCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="#e2d9c5"
                      BackgroundColor="#936840"
                      Grid.Row="0"
-                     Grid.RowSpan="2"
+                     Grid.RowSpan="3"
                      Margin="15,0,15,0">
             
             <CollectionView ItemsSource="{Binding MoodNotes}"
@@ -163,7 +163,28 @@
             </CollectionView>
         </RefreshView>
 
-        <Border Grid.Row="1"
+        <Border Grid.Row="0"
+                Margin="0,0,15,15"
+                BackgroundColor="#936840"
+                HorizontalOptions="End"
+                StrokeThickness="0"
+                WidthRequest="60">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+
+            <Image Grid.Row="0"
+                   Scale="0.9"
+                   Source="{Binding Icon}">
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding GoToUserPageCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Border>
+        
+        <Border Grid.Row="2"
                 Margin="0,0,15,15"
                 BackgroundColor="#936840"
                 HorizontalOptions="End"
@@ -196,7 +217,7 @@
             </Grid>
         </Border>
         
-        <Border Grid.Row="2"            
+        <Border Grid.Row="3"            
                 Margin="-1,0,-1,-1"
                 BackgroundColor="#936840"
                 StrokeThickness="0">
