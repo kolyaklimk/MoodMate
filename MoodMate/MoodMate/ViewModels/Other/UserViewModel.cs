@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Messages;
-using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels.Other;
@@ -16,13 +15,6 @@ public partial class UserViewModel : ObservableObject
     private IUser User;
     private readonly LoadedMoodNoteMessage LoadedMoodNoteMessage;
     private readonly LoadedSimpleNoteMessage LoadedSimpleNoteMessage;
-    public UserViewModel(IUser user, LoadedMoodNoteMessage loaded1, LoadedSimpleNoteMessage loaded2)
-    {
-        User = user;
-        LoadedMoodNoteMessage = loaded1;
-        LoadedSimpleNoteMessage = loaded2;
-        IsRefreshing = false;
-    }
 
     [ObservableProperty] string email;
     [ObservableProperty] string singInOut;
@@ -30,12 +22,18 @@ public partial class UserViewModel : ObservableObject
     [ObservableProperty] string page;
     [ObservableProperty] Color color;
     [ObservableProperty] bool isLogIn;
-    [ObservableProperty] bool isRefreshing;
+    [ObservableProperty] bool isRefreshing = false;
+
+    public UserViewModel(IUser user, LoadedMoodNoteMessage loaded1, LoadedSimpleNoteMessage loaded2)
+    {
+        User = user;
+        LoadedMoodNoteMessage = loaded1;
+        LoadedSimpleNoteMessage = loaded2;
+    }
 
     [RelayCommand]
     void Load()
     {
-
         if (User.Client.User != null)
         {
             Email = User.Client.User.Info.Email;

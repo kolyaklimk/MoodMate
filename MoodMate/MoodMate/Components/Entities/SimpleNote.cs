@@ -6,24 +6,29 @@ namespace MoodMate.Components.Entities;
 public class SimpleNote : ANote<SimpleNote>
 {
     public SimpleNote() { }
+
     public SimpleNote(DateTime date, string text)
     {
         Date = date;
         Text = text;
     }
+
     public override List<SimpleNote> GetDataSortByDate()
     {
         return NoteControl.Data.OrderByDescending(x => x.Date).ToList();
     }
+
     public override async Task LoadNoteLocal()
     {
         await NoteControl.Load(Constants.PathNotes, false);
     }
+
     public override async Task DeleteNoteLocal()
     {
         ClearNotes();
         await NoteControl.UpdateFile(Constants.PathNotes);
     }
+
     public override async Task SaveLocalToCloud(Firebase.Auth.User user)
     {
         var data = GetData();
@@ -39,6 +44,7 @@ public class SimpleNote : ANote<SimpleNote>
         }
         await NoteControl.UpdateFile(Constants.PathNotes);
     }
+
     public override async Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
     {
         if (refresh)
@@ -59,6 +65,7 @@ public class SimpleNote : ANote<SimpleNote>
             });
         }
     }
+
     public override async Task AddNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         if (user != null)
@@ -74,15 +81,17 @@ public class SimpleNote : ANote<SimpleNote>
         }
         else
         {
-            obj.Id = NoteControl.GenerateKey();
-            while (NoteControl.Data.Any(n => n.Id == obj.Id))
+            do
             {
                 obj.Id = NoteControl.GenerateKey();
             }
+            while (NoteControl.Data.Any(n => n.Id == obj.Id));
+
             NoteControl.Add(obj);
             await NoteControl.UpdateFile(Constants.PathNotes);
         }
     }
+
     public override async Task ChangeNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == item.Id);
@@ -105,6 +114,7 @@ public class SimpleNote : ANote<SimpleNote>
             }
         }
     }
+
     public override async Task DeleteNote(SimpleNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == item.Id);

@@ -19,20 +19,17 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
 
     private readonly SimpleNote SimpleNote;
     private readonly IUser User;
-    private bool IsUpdating;
-    private bool IsLoaded;
+    private bool IsUpdating = false;
+    private bool IsLoaded = true;
     public ObservableCollection<SimpleNote> SimpleNotes { get; set; } = new();
-    [ObservableProperty] bool isRefreshing;
+
+    [ObservableProperty] bool isRefreshing = false;
     [ObservableProperty] string icon;
 
     public NoteListViewModel(Note[] note, IUser user)
     {
         SimpleNote = note[1].note;
         User = user;
-        IsRefreshing = false;
-        IsUpdating = false;
-        IsLoaded = true;
-
         WeakReferenceMessenger.Default.Register<UpdateSimpleNoteMessage>(this);
         WeakReferenceMessenger.Default.Register<LoadedSimpleNoteMessage>(this);
         SimpleNote.CreateDb();
@@ -53,7 +50,8 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     [RelayCommand]
     async Task GoToUserPage()
     {
-        await Shell.Current.GoToAsync("//" + nameof(UserPage), new Dictionary<string, object>() {
+        await Shell.Current.GoToAsync("//" + nameof(UserPage), 
+            new Dictionary<string, object>() {
                 {"Color", Color.FromArgb("#2C3963")},
                 {"Page", nameof(NoteListPage)}});
     }
@@ -74,9 +72,9 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     async Task GoToCreateOrEditPage()
     {
         await Shell.Current.GoToAsync("//" + nameof(CreateOrEditNotePage),
-                new Dictionary<string, object>() {
-                    { "SimpleNote", new SimpleNote() { Date = DateTime.Now }},
-                    { "Create", true}});
+            new Dictionary<string, object>() {
+                { "SimpleNote", new SimpleNote() { Date = DateTime.Now }},
+                { "Create", true}});
     }
 
     [RelayCommand]
@@ -114,10 +112,12 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
                         case 1:
                             User.SignOut();
                             break;
+
                         case 2:
                             await SimpleNote.DeleteNoteLocal();
                             await SimpleNote.LoadNoteCloud(0, 15, User.Client.User);
                             break;
+
                         case 3:
                             await SimpleNote.SaveLocalToCloud(User.Client.User);
                             await SimpleNote.LoadNoteCloud(0, 15, User.Client.User);
@@ -192,7 +192,6 @@ public partial class NoteListViewModel : ObservableObject, IRecipient<UpdateSimp
     {
         IsUpdating = true;
         IsRefreshing = true;
-
         if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete selected record?", "Delete")) != null)
         {
             try

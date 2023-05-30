@@ -22,6 +22,12 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
     private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
     private IToast Alert;
     private readonly IUser User;
+
+    [ObservableProperty] private bool create;
+    [ObservableProperty] public MoodNote selectedMood;
+    [ObservableProperty] private MoodNote savededMood;
+    [ObservableProperty] bool isRefreshing = false;
+
     public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService,
         UpdateMoodNoteMessage update, IToast[] toasts, IUser user)
     {
@@ -30,24 +36,16 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         UpdateMoodNoteMessage = update;
         Alert = toasts[1];
         User = user;
-        IsRefreshing = false;
     }
-
-    [ObservableProperty] private bool create;
-    [ObservableProperty] public MoodNote selectedMood;
-    [ObservableProperty] private MoodNote savededMood;
-    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async Task CreateOrEdit()
     {
         IsRefreshing = true;
-
         if (SelectedMood.Mood.Name != "")
         {
             try
             {
-
                 if (Create)
                 {
                     SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
@@ -57,7 +55,6 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
                 {
                     await MoodNote.ChangeNote(SelectedMood, User.Client.User);
                 }
-
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
                 WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
             }
@@ -76,7 +73,6 @@ public partial class CreateOrEditMoodViewModel : ObservableObject
         {
             await Alert.Show();
         }
-
         IsRefreshing = false;
     }
 

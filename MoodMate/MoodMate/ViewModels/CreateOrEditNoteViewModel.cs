@@ -20,8 +20,14 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
 {
     private readonly SimpleNote SimpleNote;
     private readonly UpdateSimpleNoteMessage UpdateSimpleNoteMessage;
-    private IToast Alert;
     private readonly IUser User;
+    private IToast Alert;
+
+    [ObservableProperty] private bool create;
+    [ObservableProperty] SimpleNote selectedNote;
+    [ObservableProperty] private SimpleNote savededNote;
+    [ObservableProperty] bool isRefreshing = false;
+
     public CreateOrEditNoteViewModel(Note[] note, IToast[] toasts,
         UpdateSimpleNoteMessage update, IUser user)
     {
@@ -29,19 +35,12 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
         UpdateSimpleNoteMessage = update;
         Alert = toasts[2];
         User = user;
-        IsRefreshing = false;
     }
-
-    [ObservableProperty] private bool create;
-    [ObservableProperty] SimpleNote selectedNote;
-    [ObservableProperty] private SimpleNote savededNote;
-    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async Task CreateOrEdit()
     {
         IsRefreshing = true;
-
         if (SelectedNote.Text != "" && SelectedNote.Text != null)
         {
             try
@@ -55,7 +54,6 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
                 {
                     await SimpleNote.ChangeNote(SelectedNote, User.Client.User);
                 }
-
                 await Shell.Current.GoToAsync("//" + nameof(NoteListPage));
                 WeakReferenceMessenger.Default.Send(UpdateSimpleNoteMessage);
             }
@@ -74,7 +72,6 @@ public partial class CreateOrEditNoteViewModel : ObservableObject
         {
             await Alert.Show();
         }
-
         IsRefreshing = false;
     }
 

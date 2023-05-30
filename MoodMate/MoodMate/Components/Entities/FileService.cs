@@ -12,10 +12,12 @@ public partial class FileService : ObservableObject, IFileService
     [ObservableProperty] public string description;
 
     public FileService() { }
+
     public async Task LoadService(string path)
     {
         await ServiceLoading.Load(path, true);
     }
+
     public List<FileService> GetServiceData()
     {
         return ServiceLoading.Data;

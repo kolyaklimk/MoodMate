@@ -11,18 +11,22 @@ public abstract partial class ANote<T> : ObservableObject
     public string Id { get; set; }
     [ObservableProperty] public DateTime date;
     [ObservableProperty] public string text;
+
     public List<T> GetData()
     {
         return NoteControl.Data;
     }
+
     public void CreateDb()
     {
         Db = FirestoreDb.Create(PrivateConstants.ProjectId);
     }
+
     public void ClearNotes()
     {
         NoteControl.ClearData();
     }
+
     public abstract List<T> GetDataSortByDate();
     public abstract Task LoadNoteLocal();
     public abstract Task DeleteNoteLocal();

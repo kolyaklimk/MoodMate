@@ -11,15 +11,16 @@ public partial class ChooseMoodViewModel : ObservableObject
 {
     private readonly FileService Mood;
     private IToast Alert;
+    public ObservableCollection<FileService> Moods { get; set; } = new();
+
+    [ObservableProperty] FileService selectedMood;
+    [ObservableProperty] DateTime dateTime = DateTime.Now;
+
     public ChooseMoodViewModel(FileService[] service, IToast[] toasts)
     {
         Mood = service[0];
         Alert = toasts[0];
     }
-    public ObservableCollection<FileService> Moods { get; set; } = new();
-
-    [ObservableProperty] FileService selectedMood;
-    [ObservableProperty] DateTime dateTime = DateTime.Now;
 
     [RelayCommand]
     void SelectedItem(FileService mood)
@@ -39,10 +40,8 @@ public partial class ChooseMoodViewModel : ObservableObject
     {
         await Task.Run(() =>
         {
-            var moods = Mood.GetServiceData();
-
             Moods.Clear();
-            foreach (var mood in moods)
+            foreach (var mood in Mood.GetServiceData())
                 Moods.Add(mood);
         });
     }

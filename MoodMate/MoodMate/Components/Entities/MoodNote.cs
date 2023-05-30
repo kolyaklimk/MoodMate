@@ -9,7 +9,9 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
 {
     public DataAnalysis<MoodNote> MoodAnalysis { get; set; } = new();
     public FileService Mood { get; set; } = new();
+
     public MoodNote() { }
+
     public MoodNote(DateTime date, string name, string sourse, string text)
     {
         Date = date;
@@ -17,19 +19,23 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         Mood.Source = sourse;
         Text = text;
     }
+
     public override List<MoodNote> GetDataSortByDate()
     {
         return NoteControl.Data.OrderByDescending(x => x.Date).ToList();
     }
+
     public override async Task LoadNoteLocal()
     {
         await NoteControl.Load(Constants.PathMoodNotes, false);
     }
+
     public override async Task DeleteNoteLocal()
     {
         ClearNotes();
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
+
     public override async Task SaveLocalToCloud(Firebase.Auth.User user)
     {
         var data = GetData();
@@ -47,6 +53,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         }
         await NoteControl.UpdateFile(Constants.PathMoodNotes);
     }
+
     public override async Task LoadNoteCloud(int offset, int limit, Firebase.Auth.User user, bool refresh = true)
     {
         if (refresh)
@@ -72,6 +79,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             });
         }
     }
+
     public override async Task AddNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         if (user != null)
@@ -98,6 +106,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             await NoteControl.UpdateFile(Constants.PathMoodNotes);
         }
     }
+
     public override async Task ChangeNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == item.Id);
@@ -122,6 +131,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             }
         }
     }
+
     public override async Task DeleteNote(MoodNote obj, Firebase.Auth.User user = null)
     {
         var index = NoteControl.Data.FindIndex(item => obj.Id == item.Id);
@@ -174,6 +184,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             }
         }
     }
+
     public List<MyKeyValue> GetAnalysedData()
     {
         return MoodAnalysis.AnalysedData.Select(kvp => new MyKeyValue
@@ -184,10 +195,12 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             Value3 = kvp.Value.Item3,
         }).ToList();
     }
+
     public int GetCountMood()
     {
         return MoodAnalysis.GetCount();
     }
+
     public void FindPercentsMood()
     {
         MoodAnalysis.GetPercents();

@@ -3,6 +3,7 @@
 public class Note
 {
     public dynamic note { get; }
+
     public Note(string kind)
     {
         switch (kind)
@@ -10,6 +11,7 @@ public class Note
             case "Simple":
                 note = new SimpleNoteFactory().CreateNote();
                 break;
+
             case "Mood":
                 note = new MoodNoteFactory().CreateNote();
                 break;

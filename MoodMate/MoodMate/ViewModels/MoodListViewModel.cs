@@ -18,20 +18,17 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
 {
     private readonly MoodNote MoodNote;
     private readonly IUser User;
-    private bool IsUpdating;
-    private bool IsLoaded;
+    private bool IsUpdating = false;
+    private bool IsLoaded = true;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
-    [ObservableProperty] bool isRefreshing;
+
+    [ObservableProperty] bool isRefreshing = false;
     [ObservableProperty] string icon;
 
     public MoodListViewModel(Note[] note, IUser user)
     {
         MoodNote = note[0].note;
         User = user;
-        IsRefreshing = false;
-        IsUpdating = false;
-        IsLoaded = true;
-
         WeakReferenceMessenger.Default.Register<UpdateMoodNoteMessage>(this);
         WeakReferenceMessenger.Default.Register<LoadedMoodNoteMessage>(this);
         MoodNote.CreateDb();
@@ -81,7 +78,6 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     [RelayCommand]
     void Load() => IsRefreshing = true;
 
-
     [RelayCommand]
     async Task UpdateMoodNote()
     {
@@ -117,10 +113,12 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                         case 1:
                             User.SignOut();
                             break;
+
                         case 2:
                             await MoodNote.DeleteNoteLocal();
                             await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
                             break;
+
                         case 3:
                             await MoodNote.SaveLocalToCloud(User.Client.User);
                             await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
@@ -168,9 +166,7 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
                 var moods = MoodNote.GetData();
 
                 for (var i = countItemsBefore; i < moods.Count; i++)
-                {
                     MoodNotes.Add(moods[i]);
-                }
             }
             catch
             {
@@ -196,7 +192,6 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     {
         IsUpdating = true;
         IsRefreshing = true;
-
         if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete selected record?", "Delete")) != null)
         {
             try

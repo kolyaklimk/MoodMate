@@ -16,23 +16,24 @@ namespace MoodMate.ViewModels;
 public partial class AnalysisMoodViewModel : ObservableObject
 {
     private readonly MoodNote MoodNote;
-    private bool IsFirst = true;
     private readonly MyKeyValue ForCollection = new();
     private readonly IUser User;
     private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
+    private bool IsFirst = true;
+    public ObservableCollection<MyKeyValue> AnalysisMood { get; set; } = new();
+
+    [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
+    [ObservableProperty] int count;
+    [ObservableProperty] bool isRefreshing = false;
+
     public AnalysisMoodViewModel(Note[] note, IUser user,
         UpdateMoodNoteMessage update)
     {
         MoodNote = note[0].note;
         User = user;
         UpdateMoodNoteMessage = update;
-        IsRefreshing = false;
     }
 
-    [ObservableProperty] DateTime selectedDate = new(DateTime.Now.Year, DateTime.Now.Month, 1);
-    [ObservableProperty] int count;
-    [ObservableProperty] bool isRefreshing;
-    public ObservableCollection<MyKeyValue> AnalysisMood { get; set; } = new();
 
     [RelayCommand]
     async Task NextMonth()

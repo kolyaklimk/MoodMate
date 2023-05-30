@@ -10,7 +10,6 @@ using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Pages.Other;
 using MoodMate.Templates;
 using SerializationTools;
-using System.Diagnostics;
 
 namespace MoodMate.Components.Entities;
 
@@ -92,7 +91,6 @@ public class User : IUser
         {
             await Alerts[2].Show();
         }
-
         return 0;
     }
 

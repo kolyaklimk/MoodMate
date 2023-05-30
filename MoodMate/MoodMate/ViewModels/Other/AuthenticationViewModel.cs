@@ -15,11 +15,11 @@ public partial class AuthenticationViewModel : ObservableObject
 
     [ObservableProperty] string email;
     [ObservableProperty] string password;
-    [ObservableProperty] bool isRefreshing;
+    [ObservableProperty] bool isRefreshing = false;
+
     public AuthenticationViewModel(IUser user, LoadedMoodNoteMessage loaded1, LoadedSimpleNoteMessage loaded2)
     {
         User = user;
-        IsRefreshing = false;
         LoadedMoodNoteMessage = loaded1;
         LoadedSimpleNoteMessage = loaded2;
     }
@@ -55,7 +55,6 @@ public partial class AuthenticationViewModel : ObservableObject
         if (!IsRefreshing)
         {
             IsRefreshing = true;
-
             if (await User.SingIn(Email, Password) == 1)
             {
                 await User.SaveEmailAndPasswordLocal(Email, Password);
@@ -63,7 +62,6 @@ public partial class AuthenticationViewModel : ObservableObject
                 WeakReferenceMessenger.Default.Send(LoadedMoodNoteMessage);
                 WeakReferenceMessenger.Default.Send(LoadedSimpleNoteMessage);
             }
-
             IsRefreshing = false;
         }
     }
@@ -74,9 +72,7 @@ public partial class AuthenticationViewModel : ObservableObject
         if (!IsRefreshing)
         {
             IsRefreshing = true;
-
             await User.SingUp(Email, Password);
-
             IsRefreshing = false;
         }
     }

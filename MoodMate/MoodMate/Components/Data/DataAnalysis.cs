@@ -6,6 +6,7 @@ public class DataAnalysis<T> : IDataAnalysis<T>
 {
     // Dictionary<name, (source, count of element, procent)> 
     public Dictionary<string, (string, int, int)> AnalysedData { get; set; } = new();
+
     public void AddItem(string name, string source, DateTime date, DateTime Choosedate)
     {
         if (date.Month == Choosedate.Month && date.Year == Choosedate.Year)
@@ -20,6 +21,7 @@ public class DataAnalysis<T> : IDataAnalysis<T>
             }
         }
     }
+
     public int GetCount()
     {
         int count = 0;
@@ -29,6 +31,7 @@ public class DataAnalysis<T> : IDataAnalysis<T>
         }
         return count;
     }
+
     public void GetPercents()
     {
         int count = GetCount();

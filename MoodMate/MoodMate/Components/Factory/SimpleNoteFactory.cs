@@ -1,5 +1,5 @@
-﻿using MoodMate.Components.Entities.Abstractions;
-using MoodMate.Components.Entities;
+﻿using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 
 namespace MoodMate.Components.Factory;
 

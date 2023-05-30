@@ -9,18 +9,22 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
     {
         Data.Add(item);
     }
+
     public void Change(int index, T item)
     {
         Data[index] = item;
     }
+
     public void Delete(int index)
     {
         Data.RemoveAt(index);
     }
+
     public void ClearData()
     {
         Data.Clear();
     }
+
     public async Task UpdateFile(string path)
     {
         try
@@ -33,6 +37,7 @@ public class DataControl<T> : DataLoading<T>, IDataControl<T>
         }
         catch { }
     }
+
     public string GenerateKey()
     {
         var random = new Random();
