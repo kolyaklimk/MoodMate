@@ -11,13 +11,13 @@ public interface IUser
     MimeMessage EmailMessage { get; set; }
     IToast[] Alerts { get; set; }
 
-    Task<bool> SingIn(string email, string password);
+    Task<int> SingIn(string email, string password);
     Task SingUp(string email, string password);
     void SignOut();
     Task DeleteUser();
     Task SendEmailVerificationLink();
-    Task SendEmailPasswordResetLink();
-    Task SendEmailLink(string link, string text);
+    Task SendEmailPasswordResetLink(string email);
+    Task SendEmailLink(string link, string text, string email);
     Task SaveEmailAndPasswordLocal(string email, string password);
     Task<EmailAndPassword> LoadEmailAndPasswordLocal();
 }

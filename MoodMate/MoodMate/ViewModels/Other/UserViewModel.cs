@@ -51,7 +51,7 @@ public partial class UserViewModel : ObservableObject
     async Task ResetPassword()
     {
         IsRefreshing = true;
-        await User.SendEmailPasswordResetLink();
+        await User.SendEmailPasswordResetLink(User.Client.User.Info.Email);
         IsRefreshing = false;
     }
 

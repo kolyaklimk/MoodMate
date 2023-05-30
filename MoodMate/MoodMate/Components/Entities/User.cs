@@ -1,13 +1,16 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using FirebaseAdmin.Auth;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MoodMate.Components.Entities.Abstractions;
+using MoodMate.Pages.Other;
 using MoodMate.Templates;
 using SerializationTools;
+using System.Diagnostics;
 
 namespace MoodMate.Components.Entities;
 
@@ -34,12 +37,11 @@ public class User : IUser
         Alerts[0] = Toast.Make("Check your email for verification!", ToastDuration.Short, 16);
         Alerts[1] = Toast.Make("Wrong email or password!", ToastDuration.Short, 16);
         Alerts[2] = Toast.Make("No internet connection!", ToastDuration.Short, 16);
-        Alerts[3] = Toast.Make("Email is not verified, try again in 1 minute to resend the mail!", ToastDuration.Short, 16);
+        Alerts[3] = Toast.Make("Try again in 1 minute!", ToastDuration.Short, 16);
         Alerts[4] = Toast.Make("Check your email to reset your password!", ToastDuration.Short, 16);
-        Alerts[5] = Toast.Make("Reset password sent to email, try again in 1 minute to resend the email!", ToastDuration.Short, 16);
     }
 
-    public async Task<bool> SingIn(string email, string password)
+    public async Task<int> SingIn(string email, string password)
     {
         if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
         {
@@ -61,12 +63,29 @@ public class User : IUser
                 }
                 else
                 {
-                    return true;
+                    return 1;
                 }
             }
             catch
             {
-                await Alerts[1].Show();
+                try
+                {
+                    await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(email);
+
+                    if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Reset your password?", "Reset")) != null)
+                    {
+                        await SendEmailPasswordResetLink(email);
+                        return 2;
+                    }
+                    else
+                    {
+                        await Alerts[1].Show();
+                    }
+                }
+                catch
+                {
+                    await Alerts[1].Show();
+                }
             }
         }
         else
@@ -74,7 +93,7 @@ public class User : IUser
             await Alerts[2].Show();
         }
 
-        return false;
+        return 0;
     }
 
     public async Task SingUp(string email, string password)
@@ -119,22 +138,22 @@ public class User : IUser
     public async Task SendEmailVerificationLink()
     {
         var link = await FirebaseAuth.DefaultInstance.GenerateEmailVerificationLinkAsync(Client.User.Info.Email);
-        await SendEmailLink(link, "verify your email address");
+        await SendEmailLink(link, "verify your email address", Client.User.Info.Email);
     }
 
-    public async Task SendEmailPasswordResetLink()
+    public async Task SendEmailPasswordResetLink(string email)
     {
         if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
         {
             try
             {
-                var link = await FirebaseAuth.DefaultInstance.GeneratePasswordResetLinkAsync(Client.User.Info.Email);
-                await SendEmailLink(link, "reset the password");
+                var link = await FirebaseAuth.DefaultInstance.GeneratePasswordResetLinkAsync(email);
+                await SendEmailLink(link, "reset the password", email);
                 await Alerts[4].Show();
             }
             catch
             {
-                await Alerts[5].Show();
+                await Alerts[3].Show();
             }
         }
         else
@@ -143,11 +162,11 @@ public class User : IUser
         }
     }
 
-    public async Task SendEmailLink(string link, string text)
+    public async Task SendEmailLink(string link, string text, string email)
     {
         await Task.Run(() =>
         {
-            EmailMessage.To.Add(new MailboxAddress("", Client.User.Info.Email));
+            EmailMessage.To.Add(new MailboxAddress("", email));
             EmailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
                 Text = "<h2><a href=" + link + ">Сlick here</a> to " + text + ".</h2><br>"

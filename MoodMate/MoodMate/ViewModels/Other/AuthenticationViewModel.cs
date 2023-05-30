@@ -53,7 +53,7 @@ public partial class AuthenticationViewModel : ObservableObject
         {
             IsRefreshing = true;
 
-            if (await User.SingIn(Email, Password))
+            if (await User.SingIn(Email, Password) == 1)
             {
                 await User.SaveEmailAndPasswordLocal(Email, Password);
                 await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
