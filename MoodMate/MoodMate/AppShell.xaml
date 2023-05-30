@@ -28,6 +28,9 @@
 
     <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}"
                   Route="MusicListPage"/>
+    
+    <ShellContent ContentTemplate="{DataTemplate music:PlayMusicPage}"
+                  Route="PlayMusicPage"/>
 
     <ShellContent ContentTemplate="{DataTemplate note:NoteListPage}"
                   Route="NoteListPage"/>

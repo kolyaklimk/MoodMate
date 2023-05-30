@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
 using MoodMate.Messages;
+using MoodMate.Pages.Music;
 using Plugin.Maui.Audio;
 using System.Timers;
 
@@ -14,14 +15,14 @@ namespace MoodMate.ViewModels.Music;
 public partial class PlayMusicViewModel : ObservableObject
 {
     private System.Timers.Timer Timer;
-    private TimeSpan Zero;
-    private TimeSpan Second;
-    private IAudioManager AudioManager;
+    private TimeSpan Zero = TimeSpan.FromSeconds(0);
+    private TimeSpan Second = TimeSpan.FromSeconds(1);
+    private IAudioManager AudioManager = new AudioManager();
     private IAudioPlayer MusicPlayer;
     private IAudioPlayer SoundPlayer;
     private bool IsRunning;
-    private readonly StartRotateMessage StartRotateMessage;
-    private readonly StopRotateMessage StopRotateMessage;
+    private readonly StartRotateMessage StartRotateMessage = new();
+    private readonly StopRotateMessage StopRotateMessage = new();
 
     [ObservableProperty] FileService selectedMusic;
     [ObservableProperty] FileService selectedSound;
@@ -32,12 +33,7 @@ public partial class PlayMusicViewModel : ObservableObject
     [ObservableProperty] double volumeMusic;
     [ObservableProperty] double volumeSound;
 
-    public PlayMusicViewModel(IAudioManager manager, StopRotateMessage stop, StartRotateMessage start)
-    {
-        AudioManager = manager;
-        StopRotateMessage = stop;
-        StartRotateMessage = start;
-    }
+    public PlayMusicViewModel() { }
 
     private void SetTimer()
     {
@@ -82,9 +78,6 @@ public partial class PlayMusicViewModel : ObservableObject
 
             WeakReferenceMessenger.Default.Send(StartRotateMessage);
 
-            Zero = TimeSpan.FromSeconds(0);
-            Second = TimeSpan.FromSeconds(1);
-
             SetTimer();
 
             MusicPlayer?.Play();
@@ -123,10 +116,16 @@ public partial class PlayMusicViewModel : ObservableObject
     [RelayCommand]
     public async Task BackClick()
     {
-        await Shell.Current.Navigation.PopAsync();
+        await Shell.Current.GoToAsync($"//{nameof(MusicListPage)}");
         MusicPlayer?.Dispose();
         SoundPlayer?.Dispose();
-        Timer.Stop();
+        Timer.Dispose();
+        Timer = null;
+        MusicPlayer = null;
+        SoundPlayer = null;
+        IsMusic = false;
+        IsSound = false;
+        IsRunning = false;
     }
 
     [RelayCommand]

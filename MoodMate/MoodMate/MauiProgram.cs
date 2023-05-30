@@ -57,8 +57,6 @@ public static class MauiProgram
         services.AddSingleton(AudioManager.Current);
         services.AddSingleton(_ => new List<int>[] { new List<int>(), new List<int>() });
         services.AddSingleton(_ => new IToast[4]);
-        services.AddSingleton<StopRotateMessage>();
-        services.AddSingleton<StartRotateMessage>();
         services.AddSingleton<UpdateMoodNoteMessage>();
         services.AddSingleton<UpdateSimpleNoteMessage>();
         services.AddSingleton<LoadedMoodNoteMessage>();

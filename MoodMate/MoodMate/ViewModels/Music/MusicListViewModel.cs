@@ -104,7 +104,7 @@ public partial class MusicListViewModel : ObservableObject
     {
         if (SelectedMusic != null || SelectedSound != null)
         {
-            await Shell.Current.GoToAsync(nameof(PlayMusicPage),
+            await Shell.Current.GoToAsync($"//{nameof(PlayMusicPage)}",
                 new Dictionary<string, object>() {
                     { "SelectedMusic", SelectedMusic},
                     { "SelectedSound", SelectedSound},
