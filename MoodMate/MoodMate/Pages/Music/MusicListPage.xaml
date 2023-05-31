@@ -51,10 +51,6 @@
                                     Stroke="#8C913F"
                                     Grid.Row="0">
 
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-
                                 <Image Source="{Binding Description}"/>
                             </Border>
                             
@@ -106,10 +102,6 @@
                                     Stroke="#8C913F"
                                     Grid.Row="0">
 
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-
                                 <Image Source="{Binding Description}"/>
                             </Border>
 
@@ -136,15 +128,10 @@
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
-            <Border StrokeThickness="0"
-                    BackgroundColor="#8C913F"
+            <Border BackgroundColor="#8C913F"
                     Grid.Row="1"
                     HorizontalOptions="Center"
                     VerticalOptions="Start">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
 
                 <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
                        Grid.Row="1"
@@ -172,7 +159,6 @@
 
         <Border Grid.Row="4"
                 BackgroundColor="#8C913F"
-                StrokeThickness="0"
                 Margin="-1,0,-1,-1">
 
             <Border.StrokeShape>
@@ -182,8 +168,7 @@
             <Grid Grid.ColumnDefinitions="*,*,*">
                 
                 <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
@@ -199,8 +184,7 @@
                        Scale="0.7"/>
 
                 <Border Grid.Column="2"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>

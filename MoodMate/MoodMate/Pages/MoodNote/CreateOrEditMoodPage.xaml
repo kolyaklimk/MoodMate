@@ -15,7 +15,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -29,7 +28,6 @@
             
             <Border Grid.Column="2"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -66,14 +64,9 @@
             </Image>
 
             <Border Grid.Row="2"
-                    StrokeThickness="0"
                     BackgroundColor="#936840"
                     Padding="5">
 
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
-                
                 <Entry
                     Grid.Row="2"
                     MaxLength="14"
@@ -86,13 +79,8 @@
             </Border>
             
             <Border Grid.Row="3"
-                    StrokeThickness="0"
                     BackgroundColor="#936840"
                     Padding="5">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
 
                 <Editor FontSize="18"
                         MaxLength="10000"

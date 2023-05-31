@@ -29,13 +29,8 @@
               VerticalOptions="Center">
 
             <Border Grid.Row="0"
-                    StrokeThickness="0"
                     BackgroundColor="#936840"
                     Padding="5">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
 
                 <Entry FontSize="22"
                        IsReadOnly="{Binding IsRefreshing}"
@@ -48,13 +43,8 @@
             </Border>
 
             <Border Grid.Row="1"
-                    StrokeThickness="0"
                     BackgroundColor="#936840"
                     Padding="5">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
 
                 <Entry FontSize="22"
                        IsReadOnly="{Binding IsRefreshing}"

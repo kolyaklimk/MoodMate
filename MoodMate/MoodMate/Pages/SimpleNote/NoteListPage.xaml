@@ -58,11 +58,8 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:SimpleNote">
-                        <Border BackgroundColor="Transparent"
-                                StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"/>
-                            </Border.StrokeShape>
+                        <Border BackgroundColor="Transparent">
+                            
                             <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
@@ -95,8 +92,7 @@
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 
-                                <Border BackgroundColor="#fffbef" 
-                                StrokeThickness="0">
+                                <Border BackgroundColor="#fffbef">
                                     <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
                                 {x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
@@ -122,12 +118,7 @@
                 Margin="0,0,15,15"
                 BackgroundColor="#2C3963"
                 HorizontalOptions="End"
-                StrokeThickness="0"
                 WidthRequest="60">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
 
             <Image Grid.Row="0"
                    Scale="0.9"
@@ -140,16 +131,11 @@
         </Border>
 
         <Border BackgroundColor="#2C3963"
-                StrokeThickness="0"
                 Grid.Row="2"
                 WidthRequest="60"
                 HorizontalOptions="End"
                 Margin="0,0,15,15">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-
+            
             <Image Source="icon_plus.png"
                    Grid.Row="1"
                    Scale="0.7">
@@ -162,7 +148,6 @@
 
         <Border Grid.Row="3"
                 BackgroundColor="#2C3963"
-                StrokeThickness="0"
                 Margin="-1,0,-1,-1">
 
             <Border.StrokeShape>
@@ -172,8 +157,7 @@
             <Grid Grid.ColumnDefinitions="*,*,*">
 
                 <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
@@ -185,8 +169,7 @@
                 </Border>
 
                 <Border Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>

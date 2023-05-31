@@ -21,7 +21,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -66,8 +65,7 @@
                 
                 <DataTemplate x:DataType="entity:FileService">
                     
-                    <Border BackgroundColor="#936840" 
-                            StrokeThickness="0">
+                    <Border BackgroundColor="#936840">
                         
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -86,10 +84,6 @@
                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type model:ChooseMoodViewModel}}, Path=SelectedItemCommand}"/>
                         </Border.GestureRecognizers>
                         
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
                         <Grid Grid.ColumnDefinitions="70,*"
                               Padding="10"
                               ColumnSpacing="10"

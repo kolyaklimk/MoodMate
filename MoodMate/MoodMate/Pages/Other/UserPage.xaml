@@ -25,7 +25,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>

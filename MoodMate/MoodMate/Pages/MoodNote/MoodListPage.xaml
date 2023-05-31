@@ -58,11 +58,7 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:MoodNote">
-                        <Border BackgroundColor="Transparent"
-                                StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"/>
-                            </Border.StrokeShape>
+                        <Border BackgroundColor="Transparent">
                             <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
@@ -155,12 +151,7 @@
                 Margin="0,0,15,15"
                 BackgroundColor="#936840"
                 HorizontalOptions="End"
-                StrokeThickness="0"
                 WidthRequest="60">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
 
             <Image Grid.Row="0"
                    Scale="0.9"
@@ -176,12 +167,7 @@
                 Margin="0,0,15,15"
                 BackgroundColor="#936840"
                 HorizontalOptions="End"
-                StrokeThickness="0"
                 WidthRequest="60">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
 
             <Grid RowDefinitions="*,*">
 
@@ -207,8 +193,7 @@
         
         <Border Grid.Row="3"            
                 Margin="-1,0,-1,-1"
-                BackgroundColor="#936840"
-                StrokeThickness="0">
+                BackgroundColor="#936840">
 
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15,15,0,0"/>
@@ -221,8 +206,7 @@
                        Source="icon_mood_selected.png"/>
                 
                 <Border Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
@@ -234,8 +218,7 @@
                 </Border>
 
                 <Border Grid.Column="2"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>

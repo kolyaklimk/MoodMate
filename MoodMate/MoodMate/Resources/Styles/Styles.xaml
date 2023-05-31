@@ -16,7 +16,10 @@
     <Style TargetType="Border">
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="StrokeShape" Value="Rectangle"/>
-        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="15"/>
+        </Setter>
     </Style>
 
     <Style TargetType="BoxView">

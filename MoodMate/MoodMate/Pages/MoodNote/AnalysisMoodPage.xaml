@@ -26,7 +26,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -40,13 +39,8 @@
 
             <Border Grid.Column="1"
                     HorizontalOptions="Center"
-                StrokeThickness="0"
                 BackgroundColor="#936840"
                 Margin="0,-10,0,-10">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
 
                 <Grid ColumnDefinitions="*,Auto,*">
                     <Image Source="icon_back.png" 
@@ -102,15 +96,10 @@
                    VerticalOptions="Start"
                    FontSize="22"
                    TextColor="#66645E"/>
-            
+
             <Border Grid.Row="3"
                     Padding="5"
-                    BackgroundColor="#936840"
-                    StrokeThickness="0">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
+                    BackgroundColor="#936840">
 
                 <CollectionView ItemsSource="{Binding AnalysisMood}"
                                 VerticalScrollBarVisibility="Never">
@@ -151,12 +140,8 @@
                                       RowDefinitions="*,0.5*"
                                       VerticalOptions="Center">
 
-                                    <Border StrokeThickness="0">
+                                    <Border>
 
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="15"/>
-                                        </Border.StrokeShape>
-                                        
                                         <ProgressBar Progress="{Binding Value3, Converter={StaticResource ProgressBarConverter}}"
                                                      ScaleY="4"
                                                      ProgressColor="{Binding Converter={StaticResource RandomColorConverter}}"

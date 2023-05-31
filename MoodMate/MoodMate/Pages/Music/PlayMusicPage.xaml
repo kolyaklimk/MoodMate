@@ -23,7 +23,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -46,8 +45,7 @@
                   IsVisible="{Binding IsSound}"
                   VerticalOptions="End">
 
-                <Border StrokeThickness="0"
-                        HeightRequest="180"
+                <Border HeightRequest="180"
                         WidthRequest="180"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
@@ -85,8 +83,7 @@
                   IsVisible="{Binding IsMusic}"
                   VerticalOptions="Start">
                 
-                <Border StrokeThickness="0"
-                        HeightRequest="180"
+                <Border HeightRequest="180"
                         WidthRequest="180"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
@@ -121,15 +118,10 @@
             </Grid>
         </Grid>
 
-        <Border StrokeThickness="0"
-                BackgroundColor="#8C913F"
+        <Border BackgroundColor="#8C913F"
                 Grid.Row="2" 
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
 
             <Label TextColor = "#fffbef"
                    FontSize="42"

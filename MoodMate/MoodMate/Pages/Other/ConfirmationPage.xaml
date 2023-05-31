@@ -7,13 +7,8 @@
                VerticalOptions="Center">
     
     <Border BackgroundColor="#e2d9c5" 
-            StrokeThickness="0"
             WidthRequest="300"
             Padding="15">
-
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="15"/>
-        </Border.StrokeShape>
 
         <Grid RowDefinitions="Auto,60"
               RowSpacing="10">

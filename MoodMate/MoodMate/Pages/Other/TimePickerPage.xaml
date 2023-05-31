@@ -7,13 +7,8 @@
                VerticalOptions="Center">
 
     <Border BackgroundColor="#e2d9c5" 
-            StrokeThickness="0"
             WidthRequest="300"
             Padding="15">
-
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="15"/>
-        </Border.StrokeShape>
 
         <Grid RowDefinitions="130,10,60">
 
@@ -90,7 +85,6 @@
                 </CarouselView>
                 
                 <Border Grid.ColumnSpan="5"
-                        StrokeThickness="0"
                         Margin="-1">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0,1">
@@ -113,9 +107,6 @@
                         VerticalOptions="Center"
                         HeightRequest="40">
 
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="15"/>
-                    </Border.StrokeShape>
                 </Border>
             </Grid>
 
