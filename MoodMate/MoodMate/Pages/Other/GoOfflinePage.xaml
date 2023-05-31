@@ -31,19 +31,13 @@
 
             <Button Grid.Row="2"
                     Text="Go offline"
-                    Clicked="Offline_Clicked"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
                     FontSize="22"
-                    BackgroundColor="#fffbef"/>
+                    Clicked="Offline_Clicked"/>
 
             <Button Grid.Row="3"
                     Text="Cancel"
-                    Clicked="Cancel_Clicked"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
                     FontSize="22"
-                    BackgroundColor="#fffbef"/>
+                    Clicked="Cancel_Clicked"/>
         </Grid>
     </Border>
 </toolkit:Popup>

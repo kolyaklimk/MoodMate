@@ -30,27 +30,18 @@
 
             <Button Grid.Row="2"
                     Text="Go offline"
-                    Clicked="Offline_Clicked"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
                     FontSize="22"
-                    BackgroundColor="#fffbef"/>
+                    Clicked="Offline_Clicked"/>
 
             <Button Grid.Row="3"
                     Text="Delete local"
-                    Clicked="Delete_Clicked"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
                     FontSize="22"
-                    BackgroundColor="#fffbef"/>
+                    Clicked="Delete_Clicked"/>
 
             <Button Grid.Row="4"
                     Text="Synchronize"
-                    Clicked="Synchronize_Clicked"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
                     FontSize="22"
-                    BackgroundColor="#fffbef"/>
+                    Clicked="Synchronize_Clicked"/>
         </Grid>
     </Border>
 </toolkit:Popup>

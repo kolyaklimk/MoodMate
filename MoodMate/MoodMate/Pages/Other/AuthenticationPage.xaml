@@ -63,32 +63,17 @@
 
                 <Button Grid.Column="0"
                         Text="Sing Up"
-                        CornerRadius="15"
-                        BackgroundColor="#fffbef"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
-                        FontSize="28"
                         Command="{Binding SingUpCommand}"/>
 
                 <Button Grid.Column="1"
                         Text="Sing In"
-                        CornerRadius="15"
-                        BackgroundColor="#fffbef"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
-                        FontSize="28"
                         Command="{Binding SingInCommand}"/>
             </Grid>
         </Grid>
 
         <Button Text="Offline"
-                CornerRadius="15"
                 HeightRequest="60"
                 VerticalOptions="End"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
                 Command="{Binding OfflineCommand}"/>
     </Grid>
 </ContentPage>

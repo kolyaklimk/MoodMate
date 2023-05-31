@@ -150,11 +150,6 @@
         <Button Text="Start" 
                 Grid.Row="3"
                 Command="{Binding GoToPlayCommand}"
-                CornerRadius="15"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
                 Margin="15,0,15,15"/>
 
         <Border Grid.Row="4"

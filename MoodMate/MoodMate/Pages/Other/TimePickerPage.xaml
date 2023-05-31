@@ -117,19 +117,13 @@
 
                 <Button Grid.Column="0"
                         Text="Cancel"
-                        Clicked="Cancel_Clicked"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
                         FontSize="22"
-                        BackgroundColor="#fffbef"/>
+                        Clicked="Cancel_Clicked"/>
                 
                 <Button Grid.Column="1"
                         Text="Ok"
-                        Clicked="Ok_Clicked"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
                         FontSize="22"
-                        BackgroundColor="#fffbef"/>
+                        Clicked="Ok_Clicked"/>
 
             </Grid>
         </Grid>

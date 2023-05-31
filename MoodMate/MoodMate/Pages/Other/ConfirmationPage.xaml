@@ -25,19 +25,13 @@
                 
                 <Button Grid.Column="0"
                         Clicked="Cancel_Clicked"
-                        Text="Cancel"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
                         FontSize="22"
-                        BackgroundColor="#fffbef"/>
+                        Text="Cancel"/>
 
                 <Button Grid.Column="1"
                         x:Name="TextButton"
-                        Clicked="Delete_Clicked"
-                        TextColor="#2F2F2C"
-                        FontFamily="OpenSansBold"
                         FontSize="22"
-                        BackgroundColor="#fffbef"/>
+                        Clicked="Delete_Clicked"/>
             </Grid>
         </Grid>
     </Border>

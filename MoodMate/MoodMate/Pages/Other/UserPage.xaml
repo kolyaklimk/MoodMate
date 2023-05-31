@@ -58,37 +58,22 @@
             
             <Button Text="{Binding SingInOut}"
                     Grid.Row="3"
-                    CornerRadius="15"
                     HeightRequest="60"
                     VerticalOptions="End"
-                    BackgroundColor="#fffbef"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
-                    FontSize="28"
                     Command="{Binding SignInOutCommand}"/>
             
             <Button Text="Delete account"
                     Grid.Row="4"
                     IsVisible="{Binding IsLogIn}"
-                    CornerRadius="15"
                     HeightRequest="60"
                     VerticalOptions="End"
-                    BackgroundColor="#fffbef"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
-                    FontSize="28"
                     Command="{Binding DeleteUserCommand}"/>
             
             <Button Text="Reset password"
                     Grid.Row="5"
                     IsVisible="{Binding IsLogIn}"
-                    CornerRadius="15"
                     HeightRequest="60"
                     VerticalOptions="End"
-                    BackgroundColor="#fffbef"
-                    TextColor="#2F2F2C"
-                    FontFamily="OpenSansBold"
-                    FontSize="28"
                     Command="{Binding ResetPasswordCommand}"/>
         </Grid>
     </Grid>

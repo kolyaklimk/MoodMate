@@ -6,10 +6,6 @@
              x:DataType="model:PlayMusicViewModel"
              x:Class="MoodMate.Pages.Music.PlayMusicPage"
              BackgroundColor="#e2d9c5">
-    
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="false"/>
-    </Shell.BackButtonBehavior>
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"
@@ -133,11 +129,6 @@
         
         <Button Text="{Binding ButtonStr}"
                 Command="{Binding ButtonClickCommand}"
-                Grid.Row="3"
-                CornerRadius="15"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"/>
+                Grid.Row="3"/>
     </Grid>
 </ContentPage>

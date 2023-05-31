@@ -114,11 +114,6 @@
 
         <Button Text="Select"
                 Grid.Row="4"
-                CornerRadius="15"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
-                BackgroundColor="#fffbef"
                 Command="{Binding GoToCreateOrEditPageCommand}"/>
     </Grid>
 </ContentPage>
