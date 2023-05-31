@@ -116,7 +116,8 @@
         <Border BackgroundColor="#8C913F"
                 Grid.Row="2" 
                 VerticalOptions="Center"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                Padding="10,0,10,0">
 
             <Label TextColor = "#fffbef"
                    FontSize="42"

@@ -58,7 +58,7 @@
 
             <Border Grid.Row="2"
                     BackgroundColor="#936840"
-                    Padding="5">
+                    Padding="5,0,5,0">
 
                 <Entry
                     Grid.Row="2"
