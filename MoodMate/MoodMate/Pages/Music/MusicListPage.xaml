@@ -15,7 +15,7 @@
     <Grid Grid.RowDefinitions="*,*,*,75,60">
 
         <Grid Grid.Row="0" 
-              Grid.RowDefinitions="*,150"
+              Grid.RowDefinitions="*,160"
               Margin="15,0,15,0">
 
             <Label Text="Sound"
@@ -37,36 +37,48 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="entity:FileService">
+                        <Border BackgroundColor="#8C913F"
+                                Margin="5,0,5,0"
+                                Grid.Row="0">
 
-                        <Grid Grid.RowDefinitions="120,*"
-                              WidthRequest="120">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor"
+                                                    Value="#d9564f"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
 
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding}"
+                            <Grid Grid.RowDefinitions="130,30"
+                              WidthRequest="130">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemSoundCommand}"/>
-                            </Grid.GestureRecognizers>
+                                </Grid.GestureRecognizers>
 
-                            <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
+                                <Border Grid.Row="0" Scale="0.85">
+                                    <Image Source="{Binding Description}"/>
+                                </Border>
 
-                                <Image Source="{Binding Description}"/>
-                            </Border>
-                            
-                            <Label Text="{Binding Name}" 
+                                <Label Text="{Binding Name}" 
                                    Grid.Row="1"
                                    FontSize="18" 
-                                   TextColor="#66645E"
-                                   VerticalOptions="Start" 
+                                   TextColor="#FCF6EB"
                                    HorizontalOptions="Center"/>
-                        </Grid>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
 
         <Grid Grid.Row="1" 
-              Grid.RowDefinitions="*,150"
+              Grid.RowDefinitions="*,160"
               Margin="15,0,15,0">
             
             <Label Text="Music"
@@ -89,28 +101,41 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="entity:FileService">
 
-                        <Grid Grid.RowDefinitions="120,*"
-                              WidthRequest="120">
+                        <Border BackgroundColor="#8C913F"
+                                Margin="5,0,5,0"
+                                Grid.Row="0">
 
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding}"
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor"
+                                                    Value="#d9564f"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid Grid.RowDefinitions="130,30"
+                              WidthRequest="130">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemMusicCommand}"/>
-                            </Grid.GestureRecognizers>
+                                </Grid.GestureRecognizers>
 
-                            <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
+                                <Border Grid.Row="0" Scale="0.85">
+                                    <Image Source="{Binding Description}"/>
+                                </Border>
 
-                                <Image Source="{Binding Description}"/>
-                            </Border>
-
-                            <Label Text="{Binding Name}" 
+                                <Label Text="{Binding Name}" 
                                    Grid.Row="1"
                                    FontSize="18" 
-                                   TextColor="#66645E"
-                                   VerticalOptions="Start" 
+                                   TextColor="#FCF6EB"
                                    HorizontalOptions="Center"/>
-                        </Grid>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
