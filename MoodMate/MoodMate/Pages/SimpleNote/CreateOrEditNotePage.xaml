@@ -21,8 +21,7 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
             
             <Border Grid.Column="2"
@@ -34,21 +33,20 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_accept.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
         </Grid>
 
         <Border Grid.Row="1"
-                    BackgroundColor="#2C3963"
-                    Padding="5">
+                BackgroundColor="#2C3963"
+                Padding="5">
 
                 <Editor FontSize="18"
-                    TextColor="#FCF6EB"
-                    MaxLength="10000"
-                    Placeholder="Write something here"
-                    PlaceholderColor="#D1CCC2"
-                    Text="{Binding SelectedNote.Text}"/>
+                        TextColor="#FCF6EB"
+                        MaxLength="10000"
+                        Placeholder="Write something here"
+                        PlaceholderColor="#D1CCC2"
+                        Text="{Binding SelectedNote.Text}"/>
         </Border>
     </Grid>
 </ContentPage>

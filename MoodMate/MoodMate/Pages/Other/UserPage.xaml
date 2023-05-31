@@ -31,8 +31,7 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
         </Grid>
         

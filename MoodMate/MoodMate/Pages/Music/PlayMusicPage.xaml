@@ -66,6 +66,7 @@
                         MaximumTrackColor="#2F2F2C"
                         MinimumTrackColor="#8C913F"
                         ThumbColor="#8C913F">
+                    
                     <Slider.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="ValueChanged"
                                                         Command="{Binding ChangeSoundVolumeCommand}"/>
@@ -105,6 +106,7 @@
                         MaximumTrackColor="#2F2F2C"
                         MinimumTrackColor="#8C913F"
                         ThumbColor="#8C913F">
+                    
                     <Slider.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="ValueChanged"
                                                         Command="{Binding ChangeMusicVolumeCommand}"/>

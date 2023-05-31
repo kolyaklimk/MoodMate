@@ -21,8 +21,7 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
             
             <Border Grid.Column="2"
@@ -34,8 +33,7 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_accept.png"
-                       Scale="0.5">
-                </Image>
+                       Scale="0.5"/>
             </Border>
         </Grid>
 
@@ -51,6 +49,7 @@
                    Source="{Binding SelectedMood.Mood.Source}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center">
+                
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ChooseImageCommand}"/>
                 </Image.GestureRecognizers>
@@ -60,15 +59,14 @@
                     BackgroundColor="#936840"
                     Padding="5,0,5,0">
 
-                <Entry
-                    Grid.Row="2"
-                    MaxLength="14"
-                    FontSize="28"
-                    FontFamily="OpenSansBold"                    
-                    Placeholder="Enter your mood here"
-                    TextColor="#fffbef"
-                    PlaceholderColor="#D1CCC2"
-                    Text="{Binding SelectedMood.Mood.Name}"/>
+                <Entry Grid.Row="2"
+                       MaxLength="14"
+                       FontSize="28"
+                       FontFamily="OpenSansBold"                    
+                       Placeholder="Enter your mood here"
+                       TextColor="#fffbef"
+                       PlaceholderColor="#D1CCC2"
+                       Text="{Binding SelectedMood.Mood.Name}"/>
             </Border>
             
             <Border Grid.Row="3"

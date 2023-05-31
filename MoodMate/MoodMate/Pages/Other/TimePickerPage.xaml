@@ -86,6 +86,7 @@
                 
                 <Border Grid.ColumnSpan="5"
                         Margin="-1">
+                    
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0,1">
                             <GradientStop Color="#e2d9c5"
@@ -99,15 +100,13 @@
                         </LinearGradientBrush>
                     </Border.Background>
                 </Border>
-                
+
                 <Border Grid.ColumnSpan="5"
                         BackgroundColor="Transparent"
                         StrokeThickness="3"
                         Stroke="#2F2F2C"
                         VerticalOptions="Center"
-                        HeightRequest="40">
-
-                </Border>
+                        HeightRequest="40"/>
             </Grid>
 
             <Grid Grid.ColumnSpan="5"
@@ -124,7 +123,6 @@
                         Text="Ok"
                         FontSize="22"
                         Clicked="Ok_Clicked"/>
-
             </Grid>
         </Grid>
     </Border>

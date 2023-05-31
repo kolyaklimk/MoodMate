@@ -7,11 +7,9 @@
              x:Class="MoodMate.Pages.MoodNote.MoodListPage"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities">
 
-    <ContentPage.Behaviors>
-        
+    <ContentPage.Behaviors>        
         <toolkit:EventToCommandBehavior Command="{Binding LoadCommand}" 
-                                        EventName="NavigatedTo"/>
-        
+                                        EventName="NavigatedTo"/>        
     </ContentPage.Behaviors>
 
     <Grid RowDefinitions="75,*,135,60">
@@ -30,6 +28,7 @@
                             RemainingItemsThresholdReachedCommand="{Binding AddItemsCommand}">
 
                 <CollectionView.EmptyView>
+                    
                     <StackLayout Spacing="10"
                                  VerticalOptions="Center"
                                  HorizontalOptions="Center">
@@ -57,15 +56,18 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:MoodNote">
+                        
                         <Border BackgroundColor="Transparent">
+                            
                             <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItemView>
+                                            
                                             <Grid ColumnDefinitions="*,*"
-                                                WidthRequest="120"
-                                                      BackgroundColor="#936840">
-
+                                                  WidthRequest="120"
+                                                  BackgroundColor="#936840">
+                                                
                                                 <Image Grid.Column="0"
                                                        Scale="0.7"
                                                        Source="icon_share.png">
@@ -97,47 +99,47 @@
 
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer CommandParameter="{Binding}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type model:MoodListViewModel}}, Path=GoToEditCommand}"/>
                                     </Grid.GestureRecognizers>
 
                                     <Grid Grid.Row="0"
-                                      ColumnSpacing="10"
-                                      Grid.ColumnDefinitions="70,*,10">
+                                          ColumnSpacing="10"
+                                          Grid.ColumnDefinitions="70,*,10">
 
                                         <Image Grid.Column="0" 
-                                           Source="{Binding Mood.Source}"/>
+                                               Source="{Binding Mood.Source}"/>
 
                                         <Grid Grid.Column="1" 
-                                          Grid.RowDefinitions="40,20">
+                                              Grid.RowDefinitions="40,20">
 
                                             <Label Grid.Row="0"
-                                               FontFamily="OpenSansBold"
-                                               FontSize="28"
-                                               Text="{Binding Mood.Name}"
-                                               TextColor="#2F2F2C"/>
+                                                   FontFamily="OpenSansBold"
+                                                   FontSize="28"
+                                                   Text="{Binding Mood.Name}"
+                                                   TextColor="#2F2F2C"/>
 
                                             <Grid Grid.Row="1"
-                                              ColumnSpacing="5"
-                                              Grid.ColumnDefinitions="15,*">
-
+                                                  ColumnSpacing="5"
+                                                  Grid.ColumnDefinitions="15,*">
+                                                
                                                 <Image Grid.Column="0"
-                                               Source="icon_time.png"
-                                               VerticalOptions="Center"/>
-
+                                                       Source="icon_time.png"
+                                                       VerticalOptions="Center"/>
+                                                
                                                 <Label Grid.Column="1"
-                                                   FontSize="14"
-                                                   Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
-                                                   TextColor="#66645E"/>
+                                                       FontSize="14"
+                                                       Text="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
+                                                       TextColor="#66645E"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
                                     <Label Grid.Row="1"
-                                       FontSize="16"
-                                       LineBreakMode="CharacterWrap"
-                                       Text="{Binding Text}"
-                                       MaxLines="10"
-                                       TextColor="#66645E"/>
+                                           FontSize="16"
+                                           LineBreakMode="CharacterWrap"
+                                           Text="{Binding Text}"
+                                           MaxLines="10"
+                                           TextColor="#66645E"/>
                                 </Grid>
                             </SwipeView>
                         </Border>
@@ -210,10 +212,9 @@
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
                     </Border.GestureRecognizers>
-                    
+
                     <Image Scale="0.5"
-                       Source="icon_music.png">
-                    </Image>
+                           Source="icon_music.png"/>
                 </Border>
 
                 <Border Grid.Column="2"
@@ -224,8 +225,7 @@
                     </Border.GestureRecognizers>
 
                     <Image Scale="0.5"
-                       Source="icon_note.png">
-                    </Image>
+                           Source="icon_note.png"/>
                 </Border>                
             </Grid>
         </Border>
