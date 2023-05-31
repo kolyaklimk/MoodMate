@@ -6,8 +6,7 @@
              x:Class="MoodMate.Pages.MoodNote.ChooseMoodPage"
              x:DataType="model:ChooseMoodViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
-             BackgroundColor="#e2d9c5">
+             xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"

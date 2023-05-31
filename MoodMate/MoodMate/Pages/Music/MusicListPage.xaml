@@ -5,8 +5,7 @@
              xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
              x:DataType="model:MusicListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             x:Class="MoodMate.Pages.Music.MusicListPage"
-             BackgroundColor="#e2d9c5">
+             x:Class="MoodMate.Pages.Music.MusicListPage">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"

@@ -6,8 +6,7 @@
              x:DataType="model:AnalysisMoodViewModel"
              x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
              xmlns:converter="clr-namespace:MoodMate.Converters"
-             xmlns:entity="clr-namespace:MoodMate.Templates"
-             BackgroundColor="#e2d9c5">
+             xmlns:entity="clr-namespace:MoodMate.Templates">
     
     <ContentPage.Resources>
         <converter:ProgressBarConverter x:Key="ProgressBarConverter"/>

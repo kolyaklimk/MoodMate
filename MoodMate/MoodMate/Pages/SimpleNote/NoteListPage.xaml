@@ -5,8 +5,7 @@
              xmlns:model="clr-namespace:MoodMate.ViewModels"
              x:DataType="model:NoteListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
-             BackgroundColor="#e2d9c5">
+             x:Class="MoodMate.Pages.SimpleNote.NoteListPage">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"

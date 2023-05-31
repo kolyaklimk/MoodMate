@@ -4,8 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
              x:DataType="model:PlayMusicViewModel"
-             x:Class="MoodMate.Pages.Music.PlayMusicPage"
-             BackgroundColor="#e2d9c5">
+             x:Class="MoodMate.Pages.Music.PlayMusicPage">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"
