@@ -25,8 +25,9 @@
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
-            <CollectionView Grid.Row="1" 
-                            SelectionMode="Single"
+            <Border BackgroundColor="Transparent"
+                    Grid.Row="1" >
+            <CollectionView SelectionMode="Single"
                             ItemsSource="{Binding SoundList}"
                             SelectedItem="{Binding SelectedSound}"
                             HorizontalOptions="Center">
@@ -75,6 +76,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </Border>
         </Grid>
 
         <Grid Grid.Row="1" 
@@ -87,63 +89,63 @@
                    TextColor="#2F2F2C"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
-            
-            <CollectionView Grid.Row="1" 
-                            SelectionMode="Single"
+            <Border BackgroundColor="Transparent"
+                    Grid.Row="1" >
+                <CollectionView SelectionMode="Single"
                             ItemsSource="{Binding MusicList}"
                             SelectedItem="{Binding SelectedMusic}"
                             HorizontalOptions="Center">
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
-                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="entity:FileService">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="entity:FileService">
 
-                        <Border BackgroundColor="#8C913F"
+                            <Border BackgroundColor="#8C913F"
                                 Margin="5,0,5,0"
                                 Grid.Row="0">
 
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor"
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor"
                                                     Value="#d9564f"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
 
-                            <Grid Grid.RowDefinitions="130,30"
+                                <Grid Grid.RowDefinitions="130,30"
                               WidthRequest="130">
 
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding}"
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemMusicCommand}"/>
-                                </Grid.GestureRecognizers>
+                                    </Grid.GestureRecognizers>
 
-                                <Border Grid.Row="0" Scale="0.85">
-                                    <Image Source="{Binding Description}"/>
-                                </Border>
+                                    <Border Grid.Row="0" Scale="0.85">
+                                        <Image Source="{Binding Description}"/>
+                                    </Border>
 
-                                <Label Text="{Binding Name}" 
+                                    <Label Text="{Binding Name}" 
                                    Grid.Row="1"
                                    FontSize="18" 
                                    TextColor="#FCF6EB"
                                    HorizontalOptions="Center"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
         </Grid>
 
         <Grid Grid.Row="2" 
-              Grid.RowDefinitions="0.5*,*"
-              Margin="15,0,15,0">
+              Grid.RowDefinitions="0.5*,*">
             
             <Label Text="Duration"
                    FontFamily="OpenSansBold"
@@ -155,7 +157,8 @@
             <Border BackgroundColor="#8C913F"
                     Grid.Row="1"
                     HorizontalOptions="Center"
-                    VerticalOptions="Start">
+                    VerticalOptions="Start"
+                    Padding="10,0,10,0">
 
                 <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
                        Grid.Row="1"
