@@ -42,12 +42,6 @@
                HorizontalOptions="Center"/>
         
         <DatePicker Grid.Row="2"
-                    FontSize="22" 
-                    TextColor="#66645E"
-                    VerticalOptions="Start" 
-                    HorizontalOptions="Center"
-                    Format="dd/MM/yyyy"
-                    MinimumDate="01/01/2023"
                     MaximumDate="{x:Static system:DateTime.Today}"
                     Date="{Binding DateTime}"/>
 

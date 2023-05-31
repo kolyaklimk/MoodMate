@@ -45,13 +45,7 @@
               RowSpacing="10">
 
             <DatePicker Grid.Row="0" 
-                        HorizontalOptions="Center"
-                        VerticalOptions="End"
-                        FontSize="22"
-                        TextColor="#66645E"
                         Date="{Binding SelectedMood.Date}"
-                        Format="dd/MM/yyyy"
-                        MinimumDate="01/01/2023"
                         MaximumDate="{x:Static system:DateTime.Today}"/>
 
             <Image Grid.Row="1"
