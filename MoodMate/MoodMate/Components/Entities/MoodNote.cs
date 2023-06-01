@@ -41,8 +41,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         var data = GetData();
         while (data.Count != 0)
         {
-            await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                AddAsync(new Dictionary<string, object>
+            await NoteControl.AddAsync(user.Uid, "MoodNote", new Dictionary<string, object>
                 {
                     { "Date", TimeZoneInfo.ConvertTimeToUtc(data[0].Date) },
                     { "Text", data[0].Text },
@@ -59,8 +58,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         if (refresh)
             ClearNotes();
 
-        var snapshot = await Db.Collection("Users").Document(user.Uid).
-            Collection("MoodNote").OrderByDescending("Date").Offset(offset).Limit(limit).GetSnapshotAsync();
+        var snapshot = await NoteControl.GetOrderByDateAsync(user.Uid, "MoodNote", offset, limit);
 
         foreach (var item in snapshot)
         {
@@ -84,8 +82,8 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
     {
         if (user != null)
         {
-            var rezult = await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                AddAsync(new Dictionary<string, object>
+            var rezult = await NoteControl.AddAsync(user.Uid, "MoodNote",
+                new Dictionary<string, object>
                 {
                     { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                     { "Text", obj.Text },
@@ -114,8 +112,8 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         {
             if (user != null)
             {
-                await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                    Document(obj.Id.ToString()).UpdateAsync(new Dictionary<string, object>
+                await NoteControl.UpdateAsync(user.Uid, "MoodNote", obj.Id.ToString(),
+                    new Dictionary<string, object>
                     {
                         { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                         { "Text", obj.Text },
@@ -139,8 +137,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
         {
             if (user != null)
             {
-                await Db.Collection("Users").Document(user.Uid).Collection("MoodNote").
-                    Document(obj.Id).DeleteAsync();
+                await NoteControl.DeleteAsync(user.Uid, "MoodNote", obj.Id);
                 NoteControl.Delete(index);
             }
             else
@@ -162,10 +159,7 @@ public class MoodNote : ANote<MoodNote>, IMoodNoteAnalysis
             var lastDay = TimeZoneInfo.ConvertTimeToUtc(
                 new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month)).AddDays(1));
 
-            var snapshot = await Db.Collection("Users").Document(user.Uid).
-            Collection("MoodNote").
-            WhereGreaterThanOrEqualTo("Date", firstDay).
-            WhereLessThan("Date", lastDay).GetSnapshotAsync();
+            var snapshot = await NoteControl.GetintervalAsync(user.Uid, "MoodNote", firstDay, lastDay);
 
             foreach (var item in snapshot)
             {

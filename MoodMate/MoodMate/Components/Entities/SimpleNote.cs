@@ -34,8 +34,8 @@ public class SimpleNote : ANote<SimpleNote>
         var data = GetData();
         while (data.Count != 0)
         {
-            await Db.Collection("Users").Document(user.Uid).Collection("SimpleNote").
-                AddAsync(new Dictionary<string, object>
+            await NoteControl.AddAsync(user.Uid, "SimpleNote",
+                new Dictionary<string, object>
                 {
                     { "Date", TimeZoneInfo.ConvertTimeToUtc(data[0].Date) },
                     { "Text", data[0].Text }
@@ -50,8 +50,7 @@ public class SimpleNote : ANote<SimpleNote>
         if (refresh)
             ClearNotes();
 
-        var snapshot = await Db.Collection("Users").Document(user.Uid).
-            Collection("SimpleNote").OrderByDescending("Date").Offset(offset).Limit(limit).GetSnapshotAsync();
+        var snapshot = await NoteControl.GetOrderByDateAsync(user.Uid, "SimpleNote", offset, limit);
 
         foreach (var item in snapshot)
         {
@@ -70,8 +69,8 @@ public class SimpleNote : ANote<SimpleNote>
     {
         if (user != null)
         {
-            var rezult = await Db.Collection("Users").Document(user.Uid).Collection("SimpleNote").
-                AddAsync(new Dictionary<string, object>
+            var rezult = await NoteControl.AddAsync(user.Uid, "SimpleNote",
+                new Dictionary<string, object>
                 {
                     { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                     { "Text", obj.Text }
@@ -99,8 +98,8 @@ public class SimpleNote : ANote<SimpleNote>
         {
             if (user != null)
             {
-                await Db.Collection("Users").Document(user.Uid).Collection("SimpleNote").
-                    Document(obj.Id.ToString()).UpdateAsync(new Dictionary<string, object>
+                await NoteControl.UpdateAsync(user.Uid, "SimpleNote", obj.Id.ToString(),
+                    new Dictionary<string, object>
                     {
                         { "Date", TimeZoneInfo.ConvertTimeToUtc(obj.Date) },
                         { "Text", obj.Text }
@@ -122,8 +121,7 @@ public class SimpleNote : ANote<SimpleNote>
         {
             if (user != null)
             {
-                await Db.Collection("Users").Document(user.Uid).Collection("SimpleNote").
-                    Document(obj.Id).DeleteAsync();
+                await NoteControl.DeleteAsync(user.Uid, "SimpleNote", obj.Id);
                 NoteControl.Delete(index);
             }
             else
