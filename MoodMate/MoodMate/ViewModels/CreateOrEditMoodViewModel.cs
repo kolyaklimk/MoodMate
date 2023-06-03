@@ -4,9 +4,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
+using MoodMate.Pages.Other;
 
 namespace MoodMate.ViewModels;
 
@@ -15,42 +17,62 @@ namespace MoodMate.ViewModels;
 [QueryProperty(nameof(SavededMood), "Save")]
 public partial class CreateOrEditMoodViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
+    private readonly MoodNote MoodNote;
     private readonly FileService MoodImages;
-    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage;
+    private readonly UpdateMoodNoteMessage UpdateMoodNoteMessage = new();
     private IToast Alert;
-    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService, UpdateMoodNoteMessage update, IToast[] toasts)
-    {
-        MoodNote = note[0];
-        MoodImages = fileService[0];
-        UpdateMoodNoteMessage = update;
-        Alert = toasts[1];
-    }
+    private readonly IUser User;
 
     [ObservableProperty] private bool create;
     [ObservableProperty] public MoodNote selectedMood;
     [ObservableProperty] private MoodNote savededMood;
+    [ObservableProperty] bool isRefreshing = false;
+
+    public CreateOrEditMoodViewModel(Note[] note, FileService[] fileService,
+        IToast[] toasts, IUser user)
+    {
+        MoodNote = note[0].note;
+        MoodImages = fileService[0];
+        Alert = toasts[1];
+        User = user;
+    }
 
     [RelayCommand]
     async Task CreateOrEdit()
     {
+        IsRefreshing = true;
         if (SelectedMood.Mood.Name != "")
         {
-            if (Create)
+            try
             {
-                SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
-                await MoodNote.note.AddNote(SelectedMood);
+                if (Create)
+                {
+                    SelectedMood.Date = SelectedMood.Date.Date.Add(DateTime.Now.TimeOfDay);
+                    await MoodNote.AddNote(SelectedMood, User.Client.User);
+                }
+                else
+                {
+                    await MoodNote.ChangeNote(SelectedMood, User.Client.User);
+                }
+                WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
+                await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
             }
-            else
-                await MoodNote.note.ChangeNote(SelectedMood, SelectedMood.Id);
-
-            WeakReferenceMessenger.Default.Send(UpdateMoodNoteMessage);
-            await Shell.Current.GoToAsync("//" + nameof(MoodListPage));
+            catch
+            {
+                if ((bool)await Shell.Current.ShowPopupAsync(new GoOfflinePage(" You can go offline to save your data.")))
+                {
+                    User.SignOut();
+                    Create = true;
+                    MoodNote.ClearNotes();
+                    await CreateOrEdit();
+                }
+            }
         }
         else
         {
             await Alert.Show();
         }
+        IsRefreshing = false;
     }
 
     [RelayCommand]

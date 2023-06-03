@@ -4,8 +4,7 @@
              x:Class="MoodMate.Pages.SimpleNote.CreateOrEditNotePage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels"
-             x:DataType="model:CreateOrEditNoteViewModel"
-             BackgroundColor="#e2d9c5">
+             x:DataType="model:CreateOrEditNoteViewModel">
     
     <Grid RowDefinitions="25,*"
           Padding="15" 
@@ -15,7 +14,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -23,48 +21,11 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
             
-            <Grid ColumnDefinitions="30,30"
-                  ColumnSpacing="50"
-                  Grid.Column="1"
-                  HorizontalOptions="Center"
-                  IsVisible="{Binding Create, Converter={toolkit:InvertedBoolConverter}}">
-                
-                <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0"
-                        Margin="-15">
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShareItemCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Source="icon_share.png"
-                           Scale="0.5">
-                    </Image>
-                </Border>
-
-                <Border Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0"
-                        Margin="-15">
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding DeleteItemCommand}"/>
-                    </Border.GestureRecognizers>
-
-                    <Image Source="icon_delete.png"
-                           Scale="0.5">
-                    </Image>
-                </Border>
-            </Grid>
-
             <Border Grid.Column="2"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -72,26 +33,20 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_accept.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
         </Grid>
 
         <Border Grid.Row="1"
-                    StrokeThickness="0"
-                    BackgroundColor="#2C3963"
-                    Padding="5">
+                BackgroundColor="#2C3963"
+                Padding="5">
 
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-            
-            <Editor FontSize="18"
-                    TextColor="#FCF6EB"
-                    MaxLength="10000"
-                    Placeholder="Write something here"
-                    PlaceholderColor="#D1CCC2"
-                    Text="{Binding SelectedNote.Text}"/>
+                <Editor FontSize="18"
+                        TextColor="#FCF6EB"
+                        MaxLength="10000"
+                        Placeholder="Write something here"
+                        PlaceholderColor="#D1CCC2"
+                        Text="{Binding SelectedNote.Text}"/>
         </Border>
     </Grid>
 </ContentPage>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodMate.Pages.Other.AuthenticationPage"
+             xmlns:model="clr-namespace:MoodMate.ViewModels.Other"
+             x:DataType="model:AuthenticationViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <ContentPage.Behaviors>        
+        <toolkit:EventToCommandBehavior Command="{Binding LoadCommand}" 
+                                        EventName="Loaded"/>        
+        <toolkit:StatusBarBehavior StatusBarColor="#e2d9c5" 
+                                   StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
+    <Grid Padding="15">
+
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="#936840">
+            <StackLayout/>
+        </RefreshView>
+        
+        <Grid RowDefinitions="60,60,60,60"
+              RowSpacing="10"
+              VerticalOptions="Center">
+
+            <Border Grid.Row="0"
+                    BackgroundColor="#936840"
+                    Padding="5,5,5,0">
+
+                <Entry FontSize="22"
+                       IsReadOnly="{Binding IsRefreshing}"
+                       FontFamily="OpenSansBold"                    
+                       Placeholder="Email"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#fffbef"
+                       PlaceholderColor="#D1CCC2"
+                       Text="{Binding Email}"/>
+            </Border>
+
+            <Border Grid.Row="1"
+                    BackgroundColor="#936840"
+                    Padding="5,5,5,0">
+
+                <Entry FontSize="22"
+                       IsReadOnly="{Binding IsRefreshing}"
+                       FontFamily="OpenSansBold"      
+                       TextColor="#fffbef"         
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Password"
+                       PlaceholderColor="#D1CCC2"
+                       IsPassword="True"
+                       Text="{Binding Password}"/>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*"
+                  Grid.Row="2"
+                  ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+                        Text="Sing Up"
+                        Command="{Binding SingUpCommand}"/>
+
+                <Button Grid.Column="1"
+                        Text="Sing In"
+                        Command="{Binding SingInCommand}"/>
+            </Grid>
+        </Grid>
+
+        <Button Text="Offline"
+                HeightRequest="60"
+                VerticalOptions="End"
+                Command="{Binding OfflineCommand}"/>
+    </Grid>
+</ContentPage>

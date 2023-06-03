@@ -6,8 +6,7 @@
              x:Class="MoodMate.Pages.MoodNote.ChooseMoodPage"
              x:DataType="model:ChooseMoodViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
-             BackgroundColor="#e2d9c5">
+             xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
@@ -21,7 +20,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -29,8 +27,7 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
         </Grid>
 
@@ -43,12 +40,6 @@
                HorizontalOptions="Center"/>
         
         <DatePicker Grid.Row="2"
-                    FontSize="22" 
-                    TextColor="#66645E"
-                    VerticalOptions="Start" 
-                    HorizontalOptions="Center"
-                    Format="dd/MM/yyyy"
-                    MinimumDate="01/01/2023"
                     MaximumDate="{x:Static system:DateTime.Today}"
                     Date="{Binding DateTime}"/>
 
@@ -66,25 +57,32 @@
                 
                 <DataTemplate x:DataType="entity:FileService">
                     
-                    <Border BackgroundColor="#936840" 
-                            StrokeThickness="0">
-
+                    <Border BackgroundColor="#936840">
+                        
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#d9564f"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer CommandParameter="{Binding}"
                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type model:ChooseMoodViewModel}}, Path=SelectedItemCommand}"/>
                         </Border.GestureRecognizers>
                         
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
                         <Grid Grid.ColumnDefinitions="70,*"
                               Padding="10"
                               ColumnSpacing="10"
                               MaximumHeightRequest="320">
 
-                            <Image  Source="{Binding Source}"
-                                    Grid.Column="0"/>
+                            <Image Source="{Binding Source}"
+                                   Grid.Column="0"/>
 
                             <Grid Grid.RowDefinitions="40,30"
                                   Grid.Column="1">
@@ -108,11 +106,6 @@
 
         <Button Text="Select"
                 Grid.Row="4"
-                CornerRadius="15"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
-                BackgroundColor="#fffbef"
                 Command="{Binding GoToCreateOrEditPageCommand}"/>
     </Grid>
 </ContentPage>

@@ -5,22 +5,21 @@
              xmlns:model="clr-namespace:MoodMate.ViewModels"
              x:DataType="model:NoteListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             x:Class="MoodMate.Pages.SimpleNote.NoteListPage"
-             BackgroundColor="#e2d9c5">
+             x:Class="MoodMate.Pages.SimpleNote.NoteListPage">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded"
-                                        Command="{Binding UpdateSimpleNoteCommand}"/>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                        Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="*,75,60">
+    <Grid RowDefinitions="75,*,75,60">
 
         <RefreshView Command="{Binding UpdateSimpleNoteCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="#e2d9c5"
                      BackgroundColor="#2C3963"
                      Grid.Row="0"
-                     Grid.RowSpan="2"
+                     Grid.RowSpan="3"
                      Margin="15,0,15,0">
 
             <CollectionView ItemsSource="{Binding SimpleNotes}"
@@ -58,57 +57,98 @@
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate x:DataType="entity:SimpleNote">
+                        
+                        <Border BackgroundColor="Transparent">
+                            
+                            <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        
+                                        <Grid ColumnDefinitions="*,*"
+                                              WidthRequest="120"
+                                              BackgroundColor="#2C3963">
+                                            
+                                            <Image Grid.Column="0"
+                                                   Scale="0.7"
+                                                   Source="icon_share.png">
+                                                
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type model:NoteListViewModel}}, Path=ShareNoteCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            
+                                            <Image Grid.Column="1"
+                                                   Scale="0.7"
+                                                   Source="icon_delete.png">
+                                                
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer CommandParameter="{Binding}"
+                                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type model:NoteListViewModel}}, Path=DeleteNoteCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                                
+                                <Grid BackgroundColor="#fffbef">
 
-                        <Border BackgroundColor="#fffbef" 
-                                StrokeThickness="0">
-
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="15"/>
-                            </Border.StrokeShape>
-
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType=
-                                {x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
-                                                      CommandParameter="{Binding}"/>
-                            </Border.GestureRecognizers>
-
-                            <Grid Padding="10">
-
-                                <Label Text="{Binding Text}" 
-                                       LineBreakMode="CharacterWrap"
-                                       TextColor = "#66645E"
-                                       MaxLines="15"
-                                       FontSize="15"/>
-                            </Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type model:NoteListViewModel}}, Path=GoToEditPageCommand}"
+                                                              CommandParameter="{Binding}"/>
+                                    </Grid.GestureRecognizers>
+                                    
+                                    <Label Text="{Binding Text}" 
+                                           LineBreakMode="CharacterWrap"
+                                           TextColor = "#66645E"
+                                           MinimumHeightRequest="90"
+                                           MaxLines="15"
+                                           FontSize="15"
+                                           Padding="10"/>
+                                </Grid>
+                            </SwipeView>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+        
+        <Border Grid.Row="0"
+                Margin="0,0,15,15"
+                BackgroundColor="#2C3963"
+                HorizontalOptions="End"
+                WidthRequest="60">
+            
+            <Image Grid.Row="0"
+                   Scale="0.9"
+                   Source="{Binding Icon}">
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding GoToUserPageCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Border>
 
         <Border BackgroundColor="#2C3963"
-                StrokeThickness="0"
-                Grid.Row="1"
+                Grid.Row="2"
                 WidthRequest="60"
                 HorizontalOptions="End"
                 Margin="0,0,15,15">
-
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding GoToCreateOrEditPageCommand}"/>
-            </Border.GestureRecognizers>
             
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-
             <Image Source="icon_plus.png"
                    Grid.Row="1"
-                   Scale="0.7"/>
+                   Scale="0.7">
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding GoToCreateOrEditPageCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
         </Border>
 
-        <Border Grid.Row="2"
+        <Border Grid.Row="3"
                 BackgroundColor="#2C3963"
-                StrokeThickness="0"
                 Margin="-1,0,-1,-1">
 
             <Border.StrokeShape>
@@ -118,29 +158,25 @@
             <Grid Grid.ColumnDefinitions="*,*,*">
 
                 <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Image Scale="0.5"
-                       Source="icon_mood.png">
-                    </Image>
+                           Source="icon_mood.png"/>
                 </Border>
 
                 <Border Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMusicPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Image Scale="0.5"
-                       Source="icon_music.png">
-                    </Image>
+                           Source="icon_music.png"/>
                 </Border>
 
                 <Image Source="icon_note_selected.png"

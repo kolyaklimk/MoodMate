@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MoodMate.Components.Data.DataAnalysis&lt;T&gt;" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Data\DataAnalysis.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Data.DataControl&lt;T&gt;">
+    <Position X="5.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAAABAIAAAEBAAAAEAAAEQAAgAAIAAAAAAAIA=</HashCode>
+      <FileName>Components\Data\DataControl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Data.DataLoading&lt;T&gt;">
+    <Position X="5.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Data\DataLoading.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Entities.Abstractions.ANote&lt;T&gt;">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAMAAEAAAAAAAEAAAAQAEgAAAAAAYMAAABQAIAAA=</HashCode>
+      <FileName>Components\Entities\Abstractions\ANote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoodMate.Components.Entities.FileService" BaseTypeListCollapsed="true">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIgIAAAAAAAAAAEQAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Components\Entities\FileService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Entities.MoodNote">
+    <Position X="3.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAANAAAFAAAAAAAAAEAIAEgABAAAAQMAAAAAAIAAA=</HashCode>
+      <FileName>Components\Entities\MoodNote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Entities.SimpleNote">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAAAAAAAAAAAAAAEgAAAAAAQMAAAAAAIAAA=</HashCode>
+      <FileName>Components\Entities\SimpleNote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoodMate.Components.Entities.User" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AJCAACAAQAAQAAQEAAAAAAAAAAAAAAAgAAAIAAAAAAY=</HashCode>
+      <FileName>Components\Entities\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Factory.MoodNoteFactory" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Factory\MoodNoteFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoodMate.Components.Factory.Note">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Factory\Note.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoodMate.Components.Factory.SimpleNoteFactory" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Factory\SimpleNoteFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MoodMate.Components.Data.Abstractions.IDataAnalysis&lt;T&gt;">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Data\Abstractions\IDataAnalysis.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Data.Abstractions.IDataCloud">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAEBAAAAEAAAAAAAgAAAAAAAAAAIA=</HashCode>
+      <FileName>Components\Data\Abstractions\IDataCloud.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Data.Abstractions.IDataControl&lt;T&gt;">
+    <Position X="10.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAAABAAAAAAAAAAAAAAAEQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Components\Data\Abstractions\IDataControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Data.Abstractions.IDataLoading&lt;T&gt;">
+    <Position X="9" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Data\Abstractions\IDataLoading.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Entities.Abstractions.IFileService">
+    <Position X="10.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAgAAAAAAAAAAQAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Entities\Abstractions\IFileService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Entities.Abstractions.IMoodNoteAnalysis">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAABAAAAAAAAAEAIAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Entities\Abstractions\IMoodNoteAnalysis.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Entities.Abstractions.IUser">
+    <Position X="12.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AJCAACAAQAAQAAQEAAAAAAAAAAAAAAAgAAAIAAAAAAY=</HashCode>
+      <FileName>Components\Entities\Abstractions\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MoodMate.Components.Factory.INoteFactory&lt;T&gt;">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Factory\INoteFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

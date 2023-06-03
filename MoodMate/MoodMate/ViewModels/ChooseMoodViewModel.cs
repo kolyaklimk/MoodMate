@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MoodMate.Components.Entities;
-using MoodMate.Components.Factory;
 using MoodMate.Pages.MoodNote;
 using System.Collections.ObjectModel;
 
@@ -10,19 +9,18 @@ namespace MoodMate.ViewModels;
 
 public partial class ChooseMoodViewModel : ObservableObject
 {
-    private readonly Note MoodNote;
     private readonly FileService Mood;
     private IToast Alert;
-    public ChooseMoodViewModel(Note[] note, FileService[] service, IToast[] toasts)
-    {
-        MoodNote = note[0];
-        Mood = service[0];
-        Alert = toasts[0];
-    }
     public ObservableCollection<FileService> Moods { get; set; } = new();
 
     [ObservableProperty] FileService selectedMood;
     [ObservableProperty] DateTime dateTime = DateTime.Now;
+
+    public ChooseMoodViewModel(FileService[] service, IToast[] toasts)
+    {
+        Mood = service[0];
+        Alert = toasts[0];
+    }
 
     [RelayCommand]
     void SelectedItem(FileService mood)
@@ -42,10 +40,8 @@ public partial class ChooseMoodViewModel : ObservableObject
     {
         await Task.Run(() =>
         {
-            var moods = Mood.GetServiceData();
-
             Moods.Clear();
-            foreach (var mood in moods)
+            foreach (var mood in Mood.GetServiceData())
                 Moods.Add(mood);
         });
     }

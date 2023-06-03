@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
@@ -13,20 +14,25 @@ using System.Collections.ObjectModel;
 
 namespace MoodMate.ViewModels;
 
-public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMoodNoteMessage>
+public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMoodNoteMessage>, IRecipient<LoadedMoodNoteMessage>
 {
-    private readonly Note MoodNote;
+    private readonly MoodNote MoodNote;
+    private readonly IUser User;
+    private bool IsUpdating = false;
+    private bool IsLoaded = true;
     public ObservableCollection<MoodNote> MoodNotes { get; set; } = new();
 
-    public MoodListViewModel(Note[] note)
+    [ObservableProperty] bool isRefreshing = false;
+    [ObservableProperty] string icon;
+
+    public MoodListViewModel(Note[] note, IUser user)
     {
-        MoodNote = note[0];
-        IsRefreshing = false;
-
-        WeakReferenceMessenger.Default.Register(this);
+        MoodNote = note[0].note;
+        User = user;
+        WeakReferenceMessenger.Default.Register<UpdateMoodNoteMessage>(this);
+        WeakReferenceMessenger.Default.Register<LoadedMoodNoteMessage>(this);
+        MoodNote.CreateDb();
     }
-
-    [ObservableProperty] bool isRefreshing;
 
     [RelayCommand]
     async Task GoToMusicPage()
@@ -53,6 +59,14 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    async Task GoToUserPage()
+    {
+        await Shell.Current.GoToAsync("//" + nameof(UserPage), new Dictionary<string, object>() {
+                {"Color", Color.FromArgb("#936840")},
+                {"Page", nameof(MoodListPage)} });
+    }
+
+    [RelayCommand]
     async Task GoToEdit(MoodNote note)
     {
         await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
@@ -62,52 +76,146 @@ public partial class MoodListViewModel : ObservableObject, IRecipient<UpdateMood
     }
 
     [RelayCommand]
+    void Load()
+    {
+        if (IsLoaded || IsUpdating)
+        {
+            IsUpdating = false;
+            IsRefreshing = true;
+        }
+    }
+
+    [RelayCommand]
     async Task UpdateMoodNote()
     {
+        if (IsUpdating)
+            return;
+
+        if (IsLoaded)
+            await MoodNote.LoadNoteLocal();
+
+        List<MoodNote> moods;
+
+        if (User.Client.User != null)
+        {
+            Icon = "icon_user_yes";
+
+            if (IsLoaded)
+            {
+                IsLoaded = false;
+            }
+            else
+            {
+                MoodNote.ClearNotes();
+            }
+            moods = MoodNote.GetData();
+
+            try
+            {
+                if (moods.Count != 0)
+                {
+                    var rezult = await Shell.Current.ShowPopupAsync(new CloudWarningPage());
+                    switch (rezult)
+                    {
+                        case 1:
+                            User.SignOut();
+                            break;
+
+                        case 2:
+                            await MoodNote.DeleteNoteLocal();
+                            await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
+                            break;
+
+                        case 3:
+                            await MoodNote.SaveLocalToCloud(User.Client.User);
+                            await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
+                            break;
+                    }
+                }
+                else
+                {
+                    await MoodNote.LoadNoteCloud(0, 15, User.Client.User);
+                }
+                moods = MoodNote.GetData();
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
+        }
+        else
+        {
+            if (IsLoaded)
+                IsLoaded = false;
+
+            Icon = "icon_user_no";
+            moods = MoodNote.GetDataSortByDate();
+        }
+
         await Task.Run(() =>
         {
-            var moods = MoodNote.note.GetData();
-
             MoodNotes.Clear();
             foreach (var mood in moods)
                 MoodNotes.Add(mood);
-            IsRefreshing = false;
+        });
+        IsRefreshing = false;
+    }
+
+    [RelayCommand]
+    async Task AddItems()
+    {
+        if (User.Client.User != null && !IsRefreshing)
+        {
+            try
+            {
+                var countItemsBefore = MoodNote.GetData().Count;
+                await MoodNote.LoadNoteCloud(countItemsBefore, 10, User.Client.User, false);
+                var moods = MoodNote.GetData();
+
+                for (var i = countItemsBefore; i < moods.Count; i++)
+                    MoodNotes.Add(moods[i]);
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
+        }
+    }
+
+    [RelayCommand]
+    async Task ShareNote(MoodNote note)
+    {
+        await Share.Default.RequestAsync(new ShareTextRequest
+        {
+            Text = "Date: " + note.Date.ToString() + '\n'
+            + "Mood: " + note.Mood.Name + '\n'
+            + "Description: " + note.Text,
+            Title = "Share Text"
         });
     }
 
     [RelayCommand]
-    async Task Popup(MoodNote note)
+    async Task DeleteNote(MoodNote note)
     {
-        var result = await Shell.Current.ShowPopupAsync(new ContextMenuPage());
-
-        switch (result)
+        IsUpdating = true;
+        IsRefreshing = true;
+        if (await Shell.Current.ShowPopupAsync(new ConfirmationPage("Delete selected record?", "Delete")) != null)
         {
-            case 1:
-                await Share.Default.RequestAsync(new ShareTextRequest
-                {
-                    Text = "Date: " + note.Date.ToString() + '\n'
-                    + "Mood: " + note.Mood.Name + '\n'
-                    + "Description: " + note.Text,
-                    Title = "Share Text"
-                });
-                break;
-
-            case 2:
-                await MoodNote.note.DeleteNote(note.Id);
-                await UpdateMoodNote();
-                break;
-
-            case 3:
-                await Shell.Current.GoToAsync("//" + nameof(CreateOrEditMoodPage),
-                    new Dictionary<string, object>() {
-                        {"MoodNote", note},
-                        {"Save", new MoodNote(note.Date, note.Mood.Name, note.Mood.Source, note.Text)}});
-                break;
+            try
+            {
+                await MoodNote.DeleteNote(note, User.Client.User);
+                MoodNotes.Remove(note);
+            }
+            catch
+            {
+                await User.Alerts[2].Show();
+            }
         }
+        IsRefreshing = false;
+        IsUpdating = false;
     }
 
-    public async void Receive(UpdateMoodNoteMessage message)
-    {
-        await UpdateMoodNote();
-    }
+    void IRecipient<UpdateMoodNoteMessage>.Receive(UpdateMoodNoteMessage message) => IsUpdating = true;
+
+    void IRecipient<LoadedMoodNoteMessage>.Receive(LoadedMoodNoteMessage message) => IsLoaded = true;
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:MoodMate.ViewModels.Other"
+             x:DataType="model:UserViewModel"
+             x:Class="MoodMate.Pages.Other.UserPage">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                        Command="{Binding LoadCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="25,*"
+          Padding="15">
+
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="#e2d9c5"
+                     BackgroundColor="{Binding Color}">
+            <StackLayout/>
+        </RefreshView>
+
+        <Grid ColumnDefinitions="25,*">
+
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Margin="-15">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
+                </Border.GestureRecognizers>
+
+                <Image Source="icon_back.png"
+                       Scale="0.45"/>
+            </Border>
+        </Grid>
+        
+        <Grid Grid.RowSpan="2"
+              VerticalOptions="Center"
+              RowSpacing="10"
+              RowDefinitions="Auto,Auto,15,*,*,*">
+            
+            <Label Grid.Row="0" 
+                   FontFamily="OpenSansBold"
+                   FontSize="28"
+                   TextColor="#2F2F2C"
+                   HorizontalOptions="Center"
+                   Text="{Binding Label}"/>
+            
+            <Label Grid.Row="1" 
+                   FontSize="22"   
+                   TextColor="#2F2F2C"         
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Email}"
+                   IsVisible="{Binding IsLogIn}"/>
+            
+            <Button Text="{Binding SingInOut}"
+                    Grid.Row="3"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    Command="{Binding SignInOutCommand}"/>
+            
+            <Button Text="Delete account"
+                    Grid.Row="4"
+                    IsVisible="{Binding IsLogIn}"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    Command="{Binding DeleteUserCommand}"/>
+            
+            <Button Text="Reset password"
+                    Grid.Row="5"
+                    IsVisible="{Binding IsLogIn}"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    Command="{Binding ResetPasswordCommand}"/>
+        </Grid>
+    </Grid>
+</ContentPage>    

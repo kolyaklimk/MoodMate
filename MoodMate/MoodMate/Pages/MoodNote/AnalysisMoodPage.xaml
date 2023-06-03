@@ -6,8 +6,7 @@
              x:DataType="model:AnalysisMoodViewModel"
              x:Class="MoodMate.Pages.MoodNote.AnalysisMoodPage"
              xmlns:converter="clr-namespace:MoodMate.Converters"
-             xmlns:entity="clr-namespace:MoodMate.Templates"
-             BackgroundColor="#e2d9c5">
+             xmlns:entity="clr-namespace:MoodMate.Templates">
     
     <ContentPage.Resources>
         <converter:ProgressBarConverter x:Key="ProgressBarConverter"/>
@@ -26,7 +25,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -34,48 +32,47 @@
                 </Border.GestureRecognizers>
 
                 <Image Source="icon_back.png"
-                       Scale="0.45">
-                </Image>
+                       Scale="0.45"/>
             </Border>
 
             <Border Grid.Column="1"
                     HorizontalOptions="Center"
-                StrokeThickness="0"
-                BackgroundColor="#936840"
-                Margin="0,-10,0,-10">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
+                    BackgroundColor="#936840"
+                    Margin="0,-10,0,-10">
 
                 <Grid ColumnDefinitions="*,Auto,*">
+                    
                     <Image Source="icon_back.png" 
-                       Grid.Column="0"
-                       Scale="0.55"
-                       VerticalOptions="Center">
+                           Grid.Column="0"
+                           Scale="0.55"
+                           VerticalOptions="Center">
+                        
                         <Image.Behaviors>
                             <toolkit:IconTintColorBehavior TintColor="#fffbef" />
                         </Image.Behaviors>
+                        
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PreviousMonthCommand}"/>
                         </Image.GestureRecognizers>
                     </Image>
 
                     <Label Text="{Binding SelectedDate, StringFormat='{}{0:MM.yyyy}'}" 
-                   FontFamily="OpenSansBold"
-                   FontSize="22"
-                   TextColor="#fffbef"
-                   Grid.Column="1"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"/>
+                           FontFamily="OpenSansBold"
+                           FontSize="22"
+                           TextColor="#fffbef"
+                           Grid.Column="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
 
                     <Image Source="icon_back.png" 
-                       Grid.Column="2"
-                       Scale="0.55"
-                       Rotation="180">
+                           Grid.Column="2"
+                           Scale="0.55"
+                           Rotation="180">
+                        
                         <Image.Behaviors>
                             <toolkit:IconTintColorBehavior TintColor="#fffbef" />
                         </Image.Behaviors>
+                        
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NextMonthCommand}"/>
                         </Image.GestureRecognizers>
@@ -105,17 +102,13 @@
 
             <Border Grid.Row="3"
                     Padding="5"
-                    BackgroundColor="#936840"
-                    StrokeThickness="0">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
+                    BackgroundColor="#936840">
 
                 <CollectionView ItemsSource="{Binding AnalysisMood}"
                                 VerticalScrollBarVisibility="Never">
                     
                     <CollectionView.EmptyView>
+                        
                         <StackLayout Spacing="10"
                                      VerticalOptions="Center"
                                      HorizontalOptions="Center">
@@ -151,12 +144,7 @@
                                       RowDefinitions="*,0.5*"
                                       VerticalOptions="Center">
 
-                                    <Border StrokeThickness="0">
-
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="15"/>
-                                        </Border.StrokeShape>
-                                        
+                                    <Border>
                                         <ProgressBar Progress="{Binding Value3, Converter={StaticResource ProgressBarConverter}}"
                                                      ScaleY="4"
                                                      ProgressColor="{Binding Converter={StaticResource RandomColorConverter}}"
@@ -175,6 +163,7 @@
                                                HorizontalOptions="End"
                                                TextColor="#FCF6EB"
                                                FontSize="16">
+                                            
                                             <Label.Text>
                                                 <MultiBinding StringFormat="{}{0} / {1}%">
                                                     <Binding Path="Value2"/>
@@ -189,6 +178,13 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Border>
+            
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Grid.Row="3"
+                         RefreshColor="#936840"
+                         BackgroundColor="#e2d9c5">
+                <StackLayout/>
+            </RefreshView>
         </Grid>
     </Grid>
 </ContentPage>

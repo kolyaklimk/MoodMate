@@ -1,13 +1,16 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using MoodMate.Components.Entities;
+using MoodMate.Components.Entities.Abstractions;
 using MoodMate.Components.Factory;
 using MoodMate.Messages;
 using MoodMate.Pages.MoodNote;
 using MoodMate.Pages.Music;
+using MoodMate.Pages.Other;
 using MoodMate.Pages.SimpleNote;
 using MoodMate.ViewModels;
 using MoodMate.ViewModels.Music;
+using MoodMate.ViewModels.Other;
 using Plugin.Maui.Audio;
 
 namespace MoodMate;
@@ -45,15 +48,18 @@ public static class MauiProgram
         services.AddSingleton<CreateOrEditMoodPage, CreateOrEditMoodViewModel>();
         services.AddSingleton<AnalysisMoodPage, AnalysisMoodViewModel>();
 
+        services.AddSingleton<AuthenticationPage, AuthenticationViewModel>();
+        services.AddSingleton<UserPage, UserViewModel>();
+
         // Services
         services.AddSingleton(_ => new Note[] { new Note("Mood"), new Note("Simple") });
         services.AddSingleton(_ => new FileService[] { new FileService(), new FileService(), new FileService() });
         services.AddSingleton(AudioManager.Current);
         services.AddSingleton(_ => new List<int>[] { new List<int>(), new List<int>() });
         services.AddSingleton(_ => new IToast[4]);
-        services.AddSingleton<StopRotateMessage>();
-        services.AddSingleton<StartRotateMessage>();
+        services.AddSingleton<LoadedMoodNoteMessage>();
+        services.AddSingleton<LoadedSimpleNoteMessage>();
         services.AddSingleton<UpdateMoodNoteMessage>();
-        services.AddSingleton<UpdateSimpleNoteMessage>();
+        services.AddSingleton<IUser, User>();
     }
 }

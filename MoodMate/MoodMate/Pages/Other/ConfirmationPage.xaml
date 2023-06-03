@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="MoodMate.Pages.Other.ConfirmationPage"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               Color="Transparent"                
+               VerticalOptions="Center">
+    
+    <Border BackgroundColor="#e2d9c5" 
+            WidthRequest="300"
+            Padding="15">
+
+        <Grid RowDefinitions="Auto,60"
+              RowSpacing="10">
+
+            <Label Grid.Row="0"
+                   x:Name="Text"
+                   FontSize="18" 
+                   TextColor="#66645E"
+                   VerticalOptions="Center"/>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+                
+                <Button Grid.Column="0"
+                        Clicked="Cancel_Clicked"
+                        FontSize="22"
+                        Text="Cancel"/>
+
+                <Button Grid.Column="1"
+                        x:Name="TextButton"
+                        FontSize="22"
+                        Clicked="Delete_Clicked"/>
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>

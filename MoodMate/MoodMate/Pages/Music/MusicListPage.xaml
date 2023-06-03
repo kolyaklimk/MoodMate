@@ -5,8 +5,7 @@
              xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
              x:DataType="model:MusicListViewModel"
              xmlns:entity="clr-namespace:MoodMate.Components.Entities"
-             x:Class="MoodMate.Pages.Music.MusicListPage"
-             BackgroundColor="#e2d9c5">
+             x:Class="MoodMate.Pages.Music.MusicListPage">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded"
@@ -16,7 +15,7 @@
     <Grid Grid.RowDefinitions="*,*,*,75,60">
 
         <Grid Grid.Row="0" 
-              Grid.RowDefinitions="*,150"
+              Grid.RowDefinitions="*,160"
               Margin="15,0,15,0">
 
             <Label Text="Sound"
@@ -26,52 +25,64 @@
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
-            <CollectionView Grid.Row="1" 
-                            SelectionMode="Single"
+            <Border BackgroundColor="Transparent"
+                    Grid.Row="1">
+                
+            <CollectionView SelectionMode="Single"
                             ItemsSource="{Binding SoundList}"
                             SelectedItem="{Binding SelectedSound}"
                             HorizontalOptions="Center">
 
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="entity:FileService">
+                        
+                        <Border BackgroundColor="#8C913F"
+                                Grid.Row="0">
 
-                        <Grid Grid.RowDefinitions="120,*"
-                              WidthRequest="120">
-
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemSoundCommand}"/>
-                            </Grid.GestureRecognizers>
-
-                            <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
-                                    Grid.Row="0">
-
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-
-                                <Image Source="{Binding Description}"/>
-                            </Border>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor"
+                                                    Value="#d9564f"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             
-                            <Label Text="{Binding Name}" 
-                                   Grid.Row="1"
-                                   FontSize="18" 
-                                   TextColor="#66645E"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="Center"/>
-                        </Grid>
+                            <Grid Grid.RowDefinitions="130,30"
+                                  WidthRequest="130">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding}"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemSoundCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Border Grid.Row="0" Scale="0.85">
+                                    <Image Source="{Binding Description}"/>
+                                </Border>
+
+                                <Label Text="{Binding Name}" 
+                                       Grid.Row="1"
+                                       FontSize="18" 
+                                       TextColor="#FCF6EB"
+                                       HorizontalOptions="Center"/>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </Border>
         </Grid>
 
         <Grid Grid.Row="1" 
-              Grid.RowDefinitions="*,150"
+              Grid.RowDefinitions="*,160"
               Margin="15,0,15,0">
             
             <Label Text="Music"
@@ -81,53 +92,64 @@
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
             
-            <CollectionView Grid.Row="1" 
-                            SelectionMode="Single"
-                            ItemsSource="{Binding MusicList}"
-                            SelectedItem="{Binding SelectedMusic}"
-                            HorizontalOptions="Center">
+            <Border BackgroundColor="Transparent"
+                    Grid.Row="1" >
+                
+                <CollectionView SelectionMode="Single"
+                                ItemsSource="{Binding MusicList}"
+                                SelectedItem="{Binding SelectedMusic}"
+                                HorizontalOptions="Center">
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
-                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                           ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="entity:FileService">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="entity:FileService">
 
-                        <Grid Grid.RowDefinitions="120,*"
-                              WidthRequest="120">
-
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemMusicCommand}"/>
-                            </Grid.GestureRecognizers>
-
-                            <Border StrokeThickness="5"
-                                    Stroke="#8C913F"
+                            <Border BackgroundColor="#8C913F"
                                     Grid.Row="0">
 
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor"
+                                                        Value="#d9564f"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
 
-                                <Image Source="{Binding Description}"/>
+                                <Grid Grid.RowDefinitions="130,30"
+                                      WidthRequest="130">
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type model:MusicListViewModel}}, Path=SelectedItemMusicCommand}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <Border Grid.Row="0" Scale="0.85">
+                                        <Image Source="{Binding Description}"/>
+                                    </Border>
+
+                                    <Label Text="{Binding Name}" 
+                                           Grid.Row="1"
+                                           FontSize="18" 
+                                           TextColor="#FCF6EB"
+                                           HorizontalOptions="Center"/>
+                                </Grid>
                             </Border>
-
-                            <Label Text="{Binding Name}" 
-                                   Grid.Row="1"
-                                   FontSize="18" 
-                                   TextColor="#66645E"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
         </Grid>
 
         <Grid Grid.Row="2" 
-              Grid.RowDefinitions="0.5*,*"
-              Margin="15,0,15,0">
+              Grid.RowDefinitions="0.5*,*">
             
             <Label Text="Duration"
                    FontFamily="OpenSansBold"
@@ -136,15 +158,11 @@
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
-            <Border StrokeThickness="0"
-                    BackgroundColor="#8C913F"
+            <Border BackgroundColor="#8C913F"
                     Grid.Row="1"
                     HorizontalOptions="Center"
-                    VerticalOptions="Start">
-
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="15"/>
-                </Border.StrokeShape>
+                    VerticalOptions="Start"
+                    Padding="10,0,10,0">
 
                 <Label Text="{Binding SelectedTime, StringFormat='{}{0:HH:mm:ss}'}"
                        Grid.Row="1"
@@ -153,6 +171,7 @@
                        FontFamily="OpenSansBold"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center">
+                    
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChooseTimeCommand}"/>
                     </Label.GestureRecognizers>
@@ -163,16 +182,10 @@
         <Button Text="Start" 
                 Grid.Row="3"
                 Command="{Binding GoToPlayCommand}"
-                CornerRadius="15"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"
                 Margin="15,0,15,15"/>
 
         <Border Grid.Row="4"
                 BackgroundColor="#8C913F"
-                StrokeThickness="0"
                 Margin="-1,0,-1,-1">
 
             <Border.StrokeShape>
@@ -182,16 +195,14 @@
             <Grid Grid.ColumnDefinitions="*,*,*">
                 
                 <Border Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMoodPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Image Scale="0.5"
-                       Source="icon_mood.png">
-                    </Image>
+                           Source="icon_mood.png"/>
                 </Border>
                 
                 <Image Source="icon_music_selected.png"
@@ -199,16 +210,14 @@
                        Scale="0.7"/>
 
                 <Border Grid.Column="2"
-                        BackgroundColor="Transparent"
-                        StrokeThickness="0">
+                        BackgroundColor="Transparent">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToNotePageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Image Scale="0.5"
-                       Source="icon_note.png">
-                    </Image>
+                       Source="icon_note.png"/>
                 </Border>
             </Grid>
         </Border>

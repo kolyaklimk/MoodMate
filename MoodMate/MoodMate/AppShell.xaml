@@ -5,8 +5,15 @@
        xmlns:mood="clr-namespace:MoodMate.Pages.MoodNote"
        xmlns:note="clr-namespace:MoodMate.Pages.SimpleNote"
        xmlns:music="clr-namespace:MoodMate.Pages.Music"
+       xmlns:other="clr-namespace:MoodMate.Pages.Other"
        Shell.FlyoutBehavior="Disabled">
-    
+
+    <ShellContent ContentTemplate="{DataTemplate other:AuthenticationPage}"
+                  Route="AuthenticationPage"/>
+
+    <ShellContent ContentTemplate="{DataTemplate other:UserPage}"
+                  Route="UserPage"/>
+
     <ShellContent ContentTemplate="{DataTemplate mood:MoodListPage}"
                   Route="MoodListPage"/>
 
@@ -21,6 +28,9 @@
 
     <ShellContent ContentTemplate="{DataTemplate music:MusicListPage}"
                   Route="MusicListPage"/>
+    
+    <ShellContent ContentTemplate="{DataTemplate music:PlayMusicPage}"
+                  Route="PlayMusicPage"/>
 
     <ShellContent ContentTemplate="{DataTemplate note:NoteListPage}"
                   Route="NoteListPage"/>

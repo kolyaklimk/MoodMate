@@ -17,6 +17,13 @@ public partial class MusicListViewModel : ObservableObject
     private readonly FileService Sound;
     private readonly List<int>[] Sbytes;
     private readonly IToast Alert;
+    public ObservableCollection<FileService> MusicList { get; set; } = new();
+    public ObservableCollection<FileService> SoundList { get; set; } = new();
+
+    [ObservableProperty] FileService selectedMusic;
+    [ObservableProperty] FileService selectedSound;
+    [ObservableProperty] TimeSpan selectedTime;
+
     public MusicListViewModel(FileService[] fileService, List<int>[] sbytes, IToast[] toasts)
     {
         Music = fileService[1];
@@ -24,12 +31,6 @@ public partial class MusicListViewModel : ObservableObject
         Sbytes = sbytes;
         Alert = toasts[3];
     }
-    public ObservableCollection<FileService> MusicList { get; set; } = new();
-    public ObservableCollection<FileService> SoundList { get; set; } = new();
-
-    [ObservableProperty] FileService selectedMusic;
-    [ObservableProperty] FileService selectedSound;
-    [ObservableProperty] TimeSpan selectedTime;
 
     [RelayCommand]
     void SelectedItemMusic(FileService music)
@@ -90,17 +91,11 @@ public partial class MusicListViewModel : ObservableObject
         {
             SelectedTime = new(0, 1, 0);
 
-            var M = Music.GetServiceData();
-            var S = Sound.GetServiceData();
-
-            foreach (var m in M)
-            {
+            foreach (var m in Music.GetServiceData())
                 MusicList.Add(m);
-            }
-            foreach (var s in S)
-            {
+
+            foreach (var s in Sound.GetServiceData())
                 SoundList.Add(s);
-            }
         });
     }
 
@@ -109,7 +104,7 @@ public partial class MusicListViewModel : ObservableObject
     {
         if (SelectedMusic != null || SelectedSound != null)
         {
-            await Shell.Current.GoToAsync(nameof(PlayMusicPage),
+            await Shell.Current.GoToAsync($"//{nameof(PlayMusicPage)}",
                 new Dictionary<string, object>() {
                     { "SelectedMusic", SelectedMusic},
                     { "SelectedSound", SelectedSound},

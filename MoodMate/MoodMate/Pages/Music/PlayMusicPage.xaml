@@ -4,12 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:MoodMate.ViewModels.Music"
              x:DataType="model:PlayMusicViewModel"
-             x:Class="MoodMate.Pages.Music.PlayMusicPage"
-             BackgroundColor="#e2d9c5">
-    
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="false"/>
-    </Shell.BackButtonBehavior>
+             x:Class="MoodMate.Pages.Music.PlayMusicPage">
 
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"
@@ -23,7 +18,6 @@
 
             <Border Grid.Column="0"
                     BackgroundColor="Transparent"
-                    StrokeThickness="0"
                     Margin="-15">
 
                 <Border.GestureRecognizers>
@@ -46,8 +40,7 @@
                   IsVisible="{Binding IsSound}"
                   VerticalOptions="End">
 
-                <Border StrokeThickness="0"
-                        HeightRequest="180"
+                <Border HeightRequest="180"
                         WidthRequest="180"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
@@ -73,6 +66,7 @@
                         MaximumTrackColor="#2F2F2C"
                         MinimumTrackColor="#8C913F"
                         ThumbColor="#8C913F">
+                    
                     <Slider.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="ValueChanged"
                                                         Command="{Binding ChangeSoundVolumeCommand}"/>
@@ -85,8 +79,7 @@
                   IsVisible="{Binding IsMusic}"
                   VerticalOptions="Start">
                 
-                <Border StrokeThickness="0"
-                        HeightRequest="180"
+                <Border HeightRequest="180"
                         WidthRequest="180"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
@@ -113,6 +106,7 @@
                         MaximumTrackColor="#2F2F2C"
                         MinimumTrackColor="#8C913F"
                         ThumbColor="#8C913F">
+                    
                     <Slider.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="ValueChanged"
                                                         Command="{Binding ChangeMusicVolumeCommand}"/>
@@ -121,15 +115,11 @@
             </Grid>
         </Grid>
 
-        <Border StrokeThickness="0"
-                BackgroundColor="#8C913F"
+        <Border BackgroundColor="#8C913F"
                 Grid.Row="2" 
                 VerticalOptions="Center"
-                HorizontalOptions="Center">
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
+                HorizontalOptions="Center"
+                Padding="10,0,10,0">
 
             <Label TextColor = "#fffbef"
                    FontSize="42"
@@ -141,11 +131,6 @@
         
         <Button Text="{Binding ButtonStr}"
                 Command="{Binding ButtonClickCommand}"
-                Grid.Row="3"
-                CornerRadius="15"
-                BackgroundColor="#fffbef"
-                TextColor="#2F2F2C"
-                FontFamily="OpenSansBold"
-                FontSize="28"/>
+                Grid.Row="3"/>
     </Grid>
 </ContentPage>
