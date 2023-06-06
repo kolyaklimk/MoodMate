@@ -9,7 +9,10 @@ This name means that the application will help users become a partner of their m
 The app allows users to record their mood every day and analyze its changes over time, listen to soothing music and create notes.
 
 # Security & Privacy
-MoodMate is built on the principles of transparency and honesty. All data is stored locally on the device. No third parties have access to the data.
+MoodMate is built on the principles of transparency and honesty. You can store your data either locally or on Firebase Firestore servers. No third parties have access to the data.
 
 # Class Diagram
 ![ProductiveApp](~/../MoodMateDiagram.jpg)
+
+# Use-case
+![ProductiveApp](~/../UseCase.jpg)
