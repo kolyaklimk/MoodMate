@@ -173,7 +173,7 @@ public class User : IUser
             using (var smtpClient = new SmtpClient())
             {
                 smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                smtpClient.Connect("smtp.yandex.ru", 465, true);
+                smtpClient.Connect(PrivateConstants.host, PrivateConstants.port, PrivateConstants.useSsl);
                 smtpClient.Authenticate(PrivateConstants.Email, PrivateConstants.EmailPassword);
                 smtpClient.Send(EmailMessage);
                 smtpClient.Disconnect(true);
