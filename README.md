@@ -15,7 +15,7 @@ MoodMate is an app that helps you control and improve your mood. It is designed 
 - Authentication: Firebase Authentication
 
 ## Design Patterns
-The following design patterns were used in developing the MoodTracker application:
+The following design patterns were used in developing the MoodMate application:
 - MVVM (Model-View-ViewModel): This pattern helps to separate the application logic (ViewModel) from the user interface (View) and data model (Model). This allows you to manage the state and interaction of the application components more effectively.
 - Abstract Factory: This pattern is used to create families of related objects without explicitly specifying their specific classes. 
 - Singleton: The Singleton model ensures that a class has only one instance and provides a global access point to that instance.
